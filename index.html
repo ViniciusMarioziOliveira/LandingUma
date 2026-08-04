@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Por que Admire Vega deve ser a sua Umamusume Favorita?</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #3865A1;
+            --primary-light: #5282c4;
+            --primary-dark: #213f69;
+            --bg-deep: #080d1a;
+            --bg-card: rgba(18, 29, 51, 0.55);
+            --bg-card-hover: rgba(28, 45, 79, 0.75);
+            --accent-star: #e0f2fe;
+            --accent-gold: #f59e0b;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-glow: rgba(56, 101, 161, 0.4);
+            --radius-lg: 22px;
+            --radius-md: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--accent-purple));
+            border-radius: 10px;
+            border: 2px solid var(--bg-deep);
+        }
+
+        #star-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .nebula-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(600px 500px at 15% 10%, rgba(168, 85, 247, 0.10), transparent 60%),
+                radial-gradient(700px 600px at 85% 25%, rgba(56, 101, 161, 0.16), transparent 60%),
+                radial-gradient(500px 500px at 50% 90%, rgba(245, 158, 11, 0.06), transparent 65%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3, .font-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        [data-reveal].in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(8, 13, 26, 0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-glow);
+            padding: 16px 0;
+            transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        nav.scrolled {
+            padding: 10px 0;
+            background: rgba(8, 13, 26, 0.92);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--border-glow);
+            animation: brandPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes brandPulse {
+            0%, 100% { box-shadow: 0 0 15px var(--border-glow); }
+            50% { box-shadow: 0 0 24px rgba(168, 85, 247, 0.55); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-star), var(--accent-purple));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-star);
+            text-shadow: 0 0 8px rgba(224, 242, 254, 0.5);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #2b5288);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(56, 101, 161, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(56, 101, 161, 0.7);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-glow);
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Glow-border card mixin (applied via class) */
+        .glow-card {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: conic-gradient(from 0deg, var(--primary), var(--accent-purple), var(--accent-gold), var(--primary-light), var(--primary));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            animation: rotateHue 8s linear infinite;
+        }
+
+        @keyframes rotateHue {
+            to { filter: hue-rotate(360deg); }
+        }
+
+        .glow-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 90vh;
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 101, 161, 0.25);
+            border: 1px solid var(--border-glow);
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: var(--accent-star);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .badge-tag i { color: var(--accent-gold); }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-star) 65%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-sub);
+            font-size: 1.15rem;
+            margin-bottom: 36px;
+            max-width: 520px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 520px;
+        }
+
+        .hero-card-glow {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--primary) 0%, rgba(168, 85, 247, 0.2) 50%, transparent 70%);
+            filter: blur(40px);
+            z-index: 0;
+            animation: pulseGlow 6s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 0.9; }
+        }
+
+        .constellation-svg {
+            position: absolute;
+            width: 520px;
+            height: 560px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        .constellation-svg .const-line {
+            stroke: var(--primary-light);
+            stroke-width: 1;
+            opacity: 0.55;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: drawLine 2.4s ease forwards;
+        }
+
+        .constellation-svg .const-star {
+            fill: var(--accent-star);
+            animation: twinkleStar 3.5s ease-in-out infinite;
+        }
+
+        .constellation-svg .const-star.vega {
+            fill: var(--accent-gold);
+            animation: twinkleVega 2.6s ease-in-out infinite;
+        }
+
+        .constellation-svg .const-label {
+            fill: var(--text-sub);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.65;
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes twinkleStar {
+            0%, 100% { opacity: 0.4; r: 2; }
+            50% { opacity: 1; r: 2.6; }
+        }
+
+        @keyframes twinkleVega {
+            0%, 100% { opacity: 0.7; r: 4; filter: drop-shadow(0 0 4px var(--accent-gold)); }
+            50% { opacity: 1; r: 5.5; filter: drop-shadow(0 0 10px var(--accent-gold)); }
+        }
+
+        .hero-avatar-box {
+            position: relative;
+            z-index: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .hero-avatar-frame {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: linear-gradient(160deg, #0d1527, #16233f);
+        }
+
+        .hero-avatar-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+            pointer-events: none;
+        }
+
+        .hero-avatar-box img {
+            display: block;
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .hero-avatar-fallback {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            height: 420px;
+            color: var(--text-sub);
+            background: radial-gradient(circle at 50% 30%, rgba(56,101,161,0.35), transparent 65%);
+        }
+
+        .hero-avatar-fallback i {
+            font-size: 2.6rem;
+            color: var(--accent-star);
+            text-shadow: 0 0 18px rgba(224,242,254,0.5);
+        }
+
+        .hero-avatar-fallback span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-avatar-caption {
+            margin-top: 16px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--accent-star);
+        }
+
+        /* API Live Section */
+        .api-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent, rgba(56, 101, 161, 0.08), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.3rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .data-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.35s ease;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: cardIn 0.6s ease forwards;
+        }
+
+        @keyframes cardIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+            border-color: var(--primary-light);
+            box-shadow: 0 10px 26px rgba(56, 101, 161, 0.25);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-label i { color: var(--primary-light); }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Skeleton loading */
+        .skel-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-md);
+            padding: 24px;
+        }
+
+        .skel-line {
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.04) 75%);
+            background-size: 400% 100%;
+            animation: shimmer 1.6s ease-in-out infinite;
+        }
+
+        .skel-line.w60 { width: 60%; margin-bottom: 14px; }
+        .skel-line.w40 { width: 40%; height: 18px; }
+
+        @keyframes shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Pillars Section */
+        .pillars-section { padding: 100px 0; }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.05);
+            box-shadow: 0 16px 36px rgba(56, 101, 161, 0.3);
+        }
+
+        .pillar-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(56, 101, 161, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--accent-star);
+            margin-bottom: 24px;
+            border: 1px solid var(--border-glow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .pillar-card:hover .pillar-icon {
+            transform: rotate(-6deg) scale(1.08);
+            box-shadow: 0 0 20px rgba(82, 130, 196, 0.5);
+        }
+
+        .pillar-card h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .pillar-card p {
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .pillar-card code {
+            background: rgba(56,101,161,0.25);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--accent-star);
+        }
+
+        /* Fluffiness Mini-game */
+        .fluff-section {
+            padding: 90px 0;
+            background: rgba(18, 29, 51, 0.35);
+            border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fluff-container {
+            background: linear-gradient(135deg, rgba(30, 48, 80, 0.75), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .fluff-icon-stage {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .fluff-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-gold) 0%, rgba(255,255,255,0.08) 0%);
+            transition: background 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fluff-ring::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 30%, rgba(56,101,161,0.5), #0d1527 75%);
+        }
+
+        .fluff-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 2.4rem;
+            color: var(--accent-star);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .fluff-slider-wrap {
+            position: relative;
+            height: 34px;
+            margin: 34px 0 18px;
+        }
+
+        .fluff-track-bg {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.08);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .fluff-track-fill {
+            position: absolute;
+            top: 0; left: 0; height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent-gold));
+            border-radius: 6px;
+            box-shadow: 0 0 14px rgba(82, 130, 196, 0.7);
+            transition: width 0.1s ease;
+        }
+
+        .fluff-slider {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 34px;
+            margin: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .fluff-slider::-webkit-slider-runnable-track { background: transparent; height: 34px; }
+        .fluff-slider::-moz-range-track { background: transparent; height: 34px; }
+        .fluff-slider::-moz-range-progress { background: transparent; }
+
+        .fluff-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 26px;
+            height: 26px;
+            margin-top: 4px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #fff, var(--accent-star) 45%, var(--primary-light));
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: 0 0 16px rgba(224, 242, 254, 0.8);
+            cursor: grab;
+        }
+
+        .fluff-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #fff, var(--accent-star) 45%, var(--primary-light));
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: 0 0 16px rgba(224, 242, 254, 0.8);
+            cursor: grab;
+        }
+
+        .sparkle {
+            position: absolute;
+            top: 6px;
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            pointer-events: none;
+            transform: translate(-50%, 0);
+            animation: sparkleFloat 0.75s ease-out forwards;
+        }
+
+        @keyframes sparkleFloat {
+            0% { opacity: 1; transform: translate(-50%, 0) scale(0.6) rotate(0deg); }
+            100% { opacity: 0; transform: translate(-50%, -38px) scale(1.1) rotate(60deg); }
+        }
+
+        .fluff-display {
+            font-size: 2.4rem;
+            font-weight: 800;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-star);
+            margin: 10px 0;
+            min-height: 56px;
+            text-shadow: 0 0 20px rgba(224, 242, 254, 0.25);
+        }
+
+        .fluff-reaction {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            min-height: 50px;
+        }
+
+        /* Quotes Section */
+        .quote-section { padding: 100px 0; }
+
+        .quote-box {
+            background: var(--bg-card);
+            border-left: 3px solid var(--primary-light);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 30px 40px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+        }
+
+        .quote-box:hover {
+            border-left-color: var(--accent-gold);
+            transform: translateX(6px);
+            background: var(--bg-card-hover);
+        }
+
+        .quote-box p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #f1f5f9;
+            margin-bottom: 12px;
+        }
+
+        .quote-author {
+            color: var(--accent-star);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* CTA Section */
+        .cta-section { padding: 100px 0; text-align: center; position: relative; }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(56, 101, 161, 0.35), rgba(8, 13, 26, 0.92));
+            border: 1px solid var(--primary-light);
+            border-radius: var(--radius-lg);
+            padding: 64px 40px;
+            box-shadow: 0 0 60px rgba(56, 101, 161, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box h2 { font-size: 2.5rem; color: #fff; margin-bottom: 16px; }
+
+        .cta-box p {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto 32px;
+        }
+
+        /* Footer */
+        footer {
+            background: #04070f;
+            border-top: 1px solid var(--border-glow);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+        }
+
+        footer a { color: var(--primary-light); text-decoration: none; }
+        footer a:hover { color: var(--accent-star); }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; }
+            .hero h1 { font-size: 2.3rem; }
+            .hero p { margin: 0 auto 28px; }
+            .hero-cta { justify-content: center; }
+            .nav-links { display: none; }
+            .constellation-svg { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="star-canvas"></canvas>
+    <div class="nebula-glow"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-star"></i></div>
+                <span>Admire Vega Agenda</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" data-nav>Quem é Ayabe</a></li>
+                <li><a href="#stats" data-nav>Dados da Tracen</a></li>
+                <li><a href="#reasons" data-nav>Por que Ela?</a></li>
+                <li><a href="#fluff-meter" data-nav>Medidor Fofo</a></li>
+            </ul>
+            <a href="#cta" class="btn-primary">
+                <i class="fa-solid fa-heart"></i> Virar Treinador
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero container" id="about">
+        <div class="hero-content">
+            <div class="badge-tag">
+                <i class="fa-solid fa-moon"></i> A Estrela Mais Brilhante de Tracen
+            </div>
+            <h1>Por que a sua Umamusume favorita deve ser a Admire Vega?</h1>
+            <p>Conhecida carinhosamente como <strong>Ayabe-san</strong>, ela combina um design estelar inesquecível, uma determinação emocionante e um lado secreto incrivelmente adorável.</p>
+            <div class="hero-cta">
+                <a href="#reasons" class="btn-primary"><i class="fa-solid fa-sparkles"></i> Descobrir Motivos</a>
+                <a href="#stats" class="btn-secondary">Ver Ficha Técnica</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card-glow"></div>
+
+            <svg class="constellation-svg" viewBox="0 0 400 440" aria-hidden="true">
+                <line class="const-line" x1="200" y1="46" x2="130" y2="150" style="animation-delay:0.1s"></line>
+                <line class="const-line" x1="200" y1="46" x2="278" y2="158" style="animation-delay:0.3s"></line>
+                <line class="const-line" x1="130" y1="150" x2="150" y2="268" style="animation-delay:0.5s"></line>
+                <line class="const-line" x1="278" y1="158" x2="258" y2="276" style="animation-delay:0.7s"></line>
+                <line class="const-line" x1="150" y1="268" x2="258" y2="276" style="animation-delay:0.9s"></line>
+                <circle class="const-star vega" cx="200" cy="46" r="4"></circle>
+                <circle class="const-star" cx="130" cy="150" r="2"></circle>
+                <circle class="const-star" cx="278" cy="158" r="2"></circle>
+                <circle class="const-star" cx="150" cy="268" r="2"></circle>
+                <circle class="const-star" cx="258" cy="276" r="2"></circle>
+                <text class="const-label" x="212" y="42">Vega</text>
+                <text class="const-label" x="10" y="410">Constelação de Lira</text>
+            </svg>
+
+            <div class="hero-avatar-box">
+                <div class="hero-avatar-frame">
+                    <img id="ayabe-img"
+                        src="img/ayabe.png"
+                        alt="Admire Vega (Ayabe-san)"
+                        onerror="handleImageFallback(this)">
+                    <div class="hero-avatar-fallback" id="ayabe-fallback">
+                        <i class="fa-solid fa-star"></i>
+                        <span>Admire Vega</span>
+                    </div>
+                </div>
+                <p class="hero-avatar-caption">"Jurei sob aquela estrela radiante... Eu correrei e vencerei."</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- API Live Character Info Section -->
+    <section class="api-section" id="stats">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <h2>Dados precisos da Tracen Academy</h2>
+                <p>Ficha técnica consumida em tempo real, com os campos oficiais da Ayabe-san.</p>
+            </div>
+            <div class="data-card-grid" id="api-data-container">
+                <div class="skel-box"><div class="skel-line w60"></div><div class="skel-line w40"></div></div>
+                <div class="skel-box"><div class="skel-line w60"></div><div class="skel-line w40"></div></div>
+                <div class="skel-box"><div class="skel-line w60"></div><div class="skel-line w40"></div></div>
+                <div class="skel-box"><div class="skel-line w60"></div><div class="skel-line w40"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons Section -->
+    <section class="pillars-section container" id="reasons">
+        <div class="section-header" data-reveal>
+            <h2>4 Razões Para Se Apaixonar</h2>
+            <p>O que torna a Admire Vega única no universo de Uma Musume Pretty Derby.</p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card glow-card" data-reveal>
+                <div class="pillar-icon"><i class="fa-solid fa-meteor"></i></div>
+                <h3>1. Estética Celestial Única</h3>
+                <p>Inspirada na estrela Vega (Constelação de Lira) e na cor azul noturno (<code>#3865A1</code>). Seus acessórios estelares, olhar profundo e presença graciosa a destacam imediatamente de qualquer outra garota-pônei.</p>
+            </div>
+
+            <div class="pillar-card glow-card" data-reveal>
+                <div class="pillar-icon"><i class="fa-solid fa-cloud"></i></div>
+                <h3>2. O "Gap Moe" Mais Adorável</h3>
+                <p>Por fora ela é fria, calma e distante. Mas em segredo? Ela é <strong>obsessiva por coisas fofas e macias</strong>! Ela tem um secador de futon no quarto, avalia pantufas pela fofura e adora pães fresquinhos.</p>
+            </div>
+
+            <div class="pillar-card glow-card" data-reveal>
+                <div class="pillar-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h3>3. Uma Lenda das Pistas (Derby '99)</h3>
+                <p>Protagonista do aclamado anime <em>Road to the Top</em>, ela é a grande vencedora do Tokyo Yushun (Japanese Derby 1999) com uma arrancada épica e emocionante vinda por fora na reta final.</p>
+            </div>
+
+            <div class="pillar-card glow-card" data-reveal>
+                <div class="pillar-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
+                <h3>4. Uma História Profunda e Ricas Interações</h3>
+                <p>Ela carrega o peso de uma promessa emocionante à sua falecida irmã gêmea. Ao se tornar o Treinador dela, você a ensina a não correr mais na solidão, mas sim a brilhar com a própria luz.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mini Game Widget -->
+    <section class="fluff-section" id="fluff-meter">
+        <div class="container">
+            <div class="fluff-container" data-reveal>
+                <div class="badge-tag"><i class="fa-solid fa-socks"></i> Mini-Game de Interação</div>
+                <h2 style="font-family:'Cinzel'; color:#fff; margin-bottom:10px;">Testador de Pantufas da Ayabe-san</h2>
+                <p style="color:var(--text-sub); margin-bottom:30px;">Arraste a barra para oferecer uma pantufa para a Admire Vega e veja o nível de aprovação dela!</p>
+
+                <div class="fluff-icon-stage">
+                    <div class="fluff-ring" id="fluff-ring">
+                        <i class="fa-solid fa-socks fluff-icon" id="fluff-icon"></i>
+                    </div>
+                </div>
+
+                <div class="fluff-slider-wrap" id="fluff-wrap">
+                    <div class="fluff-track-bg">
+                        <div class="fluff-track-fill" id="fluff-fill"></div>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" step="1" class="fluff-slider" id="fluff-range" aria-label="Nível de fofura da pantufa">
+                </div>
+
+                <div class="fluff-display" id="fluff-value">50% de Fofura</div>
+                <div class="fluff-reaction" id="fluff-quote">"Hum... É aceitável, mas o tecido poderia ser mais macio."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quote-section container">
+        <div class="section-header" data-reveal>
+            <h2>Curiosidades &amp; Falas Secretas</h2>
+        </div>
+
+        <div class="quote-box" data-reveal>
+            <p>"Eu me recuso a descansar até atingir a perfeição... Mas se Curren-chan trouxer aquele cobertor felpudo de novo... talvez só 5 minutos."</p>
+            <div class="quote-author">— Admire Vega (Segredo do Dormitório)</div>
+        </div>
+
+        <div class="quote-box" data-reveal>
+            <p>"A orelha direita dela se contorce involuntariamente sempre que ouve a palavra 'Irmã'."</p>
+            <div class="quote-author">— Fato Oficial dos Arquivos da Academia Tracen</div>
+        </div>
+
+        <div class="quote-box" data-reveal>
+            <p>"Ela compra pães de padarias diferentes dependendo do tipo exato que quer comer no dia."</p>
+            <div class="quote-author">— Curren Chan (Sua Colega de Quarto)</div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section container" id="cta">
+        <div class="cta-box" data-reveal>
+            <h2>Pronto para treinar a estrela mais brilhante?</h2>
+            <p>Seja no jogo principal ou assistindo a <em>Road to the Top</em>, Admire Vega é uma personagem com profundidade, elegância e um coração de ouro esperando por alguém que acredite nela.</p>
+            <button class="btn-primary" onclick="triggerPraise()">
+                <i class="fa-solid fa-sparkles"></i> Dar Apoio para a Ayabe-san!
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Criado com carinho para os fãs de <strong>Uma Musume: Pretty Derby</strong> | Tema oficial: <code style="color:var(--primary-light)">#3865A1</code></p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Dados consumidos da API pública <a href="https://umapyoi.net" target="_blank" rel="noopener">Umapyoi.net</a> (ID: 5191).</p>
+        </div>
+    </footer>
+
+<!-- JavaScript Logic -->
+    <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // --- 1. Starry Canvas Animation (twinkle + parallax + shooting stars) ---
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let shootingStars = [];
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const density = prefersReducedMotion ? 4500 : 2600;
+            const count = Math.floor((canvas.width * canvas.height) / density);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005,
+                    depth: Math.random() * 0.6 + 0.2,
+                    color: Math.random() > 0.75 ? '#e0f2fe' : (Math.random() > 0.5 ? '#5282c4' : '#3865A1')
+                });
+            }
+        }
+
+        function maybeSpawnShootingStar() {
+            if (prefersReducedMotion) return;
+            if (Math.random() < 0.006 && shootingStars.length < 2) {
+                const startX = Math.random() * canvas.width * 0.6;
+                shootingStars.push({
+                    x: startX,
+                    y: Math.random() * canvas.height * 0.4,
+                    len: 120 + Math.random() * 80,
+                    speed: 8 + Math.random() * 6,
+                    life: 1
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const parallaxX = (mouseX - canvas.width / 2) * 0.01;
+            const parallaxY = (mouseY - canvas.height / 2) * 0.01;
+
+            stars.forEach(s => {
+                s.alpha += s.speed;
+                if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
+
+                const dx = s.x + parallaxX * s.depth;
+                const dy = s.y + parallaxY * s.depth;
+
+                ctx.beginPath();
+                ctx.arc(dx, dy, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = s.color;
+                ctx.globalAlpha = Math.max(0, Math.min(1, s.alpha));
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+
+            maybeSpawnShootingStar();
+            shootingStars.forEach(ss => {
+                ss.x += ss.speed;
+                ss.y += ss.speed * 0.5;
+                ss.life -= 0.012;
+
+                const grad = ctx.createLinearGradient(ss.x, ss.y, ss.x - ss.len, ss.y - ss.len * 0.5);
+                grad.addColorStop(0, `rgba(224, 242, 254, ${Math.max(ss.life, 0)})`);
+                grad.addColorStop(1, 'rgba(224, 242, 254, 0)');
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(ss.x, ss.y);
+                ctx.lineTo(ss.x - ss.len, ss.y - ss.len * 0.5);
+                ctx.stroke();
+            });
+            shootingStars = shootingStars.filter(ss => ss.life > 0 && ss.x < canvas.width + 200);
+
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        resizeCanvas();
+        drawStars();
+
+        // --- 2. Navbar scroll state + active-link tracking ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        const navLinks = document.querySelectorAll('[data-nav]');
+        const trackedSections = document.querySelectorAll('#about, #stats, #reasons, #fluff-meter');
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        trackedSections.forEach(sec => spyObserver.observe(sec));
+
+        // --- 3. Reveal-on-scroll ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+        // --- 4. Local image fallback (mantém a imagem local, sem sobrescrever com URL externa) ---
+        function handleImageFallback(imgEl) {
+            imgEl.style.display = 'none';
+            const fallback = document.getElementById('ayabe-fallback');
+            if (fallback) fallback.style.display = 'flex';
+        }
+
+        // --- 5. Fetch Data from Umapyoi API (ID 5191) ---
+        const API_URL = 'https://umapyoi.net/api/v1/character/5191';
+        const container = document.getElementById('api-data-container');
+
+        const fallbackData = {
+            name_jp: 'アドマイヤベガ',
+            name_en: 'Admire Vega',
+            nickname: 'Ayabe-san (アヤベさん)',
+            va: 'Hitomi Sasaki (佐々木琴子)',
+            birthday: '12 de Março',
+            height: '157 cm',
+            weight: 'Sem mudanças (Perfeita)',
+            three_sizes: 'B83 / W55 / H81',
+            color: '#3865A1'
+        };
+
+        async function fetchCharacterData() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Falha na API');
+                const data = await response.json();
+                // A substituição do src da imagem principal é intencionalmente
+                // NUNCA feita aqui, para não quebrar a imagem local em img/ayabe.png.
+                renderData(data);
+            } catch (err) {
+                console.warn('API bloqueada por CORS ou indisponível. Usando dados da reserva:', err);
+                renderData(fallbackData);
+            }
+        }
+
+        function renderData(d) {
+            const items = [
+                { label: 'Nome em Japonês', val: d.name_jp || d.name || 'アドマイヤベガ', icon: 'fa-language' },
+                { label: 'Nome Ocidental', val: d.name_en || 'Admire Vega', icon: 'fa-signature' },
+                { label: 'Apelido Carinhoso', val: d.nickname || 'Ayabe-san', icon: 'fa-heart' },
+                { label: 'Dubladora (CV)', val: d.va || 'Hitomi Sasaki', icon: 'fa-microphone' },
+                { label: 'Aniversário', val: d.birthday || '12 de Março', icon: 'fa-cake-candles' },
+                { label: 'Altura', val: d.height || '157 cm', icon: 'fa-ruler-vertical' },
+                { label: 'Três Medidas', val: d.three_sizes || 'B83 · W55 · H81', icon: 'fa-user' },
+                { label: 'Cor Oficial', val: d.color || '#3865A1', icon: 'fa-palette', isColor: true }
+            ];
+
+            container.innerHTML = items.map((item, i) => `
+                <div class="stat-box" style="animation-delay:${i * 0.06}s">
+                    <div class="stat-label">
+                        <i class="fa-solid ${item.icon}"></i> ${item.label}
+                    </div>
+                    <div class="stat-value" ${item.isColor ? `style="color:${item.val}"` : ''}>
+                        ${item.isColor ? `<span style="display:inline-block; width:16px; height:16px; background:${item.val}; border-radius:50%; margin-right:8px; border:1px solid #fff; vertical-align:-2px;"></span>${item.val}` : item.val}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        fetchCharacterData();
+
+        // --- 6. Fluffiness Slider Interactive Widget ---
+        const fluffRange = document.getElementById('fluff-range');
+        const fluffValue = document.getElementById('fluff-value');
+        const fluffQuote = document.getElementById('fluff-quote');
+        const fluffFill = document.getElementById('fluff-fill');
+        const fluffRing = document.getElementById('fluff-ring');
+        const fluffIcon = document.getElementById('fluff-icon');
+        const fluffWrap = document.getElementById('fluff-wrap');
+
+        const quotes = [
+            { max: 20, text: '"Isso é muito rígido... Não posso aceitar algo tão desconfortável."', reaction: '😾 Desaprovação Silenciosa', color: '#94a3b8' },
+            { max: 50, text: '"Hum... É aceitável. O tecido poderia ser um pouco mais felpudo, mas cumpre o papel."', reaction: '😐 Observação Neutra', color: '#5282c4' },
+            { max: 80, text: '"Oh... É incrivelmente macio. Onde você comprou isso, Treinador?"', reaction: '✨ Olhar Interessado', color: '#e0f2fe' },
+            { max: 100, text: '"Incrível... É tão macio quanto uma nuvem... Vou testar no meu secador de futon imediatamente!"', reaction: '💙 Felicidade Extrema (Rara!)', color: '#f59e0b' }
+        ];
+
+        function spawnSparkle(pct) {
+            if (prefersReducedMotion) return;
+            const icons = ['fa-star', 'fa-heart', 'fa-wand-magic-sparkles'];
+            const icon = icons[Math.floor(Math.random() * icons.length)];
+            const sp = document.createElement('i');
+            sp.className = `fa-solid ${icon} sparkle`;
+            sp.style.left = `${pct}%`;
+            fluffWrap.appendChild(sp);
+            setTimeout(() => sp.remove(), 760);
+        }
+
+        function updateFluff(val, spawn) {
+            fluffValue.textContent = `${val}% de Fofura`;
+            fluffFill.style.width = `${val}%`;
+
+            const item = quotes.find(q => val <= q.max) || quotes[quotes.length - 1];
+            fluffQuote.innerHTML = `${item.text}<br><strong style="color:var(--accent-star); font-size:0.9rem;">[${item.reaction}]</strong>`;
+
+            fluffRing.style.background = `conic-gradient(${item.color} ${val}%, rgba(255,255,255,0.08) ${val}%)`;
+
+            const scale = 0.85 + (val / 100) * 0.55;
+            const glow = 4 + (val / 100) * 22;
+            fluffIcon.style.transform = `scale(${scale.toFixed(2)})`;
+            fluffIcon.style.filter = `drop-shadow(0 0 ${glow.toFixed(0)}px ${item.color})`;
+            fluffIcon.style.color = item.color;
+
+            if (spawn) spawnSparkle(val);
+        }
+
+        fluffRange.addEventListener('input', (e) => {
+            updateFluff(Number(e.target.value), true);
+        });
+
+        updateFluff(Number(fluffRange.value), false);
+
+        // --- 7. Interactive Praise Button ---
+        function triggerPraise() {
+            alert('🌟 Ayabe-san olhou para você com um leve sorriso no rosto:\n\n"Obrigada por estar ao meu lado, Treinador. Vamos olhar as estrelas juntos hoje à noite."');
+        }
+    </script>
+</body>
+</html>

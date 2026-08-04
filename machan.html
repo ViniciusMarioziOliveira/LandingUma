@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Landing page dedicada à Aston Machan, de Umamusume: Pretty Derby, com dados da API Umapyoi.">
+<title>Aston Machan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Gloock&family=Patrick+Hand&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --red:#cf4436;--red-dark:#8d2e26;--red-deep:#55201c;
+  --coral:#e97a6b;--peach:#f1b39e;--blush:#f9dfd7;
+  --cream:#fff8ef;--paper:#fffdf8;--paper-2:#f4ebe2;
+  --ink:#332a28;--muted:#7b6e69;--line:rgba(83,52,45,.13);
+  --shadow:0 25px 65px rgba(85,32,28,.15);
+  --soft-shadow:0 15px 38px rgba(85,32,28,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;overflow-x:hidden;color:var(--ink);font-family:"DM Sans",sans-serif;
+  background:
+    radial-gradient(circle at 8% 10%,rgba(233,122,107,.16),transparent 23rem),
+    radial-gradient(circle at 90% 18%,rgba(241,179,158,.22),transparent 24rem),
+    var(--cream);
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(85,32,28,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(85,32,28,.025) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+img{display:block;max-width:100%}
+.container{width:min(1210px,calc(100% - 34px));margin-inline:auto}
+
+/* Header */
+.header{
+  position:fixed;top:17px;left:50%;z-index:50;width:min(1160px,calc(100% - 28px));
+  transform:translateX(-50%);border:1px solid rgba(255,255,255,.72);border-radius:18px;
+  background:rgba(255,253,248,.84);box-shadow:0 13px 32px rgba(85,32,28,.08);backdrop-filter:blur(18px)
+}
+.header-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;min-height:64px;padding:8px 10px 8px 18px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Gloock",serif;font-size:1.25rem}
+.lens{position:relative;width:35px;height:35px;border:2px solid var(--red);border-radius:50%;box-shadow:inset 0 0 0 6px rgba(207,68,54,.1)}
+.lens:after{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--red)}
+.nav{display:flex;justify-content:center;gap:26px;color:var(--muted);font-size:.79rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.nav a{position:relative;padding-block:8px}
+.nav a:after{content:"";position:absolute;left:50%;bottom:0;width:0;height:2px;transform:translateX(-50%);background:var(--red);transition:.25s}
+.nav a:hover:after{width:100%}
+.header-cta{display:grid;place-items:center;min-height:46px;padding:0 18px;border-radius:12px;color:white;background:var(--red);font-size:.8rem;font-weight:800;box-shadow:0 12px 24px rgba(207,68,54,.2);transition:.2s}
+.header-cta:hover{transform:translateY(-2px);background:var(--red-dark)}
+
+/* Hero camera viewfinder */
+.hero{position:relative;min-height:900px;overflow:hidden;padding:120px 0 80px}
+.hero:after{
+  content:"";position:absolute;top:-190px;right:-130px;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95),rgba(249,223,215,.62) 25%,transparent 68%);
+}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:.88fr 1.12fr;align-items:center;gap:58px;min-height:700px}
+.record-tag{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px;padding:8px 13px;border:1px solid rgba(207,68,54,.2);border-radius:8px;color:var(--red-dark);background:rgba(255,255,255,.65);font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.rec-dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(207,68,54,.11);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.45;transform:scale(.82)}}
+.hero h1{max-width:650px;font-family:"Gloock",serif;font-size:clamp(4.2rem,7.5vw,8rem);font-weight:400;line-height:.88;letter-spacing:-.055em}
+.hero h1 span{display:block;margin-top:18px;color:var(--red);font-family:"Patrick Hand",cursive;font-size:clamp(2.2rem,4vw,4rem);font-weight:400;letter-spacing:0;transform:rotate(-2deg)}
+.hero-copy>p{max-width:590px;margin:28px 0 31px;color:var(--muted);font-size:1.04rem;line-height:1.82}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:55px;padding:0 23px;border-radius:12px;font-weight:800;transition:.22s}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{color:white;background:var(--red);box-shadow:0 15px 30px rgba(207,68,54,.22)}
+.btn-light{border:1px solid var(--line);background:rgba(255,255,255,.72)}
+.api{display:flex;align-items:center;gap:10px;margin-top:22px;color:var(--muted);font-size:.79rem}
+.api-dot{width:8px;height:8px;border-radius:50%;background:#d5a039}.api-dot.online{background:#48b88a}
+
+.camera{position:relative;min-height:700px}
+.viewfinder{
+  position:absolute;inset:28px 8px 8px;border:1px solid rgba(207,68,54,.23);border-radius:34px;
+  background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(249,223,215,.42)),var(--paper-2);box-shadow:var(--shadow)
+}
+.viewfinder:before{
+  content:"";position:absolute;inset:22px;
+  background:
+    linear-gradient(var(--red),var(--red)) left top/44px 2px no-repeat,
+    linear-gradient(var(--red),var(--red)) left top/2px 44px no-repeat,
+    linear-gradient(var(--red),var(--red)) right top/44px 2px no-repeat,
+    linear-gradient(var(--red),var(--red)) right top/2px 44px no-repeat,
+    linear-gradient(var(--red),var(--red)) left bottom/44px 2px no-repeat,
+    linear-gradient(var(--red),var(--red)) left bottom/2px 44px no-repeat,
+    linear-gradient(var(--red),var(--red)) right bottom/44px 2px no-repeat,
+    linear-gradient(var(--red),var(--red)) right bottom/2px 44px no-repeat;
+  opacity:.55
+}
+.viewfinder:after{
+  content:"";position:absolute;left:50%;top:50%;width:82px;height:82px;transform:translate(-50%,-50%);
+  border:1px solid rgba(207,68,54,.32);border-radius:50%
+}
+.hero-image{
+  position:absolute;z-index:2;inset:8px -8px 0;width:calc(100% + 16px);height:calc(100% - 8px);
+  object-fit:contain;object-position:center bottom;filter:drop-shadow(0 30px 25px rgba(77,36,29,.22));
+  opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s
+}
+.hero-image.loaded{opacity:1;transform:translateY(0)}
+.placeholder{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-weight:700}
+.camera-meta{position:absolute;z-index:4;padding:9px 12px;border-radius:8px;color:white;background:rgba(51,42,40,.78);font: .72rem monospace;backdrop-filter:blur(8px)}
+.camera-meta.top{top:55px;right:32px}.camera-meta.bottom{left:34px;bottom:26px}
+.flash{position:absolute;z-index:4;right:27px;bottom:53px;color:var(--red);font-size:2.7rem;text-shadow:0 0 24px rgba(207,68,54,.35)}
+
+/* Moving film */
+.film{position:relative;z-index:5;margin-top:-34px;overflow:hidden;color:white;background:var(--red-deep);box-shadow:0 20px 50px rgba(85,32,28,.18)}
+.film-track{display:flex;width:max-content;animation:filmMove 28s linear infinite}
+.film-item{display:flex;align-items:center;gap:14px;min-width:265px;padding:21px 27px;border-right:1px solid rgba(255,255,255,.14)}
+.film-item:before,.film-item:after{content:"";width:11px;height:15px;border-radius:2px;background:rgba(255,255,255,.2)}
+.film-item span{color:var(--peach);font: .72rem monospace}.film-item strong{font-family:"Gloock",serif;font-weight:400}
+@keyframes filmMove{to{transform:translateX(-50%)}}
+
+/* Story polaroids */
+.story{padding:115px 0}
+.story-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:center}
+.polaroids{position:relative;min-height:570px}
+.polaroid{position:absolute;width:min(390px,78%);padding:14px 14px 68px;background:white;box-shadow:0 24px 55px rgba(80,55,48,.16);transition:.35s}
+.polaroid.back{top:40px;right:15px;transform:rotate(7deg);background:#f1e7de}
+.polaroid.front{left:18px;bottom:20px;transform:rotate(-5deg)}
+.polaroids:hover .back{transform:rotate(10deg) translate(8px,-6px)}.polaroids:hover .front{transform:rotate(-2deg) translate(-4px,-8px)}
+.tape{position:absolute;top:-14px;left:50%;width:115px;height:34px;transform:translateX(-50%) rotate(-3deg);background:rgba(238,196,142,.65)}
+.photo{display:grid;place-items:center;min-height:390px;overflow:hidden;background:radial-gradient(circle at 50% 20%,rgba(241,179,158,.32),transparent 14rem),linear-gradient(160deg,#f8ebe4,#fffaf6)}
+.photo img{width:100%;height:390px;object-fit:contain;object-position:center bottom}
+.caption{position:absolute;left:24px;bottom:19px;color:var(--red-dark);font-family:"Patrick Hand",cursive;font-size:1.35rem}
+.eyebrow{color:var(--red);font-size:.75rem;font-weight:900;letter-spacing:.17em;text-transform:uppercase}
+.story-copy h2,.section-title{font-family:"Gloock",serif;font-weight:400;line-height:1.02;letter-spacing:-.04em}
+.story-copy h2{max-width:620px;margin:13px 0 24px;font-size:clamp(3rem,5.4vw,5.6rem)}
+.story-copy>p{color:var(--muted);font-size:1.04rem;line-height:1.9}
+.points{display:grid;gap:12px;margin-top:28px}
+.point{display:grid;grid-template-columns:50px 1fr;gap:15px;align-items:center;padding:15px;border-bottom:1px solid var(--line)}
+.point-icon{display:grid;place-items:center;width:50px;height:50px;border:1px solid rgba(207,68,54,.2);border-radius:50%;color:var(--red);background:white;font-size:1.25rem}
+.point h3{margin-bottom:4px;font-size:.98rem}.point p{color:var(--muted);font-size:.87rem;line-height:1.5}
+
+/* Voice memo */
+.voice{padding:100px 0;color:white;background:radial-gradient(circle at 15% 20%,rgba(233,122,107,.25),transparent 22rem),linear-gradient(135deg,#3b2521,var(--red-deep))}
+.voice-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:55px;align-items:center}
+.voice h2{margin:12px 0 20px;font-family:"Gloock",serif;font-size:clamp(3rem,5vw,5rem);font-weight:400;line-height:1}
+.voice-copy p{color:rgba(255,255,255,.68);line-height:1.78}
+.recorder{padding:36px;border:1px solid rgba(255,255,255,.13);border-radius:28px;background:rgba(255,255,255,.06)}
+.rec-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:27px}
+.rec-title{display:flex;align-items:center;gap:11px;font-size:.9rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.rec-time{color:var(--peach);font-family:monospace}
+.wave{display:flex;align-items:center;gap:5px;height:85px}
+.wave span{width:4px;border-radius:99px;background:linear-gradient(to top,var(--coral),var(--peach));animation:wave 1.3s ease-in-out infinite;animation-play-state:paused}
+.recorder.playing .wave span{animation-play-state:running}.wave span:nth-child(3n){animation-delay:.15s}.wave span:nth-child(4n){animation-delay:.3s}
+@keyframes wave{0%,100%{transform:scaleY(.45);opacity:.6}50%{transform:scaleY(1);opacity:1}}
+.play-row{display:flex;align-items:center;gap:17px}
+.play{display:grid;place-items:center;width:55px;height:55px;border:0;border-radius:50%;color:var(--red-deep);background:var(--peach);font-size:1.15rem;cursor:pointer;transition:.2s}
+.play:hover{transform:scale(1.06);background:white}.memo-text{color:rgba(255,255,255,.68);font-family:"Patrick Hand",cursive;font-size:1.25rem}
+
+/* Profile contact sheet */
+.profile{padding:115px 0;background:var(--paper-2)}
+.section-title{margin-top:11px;font-size:clamp(3rem,5vw,5.2rem)}
+.profile-head{margin-bottom:38px}
+.contact{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+.profile-main{display:grid;grid-template-columns:.82fr 1.18fr;overflow:hidden;border-radius:34px;background:white;box-shadow:var(--soft-shadow)}
+.profile-title{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:560px;padding:42px;color:white;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.17),transparent 15rem),linear-gradient(160deg,var(--red),var(--red-deep))}
+.profile-title:after{content:"7518";position:absolute;right:-15px;bottom:-30px;color:rgba(255,255,255,.08);font-family:"Gloock",serif;font-size:9rem}
+.profile-title h3{position:relative;z-index:1;font-family:"Gloock",serif;font-size:clamp(3.3rem,5vw,5rem);font-weight:400;line-height:.95}
+.jp{position:relative;z-index:1;margin-top:15px;color:var(--blush);letter-spacing:.09em}.profile-title p{position:relative;z-index:1;color:rgba(255,255,255,.66);font-size:.78rem;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(2,1fr)}
+.stat{display:flex;flex-direction:column;justify-content:center;min-height:186px;padding:28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:.22s}
+.stat:hover{background:var(--blush)}.stat span{margin-bottom:9px;color:var(--muted);font-size:.7rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.stat strong{font-family:"Gloock",serif;font-size:clamp(1.25rem,2.3vw,2rem);font-weight:400;line-height:1.2;overflow-wrap:anywhere}
+.facts{display:grid;gap:12px}
+.fact{padding:21px;border:1px solid rgba(207,68,54,.1);border-radius:18px;background:rgba(255,255,255,.72);transition:.22s}
+.fact:hover{transform:translateX(5px);box-shadow:0 12px 28px rgba(85,32,28,.08)}
+.fact span{display:block;margin-bottom:7px;color:var(--red);font-size:.7rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.fact strong,.fact p{line-height:1.55}
+
+/* Gallery darkroom */
+.gallery{padding:115px 0}
+.gallery-head{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-bottom:38px}
+.tabs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.tabs button{padding:11px 15px;border:1px solid var(--line);border-radius:9px;color:var(--muted);background:white;font-size:.82rem;font-weight:800;cursor:pointer;transition:.2s}
+.tabs button:hover{transform:translateY(-2px)}.tabs button.active{color:white;background:var(--red)}
+.darkroom{display:grid;grid-template-columns:.65fr 1.35fr;min-height:650px;overflow:hidden;border-radius:34px;color:white;background:#251b19;box-shadow:var(--shadow)}
+.dark-copy{display:flex;flex-direction:column;justify-content:space-between;padding:48px;background:linear-gradient(180deg,rgba(207,68,54,.18),transparent 45%),#251b19}
+.dark-copy h3{margin-top:12px;font-family:"Gloock",serif;font-size:clamp(2.8rem,4.5vw,5rem);font-weight:400;line-height:.95}.dark-copy p{margin-top:18px;color:rgba(255,255,255,.58);line-height:1.75}
+.negative{color:var(--coral);font-family:monospace;font-size:4.5rem;opacity:.72}
+.stage{position:relative;display:grid;place-items:center;min-height:650px;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(241,179,158,.25),transparent 18rem),linear-gradient(160deg,#f4ddd5,#fff8f2)}
+.stage:before{content:"";position:absolute;inset:24px;border:1px solid rgba(207,68,54,.2)}
+.stage img{position:relative;z-index:1;width:100%;height:620px;object-fit:contain;object-position:center bottom;padding:26px;opacity:0;filter:brightness(.75) sepia(.18);animation:develop .8s forwards}
+@keyframes develop{to{opacity:1;filter:brightness(1) sepia(0)}}.empty{color:var(--muted);text-align:center}
+
+/* Support cards as collectible memories */
+.supports{padding:110px 0;background:linear-gradient(rgba(85,32,28,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(85,32,28,.035) 1px,transparent 1px),var(--paper-2);background-size:26px 26px}
+.support-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:38px}
+.support-note{max-width:390px;color:var(--muted);line-height:1.65;text-align:right}
+.support-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.support-card{position:relative;padding:12px 12px 70px;background:white;box-shadow:0 18px 38px rgba(80,55,48,.12);transition:.3s}
+.support-card:nth-child(odd){transform:rotate(-1.2deg)}.support-card:nth-child(even){transform:rotate(1.2deg)}
+.support-card:hover{z-index:3;transform:rotate(0) translateY(-8px) scale(1.025);box-shadow:0 28px 55px rgba(80,55,48,.18)}
+.support-image{display:grid;place-items:center;min-height:260px;overflow:hidden;background:linear-gradient(160deg,#f8e8e1,#fffaf6)}
+.support-image img{width:100%;height:250px;object-fit:contain;transition:.35s}.support-card:hover img{transform:scale(1.035)}
+.rarity{position:absolute;top:22px;left:22px;z-index:2;padding:5px 8px;border-radius:6px;color:white;background:var(--red);font-size:.67rem;font-weight:900;letter-spacing:.08em}
+.support-body{position:absolute;left:22px;right:22px;bottom:18px}.support-body h3{font-family:"Patrick Hand",cursive;font-size:1.18rem;font-weight:400;line-height:1.18}.support-body small{display:block;margin-top:4px;color:var(--muted);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
+
+/* Final */
+.final{position:relative;overflow:hidden;padding:125px 0;color:white;text-align:center;background:radial-gradient(circle at 50% 0%,rgba(233,122,107,.35),transparent 28rem),linear-gradient(135deg,var(--red-deep),#2f1f1c)}
+.final:before{
+  content:"";position:absolute;inset:26px;
+  background:
+    linear-gradient(var(--peach),var(--peach)) left top/70px 2px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) left top/2px 70px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) right top/70px 2px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) right top/2px 70px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) left bottom/70px 2px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) left bottom/2px 70px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) right bottom/70px 2px no-repeat,
+    linear-gradient(var(--peach),var(--peach)) right bottom/2px 70px no-repeat;
+  opacity:.45
+}
+.final-inner{position:relative;z-index:2}.final h2{max-width:900px;margin:auto;font-family:"Gloock",serif;font-size:clamp(3.7rem,7vw,7.2rem);font-weight:400;line-height:.95;letter-spacing:-.04em}
+.final h2 span{display:block;margin-top:15px;color:var(--peach);font-family:"Patrick Hand",cursive;font-size:.55em;letter-spacing:0}.final p{max-width:650px;margin:28px auto 32px;color:rgba(255,255,255,.66);line-height:1.8}
+footer{padding:30px 0;color:rgba(255,255,255,.55);background:#211715;font-size:.79rem}.footer-inner{display:flex;justify-content:space-between;gap:20px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:none}
+
+/* Responsive */
+@media(max-width:1040px){
+  .contact{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,1fr)}.support-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  .nav{display:none}.header-inner{grid-template-columns:1fr auto}
+  .hero-grid,.story-grid,.voice-grid,.darkroom{grid-template-columns:1fr}
+  .hero{padding-top:140px}.camera{min-height:650px}.story-grid{gap:42px}
+  .profile-main{grid-template-columns:1fr}.profile-title{min-height:360px}
+  .gallery-head,.support-head{display:flex;align-items:flex-start;flex-direction:column}
+  .tabs{justify-content:flex-start}.support-note{text-align:left}.dark-copy{min-height:360px}
+}
+@media(max-width:620px){
+  .container{width:min(100% - 22px,1210px)}.header{top:10px}.header-cta{display:none}
+  .hero h1{font-size:4.2rem}.actions>*{width:100%}.camera{min-height:540px}.viewfinder{inset-inline:0}
+  .camera-meta.top{right:16px}.camera-meta.bottom{left:16px}
+  .story,.voice,.profile,.gallery,.supports{padding:78px 0}
+  .polaroids{min-height:470px}.photo,.photo img{min-height:315px;height:315px}
+  .stats,.facts{grid-template-columns:1fr}.stat{min-height:140px}
+  .stage,.stage img{min-height:520px;height:520px}.support-grid{grid-template-columns:1fr}
+  .support-card:nth-child(n){transform:none}.footer-inner{flex-direction:column;text-align:center}
+}
+
+
+    /* Seletor entre as três landing pages */
+    .page-header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .page-switcher {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .page-switcher-toggle {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .page-switcher-toggle:hover { transform: translateY(-2px); }
+
+    .page-switcher-icon {
+      display: grid;
+      gap: 4px;
+      width: 18px;
+    }
+
+    .page-switcher-icon span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .page-switcher.is-open .page-switcher-icon span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .page-switcher.is-open .page-switcher-icon span:nth-child(2) { opacity: 0; }
+
+    .page-switcher.is-open .page-switcher-icon span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .page-switcher-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      z-index: 100;
+      width: 230px;
+      padding: 8px;
+      border-radius: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(.98);
+      transform-origin: top right;
+      pointer-events: none;
+      transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+    }
+
+    .page-switcher.is-open .page-switcher-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .page-switcher-label {
+      display: block;
+      padding: 8px 10px 6px;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .page-switcher-menu a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 11px 12px;
+      border-radius: 10px;
+      font-size: .88rem;
+      font-weight: 800;
+      line-height: 1.2;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .page-switcher-menu a small {
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .page-switcher-toggle {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--red-dark);
+      background: rgba(255,255,255,.72);
+    }
+    .page-switcher-toggle:hover { border-color: rgba(207,68,54,.35); background: white; }
+    .page-switcher-menu {
+      border: 1px solid rgba(207,68,54,.12);
+      color: var(--ink);
+      background: rgba(255,253,248,.97);
+      box-shadow: 0 18px 42px rgba(85,32,28,.16);
+      backdrop-filter: blur(16px);
+    }
+    .page-switcher-label { color: var(--muted); }
+    .page-switcher-menu a:hover,
+    .page-switcher-menu a[aria-current="page"] { color: var(--red-dark); background: var(--blush); }
+
+  </style>
+</head>
+
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#inicio"><span>Aston Machan</span></a>
+    <nav class="nav">
+      <a href="#memoria">Memória</a><a href="#perfil">Perfil</a><a href="#visuais">Visuais</a><a href="#cards">Cards</a>
+    </nav>
+    <div class="page-header-actions">
+      <a class="header-cta" href="#memoria">Guardar lembrança</a>
+      <div class="page-switcher" data-page-switcher>
+        <button class="page-switcher-toggle" type="button" aria-label="Abrir menu de personagens" aria-expanded="false" aria-controls="pageSwitcherMenu">
+          <span class="page-switcher-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <div class="page-switcher-menu" id="pageSwitcherMenu" role="menu">
+          <span class="page-switcher-label">Trocar personagem</span>
+          <a href="dober.html" role="menuitem">Mejiro Dober</a>
+          <a href="machan.html" role="menuitem" aria-current="page">Aston Machan <small>Atual</small></a>
+          <a href="vivlos.html" role="menuitem">Vivlos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="record-tag"><span class="rec-dot"></span>Arquivo de memória · 7518</span>
+      <h1>Aston<br>Machan<span>Não se esqueça de mim.</span></h1>
+      <p>
+        Sempre acompanhada de sua boneca Ma-chan e pronta para encontrar a câmera mais próxima,
+        Aston Machan deseja se tornar uma mascote conhecida no mundo inteiro. Por trás de cada
+        pose fofa existe um pedido simples e marcante: permanecer na memória de alguém.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#memoria">Abrir álbum ↘</a>
+        <a class="btn btn-light" href="https://umapyoi.net/character/7518" target="_blank" rel="noopener noreferrer">Ver na Umapyoi</a>
+      </div>
+      <div class="api"><span class="api-dot" id="apiDot"></span><span id="apiStatus">Conectando à Umapyoi API...</span></div>
+    </div>
+
+    <div class="camera reveal">
+      <div class="viewfinder"></div>
+      <div class="placeholder" id="portraitPlaceholder">.</div>
+      <img class="hero-image" id="heroImage" alt="Aston Machan" hidden>
+      <div class="camera-meta top">REC ● 03:05</div>
+      <div class="camera-meta bottom">F2.8 · ISO 400 · MEMORY</div>
+      <div class="flash">✦</div>
+    </div>
+  </div>
+</section>
+
+<section class="film">
+  <div class="film-track">
+    <div class="film-item"><span>001</span><strong>Ma-chan</strong></div>
+    <div class="film-item"><span>002</span><strong>Câmeras</strong></div>
+    <div class="film-item"><span>003</span><strong>Mensagens de voz</strong></div>
+    <div class="film-item"><span>004</span><strong>Mascote mundial</strong></div>
+    <div class="film-item"><span>005</span><strong>Não me esqueça</strong></div>
+    <div class="film-item"><span>001</span><strong>Ma-chan</strong></div>
+    <div class="film-item"><span>002</span><strong>Câmeras</strong></div>
+    <div class="film-item"><span>003</span><strong>Mensagens de voz</strong></div>
+    <div class="film-item"><span>004</span><strong>Mascote mundial</strong></div>
+    <div class="film-item"><span>005</span><strong>Não me esqueça</strong></div>
+  </div>
+</section>
+
+<section class="story" id="memoria">
+  <div class="container story-grid">
+    <div class="polaroids reveal">
+      <figure class="polaroid back">
+        <div class="tape"></div><div class="photo"></div><figcaption class="caption">foto de teste — não apagar</figcaption>
+      </figure>
+      <figure class="polaroid front">
+        <div class="tape"></div>
+        <div class="photo"><img id="storyImage" alt="Aston Machan em uma Polaroid"></div>
+        <figcaption class="caption">Machan esteve aqui ♡</figcaption>
+      </figure>
+    </div>
+
+    <div class="story-copy reveal">
+      <span class="eyebrow">Uma presença para guardar</span>
+      <h2>Fofa como uma mascote. Marcante como uma lembrança.</h2>
+      <p>
+        Aston Machan transforma tudo em registro: poses, gravações, pequenos gestos e momentos
+        ao lado de sua boneca. Ela ama ser fotografada porque cada imagem é uma prova de que esteve
+        ali. Seu sonho de se tornar uma mascote mundial nasce do desejo de alcançar muitas pessoas
+        — e nunca desaparecer por completo.
+      </p>
+      <div class="points">
+        <article class="point"><div class="point-icon">📷</div><div><h3>Olhar fotográfico</h3><p>Adora câmeras, poses e qualquer chance de deixar uma nova imagem registrada.</p></div></article>
+        <article class="point"><div class="point-icon">🎙</div><div><h3>Mensagens de voz</h3><p>Guarda pequenas lembranças para que sua presença continue depois do momento passar.</p></div></article>
+        <article class="point"><div class="point-icon">🧸</div><div><h3>Ma-chan sempre por perto</h3><p>Sua boneca é companheira e parte essencial da imagem que deseja compartilhar.</p></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="voice">
+  <div class="container voice-grid">
+    <div class="voice-copy reveal">
+      <span class="eyebrow" style="color:var(--peach)">Mensagem arquivada</span>
+      <h2>Uma voz que pede para permanecer.</h2>
+      <p>O gravador homenageia o hábito de Machan de guardar mensagens. A interação é apenas visual e não usa áudio oficial.</p>
+    </div>
+    <div class="recorder reveal" id="recorder">
+      <div class="rec-head">
+        <div class="rec-title"><span class="rec-dot"></span><strong>Ma-chan voice memo</strong></div>
+        <span class="rec-time">00:08</span>
+      </div>
+      <div class="wave">
+        <span style="height:30%"></span><span style="height:55%"></span><span style="height:78%"></span><span style="height:42%"></span>
+        <span style="height:68%"></span><span style="height:92%"></span><span style="height:50%"></span><span style="height:70%"></span>
+        <span style="height:38%"></span><span style="height:86%"></span><span style="height:58%"></span><span style="height:96%"></span>
+        <span style="height:44%"></span><span style="height:72%"></span><span style="height:33%"></span><span style="height:82%"></span>
+        <span style="height:60%"></span><span style="height:95%"></span><span style="height:48%"></span><span style="height:74%"></span>
+        <span style="height:40%"></span><span style="height:68%"></span><span style="height:52%"></span><span style="height:88%"></span>
+      </div>
+      <div class="play-row">
+        <button class="play" id="playMemo" type="button" aria-label="Ativar animação do gravador">▶</button>
+        <span class="memo-text" id="memoText">“Você vai se lembrar de mim, certo?”</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="profile" id="perfil">
+  <div class="container">
+    <div class="profile-head reveal">
+      <span class="eyebrow">Ficha de contato</span>
+      <h2 class="section-title">Dados preservados no arquivo.</h2>
+    </div>
+
+    <div class="contact reveal">
+      <div class="profile-main">
+        <aside class="profile-title">
+          <div><h3 id="characterName">Aston Machan</h3><p class="jp" id="japaneseName">アストンマーチャン</p></div>
+          <p>Informações carregadas dinamicamente de <strong>/api/v1/character/7518</strong>.</p>
+        </aside>
+
+        <div class="stats">
+          <article class="stat"><span>Aniversário</span><strong id="birthday">5 de março</strong></article>
+          <article class="stat"><span>Altura</span><strong id="height">152 cm</strong></article>
+          <article class="stat"><span>Dubladora</span><strong id="voiceActor">Honoka Inoue</strong></article>
+          <article class="stat"><span>Categoria</span><strong id="category">Umamusume</strong></article>
+          <article class="stat"><span>Medidas</span><strong id="measurements">B86 · W55 · H80</strong></article>
+          <article class="stat"><span>ID</span><strong>7518</strong></article>
+        </div>
+      </div>
+
+      <div class="facts">
+        <article class="fact"><span>Série escolar</span><strong id="grade">Junior Division</strong></article>
+        <article class="fact"><span>Residência</span><strong id="residence">Ritto Dormitory</strong></article>
+        <article class="fact"><span>Peso</span><strong id="weight">O equivalente a algumas cenouras</strong></article>
+        <article class="fact"><span>Calçado</span><strong id="shoeSize">22,0 cm</strong></article>
+        <article class="fact"><span>Pontos fortes</span><p id="strengths">Observar a natureza e jogar dardos.</p></article>
+        <article class="fact"><span>Pontos fracos</span><p id="weaknesses">Assobiar.</p></article>
+        <article class="fact"><span>Curiosidade das orelhas</span><p id="earsFact">Perde brincos com frequência; já está usando o nono.</p></article>
+        <article class="fact"><span>Curiosidade da cauda</span><p id="tailFact">Procura um estilo que fique fofo em seus produtos de mascote.</p></article>
+        <article class="fact"><span>Família</span><p id="familyFact">Era responsabilidade dela levar a mãe adormecida do sofá para a cama.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="visuais">
+  <div class="container">
+    <div class="gallery-head reveal">
+      <div><span class="eyebrow">Câmara de revelação</span><h2 class="section-title">Cada visual, uma memória diferente.</h2></div>
+      <div class="tabs" id="galleryControls"></div>
+    </div>
+
+    <div class="darkroom reveal">
+      <div class="dark-copy">
+        <div>
+          <span class="eyebrow" style="color:var(--peach)">Negativo selecionado</span>
+          <h3 id="lookTitle">Uniform</h3>
+          <p>Uma imagem por opção, sempre com a mesma proporção e uma animação de revelação suave.</p>
+        </div>
+        <div class="negative" id="lookIndex">01</div>
+      </div>
+      <div class="stage" id="galleryGrid"><div class="empty">Revelando os visuais...</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="supports" id="cards">
+  <div class="container">
+    <div class="support-head reveal">
+      <div><span class="eyebrow">Cartões de memória</span><h2 class="section-title">Momentos que ficaram registrados.</h2></div>
+      <p class="support-note">Os support cards aparecem como fotografias colecionáveis, com papel claro, sombra delicada e inclinação de álbum.</p>
+    </div>
+    <div class="support-grid reveal" id="supportGrid"></div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container final-inner reveal">
+    <h2>Não se esqueça de mim.<span>Mesmo quando a fotografia começar a desbotar.</span></h2>
+    <p>Aston Machan quer se tornar uma presença que continue viva na lembrança de quem a conheceu.</p>
+    <a class="btn btn-primary" href="https://umapyoi.net/character/7518" target="_blank" rel="noopener noreferrer">Guardar esta memória</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>Projeto de fã dedicado à Aston Machan.</p>
+    <p>Dados por Umapyoi.net · Cards por GameTora · Umamusume © Cygames</p>
+  </div>
+</footer>
+
+<script>
+const API_BASE="https://umapyoi.net/api/v1";
+const CHARACTER_ID=7518;
+
+const fallbackCharacter={
+  name_en:"Aston Machan",name_jp:"アストンマーチャン",
+  birth_day:5,birth_month:3,height:152,bust:86,waist:55,hips:80,
+  category_label_en:"Umamusume",voice:"Honoka Inoue"
+};
+
+const supportCards=[
+  {id:30296,name:"単焦点でつかまえて",subtitle:"Aston Machan · SSR",rarity:"SSR",image:"https://media.gametora.com/umamusume/supports/full/small/30296.png",url:"https://gametora.com/umamusume/supports/30296-aston-machan"},
+  {id:30149,name:"Haute Couture Memory",subtitle:"Aston Machan · SSR",rarity:"SSR",image:"https://media.gametora.com/umamusume/supports/full/small/30149.png",url:"https://gametora.com/umamusume/supports/30149-aston-machan"},
+  {id:20055,name:"A Clip to Keep Your Heart Warm",subtitle:"Aston Machan · SR",rarity:"SR",image:"https://media.gametora.com/umamusume/supports/full/small/20055.png",url:"https://gametora.com/umamusume/supports/20055-aston-machan"},
+  {id:10087,name:"Tracen Academy",subtitle:"Aston Machan · R",rarity:"R",image:"https://media.gametora.com/umamusume/supports/full/small/10087.png",url:"https://gametora.com/umamusume/supports/10087-aston-machan"}
+];
+
+let imageGroups=[];
+const $=s=>document.querySelector(s);
+
+function firstDefined(obj,keys,fallback=""){
+  for(const key of keys){const value=obj?.[key];if(value!==undefined&&value!==null&&value!=="")return value}
+  return fallback
+}
+function normalizeImageUrl(value){
+  if(!value)return"";if(typeof value==="string")return value;
+  return firstDefined(value,["url","image","image_url","src","path"],"")
+}
+function formatBirthday(day,month){
+  const months=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  return day&&month&&months[month-1]?`${day} de ${months[month-1]}`:"Não informado"
+}
+function getVoiceName(character){
+  const usable=v=>typeof v==="string"&&v.trim()&&!/^https?:\/\//i.test(v)&&!/\.(png|jpe?g|webp|gif|svg|mp3|ogg|wav)(\?|$)/i.test(v);
+  const candidates=[character?.voice_actor_name_en,character?.voice_actor_name,character?.voice_name_en,character?.voice_name,character?.cv_name,character?.seiyuu,character?.voice_actor,character?.va,character?.voice];
+  for(const c of candidates){
+    if(usable(c))return c.trim();
+    if(c&&typeof c==="object"){const n=[c.name_en,c.name,c.name_jp,c.full_name].find(usable);if(n)return n.trim()}
+  }
+  return fallbackCharacter.voice
+}
+function updateCharacter(character){
+  const d={...fallbackCharacter,...character};
+  $("#characterName").textContent=firstDefined(d,["name_en","name"],fallbackCharacter.name_en);
+  $("#japaneseName").textContent=firstDefined(d,["name_jp","name_ja"],fallbackCharacter.name_jp);
+  $("#birthday").textContent=formatBirthday(Number(firstDefined(d,["birth_day","birthday_day"],5)),Number(firstDefined(d,["birth_month","birthday_month"],3)));
+  const h=firstDefined(d,["height"],152);$("#height").textContent=String(h).includes("cm")?h:`${h} cm`;
+  $("#voiceActor").textContent=getVoiceName(d);
+  $("#category").textContent=firstDefined(d,["category_label_en","category","category_name"],"Umamusume");
+  $("#measurements").textContent=`B${firstDefined(d,["bust"],86)} · W${firstDefined(d,["waist"],55)} · H${firstDefined(d,["hips","hip"],80)}`;
+  document.title=`${$("#characterName").textContent} — Não se esqueça de mim.`
+}
+function textValue(obj,keys,fallback="—"){
+  const value=firstDefined(obj,keys,fallback);
+  if(Array.isArray(value))return value.filter(Boolean).join(", ")||fallback;
+  if(value&&typeof value==="object")return firstDefined(value,["name_en","name","label_en","label","value"],fallback);
+  return String(value||fallback)
+}
+function updateExtras(character){
+  const map=[
+    ["#grade",["grade","grade_en","school_year"]],
+    ["#residence",["residence","residence_en","dorm","dormitory"]],
+    ["#weight",["weight","weight_en","weight_change"]],
+    ["#shoeSize",["shoe_size","shoe","shoes"]],
+    ["#strengths",["strengths","strength","good_at"]],
+    ["#weaknesses",["weaknesses","weakness","dislikes","bad_at"]],
+    ["#earsFact",["ears_fact","ear_fact","ears"]],
+    ["#tailFact",["tail_fact","tail"]],
+    ["#familyFact",["family_fact","family"]]
+  ];
+  map.forEach(([selector,keys])=>{
+    const el=$(selector);if(!el)return;
+    const value=textValue(character,keys,el.textContent);
+    if(value&&!/^https?:\/\//i.test(value))el.textContent=value
+  })
+}
+function extractGroups(payload){
+  const raw=Array.isArray(payload)?payload:firstDefined(payload,["image_groups","groups","images","data"],[]);
+  if(!Array.isArray(raw))return[];
+  const unique=items=>{
+    const seen=new Set();
+    return items.map(normalizeImageUrl).filter(Boolean).filter(url=>{const k=url.split("#")[0];if(seen.has(k))return false;seen.add(k);return true})
+  };
+  const flat=raw.every(item=>typeof item==="string"||(item&&typeof item==="object"&&!Array.isArray(item.images)));
+  if(flat){const images=unique(raw);return images.length?[{label:"Galeria",images}]:[]}
+  return raw.map((group,index)=>({label:firstDefined(group,["label_en","label","name"],`Visual ${index+1}`),images:unique(Array.isArray(group.images)?group.images:[])})).filter(group=>group.images.length)
+}
+function setFeatured(url){
+  if(!url)return;
+  const hero=$("#heroImage"),story=$("#storyImage"),placeholder=$("#portraitPlaceholder");
+  hero.onload=()=>{hero.hidden=false;hero.classList.add("loaded");placeholder.hidden=true};
+  hero.onerror=()=>{hero.hidden=true;placeholder.hidden=false;placeholder.textContent="Não foi possível carregar a fotografia."};
+  hero.src=url;story.src=url
+}
+function renderControls(){
+  const controls=$("#galleryControls");controls.innerHTML="";
+  imageGroups.forEach((group,index)=>{
+    const button=document.createElement("button");button.type="button";button.textContent=group.label;button.classList.toggle("active",index===0);
+    button.addEventListener("click",()=>{controls.querySelectorAll("button").forEach(b=>b.classList.remove("active"));button.classList.add("active");renderGallery(index)});
+    controls.appendChild(button)
+  })
+}
+function renderGallery(index=0){
+  const group=imageGroups[index],stage=$("#galleryGrid");
+  if(!group?.images?.length){stage.innerHTML='<div class="empty">Nenhuma imagem disponível.</div>';return}
+  $("#lookTitle").textContent=group.label;$("#lookIndex").textContent=String(index+1).padStart(2,"0");stage.innerHTML="";
+  const image=document.createElement("img");image.src=group.images[0];image.alt=`Aston Machan — ${group.label}`;image.loading="lazy";
+  image.onerror=()=>stage.innerHTML='<div class="empty">A fotografia deste visual não pôde ser revelada.</div>';
+  stage.appendChild(image)
+}
+function renderSupports(){
+  const grid=$("#supportGrid");grid.innerHTML="";
+  supportCards.forEach(card=>{
+    const link=document.createElement("a");link.className="support-card";link.href=card.url;link.target="_blank";link.rel="noopener noreferrer";
+    const rarity=document.createElement("span");rarity.className="rarity";rarity.textContent=card.rarity;
+    const wrap=document.createElement("div");wrap.className="support-image";
+    const image=document.createElement("img");image.src=card.image;image.alt=`Support Card ${card.name} de Aston Machan`;image.loading="lazy";
+    image.onerror=()=>wrap.innerHTML='<span style="color:var(--muted);font-size:.8rem">Imagem indisponível</span>';
+    const body=document.createElement("div");body.className="support-body";
+    const title=document.createElement("h3");title.textContent=card.name;
+    const small=document.createElement("small");small.textContent=card.subtitle;
+    wrap.appendChild(image);body.append(title,small);link.append(rarity,wrap,body);grid.appendChild(link)
+  })
+}
+function setupMemo(){
+  const recorder=$("#recorder"),button=$("#playMemo"),text=$("#memoText");let playing=false;
+  button.addEventListener("click",()=>{playing=!playing;recorder.classList.toggle("playing",playing);button.textContent=playing?"■":"▶";text.textContent=playing?"Mensagem sendo lembrada...":"“Você vai se lembrar de mim, certo?”"})
+}
+async function fetchJson(url){
+  const response=await fetch(url,{headers:{Accept:"application/json"}});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);return response.json()
+}
+async function load(){
+  updateCharacter(fallbackCharacter);renderSupports();setupMemo();
+  const [characterResult,imagesResult]=await Promise.allSettled([
+    fetchJson(`${API_BASE}/character/${CHARACTER_ID}`),
+    fetchJson(`${API_BASE}/character/images/${CHARACTER_ID}`)
+  ]);
+  if(characterResult.status==="fulfilled"){const d=characterResult.value?.data??characterResult.value;updateCharacter(d);updateExtras(d)}
+  if(imagesResult.status==="fulfilled"){
+    imageGroups=extractGroups(imagesResult.value);
+    if(imageGroups.length){
+      const preferred=imageGroups.find(g=>/uniform|racewear|racing/i.test(g.label))??imageGroups[0];
+      setFeatured(preferred.images[0]);renderControls();renderGallery(0)
+    }else{$("#galleryControls").hidden=true;$("#galleryGrid").innerHTML='<div class="empty">A API não retornou imagens utilizáveis.</div>'}
+  }else{$("#galleryControls").hidden=true;$("#galleryGrid").innerHTML='<div class="empty">Não foi possível carregar os visuais agora.</div>'}
+  const ok=characterResult.status==="fulfilled"||imagesResult.status==="fulfilled";
+  if(ok){$("#apiDot").classList.add("online");$("#apiStatus").textContent="Dados conectados à Umapyoi API"}
+  else{$("#apiStatus").textContent="Modo offline: exibindo dados locais";$("#portraitPlaceholder").textContent="API indisponível. Os demais conteúdos continuam funcionando."}
+}
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+load();
+</script>
+
+  <script>
+    (() => {
+      const switchers = document.querySelectorAll("[data-page-switcher]");
+
+      const closeAll = (except = null) => {
+        switchers.forEach((switcher) => {
+          if (switcher === except) return;
+          switcher.classList.remove("is-open");
+          const button = switcher.querySelector(".page-switcher-toggle");
+          if (button) button.setAttribute("aria-expanded", "false");
+        });
+      };
+
+      switchers.forEach((switcher) => {
+        const button = switcher.querySelector(".page-switcher-toggle");
+        const menu = switcher.querySelector(".page-switcher-menu");
+        if (!button || !menu) return;
+
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const willOpen = !switcher.classList.contains("is-open");
+          closeAll(switcher);
+          switcher.classList.toggle("is-open", willOpen);
+          button.setAttribute("aria-expanded", String(willOpen));
+        });
+
+        menu.addEventListener("click", (event) => event.stopPropagation());
+      });
+
+      document.addEventListener("click", () => closeAll());
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeAll();
+      });
+    })();
+  </script>
+</body>
+</html>

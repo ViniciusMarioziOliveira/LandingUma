@@ -1316,7 +1316,7 @@
   </footer>
 
   <script>
-    const API_BASE = "https://umapyoi.net/api/v1";
+    const API_BASE = "/api/umapyoi";
     const CHARACTER_ID = 5474;
 
     const fallbackCharacter = {
@@ -1346,8 +1346,21 @@
 
     function normalizeImageUrl(value) {
       if (!value) return "";
-      if (typeof value === "string") return value;
-      return firstDefined(value, ["url", "image", "image_url", "src", "path"], "");
+
+      const rawUrl = typeof value === "string"
+        ? value
+        : firstDefined(value, ["url", "image", "image_url", "src", "path"], "");
+
+      if (!rawUrl) return "";
+
+      try {
+        // Corrige URLs relativas (ex.: /media/...) e URLs sem protocolo (//cdn...).
+        if (rawUrl.startsWith("//")) return `https:${rawUrl}`;
+        return new URL(rawUrl, "https://umapyoi.net").href;
+      } catch (error) {
+        console.warn("URL de imagem inválida recebida da API:", rawUrl, error);
+        return rawUrl;
+      }
     }
 
     function getVoiceName(character) {
@@ -1478,11 +1491,14 @@
       };
 
       img.onerror = () => {
+        console.error("Falha ao carregar a imagem principal:", url);
         img.hidden = true;
         placeholder.hidden = false;
         placeholder.textContent = "Não foi possível carregar a imagem oficial.";
       };
 
+      // Alguns servidores de imagem bloqueiam hotlink quando recebem o domínio de origem.
+      img.referrerPolicy = "no-referrer";
       img.src = url;
     }
 
@@ -1529,10 +1545,12 @@
         item.className = "gallery-item";
 
         const img = document.createElement("img");
+        img.referrerPolicy = "no-referrer";
         img.src = url;
         img.alt = `${$("#characterName").textContent} — ${group.label} ${index + 1}`;
         img.loading = "lazy";
         img.addEventListener("error", () => {
+          console.error("Falha ao carregar imagem da galeria:", url);
           item.remove();
           const remaining = grid.querySelectorAll(".gallery-item").length;
           grid.classList.toggle("single-image", remaining === 1);
@@ -1645,6 +1663,7 @@
         imageWrap.className = "support-image";
 
         const image = document.createElement("img");
+        image.referrerPolicy = "no-referrer";
         image.src = card.image;
         image.alt = `Support Card ${card.name} de Mejiro Dober`;
         image.loading = "lazy";
@@ -1671,9 +1690,14 @@
 
     async function fetchJson(url) {
       const response = await fetch(url, {
-        headers: { "Accept": "application/json" }
+        headers: { "Accept": "application/json" },
+        credentials: "omit"
       });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      if (!response.ok) {
+        throw new Error(`${url} respondeu com HTTP ${response.status}`);
+      }
+
       return response.json();
     }
 
@@ -1689,6 +1713,13 @@
         characterRequest,
         imagesRequest
       ]);
+
+      if (characterResult.status === "rejected") {
+        console.error("Erro ao buscar os dados da personagem:", characterResult.reason);
+      }
+      if (imagesResult.status === "rejected") {
+        console.error("Erro ao buscar as imagens da personagem:", imagesResult.reason);
+      }
 
       if (characterResult.status === "fulfilled") {
         const characterPayload = characterResult.value?.data ?? characterResult.value;

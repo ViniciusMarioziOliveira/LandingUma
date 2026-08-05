@@ -18,6 +18,12 @@
       --lavender: #aeb8ff;
       --pink: #ee9cc6;
       --gold: #e8c56f;
+      --gold-bright: #ffedc2;
+      --gold-deep: #a9812f;
+      --teal: #6fd7c9;
+      --teal-deep: #2a7f89;
+      --sunset-1: #ff9d76;
+      --sunset-2: #ffd8a8;
       --cream: #fff9f1;
       --paper: #fffdf8;
       --ink: #171b42;
@@ -25,6 +31,13 @@
       --white: #fff;
       --shadow: 0 28px 70px rgba(18, 27, 91, .18);
       --radius: 28px;
+      --gold-foil: linear-gradient(120deg, #a9812f 0%, #f5e5bb 22%, #e8c56f 42%, #fffbe8 52%, #e8c56f 62%, #a9812f 82%, #f5e5bb 100%);
+    }
+
+    @property --angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,9 +88,13 @@
     }
 
     .logo-mark {
-      color: var(--gold);
-      font-size: 1.3rem;
+      width: 26px;
+      height: 26px;
+      flex: 0 0 auto;
+      animation: wheelIdle 100s linear infinite;
+      transition: animation-duration .5s ease;
     }
+    .logo:hover .logo-mark { animation-duration: 4s; }
 
     .nav {
       display: flex;
@@ -126,6 +143,54 @@
         radial-gradient(circle at 83% 17%, #fff 0 1px, transparent 2px),
         radial-gradient(circle at 91% 31%, #e8c56f 0 1px, transparent 2px);
       background-size: 170px 170px, 220px 220px, 190px 190px, 210px 210px, 160px 160px;
+      animation: starDrift 34s linear infinite;
+    }
+    @keyframes starDrift { to { background-position: 170px 170px, -220px 220px, 190px -190px, -210px 210px, 160px -160px; } }
+
+    /* ---------- Ondas do mar / reflexo dourado ---------- */
+    .hero-waves {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 240px;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-waves .wave-layer {
+      position: absolute;
+      inset: 0;
+      background-repeat: repeat-x;
+      background-position: 0 bottom;
+    }
+    .hero-waves .wave-teal {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='240' viewBox='0 0 480 240'%3E%3Cpath d='M0,150 C60,110 100,110 160,150 C220,190 260,190 320,150 C380,110 420,110 480,150 L480,240 L0,240 Z' fill='%236fd7c9' fill-opacity='.22'/%3E%3C/svg%3E");
+      background-size: 480px 240px;
+      animation: waveDriftA 15s linear infinite;
+      opacity: .8;
+    }
+    .hero-waves .wave-gold {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='240' viewBox='0 0 620 240'%3E%3Cpath d='M0,180 C80,140 140,140 220,180 C300,220 360,220 440,180 C520,140 580,140 620,180 L620,240 L0,240 Z' fill='%23e8c56f' fill-opacity='.2'/%3E%3C/svg%3E");
+      background-size: 620px 240px;
+      animation: waveDriftB 23s linear infinite reverse;
+      opacity: .75;
+    }
+    @keyframes waveDriftA { to { background-position: -480px bottom; } }
+    @keyframes waveDriftB { to { background-position: -620px bottom; } }
+    .hero-waves .glints {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 40%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 32% 62%, rgba(232,197,111,.95) 0 1px, transparent 2px),
+        radial-gradient(circle at 58% 35%, rgba(255,255,255,.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 78% 66%, rgba(232,197,111,.85) 0 1px, transparent 2px),
+        radial-gradient(circle at 93% 44%, rgba(255,255,255,.75) 0 1px, transparent 2px);
+      background-size: 150px 90px;
+      animation: glintTwinkle 5s ease-in-out infinite alternate;
+    }
+    @keyframes glintTwinkle { 0% { background-position: 0 0; opacity: .55; } 100% { background-position: 24px -10px; opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero::before, .wave-teal, .wave-gold, .glints { animation: none !important; }
     }
 
     .skyline {
@@ -232,6 +297,41 @@
       border: 1px solid rgba(232,197,111,.4);
       border-radius: 50% 50% 20% 20%;
       transform: rotate(5deg);
+    }
+
+    /* ---------- Roda de leme dourada (elemento-assinatura) ---------- */
+    .wheel-halo {
+      position: absolute;
+      top: 2%; left: 50%;
+      width: min(84%, 480px);
+      aspect-ratio: 1;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,197,111,.22), transparent 68%);
+      filter: blur(6px);
+      pointer-events: none;
+    }
+    .wheel-scroll {
+      position: absolute;
+      top: 2%; left: 50%;
+      width: min(84%, 480px);
+      aspect-ratio: 1;
+      transform: translate(-50%, 0) rotate(0deg);
+      will-change: transform;
+      pointer-events: none;
+    }
+    .wheel-spin {
+      width: 100%;
+      height: 100%;
+      animation: wheelIdle 100s linear infinite;
+      transition: animation-duration .5s ease;
+      filter: drop-shadow(0 20px 34px rgba(0,0,0,.4));
+      opacity: .92;
+    }
+    .hero-visual:hover .wheel-spin { animation-duration: 9s; }
+    @keyframes wheelIdle { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .wheel-spin { animation: none !important; }
     }
 
     .hero-image {
@@ -369,11 +469,15 @@
 
     .passport {
       position: relative;
+      isolation: isolate;
       overflow: hidden;
       padding: 28px;
       border-radius: 24px;
       color: white;
-      background: linear-gradient(145deg, #202a88, #10164f);
+      border: 1.5px solid transparent;
+      background:
+        linear-gradient(145deg, #202a88, #10164f) padding-box,
+        var(--gold-foil) border-box;
     }
 
     .passport::after {
@@ -384,15 +488,52 @@
       color: rgba(255,255,255,.06);
       font-family: "Italiana", serif;
       font-size: 12rem;
+      z-index: 0;
     }
 
+    .passport::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.22) 45%, rgba(232,197,111,.4) 50%, rgba(255,255,255,.22) 55%, transparent 70%);
+      transform: translateX(-130%);
+      transition: transform 1s ease;
+    }
+
+    .passport:hover::before { transform: translateX(130%); }
+
     .passport h3 {
+      position: relative;
+      z-index: 1;
       margin-bottom: 22px;
       color: var(--gold);
       font-size: .78rem;
       letter-spacing: .15em;
       text-transform: uppercase;
     }
+
+    .stamp {
+      position: absolute;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(232,197,111,.6);
+      box-shadow: inset 0 0 0 5px rgba(232,197,111,.1);
+      color: rgba(232,197,111,.75);
+      font-family: "Italiana", serif;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.25;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .stamp-1 { top: 58px; right: -20px; width: 88px; height: 88px; font-size: .6rem; transform: rotate(-16deg); }
+    .stamp-2 { bottom: 22px; left: -22px; width: 66px; height: 66px; font-size: .5rem; transform: rotate(12deg); }
 
     .passport-row {
       position: relative;
@@ -415,11 +556,36 @@
     }
 
     .v-sisters {
-      padding: 72px 0;
+      position: relative;
+      padding: 72px 0 110px;
       color: white;
       background:
         radial-gradient(circle at 50% 20%, rgba(110,126,255,.3), transparent 20rem),
         linear-gradient(135deg, #0a0f38, #1d287d);
+    }
+
+    .sea-divider {
+      position: absolute;
+      left: 0; right: 0; bottom: -1px;
+      height: 96px;
+      line-height: 0;
+    }
+
+    .sea-divider svg { width: 100%; height: 100%; display: block; }
+
+    .sea-divider .medallion-ring {
+      fill: none;
+      stroke: url(#goldFoilGrad);
+      stroke-width: 2;
+    }
+
+    .sea-divider .medallion-bg { fill: #0d1442; }
+    .sea-divider .medallion-anchor {
+      fill: none;
+      stroke: url(#goldFoilGrad);
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .sisters-grid {
@@ -446,17 +612,64 @@
     }
 
     .sister-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
       min-height: 300px;
       padding: 24px;
       border: 1px solid rgba(255,255,255,.14);
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+      transition: transform .3s ease, border-color .3s ease;
     }
 
+    .sister-card:hover { transform: translateY(-5px); }
+
+    .sister-card::before {
+      content: "";
+      position: absolute;
+      inset: -1.5px;
+      z-index: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(from var(--angle, 0deg), transparent 0 58%, var(--gold) 74%, var(--gold-bright) 80%, var(--gold) 86%, transparent 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      animation: sisterAngle 4.5s linear infinite;
+      animation-play-state: paused;
+      transition: opacity .35s ease;
+    }
+
+    .sister-card.active::before,
+    .sister-card:hover::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+
+    @keyframes sisterAngle { to { --angle: 360deg; } }
+
+    .sister-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(232,197,111,.18), transparent 62%);
+      transition: opacity .3s ease;
+    }
+
+    .sister-card:hover::after { opacity: 1; }
+
     .sister-card.active {
-      border-color: rgba(232,197,111,.75);
+      border-color: transparent;
       box-shadow: 0 0 35px rgba(232,197,111,.12);
     }
+
+    .sister-card > * { position: relative; z-index: 1; }
 
     .sister-card .number {
       color: var(--gold);
@@ -599,7 +812,27 @@
 
     .details-intro {
       position: sticky;
+      isolation: isolate;
       top: 110px;
+    }
+
+    .details-intro .anchor-mark {
+      position: absolute;
+      z-index: -1;
+      top: -40px;
+      left: -30px;
+      width: 260px;
+      height: 260px;
+      opacity: .05;
+      pointer-events: none;
+    }
+    .details-intro .anchor-mark path,
+    .details-intro .anchor-mark circle,
+    .details-intro .anchor-mark line {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 3;
+      stroke-linecap: round;
     }
 
     .details-intro .section-title {
@@ -956,13 +1189,682 @@
     .page-switcher-menu a:hover,
     .page-switcher-menu a[aria-current="page"] { color: var(--blue); background: #f1f0ff; }
 
+    /* ==========================================================
+       VIVLOS ROYAL YACHT CLUB — immersive art direction layer
+       ========================================================== */
+    :root {
+      --midnight: #05081e;
+      --ocean: #071d35;
+      --ocean-light: #0b6672;
+      --champagne: #f6d98b;
+      --diamond: #eaffff;
+      --rose: #ff9fd2;
+      --ease-luxury: cubic-bezier(.2,.8,.2,1);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 0%, rgba(111,215,201,.13), transparent 30rem),
+        var(--cream);
+    }
+
+    ::selection { color: var(--midnight); background: var(--champagne); }
+
+    .topbar { transition: background .35s ease, min-height .35s ease, box-shadow .35s ease; }
+    .topbar.is-scrolled {
+      background: rgba(5,8,30,.9);
+      box-shadow: 0 14px 40px rgba(2,5,24,.2);
+    }
+
+    .hero {
+      min-height: 960px;
+      isolation: isolate;
+      cursor: default;
+      background:
+        radial-gradient(ellipse at 68% 22%, rgba(255,159,210,.2), transparent 24rem),
+        radial-gradient(ellipse at 66% 42%, rgba(111,215,201,.22), transparent 30rem),
+        linear-gradient(132deg, #030518 0%, #091349 47%, #1d225f 70%, #433071 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .34;
+      background:
+        repeating-linear-gradient(115deg, transparent 0 68px, rgba(255,255,255,.055) 69px, transparent 70px),
+        linear-gradient(90deg, transparent, rgba(232,197,111,.08), transparent);
+      mask-image: linear-gradient(to bottom, #000, transparent 78%);
+    }
+
+    .hero-inner { min-height: 960px; }
+
+    .hero-copy { position: relative; z-index: 8; }
+
+    .hero-copy::before {
+      content: "PRIVATE MARINA • DUBAI";
+      display: block;
+      width: max-content;
+      margin-bottom: 13px;
+      padding: 7px 11px;
+      border: 1px solid rgba(246,217,139,.42);
+      border-radius: 999px;
+      color: rgba(255,255,255,.62);
+      font-size: .58rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+    }
+
+    .hero h1 {
+      position: relative;
+      width: max-content;
+      max-width: 100%;
+      color: transparent;
+      background: linear-gradient(105deg, #fff 3%, #f6edff 30%, #f7d98a 50%, #fff 66%, #b8ffff 92%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 16px 28px rgba(0,0,0,.2));
+      animation: heroTitleFoil 7s linear infinite;
+    }
+
+    .hero h1 span {
+      width: max-content;
+      color: transparent;
+      background: var(--gold-foil);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: heroTitleFoil 5s linear infinite reverse;
+    }
+
+    @keyframes heroTitleFoil { to { background-position: 220% center; } }
+
+    .hero-visual { z-index: 3; perspective: 1200px; }
+    .hero-ring {
+      inset: 11% -6% 2%;
+      border-color: rgba(246,217,139,.26);
+      box-shadow: inset 0 0 90px rgba(111,215,201,.08), 0 0 70px rgba(232,197,111,.08);
+    }
+
+    .wheel-halo,
+    .wheel-scroll { top: 5%; width: min(88%, 520px); }
+
+    .wheel-halo {
+      opacity: .82;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.13), rgba(232,197,111,.13) 35%, transparent 68%);
+      animation: haloPulse 4.8s ease-in-out infinite;
+    }
+
+    .wheel-scroll {
+      z-index: 0;
+      --wheel-x: 0px;
+      --wheel-y: 0px;
+      --wheel-rotation: 0deg;
+      transform: translate3d(calc(-50% + var(--wheel-x)), var(--wheel-y), 0) rotate(var(--wheel-rotation));
+      transition: filter .35s ease;
+    }
+
+    .wheel-scroll::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      background: conic-gradient(from 20deg, transparent, rgba(255,255,255,.35), transparent 18%, transparent 65%, rgba(111,215,201,.35), transparent 78%);
+      filter: blur(8px);
+      animation: wheelLight 7s linear infinite;
+    }
+
+    .wheel-spin {
+      position: relative;
+      z-index: 1;
+      animation: none;
+      filter: drop-shadow(0 20px 34px rgba(0,0,0,.48)) drop-shadow(0 0 16px rgba(232,197,111,.18));
+    }
+
+    @keyframes wheelLight { to { transform: rotate(360deg); } }
+    @keyframes haloPulse { 50% { opacity: .52; transform: scale(1.06); } }
+
+    .hero-image {
+      z-index: 2;
+      transform: translate3d(var(--portrait-x, 0), var(--portrait-y, 0), 0);
+      transition: transform .18s ease-out;
+      filter: drop-shadow(0 38px 38px rgba(0,0,0,.42)) drop-shadow(0 0 35px rgba(255,159,210,.14));
+    }
+
+    .hero-yacht-tag {
+      position: absolute;
+      right: -6%;
+      top: 23%;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      width: 92px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(246,217,139,.44);
+      border-radius: 50%;
+      color: var(--champagne);
+      background: rgba(5,8,30,.42);
+      box-shadow: inset 0 0 0 5px rgba(246,217,139,.05), 0 16px 40px rgba(0,0,0,.2);
+      backdrop-filter: blur(10px);
+      font-family: "Italiana", serif;
+      font-size: .62rem;
+      line-height: 1.3;
+      letter-spacing: .15em;
+      text-align: center;
+      text-transform: uppercase;
+      animation: yachtTagFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes yachtTagFloat { 50% { transform: translateY(-10px) rotate(4deg); } }
+
+    .hero-note {
+      z-index: 8;
+      border-image: var(--gold-foil) 1;
+      text-shadow: 0 4px 20px rgba(0,0,0,.24);
+    }
+
+    .hero-waves { height: 295px; z-index: 5; mix-blend-mode: screen; }
+    .hero-waves .wave-teal { opacity: .72; filter: saturate(1.35); }
+    .hero-waves .wave-gold { opacity: .9; }
+
+    .hero-waves .wave-deep {
+      bottom: -20px;
+      height: 230px;
+      opacity: .58;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='760' height='240' viewBox='0 0 760 240'%3E%3Cpath d='M0 118C108 64 186 184 292 132S482 75 574 132s132 43 186 14v94H0z' fill='%230b6672' fill-opacity='.65'/%3E%3Cpath d='M0 132c108-54 186 66 292 14s190-57 282 0 132 43 186 14' fill='none' stroke='%23dfffff' stroke-opacity='.28' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: 760px 240px;
+      animation: deepWave 19s linear infinite;
+    }
+
+    .water-refraction {
+      position: absolute;
+      inset: 18% -10% 0;
+      opacity: .72;
+      background:
+        repeating-linear-gradient(103deg, transparent 0 24px, rgba(255,235,169,.22) 26px, transparent 29px 67px),
+        repeating-radial-gradient(ellipse at 50% 110%, transparent 0 34px, rgba(111,215,201,.17) 36px, transparent 39px 72px);
+      filter: blur(4px);
+      transform: skewY(-3deg);
+      animation: refraction 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes deepWave { to { background-position: -760px bottom; } }
+    @keyframes refraction { to { transform: translate3d(5%, -7px, 0) skewY(2deg); opacity: .42; } }
+
+    .sparkle-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: var(--sparkle-size, 8px);
+      height: var(--sparkle-size, 8px);
+      transform: translate(-50%, -50%) rotate(45deg) scale(0);
+      background: linear-gradient(135deg, #fff, var(--champagne) 48%, #aaffff);
+      clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+      filter: drop-shadow(0 0 7px rgba(255,255,255,.95));
+      animation: sparkleBorn var(--sparkle-life, 1.15s) var(--ease-luxury) forwards;
+    }
+
+    .sparkle.ambient { animation: ambientSparkle var(--sparkle-life, 4s) ease-in-out infinite; }
+    @keyframes sparkleBorn {
+      0% { opacity: 0; transform: translate(-50%, -50%) rotate(30deg) scale(0); }
+      32% { opacity: 1; transform: translate(-50%, -70%) rotate(45deg) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -210%) rotate(90deg) scale(0); }
+    }
+    @keyframes ambientSparkle { 0%,100% { opacity: .08; transform: rotate(45deg) scale(.25); } 50% { opacity: .86; transform: rotate(90deg) scale(1); } }
+
+    .passport {
+      overflow: visible;
+      box-shadow: 0 26px 55px rgba(9,13,45,.18), inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .passport::before {
+      border-radius: inherit;
+      transform: translateX(-145%);
+      animation: passportShine 5.5s ease-in-out infinite;
+    }
+
+    .passport:hover::before { transform: none; }
+    @keyframes passportShine { 0%,42% { transform: translateX(-145%); } 72%,100% { transform: translateX(145%); } }
+
+    .stamp {
+      opacity: 0;
+      filter: blur(7px);
+      transform: translateY(-90px) rotate(var(--stamp-rotation, -14deg)) scale(1.8);
+      transform-origin: center;
+    }
+    .stamp-1 { --stamp-rotation: -16deg; }
+    .stamp-2 { --stamp-rotation: 12deg; }
+
+    .passport.passport-stamped .stamp { animation: stampDrop .72s var(--ease-luxury) forwards; }
+    .passport.passport-stamped .stamp-2 { animation-delay: .28s; }
+    @keyframes stampDrop {
+      0% { opacity: 0; filter: blur(7px); transform: translateY(-90px) rotate(calc(var(--stamp-rotation) - 12deg)) scale(1.8); }
+      68% { opacity: .92; filter: blur(0); transform: translateY(4px) rotate(var(--stamp-rotation)) scale(.92); }
+      82% { transform: translateY(0) rotate(var(--stamp-rotation)) scale(1.08); }
+      100% { opacity: .78; filter: blur(0); transform: translateY(0) rotate(var(--stamp-rotation)) scale(1); }
+    }
+
+    .sister-card {
+      --neon-a: #f6d98b;
+      --neon-b: #86ffff;
+      border-color: rgba(255,255,255,.09);
+      background: linear-gradient(165deg, rgba(255,255,255,.1), rgba(5,8,30,.16));
+      box-shadow: inset 0 1px rgba(255,255,255,.1);
+      transition: transform .55s var(--ease-luxury), background .55s ease, box-shadow .55s ease;
+    }
+
+    .sister-card::before {
+      inset: -2px;
+      padding: 2px;
+      background: conic-gradient(from var(--angle, 0deg), transparent 0 30%, var(--neon-b) 44%, #fff 50%, var(--neon-a) 58%, transparent 72%);
+      filter: drop-shadow(0 0 8px color-mix(in srgb, var(--neon-b) 58%, transparent));
+    }
+
+    .sister-card:nth-child(1) { --neon-a: #b9c8ff; --neon-b: #73e9ff; }
+    .sister-card:nth-child(2) { --neon-a: #ffe092; --neon-b: #ff83ca; }
+    .sister-card:nth-child(3) { --neon-a: #f5c572; --neon-b: #b993ff; }
+
+    .sister-card:hover {
+      transform: translateY(-12px) scale(1.025);
+      background: linear-gradient(165deg, rgba(255,255,255,.15), rgba(5,8,30,.2));
+      box-shadow: 0 24px 60px rgba(0,0,0,.22), 0 0 35px rgba(111,215,201,.09);
+    }
+
+    .visuals { position: relative; overflow: hidden; }
+    .lookbook { border: 1px solid rgba(64,79,177,.08); box-shadow: 0 36px 90px rgba(17,24,77,.15); }
+    .lookbook-copy {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 0 0, rgba(111,215,201,.18), transparent 18rem),
+        linear-gradient(160deg, #1c2578, #070b2a);
+    }
+
+    .lookbook-copy::after {
+      content: "V";
+      position: absolute;
+      right: -25px;
+      bottom: -90px;
+      color: rgba(255,255,255,.035);
+      font-family: "Italiana", serif;
+      font-size: 25rem;
+      line-height: 1;
+    }
+
+    .lookbook-stage { isolation: isolate; overflow: hidden; }
+    .lookbook-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      transform: translateX(-112%) skewX(-10deg);
+      background:
+        linear-gradient(90deg, transparent 0, rgba(111,215,201,.42) 18%, rgba(255,255,255,.96) 48%, rgba(246,217,139,.84) 53%, rgba(111,215,201,.35) 80%, transparent);
+      filter: blur(1px);
+    }
+
+    .lookbook-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      opacity: .35;
+      background: repeating-radial-gradient(ellipse at 50% 115%, transparent 0 28px, rgba(111,215,201,.13) 29px, transparent 33px 58px);
+      mix-blend-mode: multiply;
+    }
+
+    .lookbook-stage.is-transitioning::before { animation: lookbookWipe .92s var(--ease-luxury); }
+    .lookbook-stage img.lookbook-arriving { animation: lookbookReveal .75s var(--ease-luxury) both; }
+    @keyframes lookbookWipe {
+      0% { transform: translateX(-112%) skewX(-10deg); }
+      48% { transform: translateX(0) skewX(-4deg); }
+      100% { transform: translateX(112%) skewX(-10deg); }
+    }
+    @keyframes lookbookReveal {
+      from { opacity: .35; transform: translateX(36px) scale(1.035); filter: blur(8px) saturate(1.4); }
+      to { opacity: 1; transform: none; filter: none; }
+    }
+
+    .tabs button {
+      transition: transform .28s var(--ease-luxury), color .28s ease, background .28s ease, box-shadow .28s ease;
+    }
+    .tabs button:hover { transform: translateY(-3px); }
+    .tabs button.active { box-shadow: 0 10px 24px rgba(64,79,177,.22); }
+
+    .supports {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 120px 0 130px;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(255,159,210,.16), transparent 25rem),
+        radial-gradient(circle at 12% 62%, rgba(24,183,188,.15), transparent 31rem),
+        linear-gradient(145deg, #030519 0%, #08132e 45%, #111955 100%);
+    }
+
+    .supports::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: .22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at center, #000, transparent 78%);
+    }
+
+    .supports-head { align-items: start; margin-bottom: 54px; }
+    .supports-head::after {
+      content: "THE PRIVATE COLLECTION  /  01—05";
+      max-width: 190px;
+      color: rgba(255,255,255,.42);
+      font-size: .64rem;
+      font-weight: 800;
+      line-height: 1.7;
+      letter-spacing: .18em;
+      text-align: right;
+    }
+
+    .support-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 28px;
+      perspective: 1600px;
+    }
+
+    .support-card {
+      --rx: 0deg;
+      --ry: 0deg;
+      --lift: 0px;
+      --scale: 1;
+      --foil-x: 50%;
+      --foil-y: 50%;
+      position: relative;
+      grid-column: span 4;
+      min-width: 0;
+      overflow: visible;
+      border: 0;
+      border-radius: 26px;
+      outline: none;
+      background: transparent;
+      transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift)) scale(var(--scale));
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform .55s var(--ease-luxury), filter .45s ease;
+    }
+
+    .support-card:nth-child(4) { grid-column: 3 / span 4; }
+    .support-card:nth-child(5) { grid-column: 7 / span 4; }
+    .support-card:hover,
+    .support-card:focus-visible {
+      --lift: -10px;
+      --scale: 1.018;
+      filter: drop-shadow(0 34px 35px rgba(0,0,0,.34));
+    }
+
+    .support-card-inner {
+      position: relative;
+      isolation: isolate;
+      min-height: 485px;
+      overflow: hidden;
+      border: 1px solid transparent;
+      border-radius: inherit;
+      background:
+        linear-gradient(165deg, rgba(18,32,77,.97), rgba(4,9,29,.98)) padding-box,
+        var(--gold-foil) border-box;
+      box-shadow:
+        inset 0 0 0 4px rgba(4,8,25,.95),
+        inset 0 0 0 5px rgba(246,217,139,.22),
+        inset 0 0 42px rgba(232,197,111,.08),
+        0 22px 50px rgba(0,0,0,.2);
+      transform: translateZ(1px);
+    }
+
+    .support-card-inner::before,
+    .support-card-inner::after {
+      content: "";
+      position: absolute;
+      z-index: 8;
+      inset: 10px;
+      border: 1px solid rgba(246,217,139,.23);
+      border-radius: 19px;
+      pointer-events: none;
+    }
+
+    .support-card-inner::after {
+      inset: 18px;
+      border-style: dotted;
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .support-crest {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 28px;
+      transform: translateX(-50%) translateZ(38px);
+      border: 1px solid rgba(246,217,139,.55);
+      border-radius: 0 0 18px 18px;
+      color: var(--champagne);
+      background: #07102f;
+      box-shadow: 0 7px 16px rgba(0,0,0,.24);
+      font-family: "Italiana", serif;
+      font-size: .88rem;
+    }
+
+    .support-image {
+      position: relative;
+      min-height: 370px;
+      padding: 30px 22px 4px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at var(--foil-x) var(--foil-y), rgba(255,255,255,.2), transparent 23%),
+        linear-gradient(160deg, rgba(255,255,255,.06), transparent 52%);
+      transform: translateZ(18px);
+    }
+
+    .support-image::after {
+      content: "";
+      position: absolute;
+      inset: auto 26px 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--champagne), #fff, var(--champagne), transparent);
+      box-shadow: 0 0 14px rgba(246,217,139,.6);
+    }
+
+    .support-image img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 345px;
+      padding: 0;
+      object-fit: contain;
+      transform: translateZ(32px) scale(1.01);
+      filter: saturate(1.06) contrast(1.03) drop-shadow(0 20px 20px rgba(0,0,0,.28));
+      transition: transform .7s var(--ease-luxury), filter .5s ease;
+    }
+
+    .support-card:hover .support-image img { transform: translateZ(54px) scale(1.045); filter: saturate(1.16) contrast(1.04) drop-shadow(0 24px 24px rgba(0,0,0,.34)); }
+
+    .support-foil,
+    .support-glare {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .support-foil {
+      background:
+        repeating-linear-gradient(115deg, rgba(255,70,180,.16) 0 7%, rgba(102,255,239,.19) 13%, rgba(255,229,141,.22) 20%, rgba(143,105,255,.17) 27%, transparent 35% 48%),
+        radial-gradient(circle at var(--foil-x) var(--foil-y), rgba(255,255,255,.62), rgba(255,216,120,.26) 13%, transparent 37%);
+      background-size: 220% 220%, 100% 100%;
+      background-position: var(--foil-x) var(--foil-y), center;
+      mix-blend-mode: color-dodge;
+      filter: saturate(1.35) contrast(1.08);
+    }
+
+    .support-glare {
+      z-index: 5;
+      background: linear-gradient(var(--glare-angle, 120deg), transparent 26%, rgba(255,255,255,.12) 39%, rgba(255,246,203,.72) 49%, rgba(255,255,255,.09) 57%, transparent 72%);
+      transform: translateX(var(--glare-shift, -35%));
+      mix-blend-mode: screen;
+    }
+
+    .support-card.is-tilting .support-foil { opacity: .7; }
+    .support-card.is-tilting .support-glare { opacity: .84; }
+
+    .support-body {
+      position: relative;
+      z-index: 7;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 12px;
+      min-height: 104px;
+      padding: 18px 28px 24px;
+      background: linear-gradient(180deg, rgba(4,8,25,.28), rgba(4,8,25,.92));
+      transform: translateZ(34px);
+    }
+
+    .support-rarity {
+      margin: 0;
+      padding: 7px 9px;
+      border: 1px solid rgba(255,255,255,.5);
+      color: #090d2d;
+      background: var(--gold-foil);
+      box-shadow: 0 0 18px rgba(232,197,111,.25);
+      letter-spacing: .08em;
+    }
+
+    .support-card.rarity-r .support-rarity {
+      color: white;
+      background: linear-gradient(120deg, #67779e, #e8f8ff 48%, #8294bc);
+    }
+
+    .support-body h3 { font-size: .86rem; line-height: 1.45; }
+    .support-serial {
+      grid-column: 2;
+      color: rgba(255,255,255,.34);
+      font-size: .59rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+    }
+
+    .support-card:focus-visible { box-shadow: 0 0 0 3px var(--diamond), 0 0 0 7px rgba(111,215,201,.42); }
+
+    @media (max-width: 1050px) {
+      .support-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .support-card,
+      .support-card:nth-child(4),
+      .support-card:nth-child(5) { grid-column: auto; }
+      .support-card:last-child { grid-column: 1 / -1; width: min(50%, 390px); justify-self: center; }
+    }
+
+    @media (max-width: 760px) {
+      .hero { min-height: 980px; }
+      .hero-inner { min-height: 900px; }
+      .hero-copy { padding-bottom: 0; }
+      .hero-copy::before { font-size: .52rem; }
+      .hero h1 { width: auto; font-size: clamp(4.2rem, 22vw, 7rem); }
+      .hero h1 span { width: auto; font-size: 1.25rem; }
+      .hero-visual { min-height: 510px; margin-top: -34px; }
+      .wheel-scroll, .wheel-halo { top: 4%; width: min(88vw, 430px); }
+      .hero-yacht-tag { right: 2%; top: 18%; width: 72px; font-size: .5rem; }
+      .hero-waves { height: 210px; }
+      .passport { overflow: hidden; }
+      .supports-head::after { display: none; }
+      .support-grid { grid-template-columns: 1fr; gap: 24px; }
+      .support-card,
+      .support-card:nth-child(4),
+      .support-card:nth-child(5),
+      .support-card:last-child { grid-column: auto; width: 100%; max-width: 430px; justify-self: center; }
+      .support-card-inner { min-height: 455px; }
+      .support-image { min-height: 340px; }
+      .support-image img { height: 320px; }
+    }
+
+    @media (pointer: coarse) {
+      .support-card:active { --lift: -6px; --scale: 1.01; }
+      .support-foil { opacity: .2; animation: mobileFoil 6s ease-in-out infinite; }
+      @keyframes mobileFoil { 50% { background-position: 85% 20%, center; opacity: .42; } }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero h1, .hero h1 span, .wheel-halo, .wheel-scroll::after, .water-refraction,
+      .sparkle, .passport::before, .sister-card::before, .support-foil { animation: none !important; }
+      .support-card, .hero-image { transform: none !important; transition: none !important; }
+      .lookbook-stage.is-transitioning::before, .lookbook-stage img.lookbook-arriving { animation-duration: .01ms !important; }
+    }
+
   </style>
 </head>
 
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="goldFoilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a9812f"/>
+        <stop offset="25%" stop-color="#f5e5bb"/>
+        <stop offset="50%" stop-color="#fffbe8"/>
+        <stop offset="75%" stop-color="#e8c56f"/>
+        <stop offset="100%" stop-color="#a9812f"/>
+      </linearGradient>
+      <symbol id="shipWheel" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="url(#goldFoilGrad)" stroke-width="5"/>
+        <circle cx="100" cy="100" r="68" fill="none" stroke="url(#goldFoilGrad)" stroke-width="1.4" opacity=".55"/>
+        <circle cx="100" cy="100" r="24" fill="#0d1442" stroke="url(#goldFoilGrad)" stroke-width="3"/>
+        <text x="100" y="108" text-anchor="middle" font-family="Italiana, serif" font-size="22" fill="url(#goldFoilGrad)">V</text>
+        <g stroke="url(#goldFoilGrad)" stroke-width="5" stroke-linecap="round">
+          <line x1="100" y1="24" x2="100" y2="76"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(45 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(90 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(135 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(180 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(225 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(270 100 100)"/>
+          <line x1="100" y1="24" x2="100" y2="76" transform="rotate(315 100 100)"/>
+        </g>
+        <g fill="url(#goldFoilGrad)">
+          <circle cx="100" cy="14" r="7"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(45 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(90 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(135 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(180 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(225 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(270 100 100)"/>
+          <circle cx="100" cy="14" r="7" transform="rotate(315 100 100)"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <header class="topbar">
     <div class="shell topbar-inner">
-      <a href="#inicio" class="logo">Vivlos</a>
+      <a href="#inicio" class="logo">
+        <svg class="logo-mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#shipWheel"/></svg>
+        Vivlos
+      </a>
       <nav class="nav">
         <a href="#historia">História</a>
         <a href="#sisters">V Sisters</a>
@@ -989,7 +1891,16 @@
 
   <main>
     <section class="hero" id="inicio">
+      <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
       <div class="skyline"></div>
+
+      <div class="hero-waves" aria-hidden="true">
+        <div class="wave-layer wave-deep"></div>
+        <div class="wave-layer wave-teal"></div>
+        <div class="wave-layer wave-gold"></div>
+        <div class="water-refraction"></div>
+        <div class="glints"></div>
+      </div>
 
       <div class="shell hero-inner">
         <div class="hero-copy reveal">
@@ -1008,6 +1919,11 @@
 
         <div class="hero-visual reveal">
           <div class="hero-ring"></div>
+          <div class="wheel-halo" aria-hidden="true"></div>
+          <div class="wheel-scroll" id="heroWheel" aria-hidden="true">
+            <svg class="wheel-spin" viewBox="0 0 200 200"><use href="#shipWheel"/></svg>
+          </div>
+          <div class="hero-yacht-tag" aria-hidden="true">Royal<br>Yacht<br>Club</div>
           <div class="hero-placeholder" id="portraitPlaceholder">.</div>
           <img id="heroImage" class="hero-image" alt="Vivlos" hidden>
         </div>
@@ -1053,8 +1969,10 @@
           </div>
         </div>
 
-        <aside class="passport">
+        <aside class="passport" id="starPassport">
           <h3>Passaporte da estrela</h3>
+          <div class="stamp stamp-1" aria-hidden="true">Dubai<br>World<br>Cup</div>
+          <div class="stamp stamp-2" aria-hidden="true">V<br>VIP</div>
           <div class="passport-row"><span>Nome</span><strong id="characterName">Vivlos</strong></div>
           <div class="passport-row"><span>Japonês</span><strong id="japaneseName">ヴィブロス</strong></div>
           <div class="passport-row"><span>Aniversário</span><strong id="birthday">9 de abril</strong></div>
@@ -1095,6 +2013,20 @@
             <p>A irmã elegante, orgulhosa e determinada.</p>
           </article>
         </div>
+      </div>
+
+      <div class="sea-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 96" preserveAspectRatio="none">
+          <path d="M0,42 C240,92 480,4 720,42 C960,80 1200,4 1440,42 L1440,96 L0,96 Z" fill="#f7f4ff"/>
+          <circle class="medallion-bg" cx="720" cy="30" r="30"/>
+          <circle class="medallion-ring" cx="720" cy="30" r="30"/>
+          <g class="medallion-anchor" transform="translate(720,30)">
+            <circle cx="0" cy="-13" r="4.5" fill="none"/>
+            <line x1="0" y1="-8" x2="0" y2="16"/>
+            <path d="M -13,4 A 13,13 0 0 0 13,4" fill="none"/>
+            <line x1="-11" y1="-2" x2="11" y2="-2"/>
+          </g>
+        </svg>
       </div>
     </section>
 
@@ -1352,6 +2284,8 @@
       });
     }
 
+    let galleryTransitionToken = 0;
+
     function renderGallery(index = 0) {
       const group = imageGroups[index];
       const stage = $("#galleryGrid");
@@ -1363,17 +2297,41 @@
 
       $("#lookTitle").textContent = group.label;
       $("#lookIndex").textContent = String(index + 1).padStart(2, "0");
-      stage.innerHTML = "";
-
+      const token = ++galleryTransitionToken;
       const img = document.createElement("img");
-      img.src = group.images[0];
       img.alt = `Vivlos — ${group.label}`;
-      img.loading = "lazy";
+      img.loading = "eager";
+      img.decoding = "async";
       img.onerror = () => {
+        if (token !== galleryTransitionToken) return;
+        stage.classList.remove("is-transitioning");
         stage.innerHTML = '<div class="lookbook-empty">A imagem deste visual não pôde ser carregada.</div>';
       };
+      img.onload = () => {
+        if (token !== galleryTransitionToken) return;
+        const hasPreviousLook = Boolean(stage.querySelector("img"));
 
-      stage.appendChild(img);
+        if (!hasPreviousLook || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          img.className = "lookbook-arriving";
+          stage.replaceChildren(img);
+          return;
+        }
+
+        stage.classList.remove("is-transitioning");
+        void stage.offsetWidth;
+        stage.classList.add("is-transitioning");
+
+        window.setTimeout(() => {
+          if (token !== galleryTransitionToken) return;
+          img.className = "lookbook-arriving";
+          stage.replaceChildren(img);
+        }, 390);
+
+        window.setTimeout(() => {
+          if (token === galleryTransitionToken) stage.classList.remove("is-transitioning");
+        }, 960);
+      };
+      img.src = group.images[0];
     }
 
     function setHeroImage(url) {
@@ -1399,10 +2357,19 @@
 
       supportCards.forEach(card => {
         const link = document.createElement("a");
-        link.className = "support-card";
+        link.className = `support-card rarity-${card.rarity.toLowerCase()}`;
         link.href = card.url;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
+        link.setAttribute("aria-label", `${card.name}, raridade ${card.rarity}. Abrir no GameTora`);
+
+        const inner = document.createElement("div");
+        inner.className = "support-card-inner";
+
+        const crest = document.createElement("span");
+        crest.className = "support-crest";
+        crest.textContent = "V";
+        crest.setAttribute("aria-hidden", "true");
 
         const imageWrap = document.createElement("div");
         imageWrap.className = "support-image";
@@ -1411,9 +2378,22 @@
         image.src = card.image;
         image.alt = card.name;
         image.loading = "lazy";
+        image.decoding = "async";
         image.onerror = () => {
-          imageWrap.innerHTML = '<span style="color:rgba(255,255,255,.6);font-size:.8rem">Imagem indisponível</span>';
+          image.hidden = true;
+          const fallback = document.createElement("span");
+          fallback.className = "support-image-fallback";
+          fallback.textContent = "Imagem indisponível";
+          imageWrap.prepend(fallback);
         };
+
+        const foil = document.createElement("span");
+        foil.className = "support-foil";
+        foil.setAttribute("aria-hidden", "true");
+
+        const glare = document.createElement("span");
+        glare.className = "support-glare";
+        glare.setAttribute("aria-hidden", "true");
 
         const body = document.createElement("div");
         body.className = "support-body";
@@ -1425,11 +2405,18 @@
         const title = document.createElement("h3");
         title.textContent = card.name;
 
-        imageWrap.appendChild(image);
-        body.append(rarity, title);
-        link.append(imageWrap, body);
+        const serial = document.createElement("span");
+        serial.className = "support-serial";
+        serial.textContent = `VIVLOS • ARCHIVE ${card.id}`;
+
+        imageWrap.append(image, foil, glare);
+        body.append(rarity, title, serial);
+        inner.append(crest, imageWrap, body);
+        link.append(inner);
         grid.appendChild(link);
       });
+
+      initSupportTilt();
     }
 
     async function fetchJson(url) {
@@ -1472,6 +2459,175 @@
       }
     }
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    function initSupportTilt() {
+      if (prefersReducedMotion.matches || !hasFinePointer.matches) return;
+
+      document.querySelectorAll(".support-card").forEach(card => {
+        if (card.dataset.tiltReady) return;
+        card.dataset.tiltReady = "true";
+        let frame = 0;
+
+        const updateTilt = event => {
+          const rect = card.getBoundingClientRect();
+          const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
+          const y = Math.min(Math.max(event.clientY - rect.top, 0), rect.height);
+          const normalizedX = x / rect.width - .5;
+          const normalizedY = y / rect.height - .5;
+
+          cancelAnimationFrame(frame);
+          frame = requestAnimationFrame(() => {
+            card.style.setProperty("--rx", `${(-normalizedY * 16).toFixed(2)}deg`);
+            card.style.setProperty("--ry", `${(normalizedX * 20).toFixed(2)}deg`);
+            card.style.setProperty("--foil-x", `${(x / rect.width * 100).toFixed(1)}%`);
+            card.style.setProperty("--foil-y", `${(y / rect.height * 100).toFixed(1)}%`);
+            card.style.setProperty("--glare-angle", `${(105 + normalizedX * 36).toFixed(1)}deg`);
+            card.style.setProperty("--glare-shift", `${(normalizedX * 48).toFixed(1)}%`);
+          });
+        };
+
+        card.addEventListener("pointerenter", () => card.classList.add("is-tilting"));
+        card.addEventListener("pointermove", updateTilt, { passive: true });
+        card.addEventListener("pointerleave", () => {
+          cancelAnimationFrame(frame);
+          card.classList.remove("is-tilting");
+          card.style.setProperty("--rx", "0deg");
+          card.style.setProperty("--ry", "0deg");
+          card.style.setProperty("--foil-x", "50%");
+          card.style.setProperty("--foil-y", "50%");
+          card.style.setProperty("--glare-shift", "-35%");
+        });
+      });
+    }
+
+    function initHeroExperience() {
+      const hero = $("#inicio");
+      const wheel = $("#heroWheel");
+      const portrait = $("#heroImage");
+      const sparkleLayer = $("#sparkleLayer");
+      const topbar = document.querySelector(".topbar");
+      if (!hero || !wheel) return;
+
+      let scrollAngle = 0;
+      let cursorAngle = 0;
+      let renderedAngle = 0;
+      let portraitX = 0;
+      let portraitY = 0;
+      let renderedPortraitX = 0;
+      let renderedPortraitY = 0;
+      let lastScrollY = window.scrollY;
+      let lastSparkleAt = 0;
+      let lastSparkleX = -100;
+      let lastSparkleY = -100;
+
+      const createSparkle = (x, y, ambient = false) => {
+        if (!sparkleLayer || prefersReducedMotion.matches) return;
+        const sparkle = document.createElement("span");
+        sparkle.className = ambient ? "sparkle ambient" : "sparkle";
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+        sparkle.style.setProperty("--sparkle-size", `${ambient ? 5 + Math.random() * 8 : 7 + Math.random() * 9}px`);
+        sparkle.style.setProperty("--sparkle-life", `${ambient ? 3.2 + Math.random() * 3.8 : .9 + Math.random() * .65}s`);
+        if (ambient) sparkle.style.animationDelay = `${-Math.random() * 5}s`;
+        sparkleLayer.appendChild(sparkle);
+        if (!ambient) sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
+      };
+
+      if (!prefersReducedMotion.matches) {
+        const width = hero.clientWidth;
+        const height = Math.min(hero.clientHeight, 900);
+        for (let index = 0; index < 14; index += 1) {
+          createSparkle(width * (.04 + Math.random() * .92), 85 + Math.random() * (height - 170), true);
+        }
+      }
+
+      const onScroll = () => {
+        const nextScrollY = window.scrollY;
+        const delta = nextScrollY - lastScrollY;
+        lastScrollY = nextScrollY;
+        scrollAngle += Math.max(-28, Math.min(28, delta)) * .42;
+        topbar?.classList.toggle("is-scrolled", nextScrollY > 18);
+      };
+
+      const onPointerMove = event => {
+        const rect = hero.getBoundingClientRect();
+        if (event.clientY < rect.top || event.clientY > rect.bottom) return;
+        const localX = event.clientX - rect.left;
+        const localY = event.clientY - rect.top;
+        const normalizedX = localX / rect.width - .5;
+        const normalizedY = localY / rect.height - .5;
+        cursorAngle = normalizedX * 24;
+        portraitX = normalizedX * -11;
+        portraitY = normalizedY * -7;
+
+        const now = performance.now();
+        const distance = Math.hypot(localX - lastSparkleX, localY - lastSparkleY);
+        if (hasFinePointer.matches && now - lastSparkleAt > 75 && distance > 26) {
+          createSparkle(localX, localY);
+          lastSparkleAt = now;
+          lastSparkleX = localX;
+          lastSparkleY = localY;
+        }
+      };
+
+      const resetPointer = () => {
+        cursorAngle = 0;
+        portraitX = 0;
+        portraitY = 0;
+      };
+
+      const renderMotion = () => {
+        if (!prefersReducedMotion.matches) {
+          renderedAngle += (scrollAngle + cursorAngle - renderedAngle) * .085;
+          renderedPortraitX += (portraitX - renderedPortraitX) * .09;
+          renderedPortraitY += (portraitY - renderedPortraitY) * .09;
+          wheel.style.setProperty("--wheel-rotation", `${renderedAngle.toFixed(2)}deg`);
+          wheel.style.setProperty("--wheel-x", `${(renderedPortraitX * .55).toFixed(2)}px`);
+          wheel.style.setProperty("--wheel-y", `${(renderedPortraitY * .4).toFixed(2)}px`);
+          portrait?.style.setProperty("--portrait-x", `${renderedPortraitX.toFixed(2)}px`);
+          portrait?.style.setProperty("--portrait-y", `${renderedPortraitY.toFixed(2)}px`);
+        }
+        requestAnimationFrame(renderMotion);
+      };
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      hero.addEventListener("pointermove", onPointerMove, { passive: true });
+      hero.addEventListener("pointerleave", resetPointer);
+      onScroll();
+      requestAnimationFrame(renderMotion);
+    }
+
+    function initSectionInteractions() {
+      const passport = $("#starPassport");
+      if (passport) {
+        const passportObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("passport-stamped");
+            passportObserver.unobserve(entry.target);
+          });
+        }, { threshold: .42 });
+        passportObserver.observe(passport);
+      }
+
+      if (hasFinePointer.matches) {
+        document.querySelectorAll(".sister-card").forEach(card => {
+          card.addEventListener("pointermove", event => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+            card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+          }, { passive: true });
+        });
+      }
+    }
+
+    function initImmersiveExperience() {
+      initHeroExperience();
+      initSectionInteractions();
+    }
+
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -1479,6 +2635,7 @@
     }, { threshold: .12 });
 
     document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+    initImmersiveExperience();
     loadPage();
   </script>
 

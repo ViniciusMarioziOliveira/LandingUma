@@ -1388,6 +1388,63 @@
     .page-switcher-menu a:hover,
     .page-switcher-menu a[aria-current="page"] { color: var(--primary-dark); background: var(--primary-soft); }
 
+    /* Final responsive refinement */
+    .hero-grid > *,
+    .story-grid > *,
+    .profile-grid > *,
+    .gallery-grid > *,
+    .detail-grid > *,
+    .support-grid > * { min-width: 0; }
+
+    .nav-cta,
+    .btn-primary,
+    .btn-secondary,
+    .gallery-controls button,
+    .page-switcher-toggle,
+    .page-switcher-menu a { min-height: 44px; }
+
+    .page-switcher-menu {
+      width: min(230px, calc(100vw - 24px));
+      max-height: calc(100vh - 92px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    h1,
+    h2,
+    .quote-card,
+    .cta-card { overflow-wrap: anywhere; }
+
+    @media (max-width: 599px) {
+      .container { width: min(100% - 20px, 1180px); }
+      .navbar { width: calc(100% - 20px); }
+      .nav-inner { gap: 8px; padding: 7px 8px 7px 12px; }
+      .brand { min-width: 0; font-size: .88rem; }
+      .brand span:last-child { display: block; white-space: nowrap; }
+      .page-header-actions { min-width: 0; }
+      .nav-cta { padding-inline: 13px; font-size: .76rem; white-space: nowrap; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .gallery-controls { width: 100%; justify-content: flex-start; }
+      .gallery-controls button { flex: 1 1 calc(50% - 6px); padding-inline: 10px; }
+      .portrait-stage { min-height: clamp(430px, 145vw, 510px); }
+      .gallery-item,
+      .gallery-grid.single-image .gallery-item { min-height: clamp(340px, 120vw, 430px); }
+      .support-attributes { grid-template-columns: 1fr; }
+      .support-attribute:last-child:nth-child(odd) { grid-column: auto; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-cta { display: none; }
+      .brand { font-size: .94rem; }
+      h1 { font-size: clamp(3rem, 17vw, 4.25rem); }
+      .hero { padding-top: 112px; }
+      .hero-actions { gap: 10px; }
+      .quote-card,
+      .profile-intro,
+      .detail-card,
+      .support-body { padding-inline: 22px; }
+    }
+
   </style>
 </head>
 
@@ -1416,6 +1473,7 @@
             <a href="index.html" role="menuitem" aria-current="page">Mejiro Dober <small>Atual</small></a>
             <a href="machan.html" role="menuitem">Aston Machan</a>
             <a href="vivlos.html" role="menuitem">Vivlos</a>
+            <a href="chiyo.html" role="menuitem">Sakura Chiyono O</a>
           </div>
         </div>
       </div>

@@ -1805,8 +1805,7 @@
 
     @media (pointer: coarse) {
       .support-card:active { --lift: -6px; --scale: 1.01; }
-      .support-foil { opacity: .2; animation: mobileFoil 6s ease-in-out infinite; }
-      @keyframes mobileFoil { 50% { background-position: 85% 20%, center; opacity: .42; } }
+      .support-foil { opacity: .12; animation: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1815,6 +1814,132 @@
       .sparkle, .passport::before, .sister-card::before, .support-foil { animation: none !important; }
       .support-card, .hero-image { transform: none !important; transition: none !important; }
       .lookbook-stage.is-transitioning::before, .lookbook-stage img.lookbook-arriving { animation-duration: .01ms !important; }
+    }
+
+    /* Final responsive and rendering-performance refinement */
+    .hero-inner > *,
+    .magazine-sheet > *,
+    .sisters-grid > *,
+    .sister-cards > *,
+    .lookbook > *,
+    .details-layout > *,
+    .support-grid > * { min-width: 0; }
+
+    .primary-btn,
+    .ghost-btn,
+    .top-cta,
+    .tabs button,
+    .page-switcher-toggle,
+    .page-switcher-menu a { min-height: 44px; }
+
+    .page-switcher-menu {
+      width: min(230px, calc(100vw - 24px));
+      max-height: calc(100vh - 84px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      backdrop-filter: none;
+    }
+
+    .topbar { backdrop-filter: blur(8px); }
+    .hero-yacht-tag { background: rgba(5,8,30,.72); backdrop-filter: none; }
+    .hero-ring { box-shadow: inset 0 0 42px rgba(111,215,201,.07), 0 0 34px rgba(232,197,111,.07); }
+    .wheel-scroll::after { filter: blur(4px); }
+    .wheel-spin { filter: drop-shadow(0 18px 26px rgba(0,0,0,.42)); }
+    .hero-image { filter: drop-shadow(0 30px 30px rgba(0,0,0,.38)); }
+    .lookbook { box-shadow: 0 24px 60px rgba(17,24,77,.14); }
+    .support-card { will-change: auto; }
+    .support-card.is-tilting { will-change: transform; }
+    .support-card-inner {
+      box-shadow:
+        inset 0 0 0 4px rgba(4,8,25,.95),
+        inset 0 0 0 5px rgba(246,217,139,.22),
+        0 18px 38px rgba(0,0,0,.2);
+    }
+
+    .v-sisters,
+    .visuals,
+    .details,
+    .supports,
+    .finale {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 800px;
+    }
+
+    .hero h1,
+    .hero h1 span,
+    .section-title,
+    .editorial h2,
+    .supports-head,
+    .detail-line { overflow-wrap: anywhere; }
+
+    @media (max-width: 760px) {
+      .topbar-inner { gap: 10px; min-height: 64px; }
+      .logo { min-width: 0; font-size: clamp(1.25rem, 6vw, 1.55rem); }
+      .page-header-actions { min-width: 0; }
+      .top-cta { padding-inline: 14px; font-size: .72rem; white-space: nowrap; }
+      .hero { min-height: auto; }
+      .hero-inner { min-height: auto; padding: 116px 0 62px; }
+      .hero h1 { font-size: clamp(3.65rem, 19vw, 6rem); }
+      .hero h1 span { font-size: clamp(1rem, 5.5vw, 1.25rem); }
+      .hero-visual { min-height: clamp(420px, 132vw, 510px); margin-top: -18px; }
+      .wheel-scroll,
+      .wheel-halo { width: min(86vw, 410px); }
+      .hero-waves { mix-blend-mode: normal; }
+      .magazine-sheet { padding: clamp(22px, 7vw, 34px); }
+      .tabs { width: 100%; justify-content: flex-start; }
+      .tabs button { flex: 1 1 calc(50% - 8px); padding-inline: 10px; }
+      .details-intro .anchor-mark { width: min(68vw, 220px); }
+      .support-card,
+      .support-card:hover,
+      .support-card:focus-visible { transform: none; filter: none; will-change: auto; }
+      .support-card-inner { min-height: clamp(410px, 135vw, 455px); transform: none; }
+      .support-image { min-height: clamp(300px, 102vw, 340px); transform: none; }
+      .support-image img { height: clamp(280px, 96vw, 320px); transform: none; filter: drop-shadow(0 14px 16px rgba(0,0,0,.25)); }
+      .support-body { transform: none; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 20px, 1240px); }
+      .top-cta { display: none; }
+      .topbar-inner { grid-template-columns: minmax(0, 1fr) auto; }
+      .hero-actions > * { width: 100%; }
+      .story-badge { grid-template-columns: 44px minmax(0, 1fr); }
+      .support-grid { grid-template-columns: 1fr; }
+      .detail-line { padding-block: 18px; }
+    }
+
+    @media (max-width: 380px) {
+      .shell { width: calc(100% - 16px); }
+      .hero h1 { font-size: clamp(3.25rem, 18vw, 4rem); }
+      .hero-copy::before { max-width: 100%; width: auto; letter-spacing: .14em; }
+      .hero-yacht-tag { right: 0; }
+      .magazine-sheet,
+      .lookbook-copy,
+      .details-intro { padding-inline: 20px; }
+      .passport { padding-inline: 20px; }
+    }
+
+    @media (pointer: coarse), (max-width: 760px), (update: slow) {
+      .hero::before,
+      .hero h1,
+      .hero h1 span,
+      .hero-waves .wave-teal,
+      .hero-waves .wave-gold,
+      .hero-waves .wave-deep,
+      .hero-waves .glints,
+      .wheel-halo,
+      .wheel-scroll::after,
+      .logo-mark,
+      .hero-yacht-tag,
+      .water-refraction,
+      .passport::before,
+      .sister-card::before,
+      .sparkle,
+      .support-foil { animation: none !important; }
+      .sparkle-layer { display: none; }
+      .water-refraction { display: none; }
+      .support-foil,
+      .support-glare { opacity: 0 !important; }
     }
 
   </style>
@@ -1883,6 +2008,7 @@
             <a href="index.html" role="menuitem">Mejiro Dober</a>
             <a href="machan.html" role="menuitem">Aston Machan</a>
             <a href="vivlos.html" role="menuitem" aria-current="page">Vivlos <small>Atual</small></a>
+            <a href="chiyo.html" role="menuitem">Sakura Chiyono O</a>
           </div>
         </div>
       </div>
@@ -1925,7 +2051,7 @@
           </div>
           <div class="hero-yacht-tag" aria-hidden="true">Royal<br>Yacht<br>Club</div>
           <div class="hero-placeholder" id="portraitPlaceholder">.</div>
-          <img id="heroImage" class="hero-image" alt="Vivlos" hidden>
+          <img id="heroImage" class="hero-image" alt="Vivlos" loading="lazy" decoding="async" referrerpolicy="no-referrer" hidden>
         </div>
 
         <aside class="hero-note reveal">
@@ -2300,8 +2426,9 @@
       const token = ++galleryTransitionToken;
       const img = document.createElement("img");
       img.alt = `Vivlos — ${group.label}`;
-      img.loading = "eager";
+      img.loading = "lazy";
       img.decoding = "async";
+      img.referrerPolicy = "no-referrer";
       img.onerror = () => {
         if (token !== galleryTransitionToken) return;
         stage.classList.remove("is-transitioning");
@@ -2318,8 +2445,9 @@
         }
 
         stage.classList.remove("is-transitioning");
-        void stage.offsetWidth;
-        stage.classList.add("is-transitioning");
+        requestAnimationFrame(() => {
+          if (token === galleryTransitionToken) stage.classList.add("is-transitioning");
+        });
 
         window.setTimeout(() => {
           if (token !== galleryTransitionToken) return;
@@ -2379,6 +2507,7 @@
         image.alt = card.name;
         image.loading = "lazy";
         image.decoding = "async";
+        image.referrerPolicy = "no-referrer";
         image.onerror = () => {
           image.hidden = true;
           const fallback = document.createElement("span");
@@ -2469,9 +2598,10 @@
         if (card.dataset.tiltReady) return;
         card.dataset.tiltReady = "true";
         let frame = 0;
+        let rect = null;
 
         const updateTilt = event => {
-          const rect = card.getBoundingClientRect();
+          if (!rect) rect = card.getBoundingClientRect();
           const x = Math.min(Math.max(event.clientX - rect.left, 0), rect.width);
           const y = Math.min(Math.max(event.clientY - rect.top, 0), rect.height);
           const normalizedX = x / rect.width - .5;
@@ -2488,10 +2618,14 @@
           });
         };
 
-        card.addEventListener("pointerenter", () => card.classList.add("is-tilting"));
+        card.addEventListener("pointerenter", () => {
+          rect = card.getBoundingClientRect();
+          card.classList.add("is-tilting");
+        });
         card.addEventListener("pointermove", updateTilt, { passive: true });
         card.addEventListener("pointerleave", () => {
           cancelAnimationFrame(frame);
+          rect = null;
           card.classList.remove("is-tilting");
           card.style.setProperty("--rx", "0deg");
           card.style.setProperty("--ry", "0deg");
@@ -2509,6 +2643,7 @@
       const sparkleLayer = $("#sparkleLayer");
       const topbar = document.querySelector(".topbar");
       if (!hero || !wheel) return;
+      const motionEnabled = !prefersReducedMotion.matches && hasFinePointer.matches;
 
       let scrollAngle = 0;
       let cursorAngle = 0;
@@ -2535,24 +2670,60 @@
         if (!ambient) sparkle.addEventListener("animationend", () => sparkle.remove(), { once: true });
       };
 
-      if (!prefersReducedMotion.matches) {
+      if (motionEnabled) {
         const width = hero.clientWidth;
         const height = Math.min(hero.clientHeight, 900);
-        for (let index = 0; index < 14; index += 1) {
+        for (let index = 0; index < 6; index += 1) {
           createSparkle(width * (.04 + Math.random() * .92), 85 + Math.random() * (height - 170), true);
         }
       }
 
-      const onScroll = () => {
+      let motionFrame = 0;
+      let scrollFrame = 0;
+      let heroRect = null;
+
+      const renderMotion = () => {
+        motionFrame = 0;
+        if (!motionEnabled) return;
+
+        const angleDelta = scrollAngle + cursorAngle - renderedAngle;
+        const portraitDeltaX = portraitX - renderedPortraitX;
+        const portraitDeltaY = portraitY - renderedPortraitY;
+        renderedAngle += angleDelta * .12;
+        renderedPortraitX += portraitDeltaX * .12;
+        renderedPortraitY += portraitDeltaY * .12;
+        wheel.style.setProperty("--wheel-rotation", `${renderedAngle.toFixed(2)}deg`);
+        wheel.style.setProperty("--wheel-x", `${(renderedPortraitX * .55).toFixed(2)}px`);
+        wheel.style.setProperty("--wheel-y", `${(renderedPortraitY * .4).toFixed(2)}px`);
+        portrait?.style.setProperty("--portrait-x", `${renderedPortraitX.toFixed(2)}px`);
+        portrait?.style.setProperty("--portrait-y", `${renderedPortraitY.toFixed(2)}px`);
+
+        if (Math.abs(angleDelta) > .02 || Math.abs(portraitDeltaX) > .02 || Math.abs(portraitDeltaY) > .02) {
+          motionFrame = requestAnimationFrame(renderMotion);
+        }
+      };
+
+      const scheduleMotion = () => {
+        if (!motionFrame && motionEnabled) motionFrame = requestAnimationFrame(renderMotion);
+      };
+
+      const updateScroll = () => {
+        scrollFrame = 0;
         const nextScrollY = window.scrollY;
         const delta = nextScrollY - lastScrollY;
         lastScrollY = nextScrollY;
-        scrollAngle += Math.max(-28, Math.min(28, delta)) * .42;
+        if (motionEnabled) scrollAngle += Math.max(-28, Math.min(28, delta)) * .42;
+        heroRect = null;
         topbar?.classList.toggle("is-scrolled", nextScrollY > 18);
+        scheduleMotion();
+      };
+
+      const onScroll = () => {
+        if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
       };
 
       const onPointerMove = event => {
-        const rect = hero.getBoundingClientRect();
+        const rect = heroRect || (heroRect = hero.getBoundingClientRect());
         if (event.clientY < rect.top || event.clientY > rect.bottom) return;
         const localX = event.clientX - rect.left;
         const localY = event.clientY - rect.top;
@@ -2570,33 +2741,25 @@
           lastSparkleX = localX;
           lastSparkleY = localY;
         }
+        scheduleMotion();
       };
 
       const resetPointer = () => {
         cursorAngle = 0;
         portraitX = 0;
         portraitY = 0;
-      };
-
-      const renderMotion = () => {
-        if (!prefersReducedMotion.matches) {
-          renderedAngle += (scrollAngle + cursorAngle - renderedAngle) * .085;
-          renderedPortraitX += (portraitX - renderedPortraitX) * .09;
-          renderedPortraitY += (portraitY - renderedPortraitY) * .09;
-          wheel.style.setProperty("--wheel-rotation", `${renderedAngle.toFixed(2)}deg`);
-          wheel.style.setProperty("--wheel-x", `${(renderedPortraitX * .55).toFixed(2)}px`);
-          wheel.style.setProperty("--wheel-y", `${(renderedPortraitY * .4).toFixed(2)}px`);
-          portrait?.style.setProperty("--portrait-x", `${renderedPortraitX.toFixed(2)}px`);
-          portrait?.style.setProperty("--portrait-y", `${renderedPortraitY.toFixed(2)}px`);
-        }
-        requestAnimationFrame(renderMotion);
+        heroRect = null;
+        scheduleMotion();
       };
 
       window.addEventListener("scroll", onScroll, { passive: true });
-      hero.addEventListener("pointermove", onPointerMove, { passive: true });
-      hero.addEventListener("pointerleave", resetPointer);
-      onScroll();
-      requestAnimationFrame(renderMotion);
+      if (motionEnabled) {
+        window.addEventListener("resize", () => { heroRect = null; }, { passive: true });
+        hero.addEventListener("pointerenter", () => { heroRect = hero.getBoundingClientRect(); }, { passive: true });
+        hero.addEventListener("pointermove", onPointerMove, { passive: true });
+        hero.addEventListener("pointerleave", resetPointer);
+      }
+      updateScroll();
     }
 
     function initSectionInteractions() {
@@ -2614,11 +2777,29 @@
 
       if (hasFinePointer.matches) {
         document.querySelectorAll(".sister-card").forEach(card => {
+          let frame = 0;
+          let rect = null;
+          let pointerX = 0;
+          let pointerY = 0;
+          card.addEventListener("pointerenter", () => {
+            rect = card.getBoundingClientRect();
+          });
           card.addEventListener("pointermove", event => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-            card.style.setProperty("--my", `${event.clientY - rect.top}px`);
+            if (!rect) rect = card.getBoundingClientRect();
+            pointerX = event.clientX - rect.left;
+            pointerY = event.clientY - rect.top;
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+              frame = 0;
+              card.style.setProperty("--mx", `${pointerX}px`);
+              card.style.setProperty("--my", `${pointerY}px`);
+            });
           }, { passive: true });
+          card.addEventListener("pointerleave", () => {
+            cancelAnimationFrame(frame);
+            frame = 0;
+            rect = null;
+          });
         });
       }
     }
@@ -2630,7 +2811,9 @@
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       });
     }, { threshold: .12 });
 

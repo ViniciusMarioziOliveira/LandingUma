@@ -3,18 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Um retrato interativo de Sakura Chiyono O, de Umamusume: Pretty Derby, com perfil, visuais e support cards conectados à Umapyoi API.">
+  <meta name="description" content="Um retrato interativo de Sakura Chiyono O, de Umamusume: Pretty Derby — florescer é continuar. Perfil, visuais e support cards conectados à Umapyoi API.">
   <meta name="theme-color" content="#f9879d">
   <title>Sakura Chiyono O — Florescer é continuar</title>
+  <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.microcms-assets.io">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gloock&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" fetchpriority="high"
+    href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png?w=960&fm=webp&q=80"
+    imagesrcset="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png?w=480&fm=webp&q=80 480w, https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png?w=720&fm=webp&q=80 720w, https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png?w=960&fm=webp&q=80 960w"
+    imagesizes="(max-width: 860px) 90vw, 46vw">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Gloock&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/uma-core.css">
 
   <style>
     :root {
       --sakura: #f9879d;
+      --sakura-light: #ffc4cf;
       --sakura-deep: #d95776;
       --sakura-dark: #a73555;
       --rose: #f7dde2;
@@ -23,456 +30,215 @@
       --paper: #fffdf9;
       --gold: #c9a35f;
       --gold-soft: #ead8ae;
+      --torii: #c8435f;
+      --bark: #6e4a4f;
+      --indigo: #2d3a64;
       --ink: #352b30;
       --muted: #76696f;
       --line: rgba(126, 67, 84, .14);
       --shadow: 0 30px 80px rgba(141, 70, 91, .15);
       --soft-shadow: 0 18px 48px rgba(141, 70, 91, .09);
+
+      --sw-toggle-bg: rgba(255, 255, 255, .78);
+      --sw-toggle-ink: var(--sakura-dark);
+      --sw-toggle-line: var(--line);
+      --sw-toggle-radius: 12px;
+      --sw-panel-bg: rgba(255, 253, 249, .98);
+      --sw-panel-ink: var(--ink);
+      --sw-panel-muted: var(--muted);
+      --sw-panel-line: rgba(217, 87, 118, .16);
+      --sw-hover-bg: var(--rose-soft);
+      --sw-hover-ink: var(--sakura-dark);
+      --sw-shadow: 0 20px 46px rgba(108, 54, 70, .16);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    * { margin: 0; }
+    * { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
     body {
       min-width: 320px;
-      min-height: 100vh;
       overflow-x: hidden;
       color: var(--ink);
       background: var(--cream);
-      font-family: "DM Sans", sans-serif;
+      font-family: "DM Sans", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(116, 75, 87, .022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(116, 75, 87, .022) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
+
+    body::before { content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; background-image: linear-gradient(rgba(116, 75, 87, .022) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 75, 87, .022) 1px, transparent 1px); background-size: 36px 36px; }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
     button { color: inherit; font: inherit; }
-    :focus-visible { outline: 3px solid rgba(249, 135, 157, .48); outline-offset: 4px; }
+    :focus-visible { outline: 3px solid rgba(249, 135, 157, .55); outline-offset: 4px; }
     ::selection { color: var(--ink); background: var(--rose); }
     .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
-    .skip-link {
-      position: fixed;
-      top: 8px;
-      left: 8px;
-      z-index: 200;
-      padding: 11px 15px;
-      border-radius: 10px;
-      color: white;
-      background: var(--sakura-dark);
-      transform: translateY(-150%);
-    }
-    .skip-link:focus { transform: none; }
+    .jp { font-family: "Noto Serif JP", serif; }
 
-    /* Header and shared page switcher */
-    .site-header {
-      position: fixed;
-      top: 16px;
-      left: 50%;
-      z-index: 80;
-      width: min(1180px, calc(100% - 28px));
-      border: 1px solid rgba(255, 255, 255, .86);
-      border-radius: 18px;
-      background: rgba(255, 253, 249, .82);
-      box-shadow: 0 14px 40px rgba(122, 64, 82, .09);
-      backdrop-filter: blur(18px) saturate(130%);
-      transform: translateX(-50%);
-    }
-    .header-inner {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      min-height: 64px;
-      gap: 30px;
-      padding: 8px 10px 8px 18px;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 700; }
-    .brand-mark { position: relative; width: 34px; height: 34px; transform: rotate(-8deg); }
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 7px 3px;
-      border-radius: 80% 0 80% 0;
-      background: var(--sakura);
-      transform: rotate(45deg);
-    }
-    .brand-mark::after { background: #ffc4cf; transform: rotate(135deg); }
-    .brand span:last-child { font-family: "Gloock", serif; font-size: 1.05rem; font-weight: 400; }
-    .main-nav { display: flex; justify-content: center; gap: 28px; }
-    .main-nav a {
-      position: relative;
-      padding-block: 10px;
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .main-nav a::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 4px;
-      width: 0;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--sakura);
-      transform: translateX(-50%);
-      transition: width .22s ease;
-    }
-    .main-nav a:hover::after { width: 100%; }
+    .section-kicker { display: inline-flex; align-items: center; gap: 12px; color: var(--sakura-dark); font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .section-kicker::before { content: ""; width: 30px; height: 1px; background: var(--gold); }
+    .section-title { margin-top: 13px; font-family: "Gloock", serif; font-size: clamp(2.8rem, 5.5vw, 5.4rem); font-weight: 400; line-height: .98; letter-spacing: -.045em; overflow-wrap: anywhere; }
+    .section-title em { color: var(--sakura-deep); font-style: normal; }
+    .section-intro { max-width: 600px; margin-top: 20px; color: var(--muted); font-size: .98rem; line-height: 1.8; }
+
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 54px; padding: 0 22px; border: 1px solid transparent; border-radius: 13px; font-size: .84rem; font-weight: 700; transition: transform .25s var(--ease-out), background .25s ease, box-shadow .25s ease; }
+    .button:hover { transform: translateY(-3px); }
+    .button-primary { color: #fff; background: var(--sakura); box-shadow: 0 16px 30px rgba(217, 87, 118, .22); }
+    .button-primary:hover { background: var(--sakura-deep); }
+    .button-quiet { border-color: var(--line); background: rgba(255, 255, 255, .7); }
+    .button-arrow { transition: transform .2s ease; }
+    .button:hover .button-arrow { transform: translateX(3px); }
+
+    /* ---------------------------------------------------------------- header */
+    .site-header { position: fixed; top: 16px; left: 50%; z-index: 80; width: min(1180px, calc(100% - 28px)); border: 1px solid rgba(255, 255, 255, .9); border-radius: 18px; background: rgba(255, 253, 249, .94); box-shadow: 0 14px 40px rgba(122, 64, 82, .09); transform: translateX(-50%); }
+    @media (min-width: 861px) and (hover: hover) { .site-header { background: rgba(255, 253, 249, .84); backdrop-filter: blur(14px); } }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; padding: 8px 10px 8px 18px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand svg { width: 32px; height: 32px; color: var(--sakura); }
+    .brand span { font-family: "Gloock", serif; font-size: 1.08rem; }
+    .main-nav { display: flex; gap: 26px; }
+    .main-nav a { position: relative; padding-block: 10px; color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; transition: color .2s ease; }
+    .main-nav a::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 0; height: 2px; border-radius: 2px; background: var(--sakura); transform: translateX(-50%); transition: width .25s ease; }
+    .main-nav a:hover, .main-nav a.is-active { color: var(--sakura-dark); }
+    .main-nav a:hover::after, .main-nav a.is-active::after { width: 100%; }
     .header-actions { display: flex; align-items: center; gap: 8px; }
-    .header-cta {
-      display: inline-grid;
-      place-items: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 12px;
-      color: white;
-      background: var(--sakura);
-      box-shadow: 0 11px 25px rgba(217, 87, 118, .2);
-      font-size: .78rem;
-      font-weight: 700;
-      transition: transform .2s ease, background .2s ease;
-    }
+    .header-cta { display: inline-grid; place-items: center; min-height: 44px; padding: 0 18px; border-radius: 12px; color: #fff; background: var(--sakura); box-shadow: 0 11px 25px rgba(217, 87, 118, .2); font-size: .78rem; font-weight: 700; transition: transform .2s ease, background .2s ease; }
     .header-cta:hover { background: var(--sakura-deep); transform: translateY(-2px); }
-    .page-switcher { position: relative; flex: 0 0 auto; }
-    .page-switcher-toggle {
-      display: grid;
-      place-items: center;
-      width: 46px;
-      min-height: 46px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .78);
-      cursor: pointer;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-    .page-switcher-toggle:hover { border-color: rgba(217, 87, 118, .35); background: white; transform: translateY(-2px); }
-    .page-switcher-icon { display: grid; gap: 4px; width: 18px; }
-    .page-switcher-icon span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--sakura-dark);
-      transition: transform .2s ease, opacity .2s ease;
-    }
-    .page-switcher.is-open .page-switcher-icon span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .page-switcher.is-open .page-switcher-icon span:nth-child(2) { opacity: 0; }
-    .page-switcher.is-open .page-switcher-icon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-    .page-switcher-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      width: min(238px, calc(100vw - 24px));
-      max-height: calc(100vh - 92px);
-      overflow-y: auto;
-      padding: 8px;
-      border: 1px solid rgba(217, 87, 118, .14);
-      border-radius: 15px;
-      background: rgba(255, 253, 249, .98);
-      box-shadow: 0 20px 46px rgba(108, 54, 70, .16);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(-8px) scale(.98);
-      transform-origin: top right;
-      transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
-    }
-    .page-switcher.is-open .page-switcher-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
-    .page-switcher-label {
-      display: block;
-      padding: 8px 10px 6px;
-      color: var(--muted);
-      font-size: .66rem;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .page-switcher-menu a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 44px;
-      padding: 9px 10px;
-      border-radius: 9px;
-      font-size: .84rem;
-      font-weight: 700;
-      transition: background .18s ease, color .18s ease;
-    }
-    .page-switcher-menu a:hover,
-    .page-switcher-menu a[aria-current="page"] { color: var(--sakura-dark); background: var(--rose-soft); }
-    .page-switcher-menu small { font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; opacity: .65; }
 
-    /* Hero */
-    .hero {
-      position: relative;
-      min-height: 900px;
-      overflow: hidden;
-      padding: 130px 0 80px;
-      isolation: isolate;
-      background:
-        radial-gradient(circle at 9% 25%, rgba(249, 135, 157, .18), transparent 25rem),
-        radial-gradient(circle at 87% 18%, rgba(255, 255, 255, .98), transparent 24rem),
-        linear-gradient(135deg, #fffaf2 0%, #fff7f6 58%, #fce9ed 100%);
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -230px;
-      right: -180px;
-      z-index: -2;
-      width: 680px;
-      height: 680px;
-      border: 1px solid rgba(201, 163, 95, .26);
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 70px rgba(255, 255, 255, .18), inset 0 0 0 71px rgba(201, 163, 95, .12);
-    }
-    .hero::after {
-      content: "千代の王";
-      position: absolute;
-      top: 132px;
-      right: max(18px, calc((100vw - 1240px) / 2));
-      z-index: -1;
-      color: rgba(175, 70, 98, .07);
-      font: 700 clamp(4rem, 9vw, 9rem)/1 "Noto Serif JP", serif;
-      letter-spacing: .12em;
-      writing-mode: vertical-rl;
-    }
-    #petalCanvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
-    .hero-layout {
-      display: grid;
-      grid-template-columns: .88fr 1.12fr;
-      align-items: center;
-      min-height: 690px;
-      gap: 56px;
-    }
+    /* Galho de progresso: as flores desabrocham conforme a leitura avança */
+    .bloom-bar { position: absolute; left: 22px; right: 22px; bottom: -7px; height: 14px; pointer-events: none; }
+    .bloom-branch { position: absolute; left: 0; right: 0; top: 6px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--bark), #b07a80); transform: scaleX(var(--p, 0)); transform-origin: left; }
+    .bloom { position: absolute; top: 0; width: 14px; height: 14px; margin-left: -7px; color: var(--sakura); transform: scale(clamp(0, calc((var(--p, 0) - var(--t)) * 16), 1)) rotate(calc(var(--p, 0) * 90deg)); }
+    .bloom:nth-child(even) { color: var(--sakura-light); }
+
+    /* ------------------------------------------------------------------ hero */
+    .hero { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 9% 25%, rgba(249, 135, 157, .18), transparent 25rem), radial-gradient(circle at 87% 18%, rgba(255, 255, 255, .98), transparent 24rem), linear-gradient(135deg, #fffaf2 0%, #fff7f6 58%, #fce9ed 100%); }
+    .hero::before { content: ""; position: absolute; top: -230px; right: -180px; z-index: -2; width: 680px; height: 680px; border: 1px solid rgba(201, 163, 95, .26); border-radius: 50%; box-shadow: inset 0 0 0 70px rgba(255, 255, 255, .18), inset 0 0 0 71px rgba(201, 163, 95, .12); }
+    .hero::after { content: "千代の王"; position: absolute; top: 132px; right: max(18px, calc((100vw - 1240px) / 2)); z-index: -1; color: rgba(175, 70, 98, .07); font: 700 clamp(4rem, 9vw, 9rem)/1 "Noto Serif JP", serif; letter-spacing: .12em; writing-mode: vertical-rl; }
+    #petalCanvas { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; pointer-events: none; }
+    .hero-layout { display: grid; grid-template-columns: .88fr 1.12fr; align-items: center; gap: 56px; min-height: max(720px, calc(100svh - 58px)); padding: 124px 0 40px; }
     .hero-copy { position: relative; z-index: 3; min-width: 0; }
     .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--sakura-dark); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
     .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
-    .hero h1 {
-      max-width: 700px;
-      margin-top: 22px;
-      font-family: "Gloock", serif;
-      font-size: clamp(4.5rem, 7.5vw, 7.7rem);
-      font-weight: 400;
-      line-height: .83;
-      letter-spacing: -.06em;
-    }
+    .hero h1 { max-width: 700px; margin-top: 22px; font-family: "Gloock", serif; font-size: clamp(4.2rem, 7.5vw, 7.6rem); font-weight: 400; line-height: .84; letter-spacing: -.06em; }
     .hero h1 span { display: block; color: var(--sakura-deep); }
-    .hero-jp { margin-top: 19px; color: var(--gold); font-family: "Noto Serif JP", serif; font-size: 1rem; font-weight: 700; letter-spacing: .28em; }
-    .hero-quote { position: relative; max-width: 575px; margin-top: 30px; padding-left: 20px; color: var(--muted); font-family: "Gloock", serif; font-size: clamp(1.05rem, 2vw, 1.35rem); line-height: 1.55; }
+    .hero-jp { margin-top: 19px; color: var(--gold); font-size: 1rem; font-weight: 700; letter-spacing: .28em; }
+    .hero-quote { position: relative; max-width: 575px; margin-top: 30px; padding-left: 20px; color: var(--muted); font-family: "Gloock", serif; font-size: clamp(1.05rem, 2vw, 1.32rem); line-height: 1.55; }
     .hero-quote::before { content: ""; position: absolute; top: 4px; bottom: 4px; left: 0; width: 3px; border-radius: 4px; background: linear-gradient(var(--sakura), var(--gold)); }
-    .specialties { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-    .specialties span { padding: 8px 12px; border: 1px solid rgba(217, 87, 118, .17); border-radius: 999px; color: var(--sakura-dark); background: rgba(255, 255, 255, .6); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .specialties { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .specialties span { padding: 8px 12px; border: 1px solid rgba(217, 87, 118, .17); border-radius: 999px; color: var(--sakura-dark); background: rgba(255, 255, 255, .62); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      gap: 11px;
-      padding: 0 22px;
-      border: 1px solid transparent;
-      border-radius: 13px;
-      font-size: .82rem;
-      font-weight: 700;
-      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
-    }
-    .button:hover { transform: translateY(-3px); }
-    .button-primary { color: white; background: var(--sakura); box-shadow: 0 16px 30px rgba(217, 87, 118, .22); }
-    .button-primary:hover { background: var(--sakura-deep); }
-    .button-quiet { border-color: var(--line); background: rgba(255, 255, 255, .65); }
-    .button-arrow { font-size: 1rem; transition: transform .2s ease; }
-    .button:hover .button-arrow { transform: translateX(3px); }
-    .api-line { display: flex; align-items: center; gap: 9px; min-height: 20px; margin-top: 20px; color: var(--muted); font-size: .72rem; }
-    .api-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px rgba(201, 163, 95, .11); }
-    .api-dot.online { background: #5db68b; box-shadow: 0 0 0 5px rgba(93, 182, 139, .11); }
+    .api-line { display: flex; align-items: center; gap: 9px; margin-top: 20px; color: var(--muted); font-size: .74rem; }
+    .api-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px rgba(201, 163, 95, .12); }
+    .api-dot.is-online { background: #5db68b; box-shadow: 0 0 0 5px rgba(93, 182, 139, .12); }
 
-    .portrait { position: relative; min-width: 0; min-height: 690px; }
-    .portrait-frame {
-      position: absolute;
-      inset: 22px 24px 4px 38px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .9);
-      border-radius: 46% 46% 30px 30px;
-      background:
-        radial-gradient(circle at 50% 24%, rgba(255, 255, 255, .96), transparent 18rem),
-        linear-gradient(155deg, rgba(255, 255, 255, .66), rgba(247, 221, 226, .72));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-    .portrait-frame::before {
-      content: "";
-      position: absolute;
-      inset: 24px;
-      border: 1px solid rgba(201, 163, 95, .28);
-      border-radius: 46% 46% 22px 22px;
-    }
+    .portrait { position: relative; min-width: 0; min-height: 660px; }
+    .portrait-frame { position: absolute; inset: 22px 24px 4px 38px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .95); border-radius: 46% 46% 30px 30px; background: radial-gradient(circle at 50% 24%, #fff, transparent 18rem), linear-gradient(155deg, #fff8f7, #f7dde2); box-shadow: var(--shadow); }
+    .portrait-frame::before { content: ""; position: absolute; inset: 24px; border: 1px solid rgba(201, 163, 95, .28); border-radius: 46% 46% 22px 22px; }
     .portrait-halo { position: absolute; top: 95px; left: 50%; width: 350px; height: 350px; border: 1px solid rgba(217, 87, 118, .2); border-radius: 50%; transform: translateX(-50%); }
-    .portrait-halo::before,
-    .portrait-halo::after { content: ""; position: absolute; inset: 34px; border: 1px solid rgba(201, 163, 95, .22); border-radius: 50%; }
+    .portrait-halo::before, .portrait-halo::after { content: ""; position: absolute; inset: 34px; border: 1px solid rgba(201, 163, 95, .22); border-radius: 50%; }
     .portrait-halo::after { inset: 68px; border-color: rgba(217, 87, 118, .12); }
-    .hero-image { position: absolute; right: -2%; bottom: 0; z-index: 2; width: 104%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 30px 24px rgba(105, 55, 70, .2)); opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
-    .hero-image.loaded { opacity: 1; transform: none; }
-    .portrait-fallback { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-    .portrait-fallback::after {
-      content: "";
-      position: absolute;
-      right: 10%;
-      bottom: 14px;
-      left: 10%;
-      height: 42px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(116, 48, 64, .18), transparent 68%);
-      filter: blur(7px);
-    }
-    .torii {
-      position: absolute;
-      inset: 68px 26px 34px;
-      filter: drop-shadow(0 18px 18px rgba(128, 45, 65, .18));
-    }
-    .torii-cap,
-    .torii-beam,
-    .torii-nuki,
-    .torii-pillar,
-    .torii-plaque { position: absolute; display: block; }
-    .torii-cap {
-      top: 0;
-      left: 50%;
-      width: 100%;
-      height: 23px;
-      border-radius: 8px 8px 5px 5px;
-      background: linear-gradient(180deg, #e8677f, #bc3f5e);
-      box-shadow: inset 0 -4px rgba(111, 35, 53, .18), 0 4px 0 rgba(255, 255, 255, .38);
-      clip-path: polygon(3% 0, 97% 0, 100% 48%, 96% 100%, 4% 100%, 0 48%);
-      transform: translateX(-50%);
-    }
-    .torii-cap::after {
-      content: "";
-      position: absolute;
-      right: 7%;
-      bottom: 5px;
-      left: 7%;
-      height: 1px;
-      background: rgba(238, 216, 165, .7);
-    }
-    .torii-beam {
-      top: 31px;
-      left: 50%;
-      width: 88%;
-      height: 31px;
-      border: 1px solid rgba(124, 37, 58, .16);
-      border-radius: 5px;
-      background: linear-gradient(180deg, #f47b90, #d45170);
-      box-shadow: inset 0 -7px rgba(137, 41, 64, .12);
-      transform: translateX(-50%);
-    }
-    .torii-nuki {
-      top: 88px;
-      left: 50%;
-      width: 70%;
-      height: 14px;
-      border-radius: 3px;
-      background: linear-gradient(180deg, #e96d84, #bd405e);
-      box-shadow: 0 4px 0 rgba(125, 38, 59, .11);
-      transform: translateX(-50%);
-    }
-    .torii-pillar {
-      top: 54px;
-      bottom: 8px;
-      width: 34px;
-      background: linear-gradient(90deg, #bc3f5e, #f47a90 48%, #c84362);
-      box-shadow: inset 5px 0 rgba(105, 31, 49, .1);
-      clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
-    }
-    .torii-pillar.left { left: 17%; }
-    .torii-pillar.right { right: 17%; }
-    .torii-plaque {
-      top: 49px;
-      left: 50%;
-      z-index: 2;
-      display: grid;
-      place-items: center;
-      width: 56px;
-      height: 72px;
-      border: 2px solid var(--gold-soft);
-      border-radius: 3px;
-      color: #f8e6bd;
-      background: #8f304d;
-      box-shadow: 0 6px 14px rgba(92, 36, 52, .18);
-      font: 700 .86rem/1.35 "Noto Serif JP", serif;
-      letter-spacing: .08em;
-      text-align: center;
-      transform: translateX(-50%);
-    }
-    .portrait-index { position: absolute; top: 56px; left: 6px; z-index: 4; color: var(--sakura-dark); font-family: "Gloock", serif; font-size: 4.4rem; line-height: 1; opacity: .7; }
+    /* Torii: cenário fixo atrás da personagem (entra uma vez, depois só acompanha o scroll) */
+    .torii { position: absolute; inset: 64px 8% 18px; z-index: 1; width: 84%; height: calc(100% - 82px); overflow: visible; }
+    .js .torii { animation: toriiRise 1.2s var(--ease-out) .1s backwards; }
+    @keyframes toriiRise { from { opacity: 0; transform: translate3d(0, 26px, 0) scale(.97); } }
+    .motion .torii { transform: translate3d(0, calc(var(--p, 0) * -46px), 0); }
+    .torii .shide { transform-box: fill-box; transform-origin: 50% 0; animation: shideSway 3.4s ease-in-out infinite; }
+    .torii .shide:nth-of-type(2) { animation-delay: -.9s; }
+    .torii .shide:nth-of-type(3) { animation-delay: -1.7s; }
+    .torii .shide:nth-of-type(4) { animation-delay: -2.5s; }
+    @keyframes shideSway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(6deg); } }
+    .hero.is-paused .shide { animation-play-state: paused; }
+    .hero-image { position: absolute; right: -2%; bottom: 0; z-index: 2; width: 104%; height: 100%; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .9s var(--ease-out); }
+    .hero-image.is-loaded { opacity: 1; transform: none; }
+    .portrait-index { position: absolute; top: 56px; left: 6px; z-index: 4; color: var(--sakura-dark); font-family: "Gloock", serif; font-size: 4.2rem; line-height: 1; opacity: .7; }
     .portrait-index small { display: block; margin-top: 5px; color: var(--muted); font: 700 .62rem "DM Sans", sans-serif; letter-spacing: .18em; text-transform: uppercase; }
-    .portrait-seal { position: absolute; right: 3px; bottom: 40px; z-index: 4; display: grid; place-items: center; width: 88px; height: 88px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 50%; color: white; background: var(--sakura); box-shadow: 0 12px 28px rgba(217, 87, 118, .24); font-family: "Noto Serif JP", serif; line-height: 1.3; text-align: center; transform: rotate(8deg); }
-    .hero-footnote { position: absolute; right: 22px; bottom: 0; z-index: 4; color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .portrait-seal { position: absolute; right: 3px; bottom: 40px; z-index: 5; display: grid; place-items: center; width: 88px; height: 88px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 50%; color: #fff; background: var(--sakura); box-shadow: 0 12px 28px rgba(217, 87, 118, .24); font-family: "Noto Serif JP", serif; line-height: 1.3; text-align: center; transform: rotate(8deg); }
+    .hero-footnote { position: absolute; right: 22px; bottom: -18px; z-index: 4; color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .motion .hero-copy { transform: translate3d(0, calc(var(--p, 0) * -50px), 0); }
+    .motion .portrait { transform: translate3d(0, calc(var(--p, 0) * 70px), 0); }
 
-    .hero-ribbon { position: relative; z-index: 5; margin-top: 8px; border-block: 1px solid rgba(217, 87, 118, .13); background: rgba(255, 255, 255, .42); }
+    .hero-ribbon { position: relative; z-index: 5; border-block: 1px solid rgba(217, 87, 118, .13); background: rgba(255, 255, 255, .5); }
     .ribbon-track { display: flex; align-items: center; justify-content: center; min-height: 58px; gap: clamp(22px, 5vw, 72px); overflow: hidden; color: var(--muted); white-space: nowrap; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .ribbon-track span { display: inline-flex; align-items: center; gap: clamp(22px, 5vw, 72px); }
-    .ribbon-track span::after { content: "✦"; color: var(--gold); font-size: .7rem; }
+    .ribbon-track span::after { content: "✿"; color: var(--sakura); }
+    .ribbon-track span:last-child::after { content: none; }
 
-    /* Shared section typography */
+    /* ------------------------------------------------------------ história */
     section { position: relative; }
-    .section-kicker { color: var(--sakura-dark); font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-    .section-title { margin-top: 13px; font-family: "Gloock", serif; font-size: clamp(3.1rem, 5.5vw, 5.8rem); font-weight: 400; line-height: .96; letter-spacing: -.045em; }
-    .section-title em { color: var(--sakura-deep); font-weight: 400; }
-    .section-intro { max-width: 600px; margin-top: 20px; color: var(--muted); font-size: .98rem; line-height: 1.8; }
-
-    /* Chiyo Note */
     .story { padding: 120px 0; }
     .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 74px; }
-    .note-visual { position: relative; min-height: 610px; }
-    .note-photo {
-      position: absolute;
-      inset: 25px 62px 40px 8px;
-      overflow: hidden;
-      border-radius: 180px 180px 24px 24px;
-      background: linear-gradient(155deg, var(--rose), white);
-      box-shadow: var(--soft-shadow);
-    }
+    .note-visual { position: relative; min-height: 600px; }
+    .note-photo { position: absolute; inset: 25px 62px 40px 8px; overflow: hidden; border-radius: 180px 180px 24px 24px; background: linear-gradient(155deg, var(--rose), #fff); box-shadow: var(--soft-shadow); }
     .note-photo::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(201, 163, 95, .3); border-radius: 165px 165px 16px 16px; pointer-events: none; }
-    .note-photo img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
-    .note-card {
-      position: absolute;
-      right: 0;
-      bottom: 8px;
-      z-index: 3;
-      width: min(310px, 68%);
-      padding: 28px 28px 26px;
-      border: 1px solid rgba(201, 163, 95, .3);
-      border-radius: 18px;
-      background:
-        repeating-linear-gradient(transparent 0 30px, rgba(151, 100, 114, .09) 31px),
-        var(--paper);
-      box-shadow: 0 18px 44px rgba(107, 60, 73, .15);
-      transform: rotate(2deg);
-    }
-    .note-card::before { content: "CHiyo Note / 019"; display: block; margin-bottom: 22px; color: var(--gold); font-size: .61rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-    .note-card blockquote { font-family: "Noto Serif JP", serif; font-size: 1.15rem; line-height: 2; }
+    .note-photo img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; opacity: 0; transition: opacity .8s ease; }
+    .note-photo img.is-loaded { opacity: 1; }
+    .note-card { position: absolute; right: 0; bottom: 8px; z-index: 3; width: min(310px, 68%); padding: 28px 28px 26px; border: 1px solid rgba(201, 163, 95, .3); border-radius: 18px; background: repeating-linear-gradient(transparent 0 30px, rgba(151, 100, 114, .09) 31px), var(--paper); box-shadow: 0 18px 44px rgba(107, 60, 73, .15); transform: rotate(2deg); }
+    .motion .note-card { transform: translate3d(0, calc((1 - var(--p, 1)) * 70px), 0) rotate(calc(2deg + (1 - var(--p, 1)) * 10deg)); }
+    .note-card::before { content: "Chiyo Note / 019"; display: block; margin-bottom: 22px; color: var(--gold); font-size: .61rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .note-card blockquote { font-family: "Noto Serif JP", serif; font-size: 1.1rem; line-height: 2; }
     .note-stamp { position: absolute; top: -28px; right: 24px; display: grid; place-items: center; width: 60px; height: 60px; border: 2px solid rgba(217, 87, 118, .62); border-radius: 50%; color: var(--sakura-deep); font-family: "Noto Serif JP", serif; font-size: .75rem; transform: rotate(10deg); }
-    .story-points { display: grid; gap: 1px; margin-top: 34px; border-block: 1px solid var(--line); }
-    .story-point { display: grid; grid-template-columns: 45px 1fr; gap: 16px; align-items: start; padding: 20px 0; border-bottom: 1px solid var(--line); }
-    .story-point:last-child { border-bottom: 0; }
-    .story-number { color: var(--sakura); font-family: "Gloock", serif; font-size: 1.35rem; }
-    .story-point h3 { margin-bottom: 5px; font-family: "Gloock", serif; font-size: 1.15rem; font-weight: 400; }
-    .story-point p { color: var(--muted); font-size: .86rem; line-height: 1.6; }
+    .profile-line { margin-top: 26px; padding: 18px 20px; border-radius: 16px; color: var(--sakura-dark); background: var(--rose-soft); font-family: "Gloock", serif; font-size: 1.12rem; line-height: 1.55; }
+    .profile-line small { display: block; margin-bottom: 6px; color: var(--gold); font-family: "DM Sans", sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 
-    /* Profile */
+    /* ------------------------------------------------------- florescer (cena) */
+    .bloom-scene { --scene-h: 330vh; background: var(--paper); }
+    .bloom-stage { position: relative; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 30px; min-height: 640px; padding-inline: max(20px, calc((100% - 1180px) / 2)); overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #fff8f3 0%, #fff0ef 55%, #fde3e7 100%); }
+    .bloom-haze { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 70% 40%, rgba(249, 135, 157, .28), transparent 60%); }
+    .fuji { position: absolute; right: -2%; bottom: 11%; z-index: -1; width: min(62%, 860px); height: auto; }
+    .fuji .mountain { fill: #d9d4e8; }
+    .fuji .snow { fill: #fff; }
+    .fuji .sun { fill: #f9a3b4; }
+    .ground { position: absolute; inset: auto 0 0; z-index: -1; height: 12%; background: linear-gradient(180deg, #f5d3da, #eec0ca); }
+    .tree { position: relative; justify-self: center; width: min(100%, 560px); height: min(80vh, 640px); }
+    .tree svg { width: 100%; height: 100%; overflow: visible; }
+    .tree .trunk, .tree .branches { fill: url(#barkGrad); }
+    .tree .bark-lines { fill: none; stroke: #4a2f34; stroke-width: 1.6; stroke-linecap: round; opacity: .35; }
+    .tree .lenticels { fill: none; stroke: #f3d9cf; stroke-width: 1.4; stroke-linecap: round; opacity: .35; }
+    .tree .tree-shadow { fill: #8d4a5e; opacity: .14; }
+    .tree .cluster { transform-box: fill-box; transform-origin: 50% 70%; }
+    .tree .fallen use { color: #f7a1b3; }
+    .motion .tree .cluster { transform: scale(clamp(0, calc((var(--p, 0) - var(--t)) * 5.5), 1)); }
+    .motion .tree .fallen { opacity: clamp(0, calc((var(--p, 0) - .62) * 3), 1); }
+    .scene-petals { position: absolute; inset: 0; pointer-events: none; }
+    .scene-petals span { position: absolute; top: -20px; width: 14px; height: 14px; color: var(--sakura); animation: petalFall linear infinite; }
+    .scene-petals span svg { width: 100%; height: 100%; }
+    .motion .scene-petals { opacity: clamp(0, calc((var(--p, 0) - .55) * 2.5), 1); }
+    html:not(.motion) .scene-petals { display: none; }
+    .is-paused .scene-petals span { animation-play-state: paused; }
+    @keyframes petalFall {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      100% { transform: translate3d(var(--drift, -120px), 110vh, 0) rotate(540deg); }
+    }
+
+    .bloom-copy { position: relative; z-index: 2; padding: 32px; border: 1px solid rgba(201, 163, 95, .3); border-radius: 26px; background: rgba(255, 253, 249, .9); box-shadow: 0 30px 60px rgba(141, 70, 91, .12); }
+    .bloom-copy h2 { margin: 12px 0 18px; font-family: "Gloock", serif; font-size: clamp(2.3rem, 4.4vw, 3.8rem); font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+    .stage-label { position: absolute; top: 26px; right: 26px; display: grid; }
+    .stage-label span { grid-area: 1 / 1; color: rgba(217, 87, 118, .18); font-family: "Noto Serif JP", serif; font-size: 3rem; font-weight: 700; line-height: 1; writing-mode: vertical-rl; }
+    .beats { display: grid; list-style: none; }
+    .beat { padding-block: 16px; border-top: 1px solid var(--line); }
+    .beat-no { color: var(--sakura); font-family: "Gloock", serif; font-size: 1.3rem; }
+    .beat-term { margin-left: 10px; color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .beat h3 { margin: 6px 0 8px; font-family: "Gloock", serif; font-size: 1.5rem; font-weight: 400; }
+    .beat p { color: var(--muted); line-height: 1.7; }
+    .bloom-dots { display: none; gap: 8px; margin-top: 18px; }
+    .bloom-dots span { width: 12px; height: 12px; border-radius: 50%; background: var(--rose); transition: background .4s ease, transform .4s var(--ease-out); }
+
+    html:not(.motion) .bloom-stage { padding-block: 100px; }
+    html:not(.motion) .stage-label span:not(:last-child) { display: none; }
+    .motion .bloom-haze { opacity: var(--p, 0); }
+    .motion .fuji .sun { transform: translateY(calc((1 - var(--p, 0)) * 60px)); }
+    .motion .bloom-scene .beats { grid-template-areas: "beat"; }
+    .motion .bloom-scene .beat { grid-area: beat; padding-block: 0; border-top: 0; opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s var(--ease-out); pointer-events: none; }
+    .motion .bloom-scene .stage-label span { opacity: 0; transition: opacity .6s ease; }
+    .motion .bloom-scene .bloom-dots { display: flex; }
+    .motion .bloom-scene:not([data-step]) .beat:nth-child(1), .motion .bloom-scene[data-step="0"] .beat:nth-child(1),
+    .motion .bloom-scene[data-step="1"] .beat:nth-child(2), .motion .bloom-scene[data-step="2"] .beat:nth-child(3),
+    .motion .bloom-scene:not([data-step]) .stage-label span:nth-child(1), .motion .bloom-scene[data-step="0"] .stage-label span:nth-child(1),
+    .motion .bloom-scene[data-step="1"] .stage-label span:nth-child(2), .motion .bloom-scene[data-step="2"] .stage-label span:nth-child(3) { opacity: 1; transform: none; pointer-events: auto; }
+    .motion .bloom-scene:not([data-step]) .bloom-dots span:nth-child(1), .motion .bloom-scene[data-step="0"] .bloom-dots span:nth-child(1),
+    .motion .bloom-scene[data-step="1"] .bloom-dots span:nth-child(-n+2), .motion .bloom-scene[data-step="2"] .bloom-dots span { background: var(--sakura); transform: scale(1.15); }
+
+    /* --------------------------------------------------------------- perfil */
     .profile { overflow: hidden; padding: 120px 0; background: var(--rose-soft); }
     .profile::before { content: "SAKURA"; position: absolute; right: -25px; top: 65px; color: rgba(217, 87, 118, .045); font: 400 clamp(7rem, 16vw, 15rem)/1 "Gloock", serif; letter-spacing: -.05em; }
     .profile-head { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr .72fr; gap: 40px; align-items: end; margin-bottom: 44px; }
@@ -480,11 +246,11 @@
     .profile-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.12fr .88fr; gap: 22px; }
     .identity-card { overflow: hidden; border: 1px solid rgba(255, 255, 255, .82); border-radius: 30px; background: var(--paper); box-shadow: var(--soft-shadow); }
     .identity-top { display: grid; grid-template-columns: .82fr 1.18fr; min-height: 300px; }
-    .identity-name { position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 34px; color: white; background: linear-gradient(145deg, var(--sakura), var(--sakura-deep)); }
+    .identity-name { position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 34px; color: #fff; background: linear-gradient(145deg, var(--sakura), var(--sakura-deep)); }
     .identity-name::after { content: "桜"; position: absolute; right: -12px; bottom: -38px; color: rgba(255, 255, 255, .11); font: 700 10rem "Noto Serif JP", serif; }
-    .identity-name p { position: relative; z-index: 1; color: rgba(255, 255, 255, .72); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    .identity-name h3 { position: relative; z-index: 1; max-width: 290px; font-family: "Gloock", serif; font-size: clamp(2.8rem, 4vw, 4.8rem); font-weight: 400; line-height: .88; }
-    .identity-name span { position: relative; z-index: 1; font-family: "Noto Serif JP", serif; font-size: .82rem; letter-spacing: .18em; }
+    .identity-name p { position: relative; z-index: 1; color: rgba(255, 255, 255, .75); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .identity-name h3 { position: relative; z-index: 1; max-width: 290px; font-family: "Gloock", serif; font-size: clamp(2.6rem, 4vw, 4.4rem); font-weight: 400; line-height: .9; }
+    .identity-name span { position: relative; z-index: 1; font-size: .82rem; letter-spacing: .18em; }
     .core-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
     .core-stat { display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 150px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .2s ease; }
     .core-stat:nth-child(even) { border-right: 0; }
@@ -494,193 +260,202 @@
     .core-stat strong { font-family: "Gloock", serif; font-size: clamp(1.25rem, 2vw, 1.8rem); font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; }
     .profile-quote { padding: 30px 34px; border-top: 1px solid var(--line); }
     .profile-quote small { display: block; margin-bottom: 8px; color: var(--sakura-deep); font-size: .66rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-    .profile-quote p { color: var(--muted); line-height: 1.75; }
-
+    .profile-quote p { color: var(--muted); font-family: "Gloock", serif; font-size: 1.1rem; line-height: 1.6; }
     .profile-side { display: grid; gap: 22px; }
-    .voice-card {
-      display: grid;
-      grid-template-columns: 136px 1fr;
-      min-height: 190px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .82);
-      border-radius: 26px;
-      background: var(--paper);
-      box-shadow: var(--soft-shadow);
-    }
+    .voice-card { display: grid; grid-template-columns: 136px 1fr; min-height: 190px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .82); border-radius: 26px; background: var(--paper); box-shadow: var(--soft-shadow); }
     .voice-image { position: relative; overflow: hidden; background: linear-gradient(150deg, var(--rose), #f2c6ce); }
-    .voice-image img { width: 100%; height: 100%; object-fit: cover; }
-    .voice-image .image-fallback { font-size: 2.3rem; }
+    .voice-image img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+    .voice-image .fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--sakura-dark); font-family: "Noto Serif JP", serif; font-size: 2.3rem; }
     .voice-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 25px; }
     .voice-copy small { color: var(--sakura-deep); font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .voice-copy h3 { margin: 9px 0 4px; font-family: "Gloock", serif; font-size: 1.55rem; font-weight: 400; }
-    .voice-copy p { color: var(--muted); font-family: "Noto Serif JP", serif; font-size: .78rem; }
+    .voice-copy p { color: var(--muted); font-size: .8rem; }
     .detail-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .detail-item { min-width: 0; padding: 18px; border: 1px solid rgba(217, 87, 118, .1); border-radius: 17px; background: rgba(255, 255, 255, .7); }
+    .detail-item { min-width: 0; padding: 18px; border: 1px solid rgba(217, 87, 118, .1); border-radius: 17px; background: rgba(255, 255, 255, .72); }
     .detail-item small { display: block; margin-bottom: 6px; color: var(--sakura-deep); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .detail-item strong { display: block; font-size: .86rem; font-weight: 600; line-height: 1.55; overflow-wrap: anywhere; }
-
+    .detail-item strong { display: block; font-size: .88rem; font-weight: 500; line-height: 1.55; overflow-wrap: anywhere; }
     .lore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
-    .lore-card { position: relative; overflow: hidden; min-height: 205px; padding: 28px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 22px; background: rgba(255, 255, 255, .72); }
-    .lore-card::after { content: attr(data-mark); position: absolute; right: -3px; bottom: -22px; color: rgba(217, 87, 118, .07); font: 700 6.6rem "Noto Serif JP", serif; }
+    .lore-card { position: relative; overflow: hidden; min-height: 205px; padding: 28px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 22px; background: rgba(255, 255, 255, .74); transition: transform .35s var(--ease-out), box-shadow .35s ease; }
+    .lore-card:hover { transform: translateY(-6px); box-shadow: var(--soft-shadow); }
+    .lore-card::after { content: attr(data-mark); position: absolute; right: -3px; bottom: -22px; color: rgba(217, 87, 118, .08); font: 700 6.6rem "Noto Serif JP", serif; }
     .lore-card small { color: var(--gold); font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
     .lore-card h3 { margin: 12px 0 9px; font-family: "Gloock", serif; font-size: 1.4rem; font-weight: 400; }
-    .lore-card p { position: relative; z-index: 1; color: var(--muted); font-size: .86rem; line-height: 1.68; }
+    .lore-card p { position: relative; z-index: 1; color: var(--muted); font-size: .9rem; line-height: 1.68; }
+    .lore-grid [data-reveal]:nth-child(2) { --d: .1s; }
+    .lore-grid [data-reveal]:nth-child(3) { --d: .2s; }
 
-    /* Gallery */
+    /* -------------------------------------------------------------- galeria */
     .gallery { padding: 120px 0; background: var(--paper); }
-    .gallery-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; margin-bottom: 40px; }
+    .gallery-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
     .gallery-tabs { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
-    .gallery-tabs button { min-height: 44px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: transparent; font-size: .73rem; font-weight: 700; cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s ease; }
+    .gallery-tabs button { min-height: 44px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: transparent; font-size: .74rem; font-weight: 700; cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s ease; }
     .gallery-tabs button:hover { transform: translateY(-2px); }
-    .gallery-tabs button.active { border-color: var(--sakura); color: white; background: var(--sakura); }
-    .gallery-stage { display: grid; grid-template-columns: 1.32fr .68fr; min-height: 650px; gap: 16px; }
-    .gallery-feature,
-    .gallery-small { position: relative; overflow: hidden; border-radius: 28px; background: linear-gradient(155deg, var(--rose-soft), #f7e1e5); }
-    .gallery-feature::before,
-    .gallery-small::before { content: ""; position: absolute; inset: 18px; z-index: 2; border: 1px solid rgba(201, 163, 95, .27); border-radius: 20px; pointer-events: none; }
-    .gallery-feature img,
-    .gallery-small img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; padding: 20px 20px 0; }
-    .gallery-feature figcaption,
-    .gallery-small figcaption { position: absolute; right: 24px; bottom: 24px; z-index: 3; padding: 8px 11px; border-radius: 8px; color: white; background: rgba(79, 52, 60, .66); backdrop-filter: blur(8px); font-size: .63rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    .gallery-rail { display: grid; grid-template-rows: repeat(2, 1fr); gap: 16px; min-height: 0; }
-    .gallery-empty { display: grid; place-items: center; grid-column: 1 / -1; min-height: 430px; border: 1px dashed rgba(217, 87, 118, .25); border-radius: 28px; color: var(--muted); text-align: center; }
+    .gallery-tabs button[aria-pressed="true"] { border-color: var(--sakura); color: #fff; background: var(--sakura); }
+    .gallery-stage { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 16px; min-height: 620px; }
+    .gallery-info { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; overflow: hidden; padding: 38px; border-radius: 28px; color: #fff; background: radial-gradient(circle at 20% 15%, rgba(255, 255, 255, .22), transparent 14rem), linear-gradient(150deg, var(--sakura), var(--sakura-deep) 70%, var(--sakura-dark)); }
+    .gallery-info::after { content: "桜"; position: absolute; right: -18px; bottom: -46px; color: rgba(255, 255, 255, .1); font: 700 12rem/1 "Noto Serif JP", serif; pointer-events: none; }
+    .gallery-no { font-family: "Gloock", serif; font-size: 5.2rem; line-height: 1; opacity: .9; }
+    .gallery-no small { font-size: .3em; opacity: .7; }
+    .gallery-info h3 { margin-top: 10px; font-family: "Gloock", serif; font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-weight: 400; line-height: 1; }
+    .gallery-jp { margin-top: 8px; color: var(--gold-soft); letter-spacing: .2em; }
+    .gallery-text { position: relative; z-index: 1; color: rgba(255, 255, 255, .85); line-height: 1.7; }
+    .gallery-feature { position: relative; overflow: hidden; min-height: 620px; border-radius: 28px; background: radial-gradient(circle at 50% 30%, #fff, transparent 22rem), linear-gradient(155deg, var(--rose-soft), #f7e1e5); }
+    .gallery-feature::before { content: ""; position: absolute; inset: 18px; z-index: 2; border: 1px solid rgba(201, 163, 95, .3); border-radius: 20px; pointer-events: none; }
+    .gallery-feature img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 30px 30px 0; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(14px) scale(1.02); transition: opacity .7s ease, transform .9s var(--ease-out); }
+    .gallery-feature img.is-loaded { opacity: 1; transform: none; }
+    .gallery-feature figcaption { position: absolute; right: 26px; bottom: 26px; z-index: 3; padding: 8px 11px; border-radius: 8px; color: #fff; background: rgba(79, 52, 60, .72); font-size: .63rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
     .image-fallback { position: absolute; inset: 0; display: none; place-items: center; padding: 30px; color: var(--sakura-dark); background: linear-gradient(145deg, var(--rose-soft), var(--rose)); font-family: "Gloock", serif; text-align: center; }
     .has-image-error .image-fallback { display: grid; }
 
-    /* Support cards */
+    /* -------------------------------------------------------------- supports */
     .supports { padding: 120px 0; background: linear-gradient(145deg, #fff8f7, var(--cream)); }
     .support-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 42px; }
     .support-note { max-width: 390px; color: var(--muted); font-size: .88rem; line-height: 1.7; text-align: right; }
     .support-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-    .support-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(217, 87, 118, .12); border-radius: 22px; background: white; box-shadow: 0 18px 45px rgba(109, 64, 77, .09); transition: transform .28s ease, box-shadow .28s ease; }
-    .support-card:hover { transform: translateY(-8px); box-shadow: 0 25px 58px rgba(109, 64, 77, .15); }
+    .support-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(217, 87, 118, .12); border-radius: 22px; background: #fff; box-shadow: 0 18px 45px rgba(109, 64, 77, .09); transition: transform .3s var(--ease-out), box-shadow .3s ease; }
+    .support-card:hover { box-shadow: 0 25px 58px rgba(109, 64, 77, .15); }
     .support-image { position: relative; display: grid; place-items: center; aspect-ratio: 1 / .94; overflow: hidden; background: linear-gradient(145deg, var(--rose-soft), #f8e2e6); }
     .support-image::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(255, 255, 255, .72); border-radius: 14px; pointer-events: none; }
     .support-image img { width: 100%; height: 100%; object-fit: contain; transition: transform .35s ease; }
     .support-card:hover .support-image img { transform: scale(1.035); }
-    .support-placeholder { display: grid; place-items: center; width: 100%; height: 100%; color: var(--sakura-dark); font-family: "Noto Serif JP", serif; font-size: 2.5rem; }
-    .support-placeholder,
-    .support-image img { grid-area: 1 / 1; }
+    .support-fallback { color: var(--sakura-dark); font-family: "Noto Serif JP", serif; font-size: 2.5rem; }
     .support-body { padding: 20px 20px 22px; }
     .support-topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
-    .rarity { padding: 5px 8px; border-radius: 999px; color: white; background: linear-gradient(90deg, var(--sakura-deep), var(--sakura)); font-size: .61rem; font-weight: 700; letter-spacing: .09em; }
+    .rarity { padding: 5px 8px; border-radius: 999px; color: #fff; background: linear-gradient(90deg, var(--sakura-deep), var(--sakura)); font-size: .61rem; font-weight: 700; letter-spacing: .09em; }
+    .rarity-r .rarity { color: var(--ink); background: var(--gold-soft); }
     .support-type { color: var(--muted); font-size: .63rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
-    .support-body h3 { min-height: 3.05em; font-family: "Gloock", serif; font-size: 1.08rem; font-weight: 400; line-height: 1.45; }
-    .support-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-    .support-card.rarity-r .rarity { color: var(--ink); background: var(--gold-soft); }
-    .support-empty { grid-column: 1 / -1; padding: 50px; border: 1px dashed var(--line); border-radius: 22px; color: var(--muted); text-align: center; }
+    .support-body h3 { min-height: 3em; font-family: "Gloock", serif; font-size: 1.06rem; font-weight: 400; line-height: 1.45; }
+    .support-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .js .support-grid .support-card { opacity: 0; transform: translateY(26px); transition: opacity .7s ease var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s), box-shadow .3s ease; }
+    .js .support-grid.is-in .support-card { opacity: 1; transform: none; }
+    .js .support-grid.is-in .support-card:hover { transform: translateY(-8px); }
+    .js .support-grid[data-reveal] { opacity: 1; transform: none; }
 
-    /* Final */
-    .final { position: relative; overflow: hidden; padding: 130px 0; color: white; text-align: center; background: linear-gradient(145deg, #a93658, var(--sakura-deep) 62%, #ef7891); }
-    .final::before,
-    .final::after { content: ""; position: absolute; width: 450px; height: 450px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 50%; }
+    /* ----------------------------------------------------- final + kakejiku */
+    .final { position: relative; overflow: hidden; padding: 120px 0; color: #fff; background: linear-gradient(145deg, #a93658, var(--sakura-deep) 62%, #ef7891); }
+    .final::before, .final::after { content: ""; position: absolute; width: 450px; height: 450px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 50%; }
     .final::before { top: -250px; left: -130px; box-shadow: 0 0 0 65px rgba(255, 255, 255, .035), 0 0 0 130px rgba(255, 255, 255, .025); }
     .final::after { right: -200px; bottom: -300px; box-shadow: 0 0 0 70px rgba(255, 255, 255, .03); }
-    .final-inner { position: relative; z-index: 2; }
-    .final .section-kicker { color: var(--gold-soft); }
-    .final h2 { max-width: 920px; margin: 15px auto 0; font-family: "Gloock", serif; font-size: clamp(3.8rem, 7vw, 7.3rem); font-weight: 400; line-height: .94; letter-spacing: -.045em; }
-    .final p { max-width: 620px; margin: 25px auto 31px; color: rgba(255, 255, 255, .73); line-height: 1.8; }
-    .final .button { color: var(--sakura-dark); background: white; box-shadow: 0 16px 38px rgba(94, 37, 55, .2); }
-    .site-footer { padding: 29px 0; color: rgba(255, 255, 255, .65); background: #5c2638; font-size: .72rem; }
+    .final-grid { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(40px, 8vw, 110px); }
+    .kakejiku { --kh: 470px; position: relative; justify-self: center; width: 210px; height: calc(var(--kh) + 40px); }
+    .kake-rod { position: absolute; left: -16px; right: -16px; z-index: 2; height: 18px; border-radius: 9px; background: linear-gradient(180deg, #5b3b3f, #2e1c1f); box-shadow: 0 6px 14px rgba(40, 10, 20, .35); }
+    .kake-rod::before, .kake-rod::after { content: ""; position: absolute; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); }
+    .kake-rod::before { left: -6px; }
+    .kake-rod::after { right: -6px; }
+    .kake-rod.top { top: 0; }
+    .kake-rod.bottom { top: calc(var(--kh) + 10px); }
+    .kake-cord { position: absolute; left: 50%; top: -44px; width: 90px; height: 50px; border: 2px solid var(--gold-soft); border-bottom: 0; border-radius: 50% 50% 0 0; transform: translateX(-50%); }
+    .kake-paper { position: absolute; top: 10px; left: 0; right: 0; height: var(--kh); padding: 16px 14px; background: linear-gradient(180deg, #7a2d44, #5a2034); box-shadow: 0 20px 40px rgba(60, 10, 30, .3); }
+    .kake-art { position: relative; display: flex; justify-content: center; height: 100%; padding: 30px 0; border: 1px solid rgba(234, 216, 174, .5); background: repeating-linear-gradient(0deg, rgba(160, 120, 100, .05) 0 2px, transparent 2px 6px), #fbf4e6; }
+    .kake-text { color: #2c1d20; font-family: "Noto Serif JP", serif; font-size: 2.6rem; font-weight: 700; letter-spacing: .16em; writing-mode: vertical-rl; }
+    .kake-seal { position: absolute; left: 16px; bottom: 26px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 4px; color: #fff; background: var(--torii); font-family: "Noto Serif JP", serif; font-size: .7rem; line-height: 1.05; writing-mode: vertical-rl; transform: rotate(-4deg); }
+    .motion .kakejiku { --u: clamp(.04, calc(var(--p, 1) * 1.15), 1); }
+    .motion .kake-paper { clip-path: inset(0 0 calc((1 - var(--u)) * 100%) 0); }
+    .motion .kake-rod.bottom { transform: translateY(calc((1 - var(--u)) * var(--kh) * -1)); }
+    .final-copy .section-kicker { color: var(--gold-soft); }
+    .final-copy .section-kicker::before { background: var(--gold-soft); }
+    .final-copy h2 { margin: 15px 0 0; font-family: "Gloock", serif; font-size: clamp(3.2rem, 6.4vw, 6.6rem); font-weight: 400; line-height: .94; letter-spacing: -.045em; }
+    .proverb { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--gold-soft); }
+    .proverb strong { display: block; font-family: "Noto Serif JP", serif; font-size: 1.1rem; letter-spacing: .12em; }
+    .proverb span { display: block; margin-top: 6px; color: rgba(255, 255, 255, .8); font-size: .92rem; font-style: italic; }
+    .final-copy p.lede { max-width: 580px; margin: 22px 0 30px; color: rgba(255, 255, 255, .78); line-height: 1.8; }
+    .final .button { color: var(--sakura-dark); background: #fff; box-shadow: 0 16px 38px rgba(94, 37, 55, .2); }
+
+    .site-footer { padding: 29px 0; color: rgba(255, 255, 255, .7); background: #5c2638; font-size: .74rem; }
     .footer-inner { display: flex; justify-content: space-between; gap: 25px; }
-    .footer-inner a { transition: color .2s ease; }
-    .footer-inner a:hover { color: white; }
+    .footer-inner a { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .35); transition: color .2s ease; }
+    .footer-inner a:hover { color: #fff; }
 
-    /* Motion */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* ------------------------------------------------------------ responsivo */
+    .hero-layout > *, .story-grid > *, .profile-grid > *, .bloom-stage > *, .final-grid > * { min-width: 0; }
 
-    /* Responsive */
     @media (max-width: 1050px) {
       .hero-layout { grid-template-columns: .95fr 1.05fr; gap: 20px; }
-      .portrait { min-height: 630px; }
+      .portrait { min-height: 620px; }
       .profile-grid { grid-template-columns: 1fr; }
       .profile-side { grid-template-columns: .7fr 1.3fr; }
-      .detail-list { align-content: start; }
       .support-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
     @media (max-width: 860px) {
       .main-nav { display: none; }
-      .header-inner { grid-template-columns: 1fr auto; }
-      .hero { padding-top: 135px; }
-      .hero-layout,
-      .story-grid { grid-template-columns: 1fr; }
-      .hero-layout { gap: 34px; }
-      .hero-copy { max-width: 690px; }
-      .portrait { width: min(650px, 100%); min-height: 690px; margin-inline: auto; }
+      .hero-layout, .story-grid, .final-grid { grid-template-columns: 1fr; }
+      .hero-layout { gap: 34px; padding-top: 120px; }
+      .portrait { width: min(620px, 100%); min-height: 640px; margin-inline: auto; }
       .portrait-frame { inset-inline: 25px; }
       .profile-head { grid-template-columns: 1fr; }
-      .profile-head .section-intro { margin-top: -12px; }
       .profile-side { grid-template-columns: 1fr; }
       .lore-grid { grid-template-columns: 1fr; }
-      .lore-card { min-height: 170px; }
-      .gallery-head,
-      .support-head { display: flex; align-items: flex-start; flex-direction: column; }
+      .gallery-head, .support-head { flex-direction: column; align-items: flex-start; }
       .gallery-tabs { justify-content: flex-start; }
       .support-note { text-align: left; }
-      .gallery-stage { grid-template-columns: 1fr; }
-      .gallery-feature { min-height: 590px; }
-      .gallery-rail { grid-template-columns: repeat(2, 1fr); grid-template-rows: 310px; }
+      .gallery-stage { grid-template-columns: 1fr; min-height: 0; }
+      .gallery-info { gap: 18px; padding: 28px; }
+      .gallery-no { font-size: 3.6rem; }
+      .gallery-feature { min-height: 0; height: min(120vw, 580px); }
+      .bloom-stage { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; gap: 10px; padding: 0; }
+      .tree { grid-row: 1; width: 100%; height: auto; min-height: 0; margin-top: 80px; }
+      .bloom-copy { grid-row: 2; margin: 0 14px 16px; padding: 22px; }
+      .bloom-copy h2 { font-size: clamp(1.9rem, 8vw, 2.5rem); margin-bottom: 10px; }
+      .stage-label { position: static; margin-bottom: 6px; }
+      .stage-label span { font-size: 1.5rem; writing-mode: horizontal-tb; letter-spacing: .2em; }
+      .fuji { right: -45%; width: 130%; }
+      html:not(.motion) .bloom-stage { display: flex; flex-direction: column; padding: 80px 14px; }
+      html:not(.motion) .tree { height: 420px; margin-top: 0; }
+      .final-grid { text-align: center; }
+      .proverb { display: inline-block; text-align: left; }
+      .final-copy p.lede { margin-inline: auto; }
+      .final-copy .section-kicker { justify-content: center; }
     }
+
     @media (max-width: 620px) {
-      .container { width: min(100% - 22px, 1180px); }
+      .container { width: min(100% - 24px, 1180px); }
       .site-header { top: 9px; width: calc(100% - 18px); }
       .header-inner { min-height: 58px; padding-left: 13px; }
-      .brand span:last-child { font-size: .92rem; }
       .header-cta { display: none; }
-      .hero { min-height: auto; padding: 112px 0 58px; }
-      .hero h1 { font-size: clamp(4rem, 20vw, 5.3rem); }
-      .hero-quote { font-size: 1rem; }
-      .hero-actions > * { width: 100%; }
-      .portrait { min-height: 540px; }
+      .hero h1 { font-size: clamp(3.6rem, 19vw, 5rem); }
+      .hero-actions > * { flex: 1 1 100%; }
+      .portrait { min-height: clamp(460px, 140vw, 540px); }
       .portrait-frame { inset: 15px 0 0; border-radius: 45% 45% 24px 24px; }
-      .portrait-index { top: 35px; left: 8px; font-size: 3.4rem; }
-      .portrait-seal { right: 4px; bottom: 25px; width: 72px; height: 72px; font-size: .82rem; }
-      .torii { inset: 58px 8px 27px; }
-      .torii-pillar { width: 29px; }
-      .torii-plaque { width: 49px; height: 64px; font-size: .75rem; }
+      .portrait-index { top: 35px; left: 8px; font-size: 3.2rem; }
+      .portrait-seal { right: 4px; bottom: 25px; width: 70px; height: 70px; font-size: .8rem; }
+      .torii { inset: 54px 2% 14px; width: 96%; height: calc(100% - 68px); }
       .hero-footnote { right: 8px; }
-      .ribbon-track { justify-content: flex-start; padding-inline: 18px; overflow-x: hidden; }
-      .story,
-      .profile,
-      .gallery,
-      .supports { padding: 82px 0; }
+      .ribbon-track { justify-content: flex-start; padding-inline: 18px; }
+      .story, .profile, .gallery, .supports { padding: 80px 0; }
       .story-grid { gap: 42px; }
       .note-visual { min-height: 500px; }
       .note-photo { inset: 10px 26px 50px 0; }
-      .note-card { right: 0; width: min(270px, 78%); padding: 22px; }
+      .note-card { width: min(270px, 80%); padding: 22px; }
       .note-card blockquote { font-size: .96rem; }
       .identity-top { grid-template-columns: 1fr; }
-      .identity-name { min-height: 260px; }
-      .core-stat { min-height: 125px; padding: 21px; }
-      .profile-quote { padding: 25px; }
+      .identity-name { min-height: 240px; }
+      .core-stat { min-height: 120px; padding: 20px; }
+      .profile-quote { padding: 24px; }
       .voice-card { grid-template-columns: 110px 1fr; }
       .voice-copy { padding: 20px; }
       .detail-list { grid-template-columns: 1fr; }
-      .gallery-stage { min-height: auto; }
-      .gallery-feature { min-height: 500px; }
-      .gallery-rail { grid-template-columns: 1fr; grid-template-rows: repeat(2, 420px); }
+      .gallery-feature img { padding: 20px 16px 0; }
       .support-grid { grid-template-columns: 1fr; }
       .support-image { aspect-ratio: 1.2 / 1; }
-      .final { padding: 95px 0; }
+      .final { padding: 90px 0; }
+      .kakejiku { --kh: 380px; width: 180px; }
+      .kake-text { font-size: 2.1rem; }
       .footer-inner { flex-direction: column; text-align: center; }
+      .beat h3 { font-size: 1.3rem; }
+      .beat p { font-size: .92rem; }
     }
+
     @media (max-width: 390px) {
-      .brand-mark { display: none; }
-      .hero h1 { font-size: 3.7rem; }
-      .portrait { min-height: 500px; }
+      .hero h1 { font-size: 3.4rem; }
       .core-stats { grid-template-columns: 1fr; }
       .core-stat:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--line); }
       .core-stat:last-child { border-bottom: 0; }
       .voice-card { grid-template-columns: 1fr; }
-      .voice-image { min-height: 230px; }
-      .gallery-feature { min-height: 430px; }
-      .gallery-rail { grid-template-rows: repeat(2, 350px); }
+      .voice-image { min-height: 220px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
       #petalCanvas { display: none; }
     }
   </style>
@@ -689,71 +464,120 @@
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <header class="site-header" aria-label="Navegação principal">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="sakura" viewBox="-20 -20 40 40">
+        <g fill="currentColor">
+          <path id="petal" d="M0 -2C-6 -5 -8 -13 -3.5 -17.5L0 -14.5 3.5 -17.5C8 -13 6 -5 0 -2Z"/>
+          <use href="#petal" transform="rotate(72)"/>
+          <use href="#petal" transform="rotate(144)"/>
+          <use href="#petal" transform="rotate(216)"/>
+          <use href="#petal" transform="rotate(288)"/>
+        </g>
+        <circle r="3.2" fill="#c9a35f"/>
+      </symbol>
+      <symbol id="petalShape" viewBox="-12 -12 24 24"><path fill="currentColor" d="M0 -10C7 -8 9 2 0 10C-9 2 -7 -8 0 -10Z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a class="brand" href="#inicio" aria-label="Sakura Chiyono O — início">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <svg aria-hidden="true"><use href="#sakura"/></svg>
         <span>Chiyono O</span>
       </a>
-
       <nav class="main-nav" aria-label="Seções">
         <a href="#historia">Essência</a>
+        <a href="#florescer">Florescer</a>
         <a href="#perfil">Perfil</a>
         <a href="#galeria">Visuais</a>
         <a href="#supports">Cards</a>
       </nav>
-
       <div class="header-actions">
-        <a class="header-cta" href="#perfil">Conhecer Chiyo</a>
-        <div class="page-switcher" data-page-switcher>
-          <button class="page-switcher-toggle" type="button" aria-label="Abrir menu de personagens" aria-expanded="false" aria-controls="chiyoPageSwitcher">
-            <span class="page-switcher-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        <a class="header-cta" href="#florescer">Ver florescer</a>
+        <div class="switcher" data-switcher>
+          <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
+            <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <div class="page-switcher-menu" id="chiyoPageSwitcher" role="menu">
-            <span class="page-switcher-label">Trocar personagem</span>
-            <a href="index.html" role="menuitem">Mejiro Dober</a>
-            <a href="machan.html" role="menuitem">Aston Machan</a>
-            <a href="vivlos.html" role="menuitem">Vivlos</a>
-            <a href="chiyo.html" role="menuitem" aria-current="page">Sakura Chiyono O <small>Atual</small></a>
-          </div>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
+            <p class="switcher-label">Trocar personagem</p>
+            <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
+            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
+            <a href="chiyo.html" style="--c:#f9879d" aria-current="page">Sakura Chiyono O <small>Atual</small></a>
+            <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
+            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
+          </nav>
         </div>
       </div>
+    </div>
+    <div class="bloom-bar" data-scroll="page" aria-hidden="true">
+      <span class="bloom-branch"></span>
+      <svg class="bloom" style="--t:.02;left:4%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.18;left:20%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.34;left:36%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.5;left:52%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.66;left:68%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.82;left:84%"><use href="#sakura"/></svg>
+      <svg class="bloom" style="--t:.94;left:98%"><use href="#sakura"/></svg>
     </div>
   </header>
 
   <main id="conteudo">
-    <section class="hero" id="inicio" aria-labelledby="heroTitle">
+    <section class="hero" id="inicio" data-scroll="exit" aria-labelledby="heroTitle">
       <canvas id="petalCanvas" aria-hidden="true"></canvas>
       <div class="container hero-layout">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">The blossoming disciple · Tracen Academy</p>
-          <h1 id="heroTitle">Sakura <span>Chiyono O</span></h1>
-          <p class="hero-jp" id="heroJapaneseName">サクラチヨノオー</p>
-          <blockquote class="hero-quote">“Dedicação acima de tudo — é justamente na primavera que os botões de cerejeira florescem.”</blockquote>
-          <div class="specialties" aria-label="Especialidades de corrida">
-            <span>Grama</span><span>Milha</span><span>Média distância</span><span>Senko</span>
+        <div class="hero-copy">
+          <div data-reveal>
+            <p class="eyebrow">The blossoming disciple · Tracen Academy</p>
+            <h1 id="heroTitle">Sakura <span>Chiyono O</span></h1>
+            <p class="hero-jp jp" data-field="nameJp">サクラチヨノオー</p>
+            <blockquote class="hero-quote">“Dedicação acima de tudo — é justamente na primavera que os botões de cerejeira florescem.”</blockquote>
+            <div class="specialties" aria-label="Especialidades de corrida">
+              <span>Grama</span><span>Milha</span><span>Média distância</span><span>Senko</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#historia">Ver sua história <span class="button-arrow" aria-hidden="true">→</span></a>
+              <a class="button button-quiet" href="#galeria">Explorar visuais</a>
+            </div>
+            <p class="api-line"><span class="api-dot" id="apiDot" aria-hidden="true"></span><span id="apiStatus" role="status">Preparando o arquivo Sakura…</span></p>
           </div>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#historia">Ver sua história <span class="button-arrow" aria-hidden="true">→</span></a>
-            <a class="button button-quiet" href="#galeria">Explorar visuais</a>
-          </div>
-          <p class="api-line"><span class="api-dot" id="apiDot" aria-hidden="true"></span><span id="apiStatus" role="status" aria-live="polite">Preparando o arquivo Sakura…</span></p>
         </div>
 
-        <div class="portrait reveal">
+        <div class="portrait">
           <div class="portrait-frame">
             <span class="portrait-halo" aria-hidden="true"></span>
-            <div class="portrait-fallback" id="heroFallback" aria-hidden="true">
-              <div class="torii">
-                <span class="torii-cap"></span>
-                <span class="torii-beam"></span>
-                <span class="torii-nuki"></span>
-                <span class="torii-pillar left"></span>
-                <span class="torii-pillar right"></span>
-                <span class="torii-plaque">桜<br>門</span>
-              </div>
-            </div>
-            <img class="hero-image" id="heroImage" alt="Sakura Chiyono O em seu traje de corrida" decoding="async" referrerpolicy="no-referrer">
+            <svg class="torii" viewBox="0 0 400 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="toriiPillar" x1="0" x2="1"><stop offset="0" stop-color="#b3324d"/><stop offset=".42" stop-color="#f27d91"/><stop offset=".62" stop-color="#e5647c"/><stop offset="1" stop-color="#b8364f"/></linearGradient>
+                <linearGradient id="toriiBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f68a9d"/><stop offset="1" stop-color="#c9445f"/></linearGradient>
+              </defs>
+              <ellipse cx="113" cy="408" rx="44" ry="6" fill="#8d3a52" opacity=".16"/>
+              <ellipse cx="287" cy="408" rx="44" ry="6" fill="#8d3a52" opacity=".16"/>
+              <path fill="url(#toriiPillar)" d="M100 66h26l6 326H94z"/>
+              <path fill="url(#toriiPillar)" d="M274 66h26l6 326h-38z"/>
+              <rect x="88" y="380" width="50" height="26" rx="4" fill="#3b2428"/>
+              <rect x="262" y="380" width="50" height="26" rx="4" fill="#3b2428"/>
+              <rect x="88" y="380" width="50" height="4" rx="2" fill="#c9a35f"/>
+              <rect x="262" y="380" width="50" height="4" rx="2" fill="#c9a35f"/>
+              <rect x="95" y="66" width="36" height="10" rx="2" fill="#a52f48"/>
+              <rect x="269" y="66" width="36" height="10" rx="2" fill="#a52f48"/>
+              <rect x="50" y="132" width="300" height="19" rx="3" fill="url(#toriiBeam)"/>
+              <rect x="50" y="146" width="300" height="5" rx="2" fill="#9e2c45" opacity=".45"/>
+              <rect x="56" y="52" width="288" height="16" fill="#c43f5a"/>
+              <rect x="192" y="68" width="16" height="64" fill="#c43f5a"/>
+              <path fill="url(#toriiBeam)" d="M8 30C60 42 120 44 200 44S340 42 392 30l-6 24c-46 6-106 8-186 8S60 60 14 54z"/>
+              <path fill="#34201f" d="M0 18C58 33 120 36 200 36S342 33 400 18l-7 16c-53 10-113 12-193 12S60 44 7 34z"/>
+              <rect x="174" y="72" width="52" height="58" rx="3" fill="#3b2428" stroke="#e7cf98" stroke-width="3"/>
+              <text x="200" y="97" fill="#f3dfae" font-family="Noto Serif JP, serif" font-size="17" font-weight="700" text-anchor="middle">桜</text>
+              <text x="200" y="120" fill="#f3dfae" font-family="Noto Serif JP, serif" font-size="17" font-weight="700" text-anchor="middle">門</text>
+              <path d="M132 156C172 184 228 184 268 156" fill="none" stroke="#ead6a6" stroke-width="9" stroke-linecap="round"/>
+              <path d="M132 156C172 184 228 184 268 156" fill="none" stroke="#b89250" stroke-width="9" stroke-dasharray="3 6" opacity=".55"/>
+              <path class="shide" fill="#fffdf8" stroke="#d9c7c9" stroke-width=".8" d="M150 165h9l4 10h-6l4 10h-6l4 10h-9l-3-10h5l-4-10h5z"/>
+              <path class="shide" fill="#fffdf8" stroke="#d9c7c9" stroke-width=".8" d="M180 174h9l4 10h-6l4 10h-6l4 10h-9l-3-10h5l-4-10h5z"/>
+              <path class="shide" fill="#fffdf8" stroke="#d9c7c9" stroke-width=".8" d="M213 174h9l4 10h-6l4 10h-6l4 10h-9l-3-10h5l-4-10h5z"/>
+              <path class="shide" fill="#fffdf8" stroke="#d9c7c9" stroke-width=".8" d="M243 165h9l4 10h-6l4 10h-6l4 10h-9l-3-10h5l-4-10h5z"/>
+            </svg>
+            <img class="hero-image" id="heroImage" alt="Sakura Chiyono O em seu traje de corrida" fetchpriority="high" decoding="async" referrerpolicy="no-referrer">
           </div>
           <div class="portrait-index">02<small>Spring study</small></div>
           <div class="portrait-seal" aria-hidden="true">桜<br>千代</div>
@@ -770,10 +594,10 @@
 
     <section class="story" id="historia" aria-labelledby="storyTitle">
       <div class="container story-grid">
-        <div class="note-visual reveal">
+        <div class="note-visual" data-scroll="enter">
           <figure class="note-photo">
             <div class="image-fallback">Um novo visual florescerá aqui.</div>
-            <img id="storyImage" alt="Visual de uniforme de Sakura Chiyono O" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <img id="storyImage" alt="Sakura Chiyono O de uniforme" loading="lazy" decoding="async" referrerpolicy="no-referrer">
           </figure>
           <aside class="note-card" aria-label="Página do Chiyo Note">
             <span class="note-stamp" aria-hidden="true">努力</span>
@@ -781,31 +605,80 @@
           </aside>
         </div>
 
-        <div class="story-copy reveal">
+        <div class="story-copy" data-reveal>
           <p class="section-kicker">Chiyo Note · capítulo um</p>
           <h2 class="section-title" id="storyTitle">Gentil na voz.<br><em>Firme no passo.</em></h2>
           <p class="section-intro">Sakura Chiyono O transforma cada descoberta em um provérbio e cada admiração em impulso. Seu objetivo é simples de dizer e difícil de alcançar: tornar-se forte o bastante para dividir o palco ideal com quem mais inspira sua corrida.</p>
-          <div class="story-points">
-            <article class="story-point">
-              <span class="story-number">01</span>
-              <div><h3>Esforço que cria raízes</h3><p>Organizada e sincera, ela cresce por meio da repetição paciente — sempre um pouco melhor que ontem.</p></div>
-            </article>
-            <article class="story-point">
-              <span class="story-number">02</span>
-              <div><h3>Admiração em movimento</h3><p>Seu respeito por Maruzensky não a paralisa; ele dá direção ao sonho que Chiyo escolheu perseguir.</p></div>
-            </article>
-            <article class="story-point">
-              <span class="story-number">03</span>
-              <div><h3>Sentimentos sem atalhos</h3><p>Polida, emotiva e transparente, ela mostra que delicadeza e determinação podem correr lado a lado.</p></div>
-            </article>
-          </div>
+          <p class="profile-line"><small>Apresentação oficial</small><span data-field="profile">Eu sou a S-Sakura Chiyono O! Vou fazer florescer o meu sonho de estar no palco ideal ao lado da pessoa que eu admiro!</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloom-scene scene" id="florescer" data-scroll="sticky" data-steps="3" aria-labelledby="bloomTitle">
+      <div class="scene-stage bloom-stage" id="bloomStage">
+        <div class="bloom-haze" aria-hidden="true"></div>
+        <svg class="fuji" viewBox="0 0 900 360" aria-hidden="true">
+          <circle class="sun" cx="560" cy="120" r="52"/>
+          <path class="mountain" d="M0 360 280 118c16-14 36-14 52 0l310 242z"/>
+          <path class="snow" d="M258 137 280 118c16-14 36-14 52 0l24 20-22 14-16-12-18 16-14-14-20 12z"/>
+        </svg>
+        <div class="ground" aria-hidden="true"></div>
+
+        <div class="bloom-copy">
+          <div class="stage-label" aria-hidden="true"><span>蕾</span><span>開花</span><span>満開</span></div>
+          <p class="section-kicker">Previsão de sakura</p>
+          <h2 id="bloomTitle">Florescer é <em style="color:var(--sakura-deep);font-style:normal">continuar.</em></h2>
+          <ol class="beats">
+            <li class="beat">
+              <span class="beat-no">01</span><span class="beat-term">Tsubomi · botão</span>
+              <h3>Esforço que cria raízes</h3>
+              <p>Organizada e sincera, ela cresce por meio da repetição paciente — sempre um pouco melhor que ontem.</p>
+            </li>
+            <li class="beat">
+              <span class="beat-no">02</span><span class="beat-term">Kaika · primeira flor</span>
+              <h3>Admiração em movimento</h3>
+              <p>Seu respeito por Maruzensky não a paralisa; ele dá direção ao sonho que Chiyo escolheu perseguir.</p>
+            </li>
+            <li class="beat">
+              <span class="beat-no">03</span><span class="beat-term">Mankai · florada plena</span>
+              <h3>Sentimentos sem atalhos</h3>
+              <p>Polida, emotiva e transparente, ela mostra que delicadeza e determinação podem correr lado a lado.</p>
+            </li>
+          </ol>
+          <div class="bloom-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="tree" aria-hidden="true">
+          <svg viewBox="0 0 420 470">
+            <defs>
+              <linearGradient id="barkGrad" x1="0" x2="1"><stop offset="0" stop-color="#5a3a40"/><stop offset=".45" stop-color="#7d555b"/><stop offset="1" stop-color="#4f3237"/></linearGradient>
+            </defs>
+            <ellipse class="tree-shadow" cx="212" cy="466" rx="170" ry="11"/>
+            <g id="canopyBack"></g>
+            <path class="trunk" d="M178 470c14-10 20-30 21-58 2-38-4-64-1-96 1-12 3-22 4-30h22c1 8 3 18 4 30 3 32-3 58-1 96 1 28 7 48 21 58z"/>
+            <path class="branches" id="branches"/>
+            <path class="bark-lines" d="M204 452c3-30 0-60 2-96M216 440c1-26-2-52 1-84M209 330c0-14 1-24 2-34"/>
+            <path class="lenticels" d="M196 430h10M212 412h9M199 388h12M214 366h8M202 344h9M211 318h8"/>
+            <g id="canopyFront"></g>
+            <g class="fallen" id="fallen"></g>
+          </svg>
+        </div>
+
+        <div class="scene-petals" aria-hidden="true">
+          <span style="left:8%;animation-duration:9s;animation-delay:-1s;--drift:-80px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:22%;animation-duration:12s;animation-delay:-6s;--drift:-140px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:38%;animation-duration:10s;animation-delay:-3s;--drift:-60px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:55%;animation-duration:13s;animation-delay:-9s;--drift:-160px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:70%;animation-duration:9.5s;animation-delay:-4s;--drift:-100px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:86%;animation-duration:11s;animation-delay:-7s;--drift:-130px"><svg><use href="#petalShape"/></svg></span>
+          <span style="left:95%;animation-duration:14s;animation-delay:-2s;--drift:-180px"><svg><use href="#petalShape"/></svg></span>
         </div>
       </div>
     </section>
 
     <section class="profile" id="perfil" aria-labelledby="profileTitle">
       <div class="container">
-        <header class="profile-head reveal">
+        <header class="profile-head" data-reveal>
           <div>
             <p class="section-kicker">Umapyoi profile · ID 5509</p>
             <h2 class="section-title" id="profileTitle">Em plena<br><em>floração.</em></h2>
@@ -814,90 +687,116 @@
         </header>
 
         <div class="profile-grid">
-          <article class="identity-card reveal">
+          <article class="identity-card" data-reveal>
             <div class="identity-top">
               <div class="identity-name">
                 <p>Character archive / 5509</p>
-                <h3 id="characterName">Sakura Chiyono O</h3>
-                <span id="japaneseName">サクラチヨノオー</span>
+                <h3 data-field="name">Sakura Chiyono O</h3>
+                <span class="jp" data-field="nameJp">サクラチヨノオー</span>
               </div>
               <div class="core-stats">
-                <div class="core-stat"><small>Aniversário</small><strong id="birthday">19 de fevereiro</strong></div>
-                <div class="core-stat"><small>Altura</small><strong id="height">156 cm</strong></div>
-                <div class="core-stat"><small>Medidas</small><strong id="measurements">B80 · W55 · H83</strong></div>
-                <div class="core-stat"><small>Categoria</small><strong id="category">Umamusume</strong></div>
+                <div class="core-stat"><small>Aniversário</small><strong data-field="birthday">19 de fevereiro</strong></div>
+                <div class="core-stat"><small>Altura</small><strong data-field="height">156 cm</strong></div>
+                <div class="core-stat"><small>Medidas</small><strong data-field="sizes">B80 · W55 · H83</strong></div>
+                <div class="core-stat"><small>Categoria</small><strong data-field="category">Umamusume</strong></div>
               </div>
             </div>
             <div class="profile-quote">
               <small>Slogan oficial</small>
-              <p id="slogan">Persiga seus sonhos! Uma garota honesta e esforçada!</p>
+              <p data-field="slogan">Persiga seus sonhos! Uma garota honesta e esforçada!</p>
             </div>
           </article>
 
-          <div class="profile-side reveal">
+          <div class="profile-side" data-reveal style="--d:.1s">
             <article class="voice-card">
               <div class="voice-image" id="voiceImageWrap">
-                <div class="image-fallback">声</div>
-                <img id="voiceImage" alt="Retrato da dubladora de Sakura Chiyono O" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <span class="fallback" aria-hidden="true">声</span>
+                <img id="voiceImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" hidden>
               </div>
               <div class="voice-copy">
                 <small>Character voice</small>
-                <h3 id="voiceActor">Ruriko Noguchi</h3>
-                <p id="voiceActorJp">野口瑠璃子</p>
+                <h3 data-field="voice">Ruriko Noguchi</h3>
+                <p class="jp" data-field="voiceJp">野口瑠璃子</p>
               </div>
             </article>
 
             <div class="detail-list">
-              <div class="detail-item"><small>Série</small><strong id="grade">Ensino médio</strong></div>
-              <div class="detail-item"><small>Dormitório</small><strong id="residence">Dormitório Miho</strong></div>
-              <div class="detail-item"><small>Peso</small><strong id="weight">Pequena redução</strong></div>
-              <div class="detail-item"><small>Calçado</small><strong id="shoeSize">22,0 cm</strong></div>
-              <div class="detail-item"><small>Talentos</small><strong id="strengths">Doces japoneses e organização</strong></div>
-              <div class="detail-item"><small>Desafio</small><strong id="weaknesses">Enjoo em carros e aviões</strong></div>
+              <div class="detail-item"><small>Série</small><strong data-field="grade">Ensino Médio</strong></div>
+              <div class="detail-item"><small>Dormitório</small><strong data-field="residence">Dormitório Miho</strong></div>
+              <div class="detail-item"><small>Peso</small><strong data-field="weight">Leve redução</strong></div>
+              <div class="detail-item"><small>Calçado</small><strong data-field="shoe">22,0 cm</strong></div>
+              <div class="detail-item"><small>Talentos</small><strong data-field="strengths">Fazer doces japoneses e organização</strong></div>
+              <div class="detail-item"><small>Desafio</small><strong data-field="weaknesses">Carros e aviões (enjoa com facilidade)</strong></div>
             </div>
           </div>
         </div>
 
         <div class="lore-grid">
-          <article class="lore-card reveal" data-mark="耳"><small>Detalhe 01</small><h3>Ouvidos</h3><p id="earsFact">Eles formigam quando ela pensa em um bom provérbio.</p></article>
-          <article class="lore-card reveal" data-mark="尾"><small>Detalhe 02</small><h3>Cauda</h3><p id="tailFact">Cuidada com o mesmo óleo que Maruzensky usa.</p></article>
-          <article class="lore-card reveal" data-mark="家"><small>Detalhe 03</small><h3>Família</h3><p id="familyFact">O jantar costumava ser uma refeição compartilhada com toda a família.</p></article>
+          <article class="lore-card" data-reveal data-mark="耳"><small>Detalhe 01</small><h3>Orelhas</h3><p data-field="ears">Elas formigam quando ela pensa em um bom provérbio.</p></article>
+          <article class="lore-card" data-reveal data-mark="尾"><small>Detalhe 02</small><h3>Cauda</h3><p data-field="tail">Cuidada com o mesmo óleo que a Maruzensky usa.</p></article>
+          <article class="lore-card" data-reveal data-mark="家"><small>Detalhe 03</small><h3>Família</h3><p data-field="family">O jantar em família costumava ser no estilo “cada um traz um prato”.</p></article>
         </div>
       </div>
     </section>
 
     <section class="gallery" id="galeria" aria-labelledby="galleryTitle">
       <div class="container">
-        <header class="gallery-head reveal">
+        <header class="gallery-head" data-reveal>
           <div>
             <p class="section-kicker">Visual archive</p>
             <h2 class="section-title" id="galleryTitle">Quatro formas<br>de <em>florescer.</em></h2>
           </div>
-          <div class="gallery-tabs" id="galleryTabs" role="tablist" aria-label="Coleções visuais"></div>
+          <div class="gallery-tabs" id="galleryTabs" role="group" aria-label="Coleções visuais"></div>
         </header>
-        <div class="gallery-stage reveal" id="galleryStage" aria-live="polite"></div>
+        <div class="gallery-stage" data-reveal>
+          <div class="gallery-info">
+            <div>
+              <p class="gallery-no"><span id="galleryNo">01</span><small> / <span id="galleryTotal">04</span></small></p>
+              <h3 id="galleryLabel">Uniforme</h3>
+              <p class="gallery-jp jp" id="galleryJp">制服</p>
+            </div>
+            <p class="gallery-text" id="galleryText">O uniforme da Tracen, companheiro das aulas, dos treinos e de cada página do Chiyo Note.</p>
+          </div>
+          <figure class="gallery-feature" id="galleryFeature" aria-live="polite">
+            <div class="image-fallback">Este visual está temporariamente indisponível.</div>
+            <img id="galleryImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <figcaption id="galleryCaption">Uniforme</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
     <section class="supports" id="supports" aria-labelledby="supportTitle">
       <div class="container">
-        <header class="support-head reveal">
+        <header class="support-head" data-reveal>
           <div>
             <p class="section-kicker">Support collection</p>
             <h2 class="section-title" id="supportTitle">Memórias em<br><em>cada card.</em></h2>
           </div>
           <p class="support-note">Uma coleção dinâmica ligada ao arquivo da personagem. Cada peça abre seus detalhes completos no GameTora.</p>
         </header>
-        <div class="support-grid" id="supportGrid"></div>
+        <div class="support-grid" id="supportGrid" data-reveal></div>
       </div>
     </section>
 
-    <section class="final" aria-labelledby="finalTitle">
-      <div class="container final-inner reveal">
-        <p class="section-kicker">One day, in full bloom</p>
-        <h2 id="finalTitle">Continuar também é florescer.</h2>
-        <p>Para Sakura Chiyono O, o palco ideal começa muito antes da corrida: em cada anotação, cada treino e cada pequeno passo tratado com carinho.</p>
-        <a class="button" href="#inicio">Voltar ao começo <span class="button-arrow" aria-hidden="true">↑</span></a>
+    <section class="final" id="kakejiku" aria-labelledby="finalTitle">
+      <div class="container final-grid">
+        <div class="kakejiku" data-scroll="enter" aria-hidden="true">
+          <span class="kake-cord"></span>
+          <span class="kake-rod top"></span>
+          <div class="kake-paper"><div class="kake-art"><p class="kake-text">継続は力なり</p><span class="kake-seal">千代</span></div></div>
+          <span class="kake-rod bottom"></span>
+        </div>
+        <div class="final-copy" data-reveal>
+          <p class="section-kicker">One day, in full bloom</p>
+          <h2 id="finalTitle">Continuar também é florescer.</h2>
+          <div class="proverb">
+            <strong lang="ja">継続は力なり</strong>
+            <span>“Keizoku wa chikara nari” — é a persistência que nos dá força.</span>
+          </div>
+          <p class="lede">Para Sakura Chiyono O, o palco ideal começa muito antes da corrida: em cada anotação, cada treino e cada pequeno passo tratado com carinho.</p>
+          <a class="button" href="#inicio">Voltar ao começo <span class="button-arrow" aria-hidden="true">↑</span></a>
+        </div>
       </div>
     </section>
   </main>
@@ -905,567 +804,379 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>Fan page não oficial · Umamusume: Pretty Derby</p>
-      <p>Dados: <a href="https://umapyoi.net" target="_blank" rel="noopener noreferrer">Umapyoi API</a> · Cards: GameTora</p>
+      <p>Dados: <a href="https://umapyoi.net" target="_blank" rel="noopener noreferrer">Umapyoi API</a> · Cards: GameTora · Umamusume © Cygames</p>
     </div>
   </footer>
 
+  <script src="assets/uma-core.js"></script>
   <script>
     (() => {
       "use strict";
 
-      const API_BASE = "https://umapyoi.net/api/v1";
       const CHARACTER_ID = 5509;
       const GAME_ID = 1069;
+      const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
       const $ = selector => document.querySelector(selector);
-      const $$ = selector => [...document.querySelectorAll(selector)];
 
-      const fallbackCharacter = {
-        id: 5509,
-        game_id: 1069,
-        name_en: "Sakura Chiyono O",
-        name_jp: "サクラチヨノオー",
-        birth_day: 19,
-        birth_month: 2,
-        height: 156,
-        size_b: 80,
-        size_w: 55,
-        size_h: 83,
-        category_label_en: "Umamusume",
-        slogan: "Chase your dreams! An honest and hardworking girl!",
-        profile: "I'm Sakura Chiyono O! I will make my dream of standing on my ideal stage with the person of my dreams blossom!",
-        grade: "High School",
-        residence: "Miho Dorm",
-        weight: "Small decrease",
-        shoe_size: "Both: 22.0cm",
-        strengths: "Making Japanese sweets, organization",
-        weaknesses: "Cars and airplanes (prone to motion sickness)",
-        ears_fact: "When she thinks of a good proverb, her ears tingle.",
-        tail_fact: "Tended to with the same oil that Maruzensky uses.",
-        family_fact: "Dinner was often a potluck with her family."
+      const DICTIONARY = {
+        "Chase your dreams! An honest and hardworking girl!": "Persiga seus sonhos! Uma garota honesta e esforçada!",
+        "I'm S-Sakura Chiyono O! I will make my dream of standing on my ideal stage with the person of my dreams blossom!": "Eu sou a S-Sakura Chiyono O! Vou fazer florescer o meu sonho de estar no palco ideal ao lado da pessoa que eu admiro!",
+        "Making Japanese sweets, organization": "Fazer doces japoneses e organização",
+        "Cars and airplanes (prone to motion sickness)": "Carros e aviões (enjoa com facilidade)",
+        "When she thinks of a good proverb, her ears tingle.": "Elas formigam quando ela pensa em um bom provérbio.",
+        "Tended to with the same oil that Maruzensky uses.": "Cuidada com o mesmo óleo que a Maruzensky usa.",
+        "Dinner was often a potluck with her family.": "O jantar em família costumava ser no estilo “cada um traz um prato”."
       };
 
-      const fallbackVoiceActor = {
-        id: 166,
-        name_en: "Ruriko Noguchi",
-        name_jp: "野口瑠璃子",
-        image: "https://img2.animatetimes.com/2021/12/61b22f037ab24_c8cdf8e922273005e33dac6311182b08.jpg"
+      const FALLBACK_GROUPS = Uma.normalizeGroups([
+        { label: "制服", label_en: "Uniform", images: [{ image: `${ASSETS}/5259ee7844ab4d198d5072f85002c0f0/sakurachiyonoo_01.png` }] },
+        { label: "勝負服", label_en: "Racewear", images: [{ image: `${ASSETS}/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png` }, { image: `${ASSETS}/b5ebcc7f63194925bbc38c9bf55f1a26/sakurachiyonoo_02.png` }] },
+        { label: "原案", label_en: "Concept Art", images: [{ image: `${ASSETS}/5fde5108a58b4aac94e4af8bf61ff8b9/sakurachiyonoo_03.png` }] },
+        { label: "STARTING FUTURE", label_en: "Starting Future", images: [{ image: `${ASSETS}/c2212a0e40f04055839170acc2b8a508/sakurachiyonoo_04.png` }] }
+      ]);
+
+      const FALLBACK_SUPPORTS = Uma.normalizeSupports([
+        { id: 30300, gametora: "30300-sakura-chiyono-o", rarity_string: "SSR", type: "Stamina", start_date: 1778468400, title: "[賑やかな未来を乗せて走れ！]", title_en: null },
+        { id: 30109, gametora: "30109-sakura-chiyono-o", rarity_string: "SSR", type: "Guts", start_date: 1659063600, title: "[チョベリグ心あれば桜心]", title_en: "[A Fab Heart is a Blooming Heart]" },
+        { id: 30038, gametora: "30038-sakura-chiyono-o", rarity_string: "SSR", type: "Stamina", start_date: 1614092400, title: "[今ぞ盛りのさくら花]", title_en: "[Sakura in Full Bloom]" },
+        { id: 10062, gametora: "10062-sakura-chiyono-o", rarity_string: "R", type: "Stamina", start_date: 1614092400, title: "[トレセン学園]", title_en: "[Tracen Academy]" }
+      ]);
+
+      const FALLBACK_VOICE_IMAGE = "https://img2.animatetimes.com/2021/12/61b22f037ab24_c8cdf8e922273005e33dac6311182b08.jpg";
+
+      let groups = FALLBACK_GROUPS;
+      let activeGroup = 0;
+
+      const findGroup = (list, labelEn) => list.find(group => group.labelEn === labelEn) ?? list[0];
+
+      function showPortraits(list) {
+        Uma.setImage($("#heroImage"), findGroup(list, "Racewear")?.images ?? [], {
+          widths: [480, 720, 960],
+          sizes: "(max-width: 860px) 90vw, 46vw"
+        });
+        Uma.setImage($("#storyImage"), findGroup(list, "Uniform")?.images ?? [], {
+          widths: [480, 720],
+          sizes: "(max-width: 860px) 80vw, 420px",
+          onFail: () => $(".note-photo").classList.add("has-image-error")
+        });
+      }
+
+      /* ----------------------------------------------------------- galeria */
+      // Uma imagem por visual, como nas outras páginas.
+      const GALLERY_TEXT = {
+        "Uniform": "O uniforme da Tracen, companheiro das aulas, dos treinos e de cada página do Chiyo Note.",
+        "Racewear": "O traje de corrida: mangas estampadas de sakura e um laço marcante, feito para florescer na pista.",
+        "Concept Art": "A arte original — o primeiro botão, antes de a personagem desabrochar no jogo.",
+        "Starting Future": "O figurino de palco de Starting Future, onde sonhos são divididos com quem se admira."
       };
 
-      const fallbackImageGroups = [
-        {
-          label: "Uniforme",
-          images: [
-            "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5259ee7844ab4d198d5072f85002c0f0/sakurachiyonoo_01.png",
-            "https://umamusume.jp/app/wp-content/uploads/2021/01/c2190dfe1bf4df9d8f30b8ab5fa6027e.png"
-          ]
-        },
-        {
-          label: "Traje de corrida",
-          images: [
-            "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png",
-            "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b5ebcc7f63194925bbc38c9bf55f1a26/sakurachiyonoo_02.png"
-          ]
-        },
-        {
-          label: "Arte conceitual",
-          images: [
-            "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5fde5108a58b4aac94e4af8bf61ff8b9/sakurachiyonoo_03.png"
-          ]
-        },
-        {
-          label: "Starting Future",
-          images: [
-            "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c2212a0e40f04055839170acc2b8a508/sakurachiyonoo_04.png"
-          ]
-        }
-      ];
-
-      const fallbackSupports = [
-        { id: 30300, name: "賑やかな未来を乗せて走れ！", rarity: "SSR", type: "Stamina", startDate: 1778468400, slug: "30300-sakura-chiyono-o" },
-        { id: 30109, name: "A Fab Heart is a Blooming Heart", rarity: "SSR", type: "Guts", startDate: 1659063600, slug: "30109-sakura-chiyono-o" },
-        { id: 30038, name: "Sakura in Full Bloom", rarity: "SSR", type: "Stamina", startDate: 1614092400, slug: "30038-sakura-chiyono-o" },
-        { id: 10062, name: "Tracen Academy", rarity: "R", type: "Stamina", startDate: 1614092400, slug: "10062-sakura-chiyono-o" }
-      ];
-
-      const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-
-      function firstDefined(object, keys, fallback = "—") {
-        for (const key of keys) {
-          const value = object?.[key];
-          if (value !== undefined && value !== null && value !== "") return value;
-        }
-        return fallback;
-      }
-
-      function normalizeImageUrl(value) {
-        if (value && typeof value === "object") value = firstDefined(value, ["image", "url", "src", "image_url"], "");
-        if (typeof value !== "string") return "";
-        let url = value.trim().replace(/&amp;/g, "&");
-        if (!url) return "";
-        if (url.startsWith("//")) url = `https:${url}`;
-        if (url.startsWith("/")) url = new URL(url, "https://umapyoi.net").href;
-        if (url.startsWith("http://")) url = `https://${url.slice(7)}`;
-        try {
-          const parsed = new URL(url);
-          return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : "";
-        } catch {
-          return "";
-        }
-      }
-
-      function unwrapObject(payload) {
-        let current = payload;
-        const seen = new WeakSet();
-        while (current && typeof current === "object" && !Array.isArray(current)) {
-          if (seen.has(current)) break;
-          seen.add(current);
-          const key = ["data", "result", "character", "payload"].find(candidate => current[candidate] && typeof current[candidate] === "object");
-          if (!key) break;
-          current = current[key];
-        }
-        return current && typeof current === "object" && !Array.isArray(current) ? current : {};
-      }
-
-      function unwrapArray(payload) {
-        if (Array.isArray(payload)) return payload;
-        let current = payload;
-        const seen = new WeakSet();
-        while (current && typeof current === "object" && !Array.isArray(current)) {
-          if (seen.has(current)) break;
-          seen.add(current);
-          const key = ["data", "results", "items", "value", "supports", "cards"].find(candidate => candidate in current);
-          if (!key) break;
-          current = current[key];
-        }
-        return Array.isArray(current) ? current : [];
-      }
-
-      function setResilientImage(image, sources, wrapper) {
-        const queue = [...new Set(sources.map(normalizeImageUrl).filter(Boolean))];
-        let cursor = 0;
-
-        const fail = () => {
-          if (cursor < queue.length) {
-            image.src = queue[cursor++];
-            return;
-          }
-          image.hidden = true;
-          wrapper?.classList.add("has-image-error");
-        };
-
-        image.onload = () => {
-          image.hidden = false;
-          image.classList.add("loaded");
-          wrapper?.classList.remove("has-image-error");
-        };
-        image.onerror = fail;
-        image.referrerPolicy = "no-referrer";
-        fail();
-      }
-
-      async function fetchJson(path, timeout = 9000) {
-        const controller = new AbortController();
-        const timer = window.setTimeout(() => controller.abort(), timeout);
-        try {
-          const response = await fetch(`${API_BASE}/${String(path).replace(/^\/+/, "")}`, {
-            method: "GET",
-            headers: { Accept: "application/json" },
-            credentials: "omit",
-            mode: "cors",
-            referrerPolicy: "no-referrer",
-            signal: controller.signal
-          });
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const text = await response.text();
-          if (!text.trim()) throw new Error("Resposta vazia");
-          return JSON.parse(text);
-        } finally {
-          window.clearTimeout(timer);
-        }
-      }
-
-      function updateCharacter(payload) {
-        const data = { ...fallbackCharacter, ...unwrapObject(payload) };
-        const name = String(firstDefined(data, ["name_en", "name"], fallbackCharacter.name_en)).replace(/\u00a0/g, " ");
-        const nameJp = firstDefined(data, ["name_jp", "name_ja"], fallbackCharacter.name_jp);
-        const height = firstDefined(data, ["height"], fallbackCharacter.height);
-        const bust = firstDefined(data, ["size_b", "bust"], fallbackCharacter.size_b);
-        const waist = firstDefined(data, ["size_w", "waist"], fallbackCharacter.size_w);
-        const hips = firstDefined(data, ["size_h", "hips", "hip"], fallbackCharacter.size_h);
-        const birthdayMonth = Number(firstDefined(data, ["birth_month", "birthday_month"], fallbackCharacter.birth_month));
-        const birthdayDay = firstDefined(data, ["birth_day", "birthday_day"], fallbackCharacter.birth_day);
-
-        $("#characterName").textContent = name;
-        $("#japaneseName").textContent = nameJp;
-        $("#heroJapaneseName").textContent = nameJp;
-        $("#birthday").textContent = `${birthdayDay} de ${monthNames[birthdayMonth - 1] || "fevereiro"}`;
-        $("#height").textContent = String(height).toLowerCase().includes("cm") ? height : `${height} cm`;
-        $("#measurements").textContent = `B${bust} · W${waist} · H${hips}`;
-        $("#category").textContent = firstDefined(data, ["category_label_en", "category_label", "category"], fallbackCharacter.category_label_en);
-        $("#slogan").textContent = firstDefined(data, ["slogan", "catchphrase"], fallbackCharacter.slogan);
-        $("#grade").textContent = firstDefined(data, ["grade", "school_year"], fallbackCharacter.grade);
-        $("#residence").textContent = firstDefined(data, ["residence", "dorm", "dormitory"], fallbackCharacter.residence);
-        $("#weight").textContent = firstDefined(data, ["weight", "weight_change"], fallbackCharacter.weight);
-        $("#shoeSize").textContent = firstDefined(data, ["shoe_size", "shoe", "shoes"], fallbackCharacter.shoe_size);
-        $("#strengths").textContent = firstDefined(data, ["strengths", "strength", "good_at"], fallbackCharacter.strengths);
-        $("#weaknesses").textContent = firstDefined(data, ["weaknesses", "weakness", "bad_at"], fallbackCharacter.weaknesses);
-        $("#earsFact").textContent = firstDefined(data, ["ears_fact", "ear_fact", "ears"], fallbackCharacter.ears_fact);
-        $("#tailFact").textContent = firstDefined(data, ["tail_fact", "tail"], fallbackCharacter.tail_fact);
-        $("#familyFact").textContent = firstDefined(data, ["family_fact", "family"], fallbackCharacter.family_fact);
-        return data;
-      }
-
-      function updateVoiceActor(payload) {
-        const data = { ...fallbackVoiceActor, ...unwrapObject(payload) };
-        $("#voiceActor").textContent = firstDefined(data, ["name_en", "name"], fallbackVoiceActor.name_en);
-        $("#voiceActorJp").textContent = firstDefined(data, ["name_jp", "name_ja"], fallbackVoiceActor.name_jp);
-        setResilientImage($("#voiceImage"), [data.image, fallbackVoiceActor.image], $("#voiceImageWrap"));
-      }
-
-      function normalizeImageGroups(payload) {
-        const groups = unwrapArray(payload).map((group, index) => {
-          const imageItems = unwrapArray(group.images || group.image || []);
-          const images = imageItems.map(item => normalizeImageUrl(item)).filter(Boolean);
-          return {
-            label: String(firstDefined(group, ["label_en", "label", "name"], `Visual ${index + 1}`)).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
-            images: [...new Set(images)]
-          };
-        }).filter(group => group.images.length);
-        return groups.length ? groups : fallbackImageGroups;
-      }
-
-      function createGalleryFigure(className, url, label, index) {
-        const figure = document.createElement("figure");
-        figure.className = className;
-        const fallback = document.createElement("div");
-        fallback.className = "image-fallback";
-        fallback.textContent = "Este visual está temporariamente indisponível.";
-        const image = document.createElement("img");
-        image.alt = `${label} de Sakura Chiyono O${index ? ` · variação ${index + 1}` : ""}`;
-        image.loading = "lazy";
-        image.decoding = "async";
-        const caption = document.createElement("figcaption");
-        caption.textContent = index ? `${label} · ${String(index + 1).padStart(2, "0")}` : label;
-        figure.append(fallback, image, caption);
-        setResilientImage(image, [url], figure);
-        return figure;
-      }
-
-      let imageGroups = fallbackImageGroups;
-      function renderGallery(activeIndex = 0) {
-        const tabs = $("#galleryTabs");
-        const stage = $("#galleryStage");
-        tabs.innerHTML = "";
-        stage.innerHTML = "";
-
-        imageGroups.forEach((group, index) => {
-          const button = document.createElement("button");
+      function renderGallery(index = activeGroup) {
+        activeGroup = index;
+        $("#galleryTabs").replaceChildren(...groups.map((group, groupIndex) => {
+          const button = Uma.el("button", "", group.label);
           button.type = "button";
-          button.role = "tab";
-          button.className = index === activeIndex ? "active" : "";
-          button.setAttribute("aria-selected", String(index === activeIndex));
-          button.textContent = group.label;
-          button.addEventListener("click", () => renderGallery(index));
-          tabs.appendChild(button);
-        });
+          button.setAttribute("aria-pressed", String(groupIndex === index));
+          button.addEventListener("click", () => renderGallery(groupIndex));
+          return button;
+        }));
 
-        const group = imageGroups[activeIndex];
-        if (!group?.images?.length) {
-          const empty = document.createElement("div");
-          empty.className = "gallery-empty";
-          empty.textContent = "A galeria está temporariamente indisponível.";
-          stage.appendChild(empty);
-          return;
-        }
+        const group = groups[index];
+        if (!group) return;
+        $("#galleryNo").textContent = String(index + 1).padStart(2, "0");
+        $("#galleryTotal").textContent = String(groups.length).padStart(2, "0");
+        $("#galleryLabel").textContent = group.label;
+        $("#galleryJp").textContent = group.labelJp || group.labelEn;
+        $("#galleryText").textContent = GALLERY_TEXT[group.labelEn] || "Um visual oficial do arquivo da Umapyoi.";
+        $("#galleryCaption").textContent = group.label;
 
-        stage.appendChild(createGalleryFigure("gallery-feature", group.images[0], group.label, 0));
-        const rail = document.createElement("div");
-        rail.className = "gallery-rail";
-        const secondary = group.images.slice(1, 3);
-        const visualFallbacks = imageGroups.filter(item => item !== group).flatMap(item => item.images).slice(0, 2 - secondary.length);
-        [...secondary, ...visualFallbacks].slice(0, 2).forEach((url, index) => rail.appendChild(createGalleryFigure("gallery-small", url, group.label, index + 1)));
-        if (!rail.children.length) rail.appendChild(createGalleryFigure("gallery-small", group.images[0], group.label, 1));
-        stage.appendChild(rail);
-      }
-
-      function normalizeSupportCards(payload) {
-        const cards = unwrapArray(payload);
-        if (!cards.length) return fallbackSupports;
-        return cards.map((card, index) => {
-          const id = Number(firstDefined(card, ["id", "support_id"], fallbackSupports[index]?.id || 0));
-          const fallback = fallbackSupports.find(item => item.id === id) || fallbackSupports[index] || {};
-          const rarityNumber = Number(firstDefined(card, ["rarity"], 0));
-          const rawTitle = firstDefined(card, ["title_en", "name_en", "title", "name"], fallback.name || "Support Card");
-          return {
-            id,
-            name: String(rawTitle).replace(/^\[|\]$/g, "").trim(),
-            rarity: String(firstDefined(card, ["rarity_string"], ({ 3: "SSR", 2: "SR", 1: "R" }[rarityNumber] || fallback.rarity || "R"))).toUpperCase(),
-            type: firstDefined(card, ["type", "type_name", "attribute"], fallback.type || "Support"),
-            startDate: firstDefined(card, ["start_date", "release_date", "date"], fallback.startDate),
-            slug: firstDefined(card, ["gametora", "gametora_id"], fallback.slug || `${id}-sakura-chiyono-o`),
-            image: normalizeImageUrl(firstDefined(card, ["image", "image_url", "card_image"], "")) || `https://media.gametora.com/umamusume/supports/full/small/${id}.png`
-          };
+        const figure = $("#galleryFeature");
+        const image = $("#galleryImage");
+        figure.classList.remove("has-image-error");
+        image.alt = `Sakura Chiyono O — ${group.label}`;
+        image.classList.remove("is-loaded");
+        Uma.setImage(image, group.images, {
+          widths: [480, 720, 960],
+          sizes: "(max-width: 860px) 92vw, 56vw",
+          onFail: () => figure.classList.add("has-image-error")
         });
       }
 
-      function formatDate(value) {
-        const number = Number(value);
-        const date = Number.isFinite(number) && number > 0 ? new Date(number < 1e12 ? number * 1000 : number) : new Date(value);
-        if (Number.isNaN(date.getTime())) return "Arquivo";
-        return new Intl.DateTimeFormat("pt-BR", { month: "short", year: "numeric" }).format(date).replace(" de ", " ");
-      }
-
-      function renderSupportCards(cards) {
-        const grid = $("#supportGrid");
-        grid.innerHTML = "";
-        if (!cards.length) {
-          const empty = document.createElement("div");
-          empty.className = "support-empty";
-          empty.textContent = "Nenhum support card foi encontrado para esta personagem.";
-          grid.appendChild(empty);
-          return;
-        }
-
-        cards.forEach(card => {
-          const link = document.createElement("a");
-          link.className = `support-card rarity-${card.rarity.toLowerCase().replace(/[^a-z0-9]/g, "")}`;
-          link.href = `https://gametora.com/umamusume/supports/${card.slug}`;
+      /* ------------------------------------------------------------ cards */
+      function renderSupports(cards) {
+        $("#supportGrid").replaceChildren(...cards.map((card, index) => {
+          const link = Uma.el("a", `support-card rarity-${card.rarity.toLowerCase()}`);
+          link.href = card.url;
           link.target = "_blank";
           link.rel = "noopener noreferrer";
-          link.setAttribute("aria-label", `Abrir o support card ${card.name} no GameTora`);
+          link.style.setProperty("--d", `${index * 0.08}s`);
+          link.setAttribute("aria-label", `Abrir o support card ${card.title} no GameTora`);
 
-          const imageWrap = document.createElement("div");
-          imageWrap.className = "support-image";
-          const placeholder = document.createElement("div");
-          placeholder.className = "support-placeholder";
-          placeholder.textContent = "桜";
+          const imageWrap = Uma.el("div", "support-image");
           const image = document.createElement("img");
-          image.alt = `Support card ${card.name} de Sakura Chiyono O`;
+          image.alt = "";
           image.loading = "lazy";
-          image.decoding = "async";
-          imageWrap.append(placeholder, image);
-          setResilientImage(image, [card.image], imageWrap);
+          image.width = 256;
+          image.height = 256;
+          Uma.setImage(image, [card.image], { onFail: () => imageWrap.append(Uma.el("span", "support-fallback", "桜")) });
+          imageWrap.append(image);
 
-          const body = document.createElement("div");
-          body.className = "support-body";
-          const topline = document.createElement("div");
-          topline.className = "support-topline";
-          const rarity = document.createElement("span");
-          rarity.className = "rarity";
-          rarity.textContent = card.rarity;
-          const type = document.createElement("span");
-          type.className = "support-type";
-          type.textContent = card.type;
-          topline.append(rarity, type);
-          const title = document.createElement("h3");
-          title.textContent = card.name;
-          const meta = document.createElement("div");
-          meta.className = "support-meta";
-          const date = document.createElement("span");
-          date.textContent = formatDate(card.startDate);
-          const id = document.createElement("span");
-          id.textContent = `ID ${card.id}`;
-          meta.append(date, id);
-          body.append(topline, title, meta);
+          const body = Uma.el("div", "support-body");
+          const topline = Uma.el("div", "support-topline");
+          topline.append(Uma.el("span", "rarity", card.rarity), Uma.el("span", "support-type", card.type));
+          const meta = Uma.el("div", "support-meta");
+          meta.append(Uma.el("span", "", Uma.formatMonthYear(card.date)), Uma.el("span", "", `ID ${card.id}`));
+          body.append(topline, Uma.el("h3", "", card.title), meta);
           link.append(imageWrap, body);
-          grid.appendChild(link);
-        });
+          return link;
+        }));
       }
 
-      async function fetchVoiceActor() {
-        const idsPayload = await fetchJson(`va/character/${CHARACTER_ID}`);
-        const ids = Array.isArray(idsPayload) ? idsPayload : unwrapArray(idsPayload);
-        const first = ids[0];
-        const id = typeof first === "object" ? firstDefined(first, ["id", "va_id"], fallbackVoiceActor.id) : first;
-        return fetchJson(`va/${id || fallbackVoiceActor.id}`);
-      }
+      /* ------------------------------------------------------- cerejeira */
+      // Galhos gerados com semente fixa: todos viram UM único <path> afunilado.
+      // A copa são cachos com volume (sombra atrás dos galhos + luz na frente);
+      // cada cacho é um <g> escalado pelo scroll, do tronco para as pontas.
+      function buildTree() {
+        const namespace = "http://www.w3.org/2000/svg";
+        const make = (tag, attributes = {}) => {
+          const element = document.createElementNS(namespace, tag);
+          Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+          return element;
+        };
+        const f = number => number.toFixed(1);
+        let seed = 20;
+        const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
 
-      async function loadPage() {
-        const fallbackRacewear = fallbackImageGroups[1].images;
-        const fallbackUniform = fallbackImageGroups[0].images;
-        updateCharacter(fallbackCharacter);
-        updateVoiceActor(fallbackVoiceActor);
-        renderGallery(0);
-        renderSupportCards(fallbackSupports.map(card => ({ ...card, image: `https://media.gametora.com/umamusume/supports/full/small/${card.id}.png` })));
-        setResilientImage($("#heroImage"), fallbackRacewear, $(".portrait-frame"));
-        setResilientImage($("#storyImage"), fallbackUniform, $(".note-photo"));
+        const branchPath = [];
+        const tips = [];
+        const joints = [];
 
-        const results = await Promise.allSettled([
-          fetchJson(`character/${CHARACTER_ID}`),
-          fetchJson(`character/images/${CHARACTER_ID}`),
-          fetchJson(`support/character/${GAME_ID}`),
-          fetchVoiceActor()
-        ]);
-
-        const [characterResult, imageResult, supportResult, voiceResult] = results;
-        let characterData = fallbackCharacter;
-
-        if (characterResult.status === "fulfilled") characterData = updateCharacter(characterResult.value);
-        if (voiceResult.status === "fulfilled") updateVoiceActor(voiceResult.value);
-
-        if (imageResult.status === "fulfilled") {
-          imageGroups = normalizeImageGroups(imageResult.value);
-          renderGallery(0);
-          const racewear = imageGroups.find(group => /race|corrida|勝負/i.test(group.label)) || imageGroups[1] || imageGroups[0];
-          const uniform = imageGroups.find(group => /uniform|制服/i.test(group.label)) || imageGroups[0];
-          setResilientImage($("#heroImage"), [...(racewear?.images || []), ...fallbackRacewear, characterData.detail_img_pc, characterData.detail_img_sp], $(".portrait-frame"));
-          setResilientImage($("#storyImage"), [...(uniform?.images || []), ...fallbackUniform], $(".note-photo"));
+        function grow(x, y, angle, length, width, depth) {
+          const bend = (random() - 0.5) * length * 0.3;
+          const x2 = x + Math.cos(angle) * length;
+          const y2 = y + Math.sin(angle) * length;
+          const nx = -Math.sin(angle);
+          const ny = Math.cos(angle);
+          const mx = (x + x2) / 2 + nx * bend;
+          const my = (y + y2) / 2 + ny * bend;
+          const w1 = width / 2;
+          const w2 = (width * 0.64) / 2;
+          const wm = (w1 + w2) / 2;
+          branchPath.push(
+            `M${f(x + nx * w1)} ${f(y + ny * w1)}Q${f(mx + nx * wm)} ${f(my + ny * wm)} ${f(x2 + nx * w2)} ${f(y2 + ny * w2)}` +
+            `L${f(x2 - nx * w2)} ${f(y2 - ny * w2)}Q${f(mx - nx * wm)} ${f(my - ny * wm)} ${f(x - nx * w1)} ${f(y - ny * w1)}Z` +
+            `M${f(x2 - w2)} ${f(y2)}a${f(w2)} ${f(w2)} 0 1 0 ${f(w2 * 2)} 0a${f(w2)} ${f(w2)} 0 1 0 ${f(-w2 * 2)} 0Z`
+          );
+          if (depth === 0) {
+            tips.push({ x: x2, y: y2 });
+            return;
+          }
+          if (depth === 1) joints.push({ x: x2, y: y2 });
+          const endAngle = Math.atan2(y2 - my, x2 - mx);
+          const count = depth > 1 && random() < 0.3 ? 3 : 2;
+          for (let index = 0; index < count; index += 1) {
+            const spread = 0.46 + random() * 0.22;
+            let child = endAngle + (index - (count - 1) / 2) * spread * 1.4;
+            child += (-Math.PI / 2 - child) * 0.14; // leve tendência para cima: copa em cúpula
+            grow(x2, y2, child, length * (0.7 + random() * 0.1), width * 0.64, depth - 1);
+          }
         }
 
-        if (supportResult.status === "fulfilled") renderSupportCards(normalizeSupportCards(supportResult.value));
+        grow(203, 300, -2.62, 104, 17, 3);
+        grow(211, 290, -1.62, 84, 16, 3);
+        grow(219, 300, -0.52, 104, 17, 3);
+        $("#branches").setAttribute("d", branchPath.join(""));
 
-        const fulfilled = results.filter(result => result.status === "fulfilled").length;
-        const dot = $("#apiDot");
-        const status = $("#apiStatus");
-        if (fulfilled === results.length) {
-          dot.classList.add("online");
-          status.textContent = "Arquivo ao vivo · Umapyoi API";
-        } else if (fulfilled > 0) {
-          dot.classList.add("online");
-          status.textContent = "Arquivo parcial · complementado localmente";
-        } else {
-          dot.classList.remove("online");
-          status.textContent = "Modo offline · arquivo local ativo";
+        // Enquadra a árvore pelas pontas dos galhos: a copa nunca sai da caixa.
+        const minX = Math.min(...tips.map(tip => tip.x)) - 52;
+        const maxX = Math.max(...tips.map(tip => tip.x)) + 52;
+        const minY = Math.min(...tips.map(tip => tip.y)) - 50;
+        const svg = $("#branches").ownerSVGElement;
+        svg.setAttribute("viewBox", `${f(minX)} ${f(minY)} ${f(maxX - minX)} ${f(474 - minY)}`);
+        svg.setAttribute("preserveAspectRatio", "xMidYMax meet");
+
+        // Cacho = vários círculos num único path (base) + realce + flores.
+        const puff = (cx, cy, radius, count) => {
+          let d = "";
+          for (let index = 0; index < count; index += 1) {
+            const angle = random() * Math.PI * 2;
+            const distance = Math.sqrt(random()) * radius * 0.55;
+            const r = radius * (0.42 + random() * 0.24);
+            const x = cx + Math.cos(angle) * distance;
+            const y = cy + Math.sin(angle) * distance * 0.8;
+            d += `M${f(x - r)} ${f(y)}a${f(r)} ${f(r)} 0 1 0 ${f(r * 2)} 0a${f(r)} ${f(r)} 0 1 0 ${f(-r * 2)} 0Z`;
+          }
+          return d;
+        };
+        const origin = { x: 211, y: 300 };
+        const reach = Math.max(...tips.map(tip => Math.hypot(tip.x - origin.x, tip.y - origin.y)));
+        const cluster = ({ x, y }, radius, base, light, flowers, early = 0) => {
+          const group = make("g", { class: "cluster" });
+          const distance = Math.hypot(x - origin.x, y - origin.y) / reach;
+          group.style.setProperty("--t", Math.max(0.02, Math.min(0.8, 0.04 + distance * 0.56 + random() * 0.1 - early)).toFixed(3));
+          group.append(make("path", { d: puff(x, y, radius, 6), fill: base }));
+          group.append(make("path", { d: puff(x - radius * 0.14, y - radius * 0.22, radius * 0.72, 4), fill: light, "fill-opacity": ".9" }));
+          for (let index = 0; index < flowers; index += 1) {
+            const size = 9 + random() * 7;
+            group.append(make("use", {
+              href: "#sakura",
+              x: f(x - size / 2 + (random() - 0.5) * radius * 1.1),
+              y: f(y - size / 2 + (random() - 0.5) * radius * 0.8),
+              width: f(size),
+              height: f(size),
+              style: `color:${random() > 0.4 ? "#fff" : "#ffe6ec"}`
+            }));
+          }
+          return group;
+        };
+
+        const back = $("#canopyBack");
+        const front = $("#canopyFront");
+        joints.forEach(joint => back.append(cluster(joint, 40 + random() * 10, "#e57f96", "#f09aae", 1, 0.06)));
+        tips.forEach(tip => back.append(cluster({ x: tip.x, y: tip.y - 6 }, 30 + random() * 8, "#ea8aa0", "#f5a9ba", 0)));
+        tips.forEach((tip, index) => {
+          if (index % 3 === 2) return;
+          front.append(cluster({ x: tip.x + (random() - 0.5) * 14, y: tip.y + 6 }, 22 + random() * 8, "#f8a4b7", "#ffd3dc", 2));
+        });
+
+        const fallen = $("#fallen");
+        for (let index = 0; index < 16; index += 1) {
+          const size = 6 + random() * 5;
+          fallen.append(make("use", {
+            href: "#petalShape",
+            x: f(60 + random() * 300),
+            y: f(452 + random() * 14),
+            width: f(size),
+            height: f(size),
+            transform: `rotate(${Math.round(random() * 180)} ${f(60 + random() * 300)} 460)`
+          }));
         }
 
-        results.forEach((result, index) => {
-          if (result.status === "rejected") console.warn(["personagem", "imagens", "support cards", "voice actor"][index], result.reason);
-        });
+        Uma.pauseWhenHidden($("#bloomStage"));
       }
 
-      function setupPageSwitcher() {
-        const switchers = $$('[data-page-switcher]');
-        const closeAll = except => switchers.forEach(switcher => {
-          if (switcher === except) return;
-          switcher.classList.remove("is-open");
-          switcher.querySelector("button")?.setAttribute("aria-expanded", "false");
-        });
-        switchers.forEach(switcher => {
-          const button = switcher.querySelector("button");
-          button?.addEventListener("click", event => {
-            event.stopPropagation();
-            const open = !switcher.classList.contains("is-open");
-            closeAll(switcher);
-            switcher.classList.toggle("is-open", open);
-            button.setAttribute("aria-expanded", String(open));
-          });
-          switcher.querySelector(".page-switcher-menu")?.addEventListener("click", event => event.stopPropagation());
-        });
-        document.addEventListener("click", () => closeAll());
-        document.addEventListener("keydown", event => {
-          if (event.key === "Escape") closeAll();
-        });
-      }
-
-      function setupReveal() {
-        if (!("IntersectionObserver" in window)) {
-          $$(".reveal").forEach(element => element.classList.add("visible"));
-          return;
-        }
-        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }), { threshold: .12 });
-        $$(".reveal").forEach(element => observer.observe(element));
-      }
-
-      function setupPetals() {
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      /* ------------------------------------------------ pétalas do hero */
+      // Sprites pré-renderizados + vento vindo do scroll. Pausa fora da tela.
+      function initPetals() {
         const canvas = $("#petalCanvas");
         const hero = $("#inicio");
-        if (!canvas || !hero || reduceMotion.matches) return;
-        const context = canvas.getContext("2d", { alpha: true });
+        if (!canvas || Uma.reduceMotion) return;
+        const context = canvas.getContext("2d");
         if (!context) return;
+
+        const sprites = ["#f9879d", "#ffb3c2", "#fbd0d9"].map(color => {
+          const sprite = document.createElement("canvas");
+          sprite.width = sprite.height = 32;
+          const paint = sprite.getContext("2d");
+          paint.translate(16, 5);
+          paint.beginPath();
+          paint.moveTo(0, 0);
+          paint.bezierCurveTo(11, -8, 17, 6, 0, 22);
+          paint.bezierCurveTo(-17, 6, -11, -8, 0, 0);
+          paint.fillStyle = color;
+          paint.fill();
+          return sprite;
+        });
 
         let width = 0;
         let height = 0;
+        let ratio = 1;
         let petals = [];
-        let frame = 0;
-        let running = true;
+        let wind = 0;
         let visible = true;
-        let lastTime = performance.now();
+        let last = performance.now();
 
-        const createPetal = (initial = false) => ({
+        const spawn = initial => ({
           x: Math.random() * width,
-          y: initial ? Math.random() * height : -24,
-          size: 5 + Math.random() * 8,
-          speed: .34 + Math.random() * .55,
-          drift: .18 + Math.random() * .38,
+          y: initial ? Math.random() * height : -20,
+          size: 0.35 + Math.random() * 0.4,
+          speed: 0.35 + Math.random() * 0.55,
+          drift: 0.2 + Math.random() * 0.4,
+          depth: 0.5 + Math.random() * 0.8,
           rotation: Math.random() * Math.PI * 2,
-          spin: (Math.random() - .5) * .025,
-          wave: Math.random() * Math.PI * 2,
-          alpha: .35 + Math.random() * .42
+          spin: (Math.random() - 0.5) * 0.03,
+          sway: Math.random() * Math.PI * 2,
+          alpha: 0.45 + Math.random() * 0.45,
+          sprite: sprites[Math.floor(Math.random() * sprites.length)]
         });
 
-        const resize = () => {
-          const rect = hero.getBoundingClientRect();
-          width = Math.max(1, rect.width);
-          height = Math.max(1, rect.height);
-          const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+        function resize() {
+          ratio = Math.min(window.devicePixelRatio || 1, 1.25);
+          width = hero.clientWidth;
+          height = hero.clientHeight;
           canvas.width = Math.round(width * ratio);
           canvas.height = Math.round(height * ratio);
-          canvas.style.width = `${width}px`;
-          canvas.style.height = `${height}px`;
-          context.setTransform(ratio, 0, 0, ratio, 0, 0);
-          const target = width < 620 ? 14 : width < 900 ? 20 : 28;
-          petals = Array.from({ length: target }, (_, index) => petals[index] || createPetal(true));
-        };
+          const target = width < 620 ? 12 : width < 1000 ? 18 : 24;
+          petals = Array.from({ length: target }, (_, index) => petals[index] || spawn(true));
+        }
 
-        const drawPetal = petal => {
-          context.save();
-          context.translate(petal.x, petal.y);
-          context.rotate(petal.rotation);
-          context.scale(petal.size / 10, petal.size / 10);
-          context.beginPath();
-          context.moveTo(0, 0);
-          context.bezierCurveTo(8, -8, 13, 1, 0, 15);
-          context.bezierCurveTo(-13, 1, -8, -8, 0, 0);
-          context.fillStyle = `rgba(249, 135, 157, ${petal.alpha})`;
-          context.fill();
-          context.restore();
-        };
-
-        const animate = time => {
-          if (!running) return;
-          const delta = Math.min((time - lastTime) / 16.67, 2);
-          lastTime = time;
+        function frame(now) {
+          const delta = Math.min((now - last) / 16.67, 2.5);
+          last = now;
           if (visible && !document.hidden) {
-            context.clearRect(0, 0, width, height);
-            petals.forEach(petal => {
-              petal.wave += .012 * delta;
-              petal.x += (Math.sin(petal.wave) * petal.drift + .12) * delta;
-              petal.y += petal.speed * delta;
-              petal.rotation += petal.spin * delta;
-              if (petal.y > height + 24 || petal.x > width + 30) Object.assign(petal, createPetal(false), { x: Math.random() * width });
-              drawPetal(petal);
-            });
+            wind *= Math.pow(0.95, delta);
+            context.setTransform(1, 0, 0, 1, 0, 0);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            for (const petal of petals) {
+              petal.sway += 0.014 * delta;
+              petal.x += (Math.sin(petal.sway) * petal.drift + 0.18 + wind * petal.depth) * delta;
+              petal.y += petal.speed * (1 + Math.abs(wind) * 0.08) * delta;
+              petal.rotation += (petal.spin + wind * 0.004) * delta;
+              if (petal.y > height + 24 || petal.x > width + 40 || petal.x < -40) {
+                Object.assign(petal, spawn(false), { x: wind < -1 ? width + 20 : Math.random() * width });
+              }
+              const cos = Math.cos(petal.rotation) * petal.size * ratio;
+              const sin = Math.sin(petal.rotation) * petal.size * ratio;
+              context.setTransform(cos, sin, -sin, cos, petal.x * ratio, petal.y * ratio);
+              context.globalAlpha = petal.alpha;
+              context.drawImage(petal.sprite, -16, -16);
+            }
+            context.globalAlpha = 1;
           }
-          frame = requestAnimationFrame(animate);
-        };
+          requestAnimationFrame(frame);
+        }
 
-        const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(resize) : null;
-        resizeObserver?.observe(hero);
-        if (!resizeObserver) window.addEventListener("resize", resize, { passive: true });
-        const visibilityObserver = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? true; }, { threshold: 0 });
-        visibilityObserver.observe(hero);
+        if ("ResizeObserver" in window) new ResizeObserver(resize).observe(hero);
+        else window.addEventListener("resize", resize, { passive: true });
+        new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }).observe(hero);
+        // Rolar a página levanta uma rajada de vento nas pétalas.
+        Uma.onScroll(({ delta }) => { wind = Math.max(-7, Math.min(7, wind - delta * 0.02)); });
         resize();
-        frame = requestAnimationFrame(animate);
-
-        window.addEventListener("pagehide", () => {
-          running = false;
-          cancelAnimationFrame(frame);
-          resizeObserver?.disconnect();
-          visibilityObserver.disconnect();
-          if (!resizeObserver) window.removeEventListener("resize", resize);
-          petals.length = 0;
-        }, { once: true });
+        requestAnimationFrame(frame);
       }
 
-      setupPageSwitcher();
-      setupReveal();
-      setupPetals();
-      loadPage();
+      /* ------------------------------------------------------------ dados */
+      function render({ character, groups: apiGroups, supports, voice }) {
+        if (character) Uma.fillCharacter(character, DICTIONARY);
+        if (voice) Uma.fillVoice(voice);
+        Uma.setImage($("#voiceImage"), [voice?.image, FALLBACK_VOICE_IMAGE], { onFail: () => { $("#voiceImage").hidden = true; } });
+        if (apiGroups.length) {
+          groups = apiGroups;
+          showPortraits(groups);
+          renderGallery(Math.min(activeGroup, groups.length - 1));
+        }
+        if (supports.length) renderSupports(supports);
+      }
+
+      Uma.initSwitcher();
+      Uma.initReveal();
+      Uma.initScroll();
+      Uma.initScrollSpy(".main-nav a");
+      buildTree();
+      initPetals();
+      Uma.pauseWhenHidden($("#inicio"));
+
+      showPortraits(groups);
+      renderGallery(0);
+      renderSupports(FALLBACK_SUPPORTS);
+
+      Uma.loadCharacter({ id: CHARACTER_ID, gameId: GAME_ID }).then(result => {
+        render(result);
+        Uma.status($("#apiDot"), $("#apiStatus"), result, {
+          full: "Arquivo ao vivo · Umapyoi API",
+          partial: "Arquivo parcial · complementado localmente",
+          offline: "Modo offline · arquivo local ativo"
+        });
+      });
     })();
   </script>
 </body>

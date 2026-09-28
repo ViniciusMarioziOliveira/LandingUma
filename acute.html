@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Um retrato interativo de Wonder Acute, de Umamusume: Pretty Derby — calma como uma tarde de chá, firme como uma largada. Perfil, visuais e support cards conectados à Umapyoi API.">
+  <meta name="theme-color" content="#d85081">
+  <title>Wonder Acute — Devagar, e sempre em frente</title>
+  <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.microcms-assets.io">
+  <link rel="preload" as="image" fetchpriority="high"
+    href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png?w=960&fm=webp&q=80"
+    imagesrcset="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png?w=480&fm=webp&q=80 480w, https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png?w=720&fm=webp&q=80 720w, https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png?w=960&fm=webp&q=80 960w"
+    imagesizes="(max-width: 860px) 90vw, 46vw">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Figtree:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/uma-core.css">
+
+  <style>
+    :root {
+      --acute: #d85081;
+      --acute-light: #f3a9c4;
+      --acute-deep: #b83768;
+      --acute-dark: #7e2149;
+      --blush: #f6d6e2;
+      --blush-soft: #fdf0f4;
+      --silver: #d8d2d9;
+      --silver-deep: #9f95a2;
+      --hair: #9b8f8b;
+      --cream: #fbf6ef;
+      --paper: #fffcf7;
+      --washi: #f7efe3;
+      --tea: #8a5a3c;
+      --tea-dark: #5c3b27;
+      --matcha: #9aaa6c;
+      --gold: #c9a15e;
+      --gold-soft: #ecd9ae;
+      --plum: #34182a;
+      --plum-soft: #4c2340;
+      --ribbon-red: #d8434f;
+      --ribbon-blue: #4a63b5;
+      --ink: #3a2a31;
+      --muted: #7a6a70;
+      --line: rgba(122, 60, 88, .14);
+      --shadow: 0 30px 80px rgba(126, 33, 73, .14);
+      --soft-shadow: 0 18px 48px rgba(126, 33, 73, .09);
+
+      --sw-toggle-bg: rgba(255, 255, 255, .8);
+      --sw-toggle-ink: var(--acute-dark);
+      --sw-toggle-line: var(--line);
+      --sw-toggle-radius: 14px;
+      --sw-panel-bg: rgba(255, 252, 247, .98);
+      --sw-panel-ink: var(--ink);
+      --sw-panel-muted: var(--muted);
+      --sw-panel-line: rgba(216, 80, 129, .16);
+      --sw-hover-bg: var(--blush-soft);
+      --sw-hover-ink: var(--acute-dark);
+      --sw-shadow: 0 20px 46px rgba(94, 30, 60, .16);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "Figtree", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; font: inherit; }
+    :focus-visible { outline: 3px solid rgba(216, 80, 129, .5); outline-offset: 4px; }
+    ::selection { color: var(--ink); background: var(--blush); }
+    .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+    .jp { font-family: "Zen Maru Gothic", sans-serif; }
+
+    .section-kicker { display: inline-flex; align-items: center; gap: 12px; color: var(--acute-deep); font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .section-kicker::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--acute); box-shadow: 14px 0 0 var(--silver), 28px 0 0 var(--gold-soft); margin-right: 30px; }
+    .section-title { margin-top: 14px; font-family: "Fraunces", serif; font-size: clamp(2.7rem, 5.4vw, 5.2rem); font-weight: 400; font-variation-settings: "opsz" 144; line-height: .98; letter-spacing: -.035em; overflow-wrap: anywhere; }
+    .section-title em { color: var(--acute-deep); font-style: italic; }
+    .section-intro { max-width: 600px; margin-top: 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 54px; padding: 0 24px; border: 1px solid transparent; border-radius: 999px; font-size: .86rem; font-weight: 700; cursor: pointer; transition: transform .25s var(--ease-out), background .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .button:hover { transform: translateY(-3px); }
+    .button-primary { color: #fff; background: var(--acute); box-shadow: 0 16px 30px rgba(184, 55, 104, .24); }
+    .button-primary:hover { background: var(--acute-deep); }
+    .button-quiet { border-color: var(--line); background: rgba(255, 255, 255, .72); }
+    .button-quiet:hover { border-color: rgba(216, 80, 129, .35); }
+    .button-arrow { transition: transform .2s ease; }
+    .button:hover .button-arrow { transform: translateX(3px); }
+
+    /* ---------------------------------------------------------------- header */
+    .site-header { position: fixed; top: 16px; left: 50%; z-index: 80; width: min(1180px, calc(100% - 28px)); border: 1px solid rgba(255, 255, 255, .9); border-radius: 22px; background: rgba(255, 252, 247, .95); box-shadow: 0 14px 40px rgba(94, 30, 60, .09); transform: translateX(-50%); }
+    @media (min-width: 861px) and (hover: hover) { .site-header { background: rgba(255, 252, 247, .84); backdrop-filter: blur(14px); } }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 8px 10px 8px 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+    .brand svg { width: 34px; height: 34px; color: var(--acute); }
+    .brand span { font-family: "Fraunces", serif; font-size: 1.12rem; font-weight: 600; }
+    .main-nav { display: flex; gap: 22px; }
+    .main-nav a { position: relative; padding-block: 10px; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; transition: color .2s ease; }
+    .main-nav a::after { content: ""; position: absolute; left: 50%; bottom: 3px; width: 6px; height: 6px; border-radius: 50%; background: var(--acute); opacity: 0; transform: translateX(-50%) scale(.2); transition: opacity .25s ease, transform .25s var(--ease-out); }
+    .main-nav a:hover, .main-nav a.is-active { color: var(--acute-dark); }
+    .main-nav a:hover::after, .main-nav a.is-active::after { opacity: 1; transform: translateX(-50%) scale(1); }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .header-cta { display: inline-grid; place-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; color: #fff; background: var(--acute); box-shadow: 0 11px 25px rgba(184, 55, 104, .22); font-size: .78rem; font-weight: 700; transition: transform .2s ease, background .2s ease; }
+    .header-cta:hover { background: var(--acute-deep); transform: translateY(-2px); }
+
+    /* Fio de miçangas: cada conta entra no fio conforme a leitura avança */
+    .bead-bar { position: absolute; left: 24px; right: 24px; bottom: -6px; height: 12px; pointer-events: none; }
+    .bead-thread { position: absolute; left: 0; right: 0; top: 5px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--silver-deep), var(--acute-light)); transform: scaleX(var(--p, 0)); transform-origin: left; }
+    .bead { position: absolute; top: 0; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .95) 0 18%, transparent 20%), var(--b, var(--acute)); box-shadow: 0 2px 5px rgba(94, 30, 60, .2); transform: scale(clamp(0, calc((var(--p, 0) - var(--t)) * 18), 1)); }
+
+    /* ------------------------------------------------------------------ hero */
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      background:
+        radial-gradient(circle at 10% 22%, rgba(216, 80, 129, .14), transparent 26rem),
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, .95), transparent 22rem),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='28' viewBox='0 0 56 28'%3E%3Cg fill='none' stroke='%23d85081' stroke-opacity='.075'%3E%3Cpath d='M0 28a28 28 0 0 1 56 0M9 28a19 19 0 0 1 38 0M18 28a10 10 0 0 1 20 0M-28 14a28 28 0 0 1 56 0M28 14a28 28 0 0 1 56 0'/%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(140deg, #fdf8f1 0%, #fbf1f0 60%, #f8e2ea 100%);
+    }
+    .hero::after { content: "根気"; position: absolute; top: 130px; right: max(18px, calc((100vw - 1240px) / 2)); z-index: -1; color: rgba(184, 55, 104, .06); font: 700 clamp(4rem, 9vw, 9rem)/1 "Zen Maru Gothic", sans-serif; letter-spacing: .12em; writing-mode: vertical-rl; }
+    .hero-layout { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 50px; min-height: max(720px, calc(100svh - 58px)); padding: 124px 0 44px; }
+    .hero-copy { position: relative; z-index: 3; min-width: 0; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--acute-deep); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 34px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--ribbon-red) 0 33%, #fff 33% 66%, var(--ribbon-blue) 66%); box-shadow: 0 0 0 1px rgba(122, 60, 88, .12); }
+    .hero h1 { max-width: 700px; margin-top: 22px; font-family: "Fraunces", serif; font-size: clamp(4.2rem, 8vw, 8rem); font-weight: 400; font-variation-settings: "opsz" 144; line-height: .84; letter-spacing: -.05em; }
+    .hero h1 span { display: block; padding-left: .5em; color: var(--acute); font-style: italic; }
+    .hero-jp { margin-top: 20px; color: var(--silver-deep); font-size: 1rem; font-weight: 700; letter-spacing: .3em; }
+    .hero-quote { position: relative; max-width: 560px; margin-top: 28px; padding: 20px 22px 20px 58px; border: 1px solid rgba(216, 80, 129, .14); border-radius: 22px; color: var(--ink); background: rgba(255, 255, 255, .62); font-family: "Fraunces", serif; font-size: clamp(1.04rem, 1.9vw, 1.26rem); font-style: italic; line-height: 1.5; }
+    .hero-quote::before { content: "“"; position: absolute; top: 4px; left: 18px; color: var(--acute); font-size: 3.4rem; line-height: 1; }
+    .traits-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .traits-chips span { display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border: 1px solid rgba(216, 80, 129, .16); border-radius: 999px; color: var(--acute-dark); background: rgba(255, 255, 255, .66); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .traits-chips span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--acute)); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+    .api-line { display: flex; align-items: center; gap: 9px; margin-top: 20px; color: var(--muted); font-size: .74rem; }
+    .api-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px rgba(201, 161, 94, .14); }
+    .api-dot.is-online { background: #5fae86; box-shadow: 0 0 0 5px rgba(95, 174, 134, .14); }
+
+    .portrait { position: relative; min-width: 0; min-height: 680px; }
+    /* Marumado: a janela redonda da casa japonesa, com shoji iluminado atrás */
+    .marumado { position: absolute; top: 40px; left: 50%; width: min(520px, 92%); aspect-ratio: 1; border: 14px solid var(--tea); border-radius: 50%; background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, .95), transparent 60%), linear-gradient(180deg, #fff6ee 0%, #fbe3ea 70%, #f4cddb 100%); box-shadow: inset 0 0 0 4px var(--tea-dark), inset 0 0 0 10px rgba(255, 255, 255, .5), var(--shadow); transform: translateX(-50%); overflow: hidden; }
+    .marumado::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(138, 90, 60, .34) 3px, transparent 3px), linear-gradient(rgba(138, 90, 60, .34) 3px, transparent 3px); background-size: 25% 20%; background-position: -1px -1px; opacity: .55; }
+    .marumado::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 70% 75%, rgba(216, 80, 129, .22), transparent 50%); }
+    .js .marumado { animation: windowIn 1.2s var(--ease-out) .1s backwards; }
+    @keyframes windowIn { from { opacity: 0; transform: translateX(-50%) scale(.92); } }
+    .hero-image { position: absolute; left: 50%; bottom: 0; z-index: 2; width: min(560px, 100%); height: 100%; object-fit: contain; object-position: center bottom; opacity: 0; transform: translate(-50%, 18px); transition: opacity .7s ease, transform .9s var(--ease-out); filter: drop-shadow(0 26px 30px rgba(94, 30, 60, .16)); }
+    .hero-image.is-loaded { opacity: 1; transform: translate(-50%, 0); }
+    .portrait-index { position: absolute; top: 40px; left: 0; z-index: 4; color: var(--acute-deep); font-family: "Fraunces", serif; font-size: 3.6rem; line-height: 1; }
+    .portrait-index small { display: block; margin-top: 6px; color: var(--muted); font: 700 .62rem "Figtree", sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+    .portrait-seal { position: absolute; right: 0; top: 70px; z-index: 5; display: grid; place-items: center; width: 92px; height: 92px; border: 2px dashed rgba(255, 255, 255, .7); border-radius: 50%; color: #fff; background: var(--acute); box-shadow: 0 0 0 5px var(--acute), 0 14px 30px rgba(184, 55, 104, .28); font: 700 .78rem/1.3 "Zen Maru Gothic", sans-serif; text-align: center; transform: rotate(10deg); }
+    .portrait-seal small { display: block; font: 700 .5rem "Figtree", sans-serif; letter-spacing: .12em; opacity: .85; }
+
+    /* Chá com vapor: o convite para sentar e conversar */
+    .tea { position: absolute; left: 2%; bottom: 36px; z-index: 4; width: 132px; }
+    .tea svg { width: 100%; height: auto; overflow: visible; }
+    .steam path { fill: none; stroke: rgba(154, 128, 138, .5); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 60; animation: steam 3.6s ease-in-out infinite; }
+    .steam path:nth-child(2) { animation-delay: -1.2s; }
+    .steam path:nth-child(3) { animation-delay: -2.4s; }
+    @keyframes steam { 0% { stroke-dashoffset: 60; opacity: 0; transform: translateY(8px); } 30% { opacity: .9; } 100% { stroke-dashoffset: -60; opacity: 0; transform: translateY(-14px); } }
+    .hero.is-paused .steam path { animation-play-state: paused; }
+    .hero-footnote { position: absolute; right: 12px; bottom: -18px; z-index: 4; color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .motion .hero-copy { transform: translate3d(0, calc(var(--p, 0) * -50px), 0); }
+    .motion .portrait { transform: translate3d(0, calc(var(--p, 0) * 70px), 0); }
+
+    .hero-ribbon { position: relative; z-index: 5; border-block: 1px solid rgba(216, 80, 129, .13); background: rgba(255, 255, 255, .55); }
+    .ribbon-track { display: flex; align-items: center; justify-content: center; min-height: 58px; gap: clamp(22px, 5vw, 72px); overflow: hidden; color: var(--muted); white-space: nowrap; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .ribbon-track span { display: inline-flex; align-items: center; gap: clamp(22px, 5vw, 72px); }
+    .ribbon-track span::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--acute); box-shadow: 0 0 0 3px var(--blush); }
+    .ribbon-track span:last-child::after { content: none; }
+
+    /* ------------------------------------------------------------- essência */
+    section { position: relative; }
+    .essence { padding: 120px 0; background: var(--paper); }
+    .essence-head { display: grid; grid-template-columns: 1fr .8fr; align-items: end; gap: 40px; margin-bottom: 48px; }
+    .essence-head .section-intro { margin: 0; }
+    .trait-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .trait { position: relative; display: flex; flex-direction: column; min-height: 360px; overflow: hidden; padding: 30px; border: 1px solid var(--line); border-radius: 28px; background: var(--blush-soft); transition: transform .35s var(--ease-out), box-shadow .35s ease; }
+    .trait:hover { transform: translateY(-6px); box-shadow: var(--soft-shadow); }
+    .trait::after { content: attr(data-mark); position: absolute; right: -10px; bottom: -40px; color: rgba(216, 80, 129, .09); font: 700 10rem/1 "Zen Maru Gothic", sans-serif; pointer-events: none; }
+    .trait-icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; color: var(--acute); background: #fff; box-shadow: 0 10px 22px rgba(126, 33, 73, .08); }
+    .trait-icon svg { width: 38px; height: 38px; }
+    .trait-no { margin-top: 26px; color: var(--gold); font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .trait h3 { margin: 10px 0 12px; font-family: "Fraunces", serif; font-size: 1.8rem; font-weight: 400; line-height: 1.1; }
+    .trait p { position: relative; z-index: 1; margin-top: auto; color: var(--muted); line-height: 1.72; }
+    .trait.is-fight { color: #fff; background: radial-gradient(circle at 80% 0%, rgba(216, 80, 129, .55), transparent 60%), linear-gradient(160deg, var(--plum-soft), var(--plum)); border-color: transparent; }
+    .trait.is-fight::after { color: rgba(255, 255, 255, .07); }
+    .trait.is-fight .trait-icon { color: #fff; background: var(--acute); box-shadow: 0 10px 26px rgba(216, 80, 129, .4); }
+    .trait.is-fight .trait-no { color: var(--acute-light); }
+    .trait.is-fight p { color: rgba(255, 255, 255, .78); }
+    .trait.is-patience { background: linear-gradient(170deg, #f4f1f5, #e8e2ea); }
+    .trait.is-patience .trait-icon { color: var(--silver-deep); }
+    .trait-grid [data-reveal]:nth-child(2) { --d: .1s; }
+    .trait-grid [data-reveal]:nth-child(3) { --d: .2s; }
+
+    .letter { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 30px; margin-top: 22px; padding: 30px 36px; border: 1px solid rgba(201, 161, 94, .3); border-radius: 26px; background: repeating-linear-gradient(0deg, transparent 0 34px, rgba(138, 90, 60, .07) 34px 35px), var(--washi); }
+    .letter-stamp { display: grid; place-items: center; width: 74px; height: 74px; border: 2px solid rgba(216, 80, 129, .6); border-radius: 50%; color: var(--acute-deep); font: 700 .8rem/1.2 "Zen Maru Gothic", sans-serif; text-align: center; transform: rotate(-8deg); }
+    .letter small { display: block; margin-bottom: 8px; color: var(--gold); font-size: .64rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .letter blockquote { font-family: "Fraunces", serif; font-size: clamp(1.15rem, 2.1vw, 1.5rem); font-style: italic; line-height: 1.5; }
+    .letter-sign { color: var(--acute-deep); font: 700 1rem "Zen Maru Gothic", sans-serif; white-space: nowrap; }
+
+    /* -------------------------------------------- da varanda à largada (cena) */
+    .duel { --scene-h: 340vh; background: var(--plum); }
+    .duel-stage { --race: 1; position: relative; display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: center; gap: 36px; min-height: 640px; padding-inline: max(20px, calc((100% - 1180px) / 2)); overflow: hidden; isolation: isolate; }
+    .motion .duel-stage { --race: clamp(0, calc((var(--p, 0) - .5) * 4.5), 1); }
+
+    .duel-calm, .duel-race { position: absolute; inset: 0; z-index: -2; }
+    .duel-calm { background: radial-gradient(ellipse at 72% 38%, rgba(255, 244, 226, .95), transparent 55%), linear-gradient(90deg, rgba(138, 90, 60, .2) 3px, transparent 3px) 0 0 / 110px 100%, linear-gradient(rgba(138, 90, 60, .2) 3px, transparent 3px) 0 0 / 100% 140px, linear-gradient(180deg, #fcf3e6, #f6e3d6); opacity: calc(1 - var(--race)); }
+    .duel-calm::after { content: ""; position: absolute; inset: auto 0 0; height: 15%; background: repeating-linear-gradient(90deg, #a87552 0 118px, #9a6947 118px 120px), #a87552; box-shadow: inset 0 6px 0 #c49470, inset 0 9px 0 rgba(0, 0, 0, .1); }
+    .duel-race { z-index: -1; background: radial-gradient(circle at 18% 12%, rgba(255, 240, 250, .55) 0 2px, transparent 3px), radial-gradient(circle at 34% 8%, rgba(255, 240, 250, .45) 0 2px, transparent 3px), radial-gradient(circle at 82% 10%, rgba(255, 240, 250, .5) 0 2px, transparent 3px), radial-gradient(ellipse at 60% 100%, rgba(216, 80, 129, .6), transparent 60%), linear-gradient(180deg, #1c0d19 0%, #3a1731 55%, #6d2850 100%); opacity: var(--race); }
+    .duel-race::after { content: ""; position: absolute; inset: auto 0 0; height: 15%; background: radial-gradient(ellipse at 50% 0, rgba(255, 190, 150, .25), transparent 70%), linear-gradient(180deg, #8f5f3f, #5a3825); box-shadow: 0 -16px 0 -12px #fff; }
+    .duel-race::before { content: ""; position: absolute; left: 0; right: 0; bottom: calc(15% + 4px); height: 30px; background: linear-gradient(rgba(255, 255, 255, .85) 3px, transparent 3px) 0 4px / 100% 100% no-repeat, repeating-linear-gradient(90deg, rgba(255, 255, 255, .85) 0 4px, transparent 4px 90px); }
+
+    .speed { position: absolute; inset: 0; z-index: -1; overflow: hidden; opacity: var(--race); pointer-events: none; }
+    .speed span { position: absolute; left: 0; height: 2px; width: 34%; border-radius: 2px; background: linear-gradient(90deg, transparent, rgba(255, 214, 230, .7)); animation: dash linear infinite; }
+    @keyframes dash { from { transform: translateX(320%); } to { transform: translateX(-120%); } }
+    html:not(.motion) .speed { display: none; }
+    .is-paused .speed span, .is-paused .gong-disc, .is-paused .ripple { animation-play-state: paused; }
+
+    .duel-copy { position: relative; z-index: 2; padding: 32px; border: 1px solid rgba(201, 161, 94, .3); border-radius: 28px; background: rgba(255, 252, 247, .93); box-shadow: 0 30px 60px rgba(52, 24, 42, calc(.1 + var(--race) * .25)); }
+    .duel-copy h2 { margin: 12px 0 18px; padding-right: 64px; font-family: "Fraunces", serif; font-size: clamp(2.3rem, 4.4vw, 3.8rem); font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+    .duel-copy h2 em { color: var(--acute-deep); font-style: italic; }
+    .stage-label { position: absolute; top: 26px; right: 26px; display: grid; }
+    .stage-label span { grid-area: 1 / 1; color: rgba(216, 80, 129, .2); font: 700 2.8rem/1 "Zen Maru Gothic", sans-serif; writing-mode: vertical-rl; }
+    .beats { display: grid; list-style: none; }
+    .beat { padding-block: 16px; border-top: 1px solid var(--line); }
+    .beat-no { color: var(--acute); font-family: "Fraunces", serif; font-size: 1.3rem; }
+    .beat-term { margin-left: 10px; color: var(--gold); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .beat h3 { margin: 6px 0 8px; font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 400; }
+    .beat p { color: var(--muted); line-height: 1.7; }
+    .duel-dots { display: none; gap: 8px; margin-top: 18px; }
+    .duel-dots span { width: 12px; height: 12px; border-radius: 50%; background: var(--blush); transition: background .4s ease, transform .4s var(--ease-out); }
+
+    .duel-visual { position: relative; justify-self: center; width: min(100%, 520px); height: min(80vh, 660px); }
+    .duel-frame { position: absolute; inset: 40px 30px 0; overflow: hidden; border: 1px solid rgba(255, 255, 255, .7); border-radius: 999px 999px 30px 30px; background: linear-gradient(180deg, #fff8ef, #f8dfe7); box-shadow: 0 30px 70px rgba(52, 24, 42, .22); }
+    .duel-frame::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(216, 80, 129, .55), transparent 60%), linear-gradient(180deg, #2b1226, #5d2245); opacity: var(--race); }
+    .duel-frame::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(201, 161, 94, .4); border-radius: 999px 999px 20px 20px; pointer-events: none; }
+    /* As artes oficiais têm ~20% de vazio no topo: a imagem cresce e o arco corta o excesso */
+    .duel-img { position: absolute; inset: auto 0 0; z-index: 1; width: 100%; height: 118%; padding: 0 4px; object-fit: contain; object-position: center bottom; opacity: 0; transition: opacity .6s ease; }
+    .duel-img.is-loaded { opacity: 1; }
+    .duel-img.is-calm { display: none; }
+    .motion .duel-img.is-calm { display: block; }
+    .motion .duel-img.is-calm.is-loaded { opacity: calc(1 - var(--race)); transform: translate3d(calc(var(--race) * -40px), 0, 0); transition: none; }
+    .motion .duel-img.is-race.is-loaded { opacity: var(--race); transform: translate3d(calc((1 - var(--race)) * 50px), 0, 0) scale(calc(.94 + var(--race) * .06)); transform-origin: 50% 100%; transition: none; }
+
+    /* Gongo (dora): o som que as orelhas dela nunca ignoram */
+    .gong { position: absolute; top: 0; right: -6px; z-index: 3; width: 150px; opacity: calc(1 - var(--race) * .85); }
+    .gong svg { width: 100%; height: auto; overflow: visible; }
+    .gong-disc { transform-box: fill-box; transform-origin: 50% 0; }
+    .ripple { fill: none; stroke: var(--acute); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .gong-word { position: absolute; top: 150px; right: 6px; color: var(--acute-deep); font: 700 1.3rem "Zen Maru Gothic", sans-serif; letter-spacing: .1em; opacity: 0; transform: scale(.7) rotate(-6deg); transition: opacity .4s ease, transform .5s var(--ease-out); writing-mode: vertical-rl; }
+    .motion .duel[data-step="1"] .gong-disc { animation: gongSwing 1.1s ease-in-out infinite alternate; }
+    .motion .duel[data-step="1"] .ripple { animation: ripple 1.8s ease-out infinite; }
+    .motion .duel[data-step="1"] .ripple:nth-of-type(2) { animation-delay: .6s; }
+    .motion .duel[data-step="1"] .ripple:nth-of-type(3) { animation-delay: 1.2s; }
+    .motion .duel[data-step="1"] .gong-word { opacity: 1; transform: none; }
+    @keyframes gongSwing { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+    @keyframes ripple { 0% { opacity: .8; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.4); } }
+
+    html:not(.motion) .duel-stage { padding-block: 100px; }
+    html:not(.motion) .stage-label span:not(:last-child) { display: none; }
+    html:not(.motion) .gong { display: none; }
+    .motion .duel .beats { grid-template-areas: "beat"; }
+    .motion .duel .beat { grid-area: beat; padding-block: 0; border-top: 0; opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s var(--ease-out); pointer-events: none; }
+    .motion .duel .stage-label span { opacity: 0; transition: opacity .6s ease; }
+    .motion .duel .duel-dots { display: flex; }
+    .motion .duel:not([data-step]) .beat:nth-child(1), .motion .duel[data-step="0"] .beat:nth-child(1),
+    .motion .duel[data-step="1"] .beat:nth-child(2), .motion .duel[data-step="2"] .beat:nth-child(3),
+    .motion .duel:not([data-step]) .stage-label span:nth-child(1), .motion .duel[data-step="0"] .stage-label span:nth-child(1),
+    .motion .duel[data-step="1"] .stage-label span:nth-child(2), .motion .duel[data-step="2"] .stage-label span:nth-child(3) { opacity: 1; transform: none; pointer-events: auto; }
+    .motion .duel:not([data-step]) .duel-dots span:nth-child(1), .motion .duel[data-step="0"] .duel-dots span:nth-child(1),
+    .motion .duel[data-step="1"] .duel-dots span:nth-child(-n+2), .motion .duel[data-step="2"] .duel-dots span { background: var(--acute); transform: scale(1.15); }
+
+    /* ---------------------------------------------------------- celular flip */
+    .phone-section { overflow: hidden; padding: 120px 0; background: radial-gradient(circle at 20% 40%, rgba(216, 80, 129, .12), transparent 30rem), linear-gradient(160deg, #f6f1f6, var(--cream)); }
+    .phone-section::before { content: "ガラケー"; position: absolute; left: -10px; bottom: 30px; color: rgba(159, 149, 162, .12); font: 700 clamp(5rem, 13vw, 12rem)/1 "Zen Maru Gothic", sans-serif; letter-spacing: .04em; pointer-events: none; }
+    .phone-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; gap: 70px; }
+    .phone-stage { display: grid; justify-items: center; gap: 22px; }
+    .phone-wrap { position: relative; width: 250px; height: 610px; perspective: 1500px; }
+    /* Em 3D a base fica atrás do plano do contêiner: ele não pode capturar os cliques */
+    .phone { --lid: 0deg; position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--ease-out); pointer-events: none; }
+    .phone > * { pointer-events: auto; }
+    .phone.is-closed { --lid: -180deg; transform: translateY(-148px); }
+    .phone-lid { position: absolute; top: 0; left: 0; width: 250px; height: 298px; transform-origin: 50% 100%; transform: rotateX(var(--lid)); transform-style: preserve-3d; transition: transform 1s var(--ease-out); }
+    .lid-front, .lid-back { position: absolute; inset: 0; border-radius: 34px 34px 16px 16px; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    .lid-front { padding: 22px 18px 20px; background: linear-gradient(160deg, #f7a6c3, var(--acute) 40%, var(--acute-deep)); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .5), inset 0 -3px 0 rgba(0, 0, 0, .1); }
+    .speaker { width: 54px; height: 6px; margin: 0 auto 14px; border-radius: 6px; background: repeating-linear-gradient(90deg, rgba(70, 20, 45, .55) 0 3px, transparent 3px 6px); }
+    .lcd { position: relative; display: flex; flex-direction: column; height: 232px; overflow: hidden; border: 6px solid #2b1424; border-radius: 12px; color: #3a1631; background: linear-gradient(170deg, #fff4f8, #f5dce8); font-family: "DotGothic16", monospace; box-shadow: inset 0 0 18px rgba(126, 33, 73, .18); }
+    .lcd::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(58, 22, 49, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(58, 22, 49, .045) 1px, transparent 1px); background-size: 3px 3px; pointer-events: none; }
+    .lcd-status { display: flex; align-items: center; justify-content: space-between; padding: 5px 8px 3px; font-size: .72rem; }
+    .antenna { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
+    .antenna i { display: block; width: 3px; background: currentColor; }
+    .antenna i:nth-child(1) { height: 4px; } .antenna i:nth-child(2) { height: 7px; } .antenna i:nth-child(3) { height: 11px; }
+    .battery { position: relative; width: 20px; height: 10px; border: 2px solid currentColor; border-radius: 2px; }
+    .battery::before { content: ""; position: absolute; inset: 1px 6px 1px 1px; background: currentColor; }
+    .battery::after { content: ""; position: absolute; top: 2px; right: -4px; width: 2px; height: 4px; background: currentColor; }
+    .lcd-shift { min-width: 18px; font-size: .64rem; opacity: 0; }
+    .lcd-shift.is-on { opacity: 1; }
+    .lcd-head { padding: 4px 8px; color: #fff4f8; background: #3a1631; font-size: .76rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lcd-body { flex: 1; padding: 8px 9px; font-size: .92rem; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .lcd-body .pending { text-decoration: underline; text-underline-offset: 3px; }
+    .caret { display: inline-block; width: 8px; height: 1em; margin-left: 1px; vertical-align: -2px; background: currentColor; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .lcd-soft { display: flex; justify-content: space-between; padding: 3px 8px 5px; border-top: 1px dashed rgba(58, 22, 49, .25); font-size: .66rem; }
+
+    .lid-back { display: grid; place-items: center; align-content: center; gap: 16px; background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .5), transparent 40%), linear-gradient(200deg, #f7a6c3, var(--acute) 45%, var(--acute-deep)); transform: rotateX(180deg); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .4); }
+    .sub-display { display: grid; place-items: center; width: 116px; height: 64px; border: 4px solid #2b1424; border-radius: 12px; color: #ffd6e6; background: #3a1631; font-family: "DotGothic16", monospace; line-height: 1.2; text-align: center; box-shadow: 0 0 20px rgba(255, 180, 210, .35); }
+    .sub-display strong { font-size: 1.4rem; font-weight: 400; }
+    .sub-display small { font-size: .62rem; opacity: .8; }
+    .lid-back .logo { color: rgba(255, 255, 255, .85); font: 600 italic 1rem "Fraunces", serif; letter-spacing: .08em; }
+    .lid-back .camera { position: absolute; top: 22px; right: 26px; width: 16px; height: 16px; border: 3px solid #2b1424; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #8f7da6, #1a0f1a); }
+
+    .hinge { position: absolute; top: 290px; left: 14px; right: 14px; height: 20px; border-radius: 10px; background: linear-gradient(180deg, #e0e0e6, #a79fa9 60%, #7e7582); box-shadow: 0 3px 6px rgba(0, 0, 0, .15); transform: translateZ(1px); }
+    .phone-base { position: absolute; top: 302px; left: 0; width: 250px; height: 300px; padding: 22px 20px 20px; border-radius: 16px 16px 38px 38px; background: linear-gradient(200deg, #f7b3cb, var(--acute) 35%, var(--acute-deep)); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, .12), 0 30px 50px rgba(94, 30, 60, .25); transform: translateZ(-4px); }
+    .nav-row { display: grid; grid-template-columns: 1fr 58px 1fr; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .key, .soft, .ok { border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .1s ease, background .15s ease, box-shadow .1s ease; }
+    .soft { height: 30px; border-radius: 10px; color: var(--acute-dark); background: #fff0f5; font: 700 .64rem "Figtree", sans-serif; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 3px 0 rgba(94, 30, 60, .25); }
+    .ok { width: 58px; height: 58px; border-radius: 50%; color: #fff; background: radial-gradient(circle at 35% 30%, #c9bfcb, #7e7582); font: 700 .78rem "Figtree", sans-serif; box-shadow: 0 0 0 5px rgba(255, 240, 245, .5), 0 4px 0 rgba(60, 20, 40, .35); }
+    .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 10px; }
+    .key { display: grid; place-items: center; height: 38px; padding: 0; border-radius: 12px 12px 16px 16px; color: #3a1631; background: linear-gradient(180deg, #fff, #f6e6ee); box-shadow: 0 3px 0 rgba(94, 30, 60, .28); line-height: 1; }
+    .key b { font: 700 .98rem "Figtree", sans-serif; }
+    .key small { margin-top: 1px; color: var(--acute-deep); font: 700 .5rem "Figtree", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .key:active, .soft:active, .ok:active, .key.is-down { transform: translateY(2px); box-shadow: 0 1px 0 rgba(94, 30, 60, .28); }
+    .mic { width: 22px; height: 4px; margin: 14px auto 0; border-radius: 4px; background: rgba(58, 22, 49, .35); }
+    .phone.is-closed .phone-base { pointer-events: none; }
+    /* Alça de miçangas (o talento dela), pendurada na dobradiça */
+    .strap { position: absolute; top: 300px; left: -34px; width: 44px; transform: translateZ(2px); transform-origin: 80% 0; animation: strapSway 3.2s ease-in-out infinite; }
+    .strap svg { width: 100%; height: auto; overflow: visible; }
+    @keyframes strapSway { 0%, 100% { transform: translateZ(2px) rotate(6deg); } 50% { transform: translateZ(2px) rotate(-5deg); } }
+    .phone-toggle { min-height: 46px; }
+    .phone-hint { max-width: 300px; color: var(--muted); font-size: .78rem; line-height: 1.6; text-align: center; }
+
+    .curio-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 30px; }
+    .curio { min-width: 0; padding: 22px; border: 1px solid rgba(216, 80, 129, .12); border-radius: 22px; background: rgba(255, 255, 255, .78); }
+    .curio small { display: block; margin-bottom: 8px; color: var(--acute-deep); font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .curio h3 { margin-bottom: 8px; font-family: "Fraunces", serif; font-size: 1.25rem; font-weight: 400; }
+    .curio p, .curio strong { color: var(--muted); font-size: .9rem; font-weight: 400; line-height: 1.62; overflow-wrap: anywhere; }
+    .curio.is-wide { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px; color: #fff; background: linear-gradient(140deg, var(--acute), var(--acute-deep)); border-color: transparent; }
+    .curio.is-wide small { color: rgba(255, 255, 255, .75); }
+    .curio.is-wide p { color: rgba(255, 255, 255, .9); }
+    .curio-badge { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: rgba(255, 255, 255, .18); font: 700 .8rem/1.2 "Zen Maru Gothic", sans-serif; text-align: center; }
+
+    /* --------------------------------------------------------------- perfil */
+    .profile { overflow: hidden; padding: 120px 0; background: var(--blush-soft); }
+    .profile::before { content: "ACUTE"; position: absolute; right: -25px; top: 65px; color: rgba(216, 80, 129, .05); font: 600 italic clamp(7rem, 16vw, 15rem)/1 "Fraunces", serif; letter-spacing: -.04em; }
+    .profile-head { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr .72fr; gap: 40px; align-items: end; margin-bottom: 44px; }
+    .profile-head .section-intro { margin: 0; }
+    .profile-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.12fr .88fr; gap: 22px; }
+    .identity-card { overflow: hidden; border: 1px solid rgba(255, 255, 255, .82); border-radius: 30px; background: var(--paper); box-shadow: var(--soft-shadow); }
+    .identity-top { display: grid; grid-template-columns: .74fr 1.26fr; min-height: 300px; }
+    .identity-name { position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 34px; color: #fff; background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, .25), transparent 12rem), linear-gradient(145deg, var(--acute), var(--acute-deep)); }
+    .identity-name::after { content: "茶"; position: absolute; right: -12px; bottom: -38px; color: rgba(255, 255, 255, .12); font: 700 10rem "Zen Maru Gothic", sans-serif; }
+    .identity-name p { position: relative; z-index: 1; color: rgba(255, 255, 255, .78); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .identity-name h3 { position: relative; z-index: 1; max-width: 290px; font-family: "Fraunces", serif; font-size: clamp(2.6rem, 4vw, 4.2rem); font-weight: 400; font-style: italic; line-height: .92; }
+    .identity-name span { position: relative; z-index: 1; font-size: .82rem; letter-spacing: .18em; }
+    .core-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .core-stat { display: flex; flex-direction: column; justify-content: center; min-width: 0; min-height: 150px; padding: 22px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .2s ease; }
+    .core-stat:nth-child(even) { border-right: 0; }
+    .core-stat:nth-last-child(-n + 2) { border-bottom: 0; }
+    .core-stat:hover { background: var(--blush-soft); }
+    .core-stat small { margin-bottom: 9px; color: var(--muted); font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .core-stat strong { font-family: "Fraunces", serif; font-size: clamp(1.1rem, 1.5vw, 1.4rem); font-weight: 400; line-height: 1.25; overflow-wrap: break-word; }
+    .profile-quote { padding: 30px 34px; border-top: 1px solid var(--line); }
+    .profile-quote small { display: block; margin-bottom: 8px; color: var(--acute-deep); font-size: .66rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .profile-quote p { color: var(--muted); font-family: "Fraunces", serif; font-size: 1.12rem; font-style: italic; line-height: 1.6; }
+    .profile-side { display: grid; gap: 22px; }
+    .voice-card { display: grid; grid-template-columns: 136px 1fr; min-height: 200px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .82); border-radius: 26px; background: var(--paper); box-shadow: var(--soft-shadow); }
+    .voice-image { position: relative; overflow: hidden; background: linear-gradient(150deg, var(--blush), var(--silver)); }
+    .voice-image img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+    .voice-image .fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--acute-dark); font: 700 2.3rem "Zen Maru Gothic", sans-serif; }
+    .voice-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; min-width: 0; padding: 24px; }
+    .voice-copy small { color: var(--acute-deep); font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    /* Figtree aqui: o "ō" da Fraunces (Sudō) sai com o mácron deslocado */
+    .voice-copy h3 { margin: 9px 0 4px; font-size: 1.45rem; font-weight: 700; letter-spacing: -.01em; }
+    .voice-copy p { color: var(--muted); font-size: .8rem; }
+    .voice-play { display: inline-flex; align-items: center; gap: 9px; min-height: 40px; margin-top: 14px; padding: 0 14px 0 6px; border: 1px solid rgba(216, 80, 129, .25); border-radius: 999px; color: var(--acute-dark); background: var(--blush-soft); font-size: .74rem; font-weight: 700; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+    .voice-play:hover { background: var(--blush); transform: translateY(-2px); }
+    .voice-play .play-icon { position: relative; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--acute); }
+    .voice-play .play-icon::before { content: ""; margin-left: 3px; border-left: 9px solid #fff; border-block: 6px solid transparent; }
+    .voice-play[aria-pressed="true"] .play-icon::before { width: 9px; height: 10px; margin: 0; border: 0; background: linear-gradient(90deg, #fff 0 3px, transparent 3px 6px, #fff 6px); }
+    .voice-play[aria-pressed="true"] .play-icon { animation: pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(216, 80, 129, .18); } }
+    .detail-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .detail-item { min-width: 0; padding: 18px; border: 1px solid rgba(216, 80, 129, .1); border-radius: 17px; background: rgba(255, 255, 255, .74); }
+    .detail-item small { display: block; margin-bottom: 6px; color: var(--acute-deep); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .detail-item strong { display: block; font-size: .88rem; font-weight: 500; line-height: 1.55; overflow-wrap: anywhere; }
+    .lore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+    .lore-card { position: relative; overflow: hidden; min-height: 215px; padding: 28px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 22px; background: rgba(255, 255, 255, .76); transition: transform .35s var(--ease-out), box-shadow .35s ease; }
+    .lore-card:hover { transform: translateY(-6px); box-shadow: var(--soft-shadow); }
+    .lore-card::after { content: attr(data-mark); position: absolute; right: -3px; bottom: -22px; color: rgba(216, 80, 129, .08); font: 700 6.6rem "Zen Maru Gothic", sans-serif; }
+    .lore-card small { color: var(--gold); font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .lore-card h3 { margin: 12px 0 9px; font-family: "Fraunces", serif; font-size: 1.4rem; font-weight: 400; }
+    .lore-card p { position: relative; z-index: 1; color: var(--muted); font-size: .9rem; line-height: 1.68; }
+    .lore-grid [data-reveal]:nth-child(2) { --d: .1s; }
+    .lore-grid [data-reveal]:nth-child(3) { --d: .2s; }
+    .ears { position: absolute; top: 24px; right: 24px; width: 46px; color: var(--hair); }
+    .ears svg { width: 100%; height: auto; overflow: visible; }
+    .ears .ear { transform-box: fill-box; transform-origin: 50% 100%; }
+    .gong-button { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 16px; padding: 0 14px; border: 1px solid rgba(201, 161, 94, .45); border-radius: 999px; color: var(--tea-dark); background: #fff8ec; font-size: .74rem; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .gong-button:hover { background: var(--gold-soft); transform: translateY(-2px); }
+    .gong-button svg { width: 20px; height: 20px; }
+    .lore-card.is-ringing .ear:nth-child(1) { animation: earL .28s ease-in-out 5 alternate; }
+    .lore-card.is-ringing .ear:nth-child(2) { animation: earR .28s ease-in-out 5 alternate; }
+    .lore-card.is-ringing::before { content: ""; position: absolute; top: 20px; right: 20px; width: 56px; height: 56px; border: 2px solid var(--acute); border-radius: 50%; animation: ripple 1.2s ease-out 2; }
+    @keyframes earL { from { transform: rotate(-14deg); } to { transform: rotate(8deg); } }
+    @keyframes earR { from { transform: rotate(14deg); } to { transform: rotate(-8deg); } }
+
+    /* -------------------------------------------------------------- galeria */
+    .gallery { padding: 120px 0; background: var(--paper); }
+    .gallery-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
+    .gallery-tabs { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    .gallery-tabs button { min-height: 44px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: transparent; font-size: .74rem; font-weight: 700; cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s ease; }
+    .gallery-tabs button:hover { transform: translateY(-2px); }
+    .gallery-tabs button[aria-pressed="true"] { border-color: var(--acute); color: #fff; background: var(--acute); }
+    .gallery-stage { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: 16px; min-height: 620px; }
+    .gallery-info { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; overflow: hidden; padding: 38px; border-radius: 28px; color: #fff; background: radial-gradient(circle at 20% 15%, rgba(255, 255, 255, .22), transparent 14rem), linear-gradient(155deg, var(--acute), var(--acute-deep) 60%, var(--plum-soft)); }
+    .gallery-info::after { content: "茶"; position: absolute; right: -18px; bottom: -46px; color: rgba(255, 255, 255, .1); font: 700 12rem/1 "Zen Maru Gothic", sans-serif; pointer-events: none; }
+    .gallery-no { font-family: "Fraunces", serif; font-size: 5.2rem; line-height: 1; opacity: .92; }
+    .gallery-no small { font-size: .3em; opacity: .7; }
+    .gallery-info h3 { margin-top: 10px; font-family: "Fraunces", serif; font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-weight: 400; font-style: italic; line-height: 1; }
+    .gallery-jp { margin-top: 8px; color: var(--gold-soft); letter-spacing: .2em; }
+    .gallery-text { position: relative; z-index: 1; color: rgba(255, 255, 255, .86); line-height: 1.7; }
+    .gallery-feature { position: relative; overflow: hidden; min-height: 620px; border-radius: 28px; background: radial-gradient(circle at 50% 30%, #fff, transparent 22rem), linear-gradient(155deg, var(--blush-soft), #f1e4ec); }
+    .gallery-feature::before { content: ""; position: absolute; top: 50%; left: 50%; width: min(460px, 80%); aspect-ratio: 1; border: 10px solid rgba(138, 90, 60, .14); border-radius: 50%; transform: translate(-50%, -58%); }
+    .gallery-feature::after { content: ""; position: absolute; inset: 18px; z-index: 2; border: 1px solid rgba(201, 161, 94, .32); border-radius: 20px; pointer-events: none; }
+    .gallery-feature img { position: absolute; inset: 0; width: 100%; height: 100%; padding: 30px 30px 0; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(14px) scale(1.02); transition: opacity .7s ease, transform .9s var(--ease-out); }
+    .gallery-feature img.is-loaded { opacity: 1; transform: none; }
+    .gallery-feature figcaption { position: absolute; right: 26px; bottom: 26px; z-index: 3; padding: 8px 12px; border-radius: 999px; color: #fff; background: rgba(52, 24, 42, .72); font-size: .63rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .image-fallback { position: absolute; inset: 0; display: none; place-items: center; padding: 30px; color: var(--acute-dark); background: linear-gradient(145deg, var(--blush-soft), var(--blush)); font-family: "Fraunces", serif; text-align: center; }
+    .has-image-error .image-fallback { display: grid; }
+
+    /* -------------------------------------------------------------- supports */
+    .supports { padding: 120px 0; background: linear-gradient(145deg, #fdf3f6, var(--cream)); }
+    .support-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 42px; }
+    .support-note { max-width: 390px; color: var(--muted); font-size: .88rem; line-height: 1.7; text-align: right; }
+    .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .support-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(216, 80, 129, .12); border-radius: 24px; background: #fff; box-shadow: 0 18px 45px rgba(94, 30, 60, .09); transition: transform .3s var(--ease-out), box-shadow .3s ease; }
+    .support-card:hover { box-shadow: 0 25px 58px rgba(94, 30, 60, .15); }
+    .support-image { position: relative; display: grid; place-items: center; aspect-ratio: 1 / .9; overflow: hidden; background: linear-gradient(145deg, var(--blush-soft), #efe6ee); }
+    .support-image::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 16px; pointer-events: none; }
+    .support-image img { width: 100%; height: 100%; object-fit: contain; transition: transform .35s ease; }
+    .support-card:hover .support-image img { transform: scale(1.035); }
+    .support-fallback { color: var(--acute-dark); font: 700 2.5rem "Zen Maru Gothic", sans-serif; }
+    .support-body { padding: 20px 22px 22px; }
+    .support-topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+    .rarity { padding: 5px 9px; border-radius: 999px; color: #fff; background: linear-gradient(90deg, var(--acute-deep), var(--acute)); font-size: .61rem; font-weight: 700; letter-spacing: .09em; }
+    .rarity-r .rarity { color: var(--ink); background: var(--silver); }
+    .support-type { color: var(--muted); font-size: .63rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .support-body h3 { min-height: 3em; font-family: "Fraunces", serif; font-size: 1.12rem; font-weight: 400; line-height: 1.4; }
+    .support-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .js .support-grid .support-card { opacity: 0; transform: translateY(26px); transition: opacity .7s ease var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s), box-shadow .3s ease; }
+    .js .support-grid.is-in .support-card { opacity: 1; transform: none; }
+    .js .support-grid.is-in .support-card:hover { transform: translateY(-8px); }
+    .js .support-grid[data-reveal] { opacity: 1; transform: none; }
+
+    /* -------------------------------------------------------- final + omamori */
+    .final { position: relative; overflow: hidden; padding: 120px 0; color: #fff; background: radial-gradient(circle at 80% 20%, rgba(216, 80, 129, .45), transparent 30rem), linear-gradient(150deg, var(--plum), var(--plum-soft) 60%, #6d2850); }
+    .final::before, .final::after { content: ""; position: absolute; width: 450px; height: 450px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 50%; }
+    .final::before { top: -250px; left: -130px; box-shadow: 0 0 0 65px rgba(255, 255, 255, .03), 0 0 0 130px rgba(255, 255, 255, .02); }
+    .final::after { right: -200px; bottom: -300px; box-shadow: 0 0 0 70px rgba(255, 255, 255, .025); }
+    .final-grid { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(40px, 8vw, 110px); }
+    .omamori { justify-self: center; width: 210px; transform-origin: 50% 0; }
+    .motion .omamori { transform: rotate(calc((1 - var(--p, 1)) * 16deg)); }
+    .omamori svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 24px 30px rgba(20, 5, 15, .4)); }
+    .omamori .sway { transform-box: view-box; transform-origin: 100px 0; animation: sway 5s ease-in-out infinite; }
+    .final.is-paused .omamori .sway { animation-play-state: paused; }
+    @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+    .final-copy .section-kicker { color: var(--acute-light); }
+    .final-copy .section-kicker::before { background: var(--acute-light); box-shadow: 14px 0 0 var(--silver), 28px 0 0 var(--gold-soft); }
+    .final-copy h2 { margin: 15px 0 0; font-family: "Fraunces", serif; font-size: clamp(3.1rem, 6.2vw, 6.4rem); font-weight: 400; font-variation-settings: "opsz" 144; line-height: .94; letter-spacing: -.04em; }
+    .final-copy h2 em { color: var(--acute-light); font-style: italic; }
+    .proverb { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--acute-light); }
+    .proverb strong { display: block; font: 700 1.1rem "Zen Maru Gothic", sans-serif; letter-spacing: .12em; }
+    .proverb span { display: block; margin-top: 6px; color: rgba(255, 255, 255, .8); font-size: .92rem; font-style: italic; }
+    .final-copy p.lede { max-width: 590px; margin: 22px 0 30px; color: rgba(255, 255, 255, .78); line-height: 1.8; }
+    .final .button { color: var(--acute-dark); background: #fff; box-shadow: 0 16px 38px rgba(20, 5, 15, .25); }
+
+    .site-footer { padding: 29px 0; color: rgba(255, 255, 255, .7); background: #24101d; font-size: .74rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 25px; }
+    .footer-inner a { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .35); transition: color .2s ease; }
+    .footer-inner a:hover { color: #fff; }
+
+    /* ------------------------------------------------------------ responsivo */
+    .hero-layout > *, .profile-grid > *, .duel-stage > *, .final-grid > *, .phone-grid > * { min-width: 0; }
+
+    @media (max-width: 1100px) {
+      .main-nav { gap: 16px; }
+      .header-cta { display: none; }
+    }
+
+    @media (max-width: 1050px) {
+      .hero-layout { grid-template-columns: .95fr 1.05fr; gap: 20px; }
+      .portrait { min-height: 620px; }
+      .trait-grid { grid-template-columns: 1fr 1fr; }
+      .trait.is-patience { grid-column: 1 / -1; min-height: 0; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-side { grid-template-columns: .7fr 1.3fr; }
+      .phone-grid { gap: 40px; }
+      .curio-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 960px) {
+      .main-nav { display: none; }
+      .header-cta { display: inline-grid; }
+    }
+
+    @media (max-width: 860px) {
+      .hero-layout, .final-grid, .phone-grid { grid-template-columns: 1fr; }
+      .hero-layout { gap: 34px; padding-top: 120px; }
+      .portrait { width: min(600px, 100%); min-height: 640px; margin-inline: auto; }
+      .essence-head, .profile-head { grid-template-columns: 1fr; }
+      .letter { grid-template-columns: auto 1fr; }
+      .letter-sign { grid-column: 2; }
+      .profile-side { grid-template-columns: 1fr; }
+      .lore-grid { grid-template-columns: 1fr; }
+      .phone-stage { order: 2; }
+      .curio-list { grid-template-columns: 1fr 1fr; }
+      .gallery-head, .support-head { flex-direction: column; align-items: flex-start; }
+      .gallery-tabs { justify-content: flex-start; }
+      .support-note { text-align: left; }
+      .support-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-stage { grid-template-columns: 1fr; min-height: 0; }
+      .gallery-info { gap: 18px; padding: 28px; }
+      .gallery-no { font-size: 3.6rem; }
+      .gallery-feature { min-height: 0; height: min(120vw, 580px); }
+      .duel-stage { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; gap: 10px; padding: 0; }
+      .duel-visual { grid-row: 1; width: min(100%, 440px); height: auto; min-height: 0; margin-top: 84px; }
+      .duel-frame { inset: 20px 40px 0; }
+      .gong { width: 104px; right: 6px; }
+      .gong-word { top: 104px; right: 18px; font-size: 1rem; }
+      .duel-copy { grid-row: 2; margin: 0 14px 16px; padding: 22px; }
+      .duel-copy h2 { font-size: clamp(1.9rem, 8vw, 2.5rem); margin-bottom: 10px; padding-right: 0; }
+      .stage-label { position: static; margin-bottom: 6px; }
+      .stage-label span { font-size: 1.4rem; writing-mode: horizontal-tb; letter-spacing: .2em; }
+      html:not(.motion) .duel-stage { display: flex; flex-direction: column; padding: 80px 14px; }
+      html:not(.motion) .duel-visual { height: 460px; margin-top: 0; }
+      .final-grid { text-align: center; }
+      .proverb { display: inline-block; text-align: left; }
+      .final-copy p.lede { margin-inline: auto; }
+      .final-copy .section-kicker { justify-content: center; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(100% - 24px, 1180px); }
+      .site-header { top: 9px; width: calc(100% - 18px); }
+      .header-inner { min-height: 58px; padding-left: 13px; }
+      .header-cta { display: none; }
+      .hero h1 { font-size: clamp(3.6rem, 19vw, 5rem); }
+      .hero-quote { padding: 18px 18px 18px 48px; }
+      .hero-quote::before { left: 12px; }
+      .hero-actions > * { flex: 1 1 100%; }
+      .portrait { min-height: clamp(470px, 140vw, 560px); }
+      .marumado { top: 30px; width: 92%; border-width: 10px; }
+      .portrait-index { top: 10px; font-size: 2.6rem; }
+      .portrait-seal { top: 36px; width: 72px; height: 72px; font-size: .66rem; }
+      .tea { width: 92px; bottom: 20px; }
+      .hero-footnote { right: 8px; }
+      .ribbon-track { justify-content: flex-start; padding-inline: 18px; }
+      .essence, .profile, .gallery, .supports, .phone-section { padding: 80px 0; }
+      .trait-grid { grid-template-columns: 1fr; }
+      .trait { min-height: 0; }
+      .trait p { margin-top: 0; }
+      .letter { grid-template-columns: 1fr; gap: 16px; padding: 26px 22px; }
+      .letter-sign { grid-column: auto; }
+      .curio-list { grid-template-columns: 1fr; }
+      .curio.is-wide { grid-template-columns: 1fr; }
+      .identity-top { grid-template-columns: 1fr; }
+      .identity-name { min-height: 240px; }
+      .core-stat { min-height: 120px; padding: 20px; }
+      .profile-quote { padding: 24px; }
+      .voice-card { grid-template-columns: 110px 1fr; }
+      .voice-copy { padding: 20px; }
+      .detail-list { grid-template-columns: 1fr; }
+      .gallery-feature img { padding: 20px 16px 0; }
+      .support-grid { grid-template-columns: 1fr; }
+      .support-image { aspect-ratio: 1.2 / 1; }
+      .final { padding: 90px 0; }
+      .omamori { width: 170px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .beat h3 { font-size: 1.3rem; }
+      .beat p { font-size: .92rem; }
+    }
+
+    @media (max-width: 390px) {
+      .hero h1 { font-size: 3.4rem; }
+      .core-stats { grid-template-columns: 1fr; }
+      .core-stat:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--line); }
+      .core-stat:last-child { border-bottom: 0; }
+      .voice-card { grid-template-columns: 1fr; }
+      .voice-image { min-height: 220px; }
+      .phone-wrap { transform: scale(.9); transform-origin: 50% 0; margin-bottom: -60px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .strap, .steam path, .omamori .sway, .caret { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="yunomi" viewBox="0 0 48 48">
+        <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M19 12c-3-3 3-5 0-9M27 13c-3-3 3-5 0-9" opacity=".55"/>
+        <path fill="currentColor" d="M9 18h30l-3.2 19.5A6 6 0 0 1 29.9 43H18.1a6 6 0 0 1-5.9-5.5z"/>
+        <path fill="#fff" opacity=".85" d="M10.2 25h27.6l-.6 4H10.8z"/>
+        <ellipse cx="24" cy="18" rx="15" ry="3" fill="currentColor"/>
+        <ellipse cx="24" cy="18.4" rx="12.4" ry="1.9" fill="#9aaa6c"/>
+      </symbol>
+      <symbol id="horseshoe" viewBox="0 0 48 48">
+        <path fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" d="M13 40V22a11 11 0 0 1 22 0v18"/>
+        <g fill="#fff" opacity=".85"><circle cx="13" cy="33" r="1.6"/><circle cx="13" cy="25" r="1.6"/><circle cx="35" cy="33" r="1.6"/><circle cx="35" cy="25" r="1.6"/><circle cx="18" cy="15" r="1.6"/><circle cx="30" cy="15" r="1.6"/></g>
+      </symbol>
+      <symbol id="hourglass" viewBox="0 0 48 48">
+        <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M12 6h24M12 42h24"/>
+        <path fill="none" stroke="currentColor" stroke-width="2.6" d="M15 7c0 10 8 12 8 17s-8 7-8 17M33 7c0 10-8 12-8 17s8 7 8 17"/>
+        <path fill="#d85081" d="M18 12h12c-1 4-6 6-6 9c0-3-5-5-6-9zM24 32c3 2 7 4 8 8H16c1-4 5-6 8-8z" opacity=".8"/>
+      </symbol>
+      <symbol id="gongIcon" viewBox="0 0 48 48">
+        <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M6 44V8h36v36M4 8h40"/>
+        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M18 8v8M30 8v8"/>
+        <circle cx="24" cy="27" r="11" fill="#c9a15e"/>
+        <circle cx="24" cy="27" r="4" fill="#8a5a3c"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="#inicio" aria-label="Wonder Acute — início">
+        <svg aria-hidden="true"><use href="#yunomi"/></svg>
+        <span>Wonder Acute</span>
+      </a>
+      <nav class="main-nav" aria-label="Seções">
+        <a href="#essencia">Essência</a>
+        <a href="#largada">Largada</a>
+        <a href="#celular">Flip</a>
+        <a href="#perfil">Perfil</a>
+        <a href="#galeria">Visuais</a>
+        <a href="#supports">Cards</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-cta" href="#largada">Ver a largada</a>
+        <div class="switcher" data-switcher>
+          <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
+            <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+          </button>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
+            <p class="switcher-label">Trocar personagem</p>
+            <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
+            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
+            <a href="chiyo.html" style="--c:#f9879d">Sakura Chiyono O</a>
+            <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
+            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
+            <a href="acute.html" style="--c:#d85081" aria-current="page">Wonder Acute <small>Atual</small></a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="bead-bar" data-scroll="page" aria-hidden="true">
+      <span class="bead-thread"></span>
+      <span class="bead" style="--t:.02;left:3%"></span>
+      <span class="bead" style="--t:.1;left:11%;--b:var(--silver)"></span>
+      <span class="bead" style="--t:.18;left:19%;--b:var(--ribbon-red)"></span>
+      <span class="bead" style="--t:.26;left:27%;--b:#fff"></span>
+      <span class="bead" style="--t:.34;left:35%;--b:var(--ribbon-blue)"></span>
+      <span class="bead" style="--t:.42;left:43%"></span>
+      <span class="bead" style="--t:.5;left:51%;--b:var(--silver)"></span>
+      <span class="bead" style="--t:.58;left:59%;--b:var(--gold)"></span>
+      <span class="bead" style="--t:.66;left:67%;--b:var(--acute-light)"></span>
+      <span class="bead" style="--t:.74;left:75%;--b:var(--ribbon-red)"></span>
+      <span class="bead" style="--t:.82;left:83%;--b:#fff"></span>
+      <span class="bead" style="--t:.9;left:91%;--b:var(--ribbon-blue)"></span>
+      <span class="bead" style="--t:.97;left:98%"></span>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio" data-scroll="exit" aria-labelledby="heroTitle">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <div data-reveal>
+            <p class="eyebrow">Lifelong Wonder · Tracen Academy</p>
+            <h1 id="heroTitle">Wonder <span>Acute</span></h1>
+            <p class="hero-jp jp" data-field="nameJp">ワンダーアキュート</p>
+            <blockquote class="hero-quote">Aprendo devagar, mas me esforço muito. Conto com você, viu?</blockquote>
+            <div class="traits-chips" aria-label="Traços principais">
+              <span>Carinhosa</span><span style="--c:var(--silver-deep)">Paciente</span><span style="--c:var(--ribbon-red)">Nunca desiste</span><span style="--c:var(--tea)">Pista de terra</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#essencia">Tomar um chá com ela <span class="button-arrow" aria-hidden="true">→</span></a>
+              <a class="button button-quiet" href="#celular">Abrir o celular flip</a>
+            </div>
+            <p class="api-line"><span class="api-dot" id="apiDot" aria-hidden="true"></span><span id="apiStatus" role="status">Esquentando a água do chá…</span></p>
+          </div>
+        </div>
+
+        <div class="portrait">
+          <div class="marumado" aria-hidden="true"></div>
+          <img class="hero-image" id="heroImage" alt="Wonder Acute em seu traje de corrida rosa" fetchpriority="high" decoding="async" referrerpolicy="no-referrer">
+          <div class="portrait-index">03·14<small>Aniversário</small></div>
+          <div class="portrait-seal" aria-hidden="true"><span>ガラケー<br>派<small>FLIP CLUB</small></span></div>
+          <div class="tea" aria-hidden="true">
+            <svg viewBox="0 0 120 130">
+              <g class="steam"><path d="M44 50c-8-10 8-16 0-28"/><path d="M60 46c-8-10 8-16 0-30"/><path d="M76 50c-8-10 8-16 0-28"/></g>
+              <ellipse cx="60" cy="122" rx="52" ry="6" fill="#7e2149" opacity=".12"/>
+              <path d="M22 62h76l-7 46a14 14 0 0 1-14 12H43a14 14 0 0 1-14-12z" fill="#d85081"/>
+              <path d="M23.6 74h72.8l-1.2 8H24.8z" fill="#fff" opacity=".85"/>
+              <path d="M40 90c4 6 10 8 14 4M62 96c4-6 12-6 14 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+              <ellipse cx="60" cy="62" rx="38" ry="7" fill="#b83768"/>
+              <ellipse cx="60" cy="63" rx="32" ry="4.6" fill="#9aaa6c"/>
+            </svg>
+          </div>
+          <p class="hero-footnote">Official visual · Umapyoi archive</p>
+        </div>
+      </div>
+
+      <div class="hero-ribbon" aria-hidden="true">
+        <div class="container ribbon-track">
+          <span>Calma</span><span>Paciente</span><span>Carinhosa</span><span>Nunca desiste</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="essence" id="essencia" aria-labelledby="essenceTitle">
+      <div class="container">
+        <header class="essence-head" data-reveal>
+          <div>
+            <p class="section-kicker">Uma tarde na casa dela</p>
+            <h2 class="section-title" id="essenceTitle">Chá quente.<br><em>Coração firme.</em></h2>
+          </div>
+          <p class="section-intro">Conversar com a Wonder Acute é como visitar a casa da avó: tudo desacelera, alguém serve chá e pergunta se você comeu direito. Mas não se engane pela calma — por trás dela existe uma corredora que nunca desiste.</p>
+        </header>
+
+        <div class="trait-grid">
+          <article class="trait" data-reveal data-mark="慈">
+            <span class="trait-icon" aria-hidden="true"><svg><use href="#yunomi"/></svg></span>
+            <p class="trait-no">Traço 01 · Cuidado</p>
+            <h3>Cuidado e carinho</h3>
+            <p>Dócil e atenciosa, ela gosta de cuidar de todos ao seu redor. Uma conversa com a Acute traz paz e lembra o aconchego de estar com uma avó querida.</p>
+          </article>
+          <article class="trait is-fight" data-reveal data-mark="闘">
+            <span class="trait-icon" aria-hidden="true"><svg><use href="#horseshoe"/></svg></span>
+            <p class="trait-no">Traço 02 · Espírito de luta</p>
+            <h3>Calma que vira força</h3>
+            <p>No dia a dia, pura serenidade. Quando uma corrida está para começar, ela muda por completo: disciplina firme, olhar decidido e uma força que impressiona.</p>
+          </article>
+          <article class="trait is-patience" data-reveal data-mark="忍">
+            <span class="trait-icon" aria-hidden="true"><svg><use href="#hourglass"/></svg></span>
+            <p class="trait-no">Traço 03 · Paciência</p>
+            <h3>Paciência e foco</h3>
+            <p>Ela não desiste nunca. Seu jeito maduro reflete a longa carreira do cavalo da vida real, que continuou correndo — e vencendo — mesmo mais velho.</p>
+          </article>
+        </div>
+
+        <aside class="letter" data-reveal aria-label="Apresentação oficial">
+          <span class="letter-stamp" aria-hidden="true">よろしく<br>ね</span>
+          <div>
+            <small>Apresentação oficial</small>
+            <blockquote data-field="profile">Sou a Wonder Acute. Aprendo devagar, mas sou muito esforçada. Conto com você.</blockquote>
+          </div>
+          <span class="letter-sign">— ワンダーアキュート</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="duel scene" id="largada" data-scroll="sticky" data-steps="3" aria-labelledby="duelTitle">
+      <div class="scene-stage duel-stage" id="duelStage">
+        <div class="duel-calm" aria-hidden="true"></div>
+        <div class="duel-race" aria-hidden="true"></div>
+        <div class="speed" aria-hidden="true">
+          <span style="top:18%;animation-duration:1.6s;animation-delay:-.2s"></span>
+          <span style="top:31%;animation-duration:1.1s;animation-delay:-.7s"></span>
+          <span style="top:44%;animation-duration:1.4s;animation-delay:-1s"></span>
+          <span style="top:58%;animation-duration:.9s;animation-delay:-.3s"></span>
+          <span style="top:69%;animation-duration:1.3s;animation-delay:-.9s"></span>
+          <span style="top:78%;animation-duration:1s;animation-delay:-.5s"></span>
+        </div>
+
+        <div class="duel-copy">
+          <div class="stage-label" aria-hidden="true"><span>縁側</span><span>銅鑼</span><span>闘志</span></div>
+          <p class="section-kicker">Da varanda à largada</p>
+          <h2 id="duelTitle">Calma até<br><em>o gongo.</em></h2>
+          <ol class="beats">
+            <li class="beat">
+              <span class="beat-no">01</span><span class="beat-term">Engawa · varanda</span>
+              <h3>Uma tarde sem pressa</h3>
+              <p>Chá verde, miçangas no colo e conversa mansa. No dia a dia, a Acute tem o ritmo tranquilo de quem não precisa correr para nada.</p>
+            </li>
+            <li class="beat">
+              <span class="beat-no">02</span><span class="beat-term">Dora · gongo</span>
+              <h3>Orelhas atentas</h3>
+              <p>Dizem que as orelhas dela sempre reagem ao som de um gongo. É o sinal: a serenidade dá lugar à concentração.</p>
+            </li>
+            <li class="beat">
+              <span class="beat-no">03</span><span class="beat-term">Tōshi · espírito de luta</span>
+              <h3>Outra Acute na largada</h3>
+              <p>Disciplina firme, passada forte e um olhar decidido — surpreende quem só conhecia o lado doce dela.</p>
+            </li>
+          </ol>
+          <div class="duel-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="duel-visual" aria-hidden="true">
+          <div class="duel-frame">
+            <img class="duel-img is-calm" id="calmImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <img class="duel-img is-race" id="raceImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+          </div>
+          <div class="gong">
+            <svg viewBox="0 0 150 150">
+              <circle class="ripple" cx="75" cy="86" r="30"/>
+              <circle class="ripple" cx="75" cy="86" r="30"/>
+              <circle class="ripple" cx="75" cy="86" r="30"/>
+              <path d="M18 146V26M132 146V26" stroke="#5c3b27" stroke-width="9" stroke-linecap="round"/>
+              <path d="M8 22h134" stroke="#5c3b27" stroke-width="11" stroke-linecap="round"/>
+              <path d="M8 22h134" stroke="#8a5a3c" stroke-width="4" stroke-linecap="round"/>
+              <g class="gong-disc">
+                <path d="M58 27v28M92 27v28" stroke="#c9a15e" stroke-width="2.5"/>
+                <circle cx="75" cy="86" r="34" fill="#c9a15e"/>
+                <circle cx="75" cy="86" r="27" fill="none" stroke="#a3813f" stroke-width="2"/>
+                <circle cx="75" cy="86" r="11" fill="#8a5a3c"/>
+                <circle cx="65" cy="74" r="6" fill="#fff" opacity=".35"/>
+              </g>
+            </svg>
+          </div>
+          <span class="gong-word">ゴーン…</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="phone-section" id="celular" aria-labelledby="phoneTitle">
+      <div class="container phone-grid">
+        <div class="phone-stage">
+          <div class="phone-wrap">
+            <div class="phone is-closed" id="phone">
+              <div class="phone-lid">
+                <div class="lid-front">
+                  <div class="speaker" aria-hidden="true"></div>
+                  <div class="lcd">
+                    <div class="lcd-status" aria-hidden="true">
+                      <span class="antenna"><i></i><i></i><i></i></span>
+                      <span class="lcd-shift" id="lcdShift">Aa</span>
+                      <span id="lcdClock">14:03</span>
+                      <span class="battery"></span>
+                    </div>
+                    <div class="lcd-head" id="lcdHead" aria-hidden="true">✉ Mensagem · Acute</div>
+                    <div class="lcd-body" id="lcdBody" aria-hidden="true"></div>
+                    <div class="lcd-soft" aria-hidden="true"><span>Apagar</span><span>Enviar</span><span>Voltar</span></div>
+                    <p class="sr-only" id="lcdAnnounce" aria-live="polite"></p>
+                  </div>
+                </div>
+                <div class="lid-back" aria-hidden="true">
+                  <span class="camera"></span>
+                  <div class="sub-display"><div><strong id="subClock">14:03</strong><br><small>✉ 1 nova</small></div></div>
+                  <span class="logo">Acute</span>
+                </div>
+              </div>
+              <span class="hinge" aria-hidden="true"></span>
+              <div class="phone-base">
+                <div class="nav-row">
+                  <button class="soft" type="button" data-soft="clear" aria-label="Apagar">Apagar</button>
+                  <button class="ok" type="button" data-soft="ok" aria-label="Enviar">OK</button>
+                  <button class="soft" type="button" data-soft="back" aria-label="Voltar para as mensagens da Acute">Voltar</button>
+                </div>
+                <div class="keypad" id="keypad" aria-label="Teclado do celular"></div>
+                <div class="mic" aria-hidden="true"></div>
+              </div>
+              <div class="strap" aria-hidden="true">
+                <svg viewBox="0 0 44 150">
+                  <path d="M36 2C30 20 26 36 22 52" fill="none" stroke="#9f95a2" stroke-width="2"/>
+                  <circle cx="22" cy="58" r="6" fill="#d8434f"/><circle cx="22" cy="72" r="6" fill="#fff" stroke="#e4d8df"/><circle cx="22" cy="86" r="6" fill="#4a63b5"/>
+                  <circle cx="22" cy="100" r="6" fill="#d8d2d9"/><circle cx="22" cy="114" r="6" fill="#f3a9c4"/>
+                  <path d="M22 122c-9 0-13 8-8 14l8 10 8-10c5-6 1-14-8-14z" fill="#d85081"/>
+                  <g fill="#fff" opacity=".6"><circle cx="20" cy="56" r="1.8"/><circle cx="20" cy="84" r="1.8"/><circle cx="20" cy="98" r="1.8"/><circle cx="20" cy="112" r="1.8"/></g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button class="button button-quiet phone-toggle" type="button" id="phoneToggle" aria-controls="phone" aria-pressed="false">Abrir o celular</button>
+          <p class="phone-hint">Use o teclado para responder à Acute: aperte a mesma tecla várias vezes para trocar a letra, como antigamente. <b>#</b> alterna maiúscula e <b>*</b> insere símbolos.</p>
+        </div>
+
+        <div class="phone-copy" data-reveal>
+          <p class="section-kicker">Curiosidades · ガラケー</p>
+          <h2 class="section-title" id="phoneTitle">Um flip, com<br><em>muito orgulho.</em></h2>
+          <p class="section-intro">Aparelhos modernos não são exatamente amigos da Acute. Entre todas as Umamusume, ela é a única que usa um celular de flip em vez de um smartphone — e digita cada mensagem com todo o carinho (e todo o tempo) do mundo.</p>
+
+          <div class="curio-list">
+            <article class="curio is-wide">
+              <span class="curio-badge" aria-hidden="true">唯一の<br>ガラケー</span>
+              <div>
+                <small>Curiosidade 01</small>
+                <h3>O único flip da Tracen</h3>
+                <p>Ela é a única personagem que usa um celular de flip em vez de um smartphone. Tecla por tecla, sem pressa nenhuma.</p>
+              </div>
+            </article>
+            <article class="curio">
+              <small>Curiosidade 02</small>
+              <h3>Tecnologia? Com calma.</h3>
+              <p>Ela não se dá muito bem com aparelhos modernos. Tudo no tempo dela.</p>
+            </article>
+            <article class="curio">
+              <small>Ponto fraco</small>
+              <h3>Modernidades</h3>
+              <strong data-field="weaknesses">Palavras estrangeiras da moda e aparelhos vestíveis</strong>
+            </article>
+            <article class="curio">
+              <small>Talentos</small>
+              <h3>Mãos habilidosas</h3>
+              <strong data-field="strengths">Artesanato com miçangas e entalhes decorativos em daikon</strong>
+            </article>
+            <article class="curio">
+              <small>Detalhe</small>
+              <h3>Alça de miçangas</h3>
+              <p>Um celular assim merece uma alça feita à mão. A paleta vem do enfeite tricolor que ela usa na orelha.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile" id="perfil" aria-labelledby="profileTitle">
+      <div class="container">
+        <header class="profile-head" data-reveal>
+          <div>
+            <p class="section-kicker">Umapyoi profile · ID 7879</p>
+            <h2 class="section-title" id="profileTitle">Com calma,<br><em>por inteiro.</em></h2>
+          </div>
+          <p class="section-intro">Os dados abaixo são preenchidos pela Umapyoi API e permanecem disponíveis em modo local quando a conexão externa não responde.</p>
+        </header>
+
+        <div class="profile-grid">
+          <article class="identity-card" data-reveal>
+            <div class="identity-top">
+              <div class="identity-name">
+                <p>Character archive / 7879</p>
+                <h3 data-field="name">Wonder Acute</h3>
+                <span class="jp" data-field="nameJp">ワンダーアキュート</span>
+              </div>
+              <div class="core-stats">
+                <div class="core-stat"><small>Aniversário</small><strong data-field="birthday">14 de março</strong></div>
+                <div class="core-stat"><small>Altura</small><strong data-field="height">159 cm</strong></div>
+                <div class="core-stat"><small>Medidas</small><strong data-field="sizes">B75 · W52 · H78</strong></div>
+                <div class="core-stat"><small>Categoria</small><strong data-field="category">Umamusume</strong></div>
+              </div>
+            </div>
+            <div class="profile-quote">
+              <small>Slogan oficial</small>
+              <p data-field="slogan">Tranquila, serena e paciente. Uma Umamusume cheia de garra que nunca desiste.</p>
+            </div>
+          </article>
+
+          <div class="profile-side" data-reveal style="--d:.1s">
+            <article class="voice-card">
+              <div class="voice-image">
+                <span class="fallback" aria-hidden="true">声</span>
+                <img id="voiceImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" hidden>
+              </div>
+              <div class="voice-copy">
+                <small>Character voice</small>
+                <h3 data-field="voice">Kanoko Sudō</h3>
+                <p class="jp" data-field="voiceJp">須藤叶希</p>
+                <button class="voice-play" type="button" id="voicePlay" aria-pressed="false"><span class="play-icon" aria-hidden="true"></span><span id="voicePlayLabel">Ouvir a voz</span></button>
+              </div>
+            </article>
+
+            <div class="detail-list">
+              <div class="detail-item"><small>Série</small><strong data-field="grade">Ensino Médio</strong></div>
+              <div class="detail-item"><small>Dormitório</small><strong data-field="residence">Dormitório Ritto</strong></div>
+              <div class="detail-item"><small>Peso</small><strong data-field="weight">Instável</strong></div>
+              <div class="detail-item"><small>Calçado</small><strong data-field="shoe">24,5 cm</strong></div>
+              <div class="detail-item"><small>Talentos</small><strong data-field="strengths">Artesanato com miçangas e entalhes decorativos em daikon</strong></div>
+              <div class="detail-item"><small>Desafio</small><strong data-field="weaknesses">Palavras estrangeiras da moda e aparelhos vestíveis</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lore-grid">
+          <article class="lore-card" id="earCard" data-reveal data-mark="耳">
+            <span class="ears" aria-hidden="true">
+              <svg viewBox="0 0 46 40"><path class="ear" d="M6 38C2 26 4 12 10 2c6 9 9 22 8 36z" fill="currentColor"/><path class="ear" d="M28 38c-1-14 2-27 8-36 6 10 8 24 4 36z" fill="currentColor"/></svg>
+            </span>
+            <small>Detalhe 01</small><h3>Orelhas</h3>
+            <p data-field="ears">Sempre reagem ao som de um gongo.</p>
+            <button class="gong-button" type="button" id="gongButton"><svg aria-hidden="true"><use href="#gongIcon"/></svg>Tocar o gongo</button>
+          </article>
+          <article class="lore-card" data-reveal data-mark="尾"><small>Detalhe 02</small><h3>Cauda</h3><p data-field="tail">Escapa com elegância de qualquer tentativa de toque.</p></article>
+          <article class="lore-card" data-reveal data-mark="家"><small>Detalhe 03</small><h3>Família</h3><p data-field="family">A mãe é a pessoa mais tranquila da família.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="galeria" aria-labelledby="galleryTitle">
+      <div class="container">
+        <header class="gallery-head" data-reveal>
+          <div>
+            <p class="section-kicker">Visual archive</p>
+            <h2 class="section-title" id="galleryTitle">Quatro retratos,<br>um <em>só ritmo.</em></h2>
+          </div>
+          <div class="gallery-tabs" id="galleryTabs" role="group" aria-label="Coleções visuais"></div>
+        </header>
+        <div class="gallery-stage" data-reveal>
+          <div class="gallery-info">
+            <div>
+              <p class="gallery-no"><span id="galleryNo">01</span><small> / <span id="galleryTotal">04</span></small></p>
+              <h3 id="galleryLabel">Uniforme</h3>
+              <p class="gallery-jp jp" id="galleryJp">制服</p>
+            </div>
+            <p class="gallery-text" id="galleryText">O uniforme da Tracen, com laço escuro e mangas curtas — o visual das tardes calmas entre aulas e chá.</p>
+          </div>
+          <figure class="gallery-feature" id="galleryFeature" aria-live="polite">
+            <div class="image-fallback">Este visual está temporariamente indisponível.</div>
+            <img id="galleryImage" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+            <figcaption id="galleryCaption">Uniforme</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="supports" id="supports" aria-labelledby="supportTitle">
+      <div class="container">
+        <header class="support-head" data-reveal>
+          <div>
+            <p class="section-kicker">Support collection</p>
+            <h2 class="section-title" id="supportTitle">Lembranças<br><em>guardadas.</em></h2>
+          </div>
+          <p class="support-note">Uma coleção dinâmica ligada ao arquivo da personagem. Cada peça abre seus detalhes completos no GameTora.</p>
+        </header>
+        <div class="support-grid" id="supportGrid" data-reveal></div>
+      </div>
+    </section>
+
+    <section class="final" id="amuleto" aria-labelledby="finalTitle">
+      <div class="container final-grid">
+        <div class="omamori" data-scroll="enter" aria-hidden="true">
+          <svg viewBox="0 0 200 340">
+            <defs>
+              <linearGradient id="omaCloth" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f3a9c4"/><stop offset=".45" stop-color="#d85081"/><stop offset="1" stop-color="#9c2c5a"/></linearGradient>
+              <pattern id="omaDots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.4" fill="#fff" opacity=".22"/><circle cx="0" cy="0" r="1.4" fill="#fff" opacity=".22"/><circle cx="14" cy="14" r="1.4" fill="#fff" opacity=".22"/></pattern>
+            </defs>
+            <g class="sway">
+              <path d="M100 0v40" stroke="#ecd9ae" stroke-width="4"/>
+              <path d="M100 44c-26-20-40 4-18 14M100 44c26-20 40 4 18 14" fill="none" stroke="#ecd9ae" stroke-width="5" stroke-linecap="round"/>
+              <path d="M92 50l-10 34M108 50l10 34" stroke="#c9a15e" stroke-width="4" stroke-linecap="round"/>
+              <path d="M40 106 70 70h60l30 36v196a20 20 0 0 1-20 20H60a20 20 0 0 1-20-20z" fill="url(#omaCloth)"/>
+              <path d="M40 106 70 70h60l30 36v196a20 20 0 0 1-20 20H60a20 20 0 0 1-20-20z" fill="url(#omaDots)"/>
+              <path d="M50 110 74 80h52l24 30v188a14 14 0 0 1-14 14H64a14 14 0 0 1-14-14z" fill="none" stroke="#ecd9ae" stroke-width="2" stroke-dasharray="5 5" opacity=".8"/>
+              <circle cx="100" cy="72" r="9" fill="#c9a15e"/>
+              <rect x="70" y="128" width="60" height="150" rx="6" fill="#fffaf2"/>
+              <rect x="75" y="133" width="50" height="140" rx="4" fill="none" stroke="#c9a15e" stroke-width="1.5"/>
+              <text x="100" y="182" fill="#7e2149" font-family="Zen Maru Gothic, sans-serif" font-size="38" font-weight="700" text-anchor="middle">根</text>
+              <text x="100" y="230" fill="#7e2149" font-family="Zen Maru Gothic, sans-serif" font-size="38" font-weight="700" text-anchor="middle">気</text>
+              <text x="100" y="262" fill="#b83768" font-family="Zen Maru Gothic, sans-serif" font-size="14" font-weight="700" text-anchor="middle">守</text>
+            </g>
+          </svg>
+        </div>
+        <div class="final-copy" data-reveal>
+          <p class="section-kicker">Lifelong Wonder</p>
+          <h2 id="finalTitle">Devagar, e <em>sempre em frente.</em></h2>
+          <div class="proverb">
+            <strong lang="ja">石の上にも三年</strong>
+            <span>“Ishi no ue ni mo sannen” — até uma pedra fria esquenta, se você sentar nela por três anos.</span>
+          </div>
+          <p class="lede">O cavalo real que inspirou a Acute teve uma carreira longa nas pistas de terra: venceu a JBC Classic em 2011 e, aos oito anos, ainda conquistou a Kashiwa Kinen. Paciência também é uma forma de velocidade.</p>
+          <a class="button" href="#inicio">Voltar ao começo <span class="button-arrow" aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Fan page não oficial · Umamusume: Pretty Derby</p>
+      <p>Dados: <a href="https://umapyoi.net" target="_blank" rel="noopener noreferrer">Umapyoi API</a> · Cards: GameTora · Umamusume © Cygames</p>
+    </div>
+  </footer>
+
+  <script src="assets/uma-core.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      const CHARACTER_ID = 7879;
+      const GAME_ID = 1100;
+      const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
+      const $ = selector => document.querySelector(selector);
+
+      const DICTIONARY = {
+        "Relaxed, calm, and patient. A spirited Umamusume who never gives up.": "Tranquila, serena e paciente. Uma Umamusume cheia de garra que nunca desiste.",
+        "I'm Wonder Acute. I'm a slow learner, but I'm a hard worker. Please take care of me.": "Sou a Wonder Acute. Aprendo devagar, mas sou muito esforçada. Conto com você.",
+        "Bead crafts, decorative cutting of daikon": "Artesanato com miçangas e entalhes decorativos em daikon",
+        "Trendy western writing, wearables": "Palavras estrangeiras da moda e aparelhos vestíveis",
+        "Always respond to the sound of a gong.": "Sempre reagem ao som de um gongo.",
+        "Elegantly slips away from any touching attempts": "Escapa com elegância de qualquer tentativa de toque.",
+        "Her mother is the most relaxed person in her family.": "A mãe é a pessoa mais tranquila da família.",
+        "Unstable": "Instável"
+      };
+
+      const FALLBACK_GROUPS = Uma.normalizeGroups([
+        { label: "制服", label_en: "Uniform", images: [{ image: `${ASSETS}/0e3da657432c4ba8b13443833d4885c6/wonderacute_01.png` }] },
+        { label: "勝負服", label_en: "Racewear", images: [{ image: `${ASSETS}/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png` }] },
+        { label: "原案", label_en: "Concept Art", images: [{ image: `${ASSETS}/631ff5ebb0f044449b6f0229b8ba84dc/wonderacute_03.png` }] },
+        { label: "STARTING FUTURE", label_en: "Starting Future", images: [{ image: `${ASSETS}/3364c4376f014350abffc6595fb308bb/wonderacute_04.png` }] }
+      ]);
+
+      const FALLBACK_SUPPORTS = Uma.normalizeSupports([
+        { id: 30212, gametora: "30212-wonder-acute", rarity_string: "SSR", type: "Stamina", start_date: 1722222000, title: "[あの夏のキリトリ線]", title_en: "[That Summer's Cut-off Line]" },
+        { id: 30156, gametora: "30156-wonder-acute", rarity_string: "SSR", type: "Power", start_date: 1689908400, title: "[ライフロング・ワンダー]", title_en: "[Lifelong Wonder]" },
+        { id: 10093, gametora: "10093-wonder-acute", rarity_string: "R", type: "Power", start_date: 1689908400, title: "[トレセン学園]", title_en: "[Tracen Academy]" }
+      ]);
+
+      const FALLBACK_VOICE_IMAGE = "https://www.toho-ent.co.jp/wp-content/uploads/2019/02/%E9%A0%88%E8%97%A4%E5%8F%B6%E5%B8%8C2020.jpg";
+      const FALLBACK_VOICE_SAMPLE = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e3b6df0feb84cd892e1fb8df52d92ae/wonderacute_voice.mp3";
+
+      let groups = FALLBACK_GROUPS;
+      let activeGroup = 0;
+      let voiceSample = FALLBACK_VOICE_SAMPLE;
+
+      const findGroup = (list, labelEn) => list.find(group => group.labelEn === labelEn) ?? list[0];
+
+      function showPortraits(list) {
+        const racewear = findGroup(list, "Racewear")?.images ?? [];
+        const uniform = findGroup(list, "Uniform")?.images ?? [];
+        Uma.setImage($("#heroImage"), racewear, { widths: [480, 720, 960], sizes: "(max-width: 860px) 90vw, 46vw" });
+        Uma.setImage($("#raceImage"), racewear, { widths: [480, 720, 960], sizes: "(max-width: 860px) 90vw, 460px" });
+        if (document.documentElement.classList.contains("motion")) {
+          Uma.setImage($("#calmImage"), uniform, { widths: [480, 720, 960], sizes: "(max-width: 860px) 90vw, 460px" });
+        }
+      }
+
+      /* ----------------------------------------------------------- galeria */
+      const GALLERY_TEXT = {
+        "Uniform": "O uniforme da Tracen, com laço escuro e mangas curtas — o visual das tardes calmas entre aulas e chá.",
+        "Racewear": "O traje de corrida: casaco rosa, saia em listras suaves e o enfeite tricolor na orelha. Delicado por fora, decidido por dentro.",
+        "Concept Art": "A arte original, onde a serenidade e a determinação da Acute ganharam forma pela primeira vez.",
+        "Starting Future": "O figurino de palco de Starting Future — a Acute brilhando sob as luzes, no ritmo dela."
+      };
+
+      function renderGallery(index = activeGroup) {
+        activeGroup = index;
+        $("#galleryTabs").replaceChildren(...groups.map((group, groupIndex) => {
+          const button = Uma.el("button", "", group.label);
+          button.type = "button";
+          button.setAttribute("aria-pressed", String(groupIndex === index));
+          button.addEventListener("click", () => renderGallery(groupIndex));
+          return button;
+        }));
+
+        const group = groups[index];
+        if (!group) return;
+        $("#galleryNo").textContent = String(index + 1).padStart(2, "0");
+        $("#galleryTotal").textContent = String(groups.length).padStart(2, "0");
+        $("#galleryLabel").textContent = group.label;
+        $("#galleryJp").textContent = group.labelJp || group.labelEn;
+        $("#galleryText").textContent = GALLERY_TEXT[group.labelEn] || "Um visual oficial do arquivo da Umapyoi.";
+        $("#galleryCaption").textContent = group.label;
+
+        const figure = $("#galleryFeature");
+        const image = $("#galleryImage");
+        figure.classList.remove("has-image-error");
+        image.alt = `Wonder Acute — ${group.label}`;
+        image.classList.remove("is-loaded");
+        Uma.setImage(image, group.images, {
+          widths: [480, 720, 960],
+          sizes: "(max-width: 860px) 92vw, 56vw",
+          onFail: () => figure.classList.add("has-image-error")
+        });
+      }
+
+      /* ------------------------------------------------------------ cards */
+      function renderSupports(cards) {
+        $("#supportGrid").replaceChildren(...cards.map((card, index) => {
+          const link = Uma.el("a", `support-card rarity-${card.rarity.toLowerCase()}`);
+          link.href = card.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.style.setProperty("--d", `${index * 0.08}s`);
+          link.setAttribute("aria-label", `Abrir o support card ${card.title} no GameTora`);
+
+          const imageWrap = Uma.el("div", "support-image");
+          const image = document.createElement("img");
+          image.alt = "";
+          image.loading = "lazy";
+          image.width = 256;
+          image.height = 256;
+          Uma.setImage(image, [card.image], { onFail: () => imageWrap.append(Uma.el("span", "support-fallback", "茶")) });
+          imageWrap.append(image);
+
+          const body = Uma.el("div", "support-body");
+          const topline = Uma.el("div", "support-topline");
+          topline.append(Uma.el("span", "rarity", card.rarity), Uma.el("span", "support-type", card.type));
+          const meta = Uma.el("div", "support-meta");
+          meta.append(Uma.el("span", "", Uma.formatMonthYear(card.date)), Uma.el("span", "", `ID ${card.id}`));
+          body.append(topline, Uma.el("h3", "", card.title), meta);
+          link.append(imageWrap, body);
+          return link;
+        }));
+      }
+
+      /* ------------------------------------------------------------- som */
+      // Tudo sintetizado na hora (sem arquivos) e só depois de um clique do usuário.
+      let audioContext;
+      function audio() {
+        const Context = window.AudioContext || window.webkitAudioContext;
+        if (!Context) return null;
+        audioContext ||= new Context();
+        if (audioContext.state === "suspended") audioContext.resume();
+        return audioContext;
+      }
+
+      function beep() {
+        const context = audio();
+        if (!context) return;
+        const now = context.currentTime;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = "square";
+        oscillator.frequency.value = 1320;
+        gain.gain.setValueAtTime(0.025, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+        oscillator.connect(gain).connect(context.destination);
+        oscillator.start(now);
+        oscillator.stop(now + 0.08);
+      }
+
+      // Gongo: parciais inarmônicas com decaimento longo e leve queda de afinação.
+      function gong() {
+        const context = audio();
+        if (!context) return;
+        const now = context.currentTime;
+        const master = context.createGain();
+        master.gain.setValueAtTime(0.0001, now);
+        master.gain.exponentialRampToValueAtTime(0.16, now + 0.02);
+        master.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+        master.connect(context.destination);
+        [[1, 1], [1.47, 0.55], [2.09, 0.4], [2.76, 0.28], [3.9, 0.16], [5.1, 0.08]].forEach(([ratio, level]) => {
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          oscillator.frequency.setValueAtTime(98 * ratio, now);
+          oscillator.frequency.exponentialRampToValueAtTime(96 * ratio, now + 4);
+          gain.gain.setValueAtTime(level, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2 / Math.sqrt(ratio));
+          oscillator.connect(gain).connect(master);
+          oscillator.start(now);
+          oscillator.stop(now + 4.3);
+        });
+      }
+
+      function initGong() {
+        const card = $("#earCard");
+        let timer = 0;
+        $("#gongButton").addEventListener("click", () => {
+          gong();
+          card.classList.remove("is-ringing");
+          void card.offsetWidth; // reinicia a animação das orelhas
+          card.classList.add("is-ringing");
+          window.clearTimeout(timer);
+          timer = window.setTimeout(() => card.classList.remove("is-ringing"), 2600);
+        });
+      }
+
+      /* ------------------------------------------------------ voz oficial */
+      function initVoice() {
+        const button = $("#voicePlay");
+        const label = $("#voicePlayLabel");
+        let player;
+        const setPlaying = playing => {
+          button.setAttribute("aria-pressed", String(playing));
+          label.textContent = playing ? "Pausar" : "Ouvir a voz";
+        };
+        button.addEventListener("click", () => {
+          if (!player) {
+            player = new Audio(voiceSample);
+            player.addEventListener("ended", () => setPlaying(false));
+            player.addEventListener("pause", () => setPlaying(false));
+            player.addEventListener("playing", () => setPlaying(true));
+            player.addEventListener("error", () => {
+              label.textContent = "Áudio indisponível";
+              button.disabled = true;
+            });
+          }
+          if (player.paused) player.play().catch(() => setPlaying(false));
+          else player.pause();
+        });
+      }
+
+      /* ----------------------------------------------------- celular flip */
+      // "«" apaga o caractere anterior: ela erra, percebe, e corrige com calma.
+      const MESSAGES = [
+        "Oi! Aqui é a Acyte«««ute. Consegui abrir o celular sozinha ☺",
+        "Já almoçou? Coma direitinho, viu? E leve um casaquinho.",
+        "Amanhã tem treino cedo. Vou dormir às 21h, como sempre ♪",
+        "Como é que manda aquele desenho… o emoki««ji? Enfim: ♥",
+        "Não desista, tá bom? Devagar também se chega lá."
+      ];
+      const REPLIES = [
+        "Recebi! Levei um tempinho pra achar o botão de abrir, hehe. Obrigada ♥",
+        "Que mensagem bonita… Vou guardar. Como é que guarda mesmo?",
+        "Obrigada! Agora vá descansar, viu? Amanhã a gente treina ♪"
+      ];
+      const KEYS = [
+        ["1", ".,?!1", ".,?"], ["2", "abc2", "abc"], ["3", "def3", "def"],
+        ["4", "ghi4", "ghi"], ["5", "jkl5", "jkl"], ["6", "mno6", "mno"],
+        ["7", "pqrs7", "pqrs"], ["8", "tuv8", "tuv"], ["9", "wxyz9", "wxyz"],
+        ["*", "♥☺♪☆", "♥ ♪"], ["0", " 0", "espaço"], ["#", "", "Aa"]
+      ];
+      const MAX_DRAFT = 64;
+      const MULTI_TAP_MS = 900;
+
+      function initPhone() {
+        const phone = $("#phone");
+        const toggle = $("#phoneToggle");
+        const head = $("#lcdHead");
+        const body = $("#lcdBody");
+        const announce = $("#lcdAnnounce");
+        const shiftMark = $("#lcdShift");
+        const instant = Uma.reduceMotion;
+
+        let run = 0;
+        let mode = "demo";
+        let messageIndex = 0;
+        let draft = "";
+        let pending = false;
+        let lastKey = "";
+        let lastTime = 0;
+        let shift = false;
+        let shiftUsed = false;
+        let commitTimer = 0;
+        let touched = false;
+
+        const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+        const isOpen = () => !phone.classList.contains("is-closed");
+        const finalText = text => [...text].reduce((out, char) => (char === "«" ? out.slice(0, -1) : out + char), "");
+
+        function draw(text, pendingChar = "") {
+          const caret = Uma.el("span", "caret");
+          const nodes = [document.createTextNode(text)];
+          if (pendingChar) nodes.push(Uma.el("span", "pending", pendingChar));
+          body.replaceChildren(...nodes, caret);
+        }
+
+        function tick() {
+          const now = new Date();
+          const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+          $("#lcdClock").textContent = time;
+          $("#subClock").textContent = time;
+        }
+
+        async function typeOut(id, text) {
+          if (instant) {
+            draw(finalText(text));
+            return id === run;
+          }
+          let out = "";
+          for (let index = 0; index < text.length; index += 1) {
+            const char = text[index];
+            if (char === "«") {
+              if (text[index - 1] !== "«") await wait(620);
+              out = out.slice(0, -1);
+              await wait(170);
+            } else {
+              out += char;
+              await wait(char === " " ? 80 : /[.,?!…]/.test(char) ? 420 : 90 + Math.random() * 140);
+            }
+            if (id !== run) return false;
+            draw(out);
+          }
+          return true;
+        }
+
+        async function demo() {
+          const id = ++run;
+          mode = "demo";
+          while (id === run) {
+            head.textContent = "✎ Acute está digitando…";
+            draw("");
+            await wait(instant ? 0 : 700);
+            if (id !== run) return;
+            const message = MESSAGES[messageIndex];
+            if (!(await typeOut(id, message))) return;
+            head.textContent = "✉ Mensagem da Acute";
+            announce.textContent = `Mensagem da Acute: ${finalText(message)}`;
+            messageIndex = (messageIndex + 1) % MESSAGES.length;
+            if (instant) return;
+            await wait(2800);
+          }
+        }
+
+        // Confirma a letra em edição; a maiúscula vale só para a letra em que foi usada.
+        function commit() {
+          window.clearTimeout(commitTimer);
+          if (!pending) return;
+          pending = false;
+          if (shiftUsed) {
+            shift = shiftUsed = false;
+            shiftMark.classList.remove("is-on");
+          }
+          if (mode === "compose") draw(draft);
+        }
+
+        function startCompose() {
+          run += 1;
+          mode = "compose";
+          draft = "";
+          pending = false;
+          head.textContent = "✎ Responder à Acute";
+          draw("");
+        }
+
+        function press(key) {
+          if (!isOpen()) return;
+          beep();
+          if (mode !== "compose") startCompose();
+          if (key === "#") {
+            commit();
+            shift = !shift;
+            shiftMark.classList.toggle("is-on", shift);
+            return;
+          }
+          const chars = KEYS.find(([label]) => label === key)?.[1] ?? "";
+          const now = performance.now();
+          if (pending && lastKey === key && now - lastTime < MULTI_TAP_MS) {
+            const current = draft.slice(-1).toLowerCase();
+            const next = chars[(chars.indexOf(current) + 1) % chars.length];
+            draft = draft.slice(0, -1) + (shift ? next.toUpperCase() : next);
+          } else {
+            commit();
+            if (draft.length >= MAX_DRAFT) return;
+            draft += shift ? chars[0].toUpperCase() : chars[0];
+            shiftUsed = shift;
+            pending = true;
+          }
+          lastKey = key;
+          lastTime = now;
+          window.clearTimeout(commitTimer);
+          commitTimer = window.setTimeout(commit, MULTI_TAP_MS);
+          draw(draft.slice(0, -1), draft.slice(-1));
+        }
+
+        async function send() {
+          if (mode !== "compose" || !draft.trim()) return;
+          window.clearTimeout(commitTimer);
+          const id = ++run;
+          mode = "reply";
+          head.textContent = "✉ Enviando…";
+          await wait(instant ? 0 : 900);
+          if (id !== run) return;
+          head.textContent = "✓ Enviado! Aguardando…";
+          await wait(instant ? 0 : 1400);
+          if (id !== run) return;
+          head.textContent = "✎ Acute está respondendo…";
+          const reply = REPLIES[Math.floor(Math.random() * REPLIES.length)];
+          draw("");
+          if (!(await typeOut(id, reply))) return;
+          head.textContent = "✉ Resposta da Acute";
+          announce.textContent = `Resposta da Acute: ${reply}`;
+        }
+
+        function soft(action) {
+          if (!isOpen()) return;
+          beep();
+          if (action === "ok") {
+            commit();
+            send();
+          } else if (action === "back") {
+            commit();
+            demo();
+          } else if (action === "clear" && mode === "compose") {
+            commit();
+            draft = draft.slice(0, -1);
+            draw(draft);
+          }
+        }
+
+        function setOpen(open) {
+          phone.classList.toggle("is-closed", !open);
+          toggle.textContent = open ? "Fechar o celular" : "Abrir o celular";
+          toggle.setAttribute("aria-pressed", String(open));
+          if (!open) {
+            run += 1;
+            return;
+          }
+          const id = run;
+          window.setTimeout(() => {
+            if (id !== run || !isOpen()) return;
+            if (mode === "compose") draw(draft);
+            else demo();
+          }, instant ? 0 : 650);
+        }
+
+        // Teclado
+        $("#keypad").replaceChildren(...KEYS.map(([label, , hint]) => {
+          const button = Uma.el("button", "key");
+          button.type = "button";
+          button.dataset.key = label;
+          button.setAttribute("aria-label", label === "#" ? "Maiúscula" : label === "0" ? "0, espaço" : `${label}: ${hint}`);
+          button.append(Uma.el("b", "", label), Uma.el("small", "", hint));
+          button.addEventListener("click", () => press(label));
+          return button;
+        }));
+        phone.querySelectorAll("[data-soft]").forEach(button => button.addEventListener("click", () => soft(button.dataset.soft)));
+        toggle.addEventListener("click", () => {
+          touched = true;
+          setOpen(!isOpen());
+        });
+
+        // Teclado físico também funciona enquanto o foco está no celular.
+        phone.addEventListener("keydown", event => {
+          const key = event.key;
+          if (/^[0-9*#]$/.test(key)) {
+            event.preventDefault();
+            const button = phone.querySelector(`[data-key="${key}"]`);
+            button?.classList.add("is-down");
+            window.setTimeout(() => button?.classList.remove("is-down"), 120);
+            press(key);
+          } else if (key === "Backspace") {
+            event.preventDefault();
+            soft("clear");
+          }
+        });
+
+        tick();
+        window.setInterval(tick, 30000);
+
+        // Abre sozinho na primeira vez que aparece na tela.
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(entries => {
+            if (!entries[0].isIntersecting) return;
+            observer.disconnect();
+            if (!touched) window.setTimeout(() => setOpen(true), instant ? 0 : 450);
+          }, { threshold: 0.45 });
+          observer.observe(phone);
+        } else {
+          setOpen(true);
+        }
+      }
+
+      /* ------------------------------------------------------------ dados */
+      function render({ character, groups: apiGroups, supports, voice }) {
+        if (character) {
+          Uma.fillCharacter(character, DICTIONARY);
+          if (character.voice) voiceSample = Uma.normalizeUrl(character.voice) || voiceSample;
+        }
+        if (voice) Uma.fillVoice(voice);
+        Uma.setImage($("#voiceImage"), [voice?.image, FALLBACK_VOICE_IMAGE], { onFail: () => { $("#voiceImage").hidden = true; } });
+        if (apiGroups.length) {
+          groups = apiGroups;
+          showPortraits(groups);
+          renderGallery(Math.min(activeGroup, groups.length - 1));
+        }
+        if (supports.length) renderSupports(supports);
+      }
+
+      Uma.initSwitcher();
+      Uma.initReveal();
+      Uma.initScroll();
+      Uma.initScrollSpy(".main-nav a");
+      Uma.pauseWhenHidden($("#inicio"));
+      Uma.pauseWhenHidden($("#duelStage"));
+      Uma.pauseWhenHidden($("#amuleto"));
+
+      showPortraits(groups);
+      renderGallery(0);
+      renderSupports(FALLBACK_SUPPORTS);
+      initGong();
+      initVoice();
+      initPhone();
+
+      Uma.loadCharacter({ id: CHARACTER_ID, gameId: GAME_ID }).then(result => {
+        render(result);
+        Uma.status($("#apiDot"), $("#apiStatus"), result, {
+          full: "Chá servido · Umapyoi API",
+          partial: "Arquivo parcial · complementado localmente",
+          offline: "Modo offline · arquivo local ativo"
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

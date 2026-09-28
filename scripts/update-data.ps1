@@ -17,6 +17,7 @@ $Characters = [ordered]@{
   5509  = 1069  # Sakura Chiyono O (chiyo.html)
   7518  = 1087  # Aston Machan   (machan.html)
   10013 = 1091  # Vivlos         (vivlos.html)
+  7879  = 1100  # Wonder Acute   (acute.html)
 }
 
 $Client = New-Object System.Net.WebClient

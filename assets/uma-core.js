@@ -1,6 +1,6 @@
 /*
  * Uma Core — utilitários compartilhados pelas landing pages.
- * API Umapyoi (com cache e fallback via proxy da Vercel), imagens otimizadas,
+ * Dados da Umapyoi (snapshot local em data/, com a API ao vivo como reserva), imagens otimizadas,
  * preenchimento de campos, seletor de personagens, reveal e motor de scroll.
  */
 (function () {
@@ -134,10 +134,32 @@
   }
 
   /**
+   * Lê o snapshot local data/<id>.json (gerado por scripts/update-data.ps1):
+   * uma única requisição no mesmo domínio em vez de cinco à Umapyoi.
+   * Se o arquivo não estiver disponível, recorre à API ao vivo.
+   */
+  async function loadCharacter({ id, gameId }) {
+    try {
+      const snapshot = await request(`data/${id}.json`, 6000);
+      return {
+        character: unwrapObject(snapshot.character),
+        groups: normalizeGroups(snapshot.images),
+        supports: normalizeSupports(snapshot.supports),
+        voice: unwrapObject(snapshot.voice),
+        loaded: 4,
+        total: 4
+      };
+    } catch (error) {
+      console.warn("Snapshot local indisponível; usando a API Umapyoi.", error);
+      return loadCharacterLive({ id, gameId });
+    }
+  }
+
+  /**
    * Busca personagem, imagens, support cards e dubladora em paralelo.
    * Cada parte falha de forma independente; a página continua com o fallback local.
    */
-  async function loadCharacter({ id, gameId }) {
+  async function loadCharacterLive({ id, gameId }) {
     const requests = [
       api(`character/${id}`),
       api(`character/images/${id}`),

@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-uma="vivlos">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Landing page dedicada à Vivlos, de Umamusume: Pretty Derby — Dubai, mimos e muito brilho, com dados da API Umapyoi.">
   <meta name="theme-color" content="#060922">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Paddock · Uma Musume fan pages">
+  <meta property="og:title" content="Vivlos — Passport to Dubai">
+  <meta property="og:description" content="Landing page dedicada à Vivlos, de Umamusume: Pretty Derby — Dubai, mimos e muito brilho, com dados da API Umapyoi.">
+  <meta property="og:image" content="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/42c00789da90497ab39c67481cb7a455/vivlos_header.png?w=1200&amp;fm=jpg&amp;q=85">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Vivlos — Passport to Dubai</title>
+  <link rel="icon" type="image/png" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a72fd0cded7040da8c4873657fb624a3/vivlos_icon.png?w=64&amp;h=64&amp;fm=png&amp;mask=ellipse">
+  <link rel="apple-touch-icon" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a72fd0cded7040da8c4873657fb624a3/vivlos_icon.png?w=180&amp;h=180&amp;fm=png">
   <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +47,13 @@
       --muted: #62668f;
       --foil: linear-gradient(120deg, #a9812f 0%, #f5e5bb 24%, #e8c56f 44%, #fffbe8 52%, #e8c56f 62%, #a9812f 84%, #f5e5bb 100%);
       --shadow: 0 28px 70px rgba(17, 24, 77, .16);
+      --uma-display: "Italiana", serif;
+      --uv-line: rgba(64, 79, 177, .22);
+      --uv-ink: var(--royal-deep);
+      --uv-bg: #fff;
+      --uv-bg-hover: var(--lilac);
+      --uv-dot: var(--royal);
+      --uv-dot-ink: #fff;
 
       --sw-toggle-bg: rgba(255, 255, 255, .06);
       --sw-toggle-ink: #fff;
@@ -247,6 +263,7 @@
     .editorial h2 { margin: 12px 0 20px; font-size: clamp(2.6rem, 4.6vw, 4.6rem); }
     .editorial p { color: var(--muted); line-height: 1.85; }
     .editorial blockquote { margin-top: 22px; padding: 16px 18px; border-radius: 16px; color: var(--royal-deep); background: var(--lilac); font-family: "Italiana", serif; font-size: 1.3rem; line-height: 1.4; }
+    .editorial .uma-voice { margin-top: 14px; }
     .signature { margin-top: 20px; color: var(--royal); font-family: "Italiana", serif; font-size: 2rem; font-style: italic; }
 
     .badges { display: grid; align-content: start; gap: 14px; }
@@ -275,22 +292,90 @@
       100% { opacity: .82; transform: rotate(var(--r)); }
     }
 
-    /* ------------------------------------------------------ jornada (cena) */
-    .journey { --scene-h: 340vh; position: relative; color: #fff; background: var(--night); }
-    .journey-stage { position: relative; display: grid; min-height: 640px; }
-    .sky { position: absolute; inset: 0; }
-    .sky-tokyo { background: linear-gradient(180deg, #050826 0%, #141d5e 58%, #34398a 100%); }
-    .sky-sunset { background: linear-gradient(180deg, #27266a 0%, #a5528b 42%, #ff9f86 72%, #ffd6a3 100%); }
-    .sky-dubai { background: radial-gradient(ellipse at 70% 100%, rgba(232, 168, 111, .5), transparent 60%), linear-gradient(180deg, #03051c 0%, #111858 52%, #4a2b6c 86%); }
-    .journey-sun { position: absolute; left: 62%; top: 22%; width: clamp(110px, 16vw, 200px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff6d8 0 38%, #ffd08a 56%, rgba(255, 180, 135, 0) 72%); }
-    .journey-city { position: absolute; inset: auto 0 0; width: 100%; height: 46%; }
-    .city-tokyo { fill: #0a0f3a; }
-    .city-dubai .towers { fill: #070b30; }
-    .city-dubai .lights { fill: url(#windowLights); }
-    .city-dubai .spire { fill: var(--gold-light); }
-    .journey-plane { position: absolute; left: 0; top: 30%; width: clamp(54px, 7vw, 92px); color: #fff; }
-    .journey-plane::before { content: ""; position: absolute; right: 70%; top: 48%; width: 36vw; height: 2px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55)); }
-    .journey-plane svg { position: relative; display: block; width: 100%; height: auto; }
+    /* --------------------------------------------------- jornada (o voo) */
+    /*
+     * Um voo inteiro guiado pelo scroll: decolagem em Tóquio, subida pelas nuvens,
+     * cruzeiro no pôr do sol e descida na Dubai noturna. O JS transforma o progresso
+     * da cena em câmera, avião e nuvens; o CSS desenha e cuida das luzes que piscam.
+     */
+    .journey { --scene-h: 420vh; position: relative; color: #fff; background: var(--night); }
+    .journey-stage { position: relative; display: grid; min-height: 640px; overflow: hidden; isolation: isolate; }
+    .journey-stage.is-paused *, .journey-stage.is-paused *::after { animation-play-state: paused !important; }
+    .jy-world { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .jy-world > * { position: absolute; }
+    .jy-sky { inset: 0; }
+    .jy-sky-dusk { background: linear-gradient(180deg, #070b33 0%, #16216b 40%, #45428f 66%, #b9729f 86%, #f2a59a 100%); }
+    .jy-sky-sunset { opacity: 0; background: linear-gradient(180deg, #141a5c 0%, #3c2e84 22%, #94508f 44%, #ea7c8b 62%, #ffb487 77%, #ffe2a6 92%); }
+    .jy-sky-night { opacity: 0; background: radial-gradient(ellipse at 64% 100%, rgba(255, 170, 120, .34), transparent 58%), linear-gradient(180deg, #02041a 0%, #0a1048 46%, #291d60 78%, #59306d 100%); }
+    .jy-stars { inset: 0 0 32%; opacity: .45; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Ccircle cx='334.1' cy='338.8' r='0.8' fill='%23fff' opacity='0.87'/%3E%3Ccircle cx='450.7' cy='277.8' r='0.6' fill='%23c9f2ff' opacity='0.59'/%3E%3Ccircle cx='521.7' cy='176.2' r='1.1' fill='%23c9f2ff' opacity='0.80'/%3E%3Ccircle cx='438' cy='304.2' r='0.7' fill='%23c9f2ff' opacity='0.48'/%3E%3Ccircle cx='520.1' cy='367.6' r='0.7' fill='%23c9f2ff' opacity='0.74'/%3E%3Ccircle cx='513.1' cy='288' r='0.8' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='408.8' cy='129.9' r='0.6' fill='%23fff' opacity='0.92'/%3E%3Ccircle cx='409.7' cy='252' r='1.4' fill='%23c9f2ff' opacity='0.90'/%3E%3Ccircle cx='588.8' cy='7.5' r='0.8' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='472.9' cy='21.1' r='0.9' fill='%23fff' opacity='0.88'/%3E%3Ccircle cx='555.4' cy='100.4' r='1.1' fill='%23fff' opacity='0.59'/%3E%3Ccircle cx='612.7' cy='24.4' r='0.6' fill='%23f8e7b5' opacity='0.56'/%3E%3Ccircle cx='386.5' cy='233.3' r='1.1' fill='%23c9f2ff' opacity='0.59'/%3E%3Ccircle cx='196.9' cy='146.1' r='0.7' fill='%23fff' opacity='0.95'/%3E%3Ccircle cx='370.1' cy='114.5' r='0.6' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='12.3' cy='312.8' r='0.9' fill='%23f8e7b5' opacity='0.85'/%3E%3Ccircle cx='198.3' cy='31.5' r='1.4' fill='%23c9f2ff' opacity='0.46'/%3E%3Ccircle cx='361.1' cy='288.1' r='0.9' fill='%23fff' opacity='0.97'/%3E%3Ccircle cx='626.3' cy='342.9' r='0.7' fill='%23fff' opacity='0.59'/%3E%3Ccircle cx='96.5' cy='46.4' r='0.7' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='195.3' cy='373.7' r='0.8' fill='%23c9f2ff' opacity='0.48'/%3E%3Ccircle cx='592.6' cy='39' r='0.8' fill='%23c9f2ff' opacity='0.81'/%3E%3Ccircle cx='258.4' cy='31.5' r='0.6' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='144' cy='402.3' r='1.1' fill='%23fff' opacity='0.61'/%3E%3Ccircle cx='463.9' cy='204.5' r='0.9' fill='%23c9f2ff' opacity='0.57'/%3E%3Ccircle cx='261' cy='263.3' r='0.6' fill='%23c9f2ff' opacity='0.86'/%3E%3Ccircle cx='146.6' cy='133.7' r='0.7' fill='%23c9f2ff' opacity='0.78'/%3E%3Ccircle cx='615.4' cy='242.8' r='1.1' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='210.4' cy='243' r='1.1' fill='%23fff' opacity='0.62'/%3E%3Ccircle cx='110.2' cy='408.5' r='0.7' fill='%23fff' opacity='0.65'/%3E%3Ccircle cx='378.6' cy='217.8' r='1.1' fill='%23fff' opacity='0.97'/%3E%3Ccircle cx='575.1' cy='232.5' r='0.7' fill='%23fff' opacity='0.70'/%3E%3Ccircle cx='322.7' cy='225.2' r='0.9' fill='%23fff' opacity='0.61'/%3E%3Ccircle cx='117.8' cy='3.4' r='0.9' fill='%23fff' opacity='0.63'/%3E%3Ccircle cx='33.2' cy='41.4' r='1.4' fill='%23f8e7b5' opacity='0.47'/%3E%3Ccircle cx='301.9' cy='380.6' r='1.1' fill='%23fff' opacity='0.88'/%3E%3Ccircle cx='497.9' cy='344.4' r='0.6' fill='%23fff' opacity='0.90'/%3E%3Ccircle cx='591.4' cy='364.3' r='0.6' fill='%23c9f2ff' opacity='0.89'/%3E%3Ccircle cx='274' cy='24.5' r='1.1' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='167.9' cy='149.9' r='1.1' fill='%23fff' opacity='1.00'/%3E%3Ccircle cx='266.7' cy='383.4' r='1.1' fill='%23f8e7b5' opacity='0.64'/%3E%3Ccircle cx='484.9' cy='348.8' r='0.6' fill='%23f8e7b5' opacity='0.93'/%3E%3Ccircle cx='208.2' cy='49.3' r='0.7' fill='%23fff' opacity='0.58'/%3E%3Ccircle cx='316.5' cy='119' r='0.6' fill='%23fff' opacity='0.49'/%3E%3Ccircle cx='269.1' cy='287.6' r='0.9' fill='%23fff' opacity='0.57'/%3E%3Ccircle cx='630.1' cy='330.6' r='0.7' fill='%23f8e7b5' opacity='0.50'/%3E%3C/svg%3E") 0 0 / 640px 420px; }
+    .jy-stars::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Ccircle cx='334.1' cy='338.8' r='0.8' fill='%23fff' opacity='0.87'/%3E%3Ccircle cx='450.7' cy='277.8' r='0.6' fill='%23c9f2ff' opacity='0.59'/%3E%3Ccircle cx='521.7' cy='176.2' r='1.1' fill='%23c9f2ff' opacity='0.80'/%3E%3Ccircle cx='438' cy='304.2' r='0.7' fill='%23c9f2ff' opacity='0.48'/%3E%3Ccircle cx='520.1' cy='367.6' r='0.7' fill='%23c9f2ff' opacity='0.74'/%3E%3Ccircle cx='513.1' cy='288' r='0.8' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='408.8' cy='129.9' r='0.6' fill='%23fff' opacity='0.92'/%3E%3Ccircle cx='409.7' cy='252' r='1.4' fill='%23c9f2ff' opacity='0.90'/%3E%3Ccircle cx='588.8' cy='7.5' r='0.8' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='472.9' cy='21.1' r='0.9' fill='%23fff' opacity='0.88'/%3E%3Ccircle cx='555.4' cy='100.4' r='1.1' fill='%23fff' opacity='0.59'/%3E%3Ccircle cx='612.7' cy='24.4' r='0.6' fill='%23f8e7b5' opacity='0.56'/%3E%3Ccircle cx='386.5' cy='233.3' r='1.1' fill='%23c9f2ff' opacity='0.59'/%3E%3Ccircle cx='196.9' cy='146.1' r='0.7' fill='%23fff' opacity='0.95'/%3E%3Ccircle cx='370.1' cy='114.5' r='0.6' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='12.3' cy='312.8' r='0.9' fill='%23f8e7b5' opacity='0.85'/%3E%3Ccircle cx='198.3' cy='31.5' r='1.4' fill='%23c9f2ff' opacity='0.46'/%3E%3Ccircle cx='361.1' cy='288.1' r='0.9' fill='%23fff' opacity='0.97'/%3E%3Ccircle cx='626.3' cy='342.9' r='0.7' fill='%23fff' opacity='0.59'/%3E%3Ccircle cx='96.5' cy='46.4' r='0.7' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='195.3' cy='373.7' r='0.8' fill='%23c9f2ff' opacity='0.48'/%3E%3Ccircle cx='592.6' cy='39' r='0.8' fill='%23c9f2ff' opacity='0.81'/%3E%3Ccircle cx='258.4' cy='31.5' r='0.6' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='144' cy='402.3' r='1.1' fill='%23fff' opacity='0.61'/%3E%3Ccircle cx='463.9' cy='204.5' r='0.9' fill='%23c9f2ff' opacity='0.57'/%3E%3Ccircle cx='261' cy='263.3' r='0.6' fill='%23c9f2ff' opacity='0.86'/%3E%3Ccircle cx='146.6' cy='133.7' r='0.7' fill='%23c9f2ff' opacity='0.78'/%3E%3Ccircle cx='615.4' cy='242.8' r='1.1' fill='%23fff' opacity='0.94'/%3E%3Ccircle cx='210.4' cy='243' r='1.1' fill='%23fff' opacity='0.62'/%3E%3Ccircle cx='110.2' cy='408.5' r='0.7' fill='%23fff' opacity='0.65'/%3E%3Ccircle cx='378.6' cy='217.8' r='1.1' fill='%23fff' opacity='0.97'/%3E%3Ccircle cx='575.1' cy='232.5' r='0.7' fill='%23fff' opacity='0.70'/%3E%3Ccircle cx='322.7' cy='225.2' r='0.9' fill='%23fff' opacity='0.61'/%3E%3Ccircle cx='117.8' cy='3.4' r='0.9' fill='%23fff' opacity='0.63'/%3E%3Ccircle cx='33.2' cy='41.4' r='1.4' fill='%23f8e7b5' opacity='0.47'/%3E%3Ccircle cx='301.9' cy='380.6' r='1.1' fill='%23fff' opacity='0.88'/%3E%3Ccircle cx='497.9' cy='344.4' r='0.6' fill='%23fff' opacity='0.90'/%3E%3Ccircle cx='591.4' cy='364.3' r='0.6' fill='%23c9f2ff' opacity='0.89'/%3E%3Ccircle cx='274' cy='24.5' r='1.1' fill='%23fff' opacity='0.99'/%3E%3Ccircle cx='167.9' cy='149.9' r='1.1' fill='%23fff' opacity='1.00'/%3E%3Ccircle cx='266.7' cy='383.4' r='1.1' fill='%23f8e7b5' opacity='0.64'/%3E%3Ccircle cx='484.9' cy='348.8' r='0.6' fill='%23f8e7b5' opacity='0.93'/%3E%3Ccircle cx='208.2' cy='49.3' r='0.7' fill='%23fff' opacity='0.58'/%3E%3Ccircle cx='316.5' cy='119' r='0.6' fill='%23fff' opacity='0.49'/%3E%3Ccircle cx='269.1' cy='287.6' r='0.9' fill='%23fff' opacity='0.57'/%3E%3Ccircle cx='630.1' cy='330.6' r='0.7' fill='%23f8e7b5' opacity='0.50'/%3E%3C/svg%3E") 230px 150px / 640px 420px; animation: starPulse 4.6s ease-in-out infinite; }
+    @keyframes starPulse { 50% { opacity: .15; } }
+    /* Estrela cadente de vez em quando, só no céu de Dubai */
+    .jy-meteor { left: 58%; top: 16%; width: 170px; height: 2px; opacity: 0; transform: rotate(-22deg); }
+    .jy-meteor::before { content: ""; position: absolute; inset: 0; border-radius: 2px; background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff 85%, rgba(255, 255, 255, 0)); opacity: 0; animation: meteor 7s ease-out 1.5s infinite; }
+    @keyframes meteor { 0% { opacity: 0; transform: translateX(120%) scaleX(.3); } 3% { opacity: 1; } 11%, 100% { opacity: 0; transform: translateX(-150%) scaleX(1); } }
+    /* O sol é um ponto: o disco e o reflexo saem dele */
+    .jy-sun { left: 0; top: 0; opacity: 0; }
+    .jy-sun::before, .jy-sun::after { content: ""; position: absolute; transform: translate(-50%, -50%); }
+    .jy-sun::before { width: clamp(130px, 15vw, 220px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fffbe8 0 27%, #ffe6a8 38%, rgba(255, 186, 130, .62) 52%, rgba(255, 150, 120, 0) 71%); }
+    .jy-sun::after { width: 60vw; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, rgba(255, 238, 205, .5), transparent); }
+    .jy-moon { right: 11%; top: 15%; width: clamp(44px, 4.6vw, 66px); opacity: 0; filter: drop-shadow(0 0 16px rgba(255, 240, 205, .5)); }
+    /* Fogos sobre Dubai: só no fim do voo */
+    .jy-fireworks { inset: 0; }
+    .jy-burst { position: absolute; width: clamp(96px, 11vw, 168px); aspect-ratio: 1; opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+    .jy-burst:nth-child(1) { left: 60%; top: 27%; color: #f8e7b5; }
+    .jy-burst:nth-child(2) { left: 77%; top: 21%; color: #ff9cc8; }
+    .jy-burst:nth-child(3) { left: 90%; top: 35%; color: #9fe7f2; }
+    .jy-burst:nth-child(4) { left: 69%; top: 43%; color: #fff; }
+    .jy-burst svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .is-finale .jy-burst { animation: burst 2.6s cubic-bezier(.16, .8, .3, 1) infinite; }
+    .is-finale .jy-burst:nth-child(2) { animation-delay: .65s; }
+    .is-finale .jy-burst:nth-child(3) { animation-delay: 1.3s; }
+    .is-finale .jy-burst:nth-child(4) { animation-delay: 1.9s; }
+    @keyframes burst {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.15); }
+      10% { opacity: 1; }
+      55% { opacity: .9; }
+      100% { opacity: 0; transform: translate(-50%, -38%) scale(1.15); }
+    }
+    .jy-fuji { left: 42%; bottom: 22%; width: min(66%, 940px); }
+    .jy-fuji svg, .jy-meydan svg { display: block; width: 100%; height: auto; }
+    .jy-city { left: 0; right: 0; bottom: 0; }
+    .jy-city svg { display: block; width: 100%; height: 100%; }
+    .jy-tokyo { height: 44%; }
+    .jy-dubai { height: 50%; }
+    .blink { animation: blink 1.6s linear infinite; }
+    @keyframes blink { 0%, 12% { opacity: 1; } 13%, 100% { opacity: .15; } }
+    /* Pista de Haneda: as luzes correm para trás na corrida de decolagem */
+    .jy-runway { left: 0; right: 0; bottom: 0; height: clamp(44px, 6.4vh, 62px); overflow: hidden; background: linear-gradient(180deg, #1a1f4d, #0b0f2e 26%, #060920); box-shadow: 0 -1px 0 rgba(255, 255, 255, .1); }
+    .jy-runway-lights { position: absolute; inset: 0 auto 0 0; width: calc(100% + 160px); background: radial-gradient(circle, #fff3cc 0 1.6px, rgba(255, 214, 140, .45) 2.6px, transparent 5px) 0 2px / 80px 10px repeat-x, linear-gradient(90deg, rgba(255, 255, 255, .75) 0 38px, transparent 38px) 0 58% / 160px 3px repeat-x, radial-gradient(circle, #9fe7ff 0 1.4px, rgba(132, 212, 227, .4) 2.4px, transparent 4.6px) 40px calc(100% - 3px) / 80px 10px repeat-x; }
+    .jy-meydan { right: 0; bottom: 0; width: min(74%, 1080px); }
+    /* Nuvens: faixas que se repetem sem emenda; a camada "lit" é a luz do pôr do sol */
+    .jy-clouds { left: 0; right: 0; top: 56%; height: 52%; }
+    .jy-clouds-front { top: 66%; height: 42%; }
+    .jy-cloud-strip { position: absolute; inset: 0 auto 0 0; }
+    .jy-cloud-drift { height: 100%; animation: cloudDrift 160s linear infinite; }
+    .jy-clouds-front .jy-cloud-drift { animation-duration: 100s; }
+    .jy-cloud-drift svg { display: block; width: 100%; height: 100%; }
+    .jy-clouds .lit { opacity: var(--sunlit, 0); }
+    @keyframes cloudDrift { to { transform: translateX(calc(var(--tile, 1000px) * -1)); } }
+    .jy-mist { inset: 0; opacity: 0; background: radial-gradient(ellipse at 60% 45%, rgba(248, 243, 255, .94), rgba(212, 204, 242, .86) 60%, rgba(186, 176, 232, .8)); }
+    /* O jato: o ponto de apoio é o trem principal, então ele gira sobre as rodas ao decolar */
+    .jy-plane { left: 0; top: 0; width: clamp(180px, 22vw, 330px); transform-origin: 0 0; will-change: transform; }
+    .jy-bob { position: relative; }
+    .is-cruising .jy-bob { animation: jetBob 4.8s ease-in-out infinite; }
+    @keyframes jetBob { 50% { transform: translateY(-5px) rotate(-.7deg); } }
+    .jy-jet { position: absolute; left: 0; top: 0; width: 100%; height: auto; overflow: visible; transform: translate(-56.9%, -83.2%); }
+    .jy-jet .gear { transform-box: fill-box; transform-origin: 50% 0; transition: transform .7s var(--ease-out), opacity .45s ease; }
+    .gear-up .jy-jet .gear { opacity: 0; transform: translateY(-4px) scaleY(.2); }
+    .jy-jet .beam { opacity: 0; transition: opacity .6s ease; }
+    .lights-on .jy-jet .beam { opacity: 1; }
+    .jy-jet .trail { opacity: var(--trail, 0); }
+    .jy-jet .win rect { fill: #2c3577; transition: fill .8s ease; }
+    .is-night .jy-jet .win rect { fill: #ffe3a3; }
+    .jy-jet .beacon { animation: blink 1.25s linear infinite; }
+    .jy-jet .strobe { animation: strobe 1.8s linear infinite; }
+    @keyframes strobe { 0%, 4% { opacity: 1; } 5%, 10% { opacity: 0; } 11%, 15% { opacity: 1; } 16%, 100% { opacity: 0; } }
 
     .journey-copy { position: relative; z-index: 2; align-self: center; width: min(470px, calc(100% - 40px)); margin-left: max(20px, calc((100% - 1240px) / 2)); padding: 30px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 26px; background: rgba(6, 9, 34, .8); box-shadow: 0 30px 60px rgba(0, 0, 0, .25); }
     .journey-copy .kicker { color: var(--gold); }
@@ -302,18 +387,15 @@
     .beat p { color: rgba(255, 255, 255, .74); line-height: 1.7; }
     .journey-dots { display: none; gap: 8px; margin-top: 18px; }
     .journey-dots span { width: 26px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .22); transition: background .4s ease, width .4s var(--ease-out); }
+    /* Painel de voo: altitude, velocidade e quanto falta, conforme o scroll */
+    .jy-readout { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .12); }
+    .jy-readout dt { color: rgba(255, 255, 255, .5); font-size: .58rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .jy-readout dd { margin-top: 4px; color: var(--gold-light); font-size: .95rem; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-    /* Sem movimento: a cena vira um bloco estático com todos os trechos */
-    html:not(.motion) .journey-stage { padding: 110px 0 260px; }
-    html:not(.motion) .sky-tokyo, html:not(.motion) .journey-sun, html:not(.motion) .city-tokyo, html:not(.motion) .journey-plane { display: none; }
-    html:not(.motion) .sky-sunset { opacity: .35; }
+    /* Sem movimento: a cena vira um quadro só (o cruzeiro no pôr do sol) com todos os trechos */
+    html:not(.motion) .journey-stage { padding: 110px 0 300px; }
+    html:not(.motion) .jy-runway, html:not(.motion) .jy-readout { display: none; }
 
-    .motion .sky-sunset { opacity: clamp(0, calc((var(--p, 0) - .18) * 3.2), 1); }
-    .motion .sky-dubai { opacity: clamp(0, calc((var(--p, 0) - .6) * 3.2), 1); }
-    .motion .journey-sun { transform: translate3d(0, calc(var(--p, 0) * 190%), 0); opacity: clamp(0, calc(1 - (var(--p, 0) - .55) * 3.4), 1); }
-    .motion .city-tokyo { transform: translate3d(0, calc(var(--p, 0) * 120%), 0); }
-    .motion .city-dubai { transform: translate3d(0, calc((1 - clamp(0, calc((var(--p, 0) - .45) * 2), 1)) * 100%), 0); }
-    .motion .journey-plane { transform: translate3d(calc(-15vw + var(--p, 0) * 125vw), calc(var(--p, 0) * -110px), 0) rotate(-8deg); }
     .motion .journey .beats { grid-template-areas: "beat"; }
     .motion .journey .beat { grid-area: beat; border-top: 0; padding-block: 0; opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s var(--ease-out); pointer-events: none; }
     .motion .journey:not([data-step]) .beat:nth-child(1),
@@ -470,9 +552,17 @@
       .lookbook-stage img { height: 100%; }
       .journey-copy { align-self: start; margin: 104px auto 0; padding: 22px; }
       .journey-copy h2 { margin-bottom: 14px; font-size: clamp(2.2rem, 10vw, 3rem); }
-      .journey-city { height: 36%; }
-      .motion .journey-plane { top: 62%; }
-      .journey-sun { left: 58%; top: 60%; width: 96px; }
+      .jy-tokyo, .jy-dubai { height: 40%; }
+      .jy-fuji { left: -16%; bottom: 26%; width: 132%; }
+      .jy-clouds { top: 72%; height: 34%; }
+      .jy-clouds-front { top: 80%; height: 26%; }
+      .jy-meydan { left: -34%; right: auto; width: 168%; }
+      .jy-moon { top: 59%; right: 7%; width: 40px; }
+      .jy-burst { width: 82px; }
+      .jy-burst:nth-child(1) { left: 22%; top: 65%; }
+      .jy-burst:nth-child(2) { left: 55%; top: 63%; }
+      .jy-burst:nth-child(3) { left: 84%; top: 68%; }
+      .jy-burst:nth-child(4) { left: 40%; top: 71%; }
       html:not(.motion) .journey-copy { margin-top: 0; }
     }
 
@@ -500,10 +590,12 @@
       .support-card { flex-basis: 100%; max-width: 330px; }
       .beat h3 { font-size: 1.45rem; }
       .beat p { font-size: .92rem; }
+      .jy-readout { gap: 6px; margin-top: 14px; padding-top: 12px; }
+      .jy-readout dd { font-size: .82rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .wheel-spin, .wave, .twinkle, .yacht-tag { animation: none; }
+      .wheel-spin, .wave, .twinkle, .yacht-tag, .jy-stars::after, .jy-meteor::before, .jy-cloud-drift, .jy-bob, .blink, .jy-jet .beacon, .jy-jet .strobe, .jy-burst { animation: none; }
     }
   </style>
 </head>
@@ -553,6 +645,18 @@
       <symbol id="plane" viewBox="0 0 64 32">
         <path transform="matrix(-1 0 0 1 64 0)" fill="currentColor" d="M2 17.5c0-1.2 1-2 2.2-2h14.6L31 2.6c.5-.5 1.1-.8 1.8-.8h3.4c.8 0 1.3.8 1 1.5L31.5 15.5h17.8l5.6-6.2c.4-.4.9-.7 1.5-.7h3.2c.7 0 1.2.7.9 1.4l-3.4 8.2 3.4 8.2c.3.7-.2 1.4-.9 1.4h-3.2c-.6 0-1.1-.3-1.5-.7l-5.6-6.2H31.5l5.7 12.2c.3.7-.2 1.5-1 1.5h-3.4c-.7 0-1.3-.3-1.8-.8L18.8 19.5H4.2c-1.2 0-2.2-.8-2.2-2Z"/>
       </symbol>
+      <!-- jornada: blocos de nuvem (proporção 2:1, emendam nas pontas) e a explosão dos fogos -->
+      <linearGradient id="cloudFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3a4d6"/><stop offset=".2" stop-color="#7778b8"/><stop offset=".55" stop-color="#474a8e"/><stop offset="1" stop-color="#262a64"/></linearGradient>
+      <linearGradient id="cloudFarLit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd8bf"/><stop offset=".18" stop-color="#eba3b4"/><stop offset=".5" stop-color="#9b73b0"/><stop offset="1" stop-color="#4b4387"/></linearGradient>
+      <linearGradient id="cloudNear" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bae6"/><stop offset=".16" stop-color="#8586c6"/><stop offset=".5" stop-color="#3d4087"/><stop offset="1" stop-color="#1c1f55"/></linearGradient>
+      <linearGradient id="cloudNearLit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9cc"/><stop offset=".12" stop-color="#ffbfa8"/><stop offset=".34" stop-color="#e494b2"/><stop offset=".66" stop-color="#8a62a6"/><stop offset="1" stop-color="#40367c"/></linearGradient>
+      <symbol id="cloudBack" viewBox="0 0 1200 600"><path d="M0 118A51 51 0 0 1 89.1 109.6A35.9 35.9 0 0 1 155.7 118.9A32.9 32.9 0 0 1 220.9 118.2A50.5 50.5 0 0 1 319.9 107.7A50.4 50.4 0 0 1 418.1 125.8A48.4 48.4 0 0 1 498.2 121.1A68 68 0 0 1 610.1 115.5A34.1 34.1 0 0 1 674.3 126.6A39 39 0 0 1 747.3 108.8A75.3 75.3 0 0 1 880.8 110.3A65.8 65.8 0 0 1 998.3 114.9A34.3 34.3 0 0 1 1063.9 107.4A74.4 74.4 0 0 1 1200 118V520A33.7 33.7 0 0 1 1144.3 521A35.6 35.6 0 0 1 1089.3 523.5A32.2 32.2 0 0 1 1037.1 520.9A48.2 48.2 0 0 1 953.3 522.8A53.2 53.2 0 0 1 864.3 515.4A47.5 47.5 0 0 1 786.5 515.8A27.6 27.6 0 0 1 744.5 522A39.8 39.8 0 0 1 675.9 524.5A46.8 46.8 0 0 1 601.1 521.1A43.4 43.4 0 0 1 538.3 524.1A34.1 34.1 0 0 1 474.6 522A52.5 52.5 0 0 1 399.5 521.8A48.1 48.1 0 0 1 318.4 517.4A44.5 44.5 0 0 1 245 514.3A25.9 25.9 0 0 1 196.6 515.4A44.6 44.6 0 0 1 118.2 515.6A32.1 32.1 0 0 1 58.6 524.5A36.4 36.4 0 0 1 0 520Z"/></symbol>
+      <symbol id="cloudFront" viewBox="0 0 1200 600"><path d="M0 96A81.5 81.5 0 0 1 143.1 103.6A109.8 109.8 0 0 1 330.2 84.6A129.5 129.5 0 0 1 563.3 96.5A82.8 82.8 0 0 1 716.3 76.1A118.6 118.6 0 0 1 918.3 78.8A77 77 0 0 1 1070.8 85.3A75.1 75.1 0 0 1 1200 96V540A59.7 59.7 0 0 1 1087.5 541.4A43.5 43.5 0 0 1 1007.8 540A64.7 64.7 0 0 1 890.6 538.4A75 75 0 0 1 781.6 535.5A51 51 0 0 1 694.4 540.6A47.3 47.3 0 0 1 605.3 536.2A74.1 74.1 0 0 1 493.4 536.8A49.4 49.4 0 0 1 420.9 545.6A66 66 0 0 1 315.6 543.2A63.1 63.1 0 0 1 211.8 535.5A75.3 75.3 0 0 1 102.2 536.4A61 61 0 0 1 0 540Z"/></symbol>
+      <g id="burstShape">
+        <path d="M0 -12L0 -36M6 -10.4L18 -31.2M10.4 -6L31.2 -18M12 0L36 0M10.4 6L31.2 18M6 10.4L18 31.2M0 12L0 36M-6 10.4L-18 31.2M-10.4 6L-31.2 18M-12 0L-36 0M-10.4 -6L-31.2 -18M-6 -10.4L-18 -31.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <g fill="currentColor"><circle cy="-44" r="2.2"/><circle cx="22" cy="-38.1" r="2.2"/><circle cx="38.1" cy="-22" r="2.2"/><circle cx="44" r="2.2"/><circle cx="38.1" cy="22" r="2.2"/><circle cx="22" cy="38.1" r="2.2"/><circle cy="44" r="2.2"/><circle cx="-22" cy="38.1" r="2.2"/><circle cx="-38.1" cy="22" r="2.2"/><circle cx="-44" r="2.2"/><circle cx="-38.1" cy="-22" r="2.2"/><circle cx="-22" cy="-38.1" r="2.2"/></g>
+        <circle r="5" fill="currentColor" opacity=".55"/>
+      </g>
       <symbol id="dubaiTowers" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
         <path d="M0 320V250h48v70zM52 320V214h36v106zM92 320V236h54v84zM150 320V190h30v130zM184 320V244h40v76zM228 320V120c2-50 26-82 44-94 12 34 20 82 20 150v144zM300 320V230h46v90zM350 320V176h28v144zM382 320V206h42v114zM428 320V150h24v170zM456 320V226h58v94zM518 320V160l22-30v190zM546 320V174l18-24v170zM570 320V236h40v84zM614 320V196h34v124zM652 320V140h26v180zM682 320V218h52v102zM738 320V168h30v152zM772 320V240h44v80zM820 320V120h8l6-18 6 18h8v200zM860 320V208h38v112zM902 320V178h30v142zM936 320V232h30v88zM972 320v-58h10v-48h8v-54h7v-56h6V58h4V16l3-16 3 16v42h4v46h6v56h7v54h8v48h10v58zM1054 320V222h42v98zM1100 320V176h30v144zM1134 320V140h22v180zM1160 320V204h48v116zM1212 320V160c0-18 28-18 28 0v160zM1244 320V236h44v84zM1292 320V186h28v134zM1324 320V226h54v94zM1382 320V200h30v120zM1416 320V244h24v76z"/>
       </symbol>
@@ -579,15 +683,7 @@
             <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
               <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
             </button>
-            <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
-              <p class="switcher-label">Trocar personagem</p>
-              <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
-              <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
-              <a href="chiyo.html" style="--c:#f9879d">Sakura Chiyono O</a>
-              <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
-              <a href="vivlos.html" style="--c:#404fb1" aria-current="page">Vivlos <small>Atual</small></a>
-              <a href="acute.html" style="--c:#d85081">Wonder Acute</a>
-            </nav>
+            <nav class="switcher-panel" id="switcherPanel" aria-label="Personagens"></nav>
           </div>
         </div>
       </div>
@@ -674,6 +770,7 @@
             ela realmente pretende chegar às maiores pistas do mundo.
           </p>
           <blockquote data-field="profile">Eu sou a Vivlos! Um dia vou ser uma celebridade correndo na cintilante Dubai!♪ E você vem comigo, sem desculpas!♪</blockquote>
+          <button class="uma-voice" type="button" id="voicePlay"><span class="uma-voice-icon" aria-hidden="true"></span><span data-voice-label>Ouvir a Vivlos ♪</span></button>
           <div class="signature">Vivlos ♡</div>
         </article>
 
@@ -716,20 +813,211 @@
     </section>
 
     <section class="journey scene" id="jornada" data-scroll="sticky" data-steps="3" aria-labelledby="journeyTitle">
-      <div class="scene-stage journey-stage">
-        <div class="sky sky-tokyo" aria-hidden="true"></div>
-        <div class="sky sky-sunset" aria-hidden="true"></div>
-        <div class="sky sky-dubai" aria-hidden="true"></div>
-        <div class="journey-sun" aria-hidden="true"></div>
-        <svg class="journey-city city-tokyo" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <path d="M0 320V236h60v84zM70 320V200h44v120zM124 320V250h70v70zM206 320V176h38v144zM252 320V226h64v94zM326 320V190h30v130zM366 320V240h52v80zM430 320V160h34v160zM474 320V214h60v106zM546 320V250h40v70zM600 320l40-150h-8v-8h14l12-72h-6v-8h12l6-50 2-24 2 24 6 50h12v8h-6l12 72h14v8h-8l40 150h-22l-24-100h-52l-24 100zM790 320V206h44v114zM846 320V170h30v150zM886 320V236h62v84zM960 320V120l4-30 4 30v200zM982 320V190h48v130zM1040 320V226h40v94zM1092 320V168h34v152zM1136 320V244h56v76zM1204 320V196h30v124zM1246 320V230h60v90zM1316 320V180h36v140zM1362 320V238h78v82z"/>
-        </svg>
-        <svg class="journey-city city-dubai" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <use class="towers" href="#dubaiTowers"/>
-          <use class="lights" href="#dubaiTowers"/>
-          <circle class="spire" cx="1010" cy="3" r="3"/>
-        </svg>
-        <div class="journey-plane" aria-hidden="true"><svg viewBox="0 0 64 32"><use href="#plane"/></svg></div>
+      <div class="scene-stage journey-stage" id="journeyStage">
+        <div class="jy-world" aria-hidden="true">
+          <div class="jy-sky jy-sky-dusk"></div>
+          <div class="jy-sky jy-sky-sunset" data-jy="sunset"></div>
+          <div class="jy-sky jy-sky-night" data-jy="night"></div>
+          <div class="jy-stars" data-jy="stars"></div>
+          <span class="jy-meteor" data-jy="meteor"></span>
+          <div class="jy-sun" data-jy="sun"></div>
+          <svg class="jy-moon" data-jy="moon" viewBox="0 0 100 100">
+            <defs><mask id="jyCrescent"><rect width="100" height="100" fill="#fff"/><circle cx="66" cy="38" r="34" fill="#000"/></mask></defs>
+            <circle cx="50" cy="50" r="36" fill="#fff3d2" mask="url(#jyCrescent)"/>
+          </svg>
+          <div class="jy-fireworks">
+            <span class="jy-burst"><svg viewBox="-50 -50 100 100"><use href="#burstShape"/></svg></span>
+            <span class="jy-burst"><svg viewBox="-50 -50 100 100"><use href="#burstShape"/></svg></span>
+            <span class="jy-burst"><svg viewBox="-50 -50 100 100"><use href="#burstShape"/></svg></span>
+            <span class="jy-burst"><svg viewBox="-50 -50 100 100"><use href="#burstShape"/></svg></span>
+          </div>
+
+          <!-- Tóquio: monte Fuji ao fundo, Tokyo Tower e Skytree acesas -->
+          <div class="jy-fuji" data-jy="fuji">
+            <svg viewBox="0 0 900 300">
+              <defs>
+                <linearGradient id="fujiBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b4f9f"/><stop offset=".7" stop-color="#3a3d8a" stop-opacity=".75"/><stop offset="1" stop-color="#3a3d8a" stop-opacity="0"/></linearGradient>
+                <linearGradient id="fujiSnow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6f7"/><stop offset="1" stop-color="#d6cfee"/></linearGradient>
+              </defs>
+              <path d="M0 300C160 270 300 190 392 92C404 80 420 72 436 72H470C486 72 500 80 512 92C604 190 740 270 900 300Z" fill="url(#fujiBody)"/>
+              <path d="M392 92C404 80 420 72 436 72H470C486 72 500 80 512 92C530 111 548 130 566 147L554 146L540 140L529 167L517 139L502 157L488 135L474 163L460 133L446 151L432 130L418 157L404 128L390 146L377 131C381 117 386 104 392 92Z" fill="url(#fujiSnow)" opacity=".9"/>
+            </svg>
+          </div>
+          <div class="jy-city jy-tokyo" data-jy="tokyo">
+            <svg viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice">
+              <defs>
+                <pattern id="tyoWin" width="13" height="15" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="3" height="4" fill="#ffe7b0" opacity=".75"/><rect x="9" y="10" width="2" height="3" fill="#bfe6ff" opacity=".45"/></pattern>
+                <pattern id="tyoLattice" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0H9M0 0V9" stroke="#fff1e4" stroke-width=".9" opacity=".45"/></pattern>
+                <linearGradient id="tyoTower" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb37a"/><stop offset=".5" stop-color="#ff6b3d"/><stop offset="1" stop-color="#e2452a"/></linearGradient>
+                <linearGradient id="tyoTree" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7fb2ff"/><stop offset=".5" stop-color="#e3f1ff"/><stop offset="1" stop-color="#8ab8ff"/></linearGradient>
+                <radialGradient id="tyoGlowTower"><stop offset="0" stop-color="#ff8a4c" stop-opacity=".5"/><stop offset="1" stop-color="#ff8a4c" stop-opacity="0"/></radialGradient>
+                <radialGradient id="tyoGlowTree"><stop offset="0" stop-color="#a9d4ff" stop-opacity=".42"/><stop offset="1" stop-color="#a9d4ff" stop-opacity="0"/></radialGradient>
+                <clipPath id="tyoLegs"><path d="M588 360C607 306 624 262 632 226H668C676 262 693 306 712 360H686C674 332 662 318 650 314C638 318 626 332 614 360Z"/></clipPath>
+              </defs>
+              <ellipse cx="650" cy="250" rx="130" ry="160" fill="url(#tyoGlowTower)"/>
+              <ellipse cx="900" cy="170" rx="70" ry="210" fill="url(#tyoGlowTree)"/>
+              <path d="M0 360V210.1H41.4V360ZM43.8 360V262.8H72.4V232H75.4V262.8H103.9V360ZM104.9 360V160.5H146.2V360ZM149.5 360V209.7L175.9 199.7L202.4 209.7V360ZM204.9 360V212.5H276.6V360ZM279.3 360V186.6H312.3V360ZM313.5 360V174.8H345V360ZM347.9 360V191.4H420.1V360ZM421.7 360V221.1H490.1V360ZM493.6 360V265L511 255L528.3 265V360ZM532.2 360V201.1H562.7V215.1H583.1V360ZM585.1 360V231.4H633.7V360ZM636 360V195H709.4V360ZM712.8 360V206.2L751.6 196.2L790.4 206.2V360ZM793.8 360V170.5H870.1V360ZM873 360V178.5H913.1V360ZM914.3 360V176.1H947.3V360ZM947.7 360V234.8L981.9 224.8L1016.1 234.8V360ZM1017.3 360V174H1049.2V147.7H1052.2V174H1084.2V360ZM1084.3 360V233.6H1148.8V360ZM1152.7 360V160.2H1185.3V174.2H1207V360ZM1207.3 360V276.5L1236.7 266.5L1266.1 276.5V360ZM1267.7 360V252.8H1295.9V221.5H1298.9V252.8H1327V360ZM1328.3 360V171.4H1404.3V360ZM1406.2 360V199.2H1461.1V360Z" fill="#1f2770" opacity=".9"/>
+              <path d="M884 360L891 252L895 186H905L909 252L916 360Z" fill="url(#tyoTree)" opacity=".95"/>
+              <rect x="885" y="172" width="30" height="14" rx="5" fill="#eef6ff"/>
+              <rect x="888" y="177" width="24" height="3" fill="#9fc8ff"/>
+              <rect x="896" y="134" width="8" height="38" fill="url(#tyoTree)"/>
+              <rect x="889" y="124" width="22" height="10" rx="4" fill="#eef6ff"/>
+              <path d="M897 124L899 26H901L903 124Z" fill="#cfe4ff"/>
+              <circle class="blink" cx="900" cy="24" r="2.6" fill="#ff5a5a"/>
+              <path d="M588 360C607 306 624 262 632 226H668C676 262 693 306 712 360H686C674 332 662 318 650 314C638 318 626 332 614 360Z" fill="url(#tyoTower)"/>
+              <path d="M588 360C607 306 624 262 632 226H668C676 262 693 306 712 360H686C674 332 662 318 650 314C638 318 626 332 614 360Z" fill="url(#tyoLattice)"/>
+              <g clip-path="url(#tyoLegs)" fill="#fff1e6"><rect x="580" y="282" width="140" height="8" opacity=".85"/><rect x="580" y="250" width="140" height="6" opacity=".6"/></g>
+              <rect x="622" y="212" width="56" height="14" rx="2" fill="#ffe4c8"/>
+              <rect x="626" y="217" width="48" height="3" fill="#fff8e6"/>
+              <path d="M636 212L640 160H660L664 212Z" fill="url(#tyoTower)"/>
+              <path d="M636 212L640 160H660L664 212Z" fill="url(#tyoLattice)"/>
+              <rect x="636" y="150" width="28" height="10" rx="2" fill="#ffe4c8"/>
+              <path d="M644 150L647 92H653L656 150Z" fill="#ff8a55"/>
+              <path d="M650 92V62" stroke="#ffd0b0" stroke-width="2"/>
+              <circle class="blink" cx="650" cy="60" r="2.6" fill="#ff5a5a"/>
+              <path d="M-10 360V236.9H43.4V360ZM51.1 360V218.1H78.8V194.8H81.8V218.1H109.6V360ZM117.3 360V220.3H143.1V196.9H146.1V220.3H171.8V360ZM175.3 360V254.3H198.8V236H201.8V254.3H225.2V360ZM228.9 360V244.4L262.1 234.4L295.2 244.4V360ZM302 360V249.8H316.6V235.7H319.6V249.8H334.1V360ZM341.4 360V291.6H376.6V360ZM383.8 360V214H422.5V360ZM428.6 360V216.1H463.6V360ZM471.4 360V282.9H510.6V296.9H536.7V360ZM539.7 360V307.2H559.2V321.2H572.1V360ZM729.2 360V226.1H757.2V196.4H760.2V226.1H788.2V360ZM792.4 360V313.1H816.6V295.4H819.6V313.1H843.9V360ZM851.6 360V235.4H886.2V360ZM940.2 360V302.8H1000.3V360ZM1007.1 360V310.2H1070.9V360ZM1073.5 360V250.5H1114.5V360ZM1118.5 360V257.3H1158.5V271.3H1185.2V360ZM1189.1 360V315.9L1206 305.9L1222.9 315.9V360ZM1229 360V297.2H1262.5V263.5H1265.5V297.2H1298.9V360ZM1304.1 360V289.3H1347.9V360ZM1354.9 360V270.1H1376.4V237.8H1379.4V270.1H1400.9V360ZM1403.1 360V226.8H1425.5V198.2H1428.5V226.8H1450.9V360Z" fill="#0a1044"/>
+              <path d="M-10 360V236.9H43.4V360ZM51.1 360V218.1H78.8V194.8H81.8V218.1H109.6V360ZM117.3 360V220.3H143.1V196.9H146.1V220.3H171.8V360ZM175.3 360V254.3H198.8V236H201.8V254.3H225.2V360ZM228.9 360V244.4L262.1 234.4L295.2 244.4V360ZM302 360V249.8H316.6V235.7H319.6V249.8H334.1V360ZM341.4 360V291.6H376.6V360ZM383.8 360V214H422.5V360ZM428.6 360V216.1H463.6V360ZM471.4 360V282.9H510.6V296.9H536.7V360ZM539.7 360V307.2H559.2V321.2H572.1V360ZM729.2 360V226.1H757.2V196.4H760.2V226.1H788.2V360ZM792.4 360V313.1H816.6V295.4H819.6V313.1H843.9V360ZM851.6 360V235.4H886.2V360ZM940.2 360V302.8H1000.3V360ZM1007.1 360V310.2H1070.9V360ZM1073.5 360V250.5H1114.5V360ZM1118.5 360V257.3H1158.5V271.3H1185.2V360ZM1189.1 360V315.9L1206 305.9L1222.9 315.9V360ZM1229 360V297.2H1262.5V263.5H1265.5V297.2H1298.9V360ZM1304.1 360V289.3H1347.9V360ZM1354.9 360V270.1H1376.4V237.8H1379.4V270.1H1400.9V360ZM1403.1 360V226.8H1425.5V198.2H1428.5V226.8H1450.9V360Z" fill="url(#tyoWin)"/>
+            </svg>
+          </div>
+          <div class="jy-runway" data-jy="runway"><span class="jy-runway-lights" data-jy="lights"></span></div>
+
+          <!-- Dubai: Burj Al Arab, Emirates Towers, Burj Khalifa, Dubai Frame e Cayan Tower -->
+          <div class="jy-city jy-dubai" data-jy="dubai">
+            <svg viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice">
+              <defs>
+                <pattern id="dxbWin" width="11" height="14" patternUnits="userSpaceOnUse"><rect x="2" y="3" width="3" height="4" fill="#f8e7b5" opacity=".7"/><rect x="7" y="9" width="2" height="3" fill="#84d4e3" opacity=".4"/></pattern>
+                <pattern id="bkLights" width="6" height="9" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="2" height="3" fill="#ffe8b8" opacity=".8"/></pattern>
+                <linearGradient id="bkBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b2470"/><stop offset=".5" stop-color="#3b4ba8"/><stop offset="1" stop-color="#141b5a"/></linearGradient>
+                <linearGradient id="dxbSail" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f6f3ff"/><stop offset="1" stop-color="#a7a1ec"/></linearGradient>
+                <radialGradient id="dxbGlow" cx=".5" cy="1" r=".8"><stop offset="0" stop-color="#ffb37a" stop-opacity=".45"/><stop offset="1" stop-color="#ffb37a" stop-opacity="0"/></radialGradient>
+                <radialGradient id="bkHalo"><stop offset="0" stop-color="#cfe0ff" stop-opacity=".35"/><stop offset="1" stop-color="#cfe0ff" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect x="300" y="150" width="1000" height="270" fill="url(#dxbGlow)"/>
+              <ellipse cx="860" cy="70" rx="34" ry="96" fill="url(#bkHalo)"/>
+              <path d="M0 420V231.6H39.4V420ZM43.7 420V237.8L64.3 227.8L85 237.8V420ZM89.5 420V199H110.7V178.9H113.7V199H135V420ZM137.4 420V212.9H161.7V179.3H164.7V212.9H188.9V420ZM195.8 420V233.8L218.9 223.8L242 233.8V420ZM244.1 420V311.7L265 301.7L286 311.7V420ZM289.2 420V245H314.3V420ZM320.5 420V220.4H362.1V420ZM367.4 420V271.1H407V420ZM414 420V210.9H445.5V224.9H466.5V420ZM469.7 420V300.2H503.5V420ZM507.5 420V255.9H560.3V420ZM566.5 420V280.6H590.5V420ZM594.9 420V254.4H622.1V227.8H625.1V254.4H652.2V420ZM658.1 420V297.8H678V311.8H691.3V420ZM698.1 420V293.5H728V307.5H747.9V420ZM750.4 420V208.4L763.4 198.4L776.4 208.4V420ZM781.2 420V283.3H820.4V420ZM911.2 420V267.4H962.5V420ZM965.5 420V190.4H1003V420ZM1005.5 420V280.1H1040V294.1H1063.1V420ZM1069 420V268.5H1085V252.7H1088V268.5H1104.1V420ZM1109.1 420V225.8H1141.3V420ZM1145.6 420V242.3H1202.2V420ZM1208.5 420V288.4H1238.7V420ZM1244.8 420V283.4H1277.3V420ZM1284 420V177H1314.7V420ZM1319.7 420V295.5H1337.4V262.2H1340.4V295.5H1358V420ZM1361.2 420V274H1409.2V420ZM1414.2 420V285.4H1448.2V420Z" fill="#18205f"/>
+              <path d="M0 420V231.6H39.4V420ZM43.7 420V237.8L64.3 227.8L85 237.8V420ZM89.5 420V199H110.7V178.9H113.7V199H135V420ZM137.4 420V212.9H161.7V179.3H164.7V212.9H188.9V420ZM195.8 420V233.8L218.9 223.8L242 233.8V420ZM244.1 420V311.7L265 301.7L286 311.7V420ZM289.2 420V245H314.3V420ZM320.5 420V220.4H362.1V420ZM367.4 420V271.1H407V420ZM414 420V210.9H445.5V224.9H466.5V420ZM469.7 420V300.2H503.5V420ZM507.5 420V255.9H560.3V420ZM566.5 420V280.6H590.5V420ZM594.9 420V254.4H622.1V227.8H625.1V254.4H652.2V420ZM658.1 420V297.8H678V311.8H691.3V420ZM698.1 420V293.5H728V307.5H747.9V420ZM750.4 420V208.4L763.4 198.4L776.4 208.4V420ZM781.2 420V283.3H820.4V420ZM911.2 420V267.4H962.5V420ZM965.5 420V190.4H1003V420ZM1005.5 420V280.1H1040V294.1H1063.1V420ZM1069 420V268.5H1085V252.7H1088V268.5H1104.1V420ZM1109.1 420V225.8H1141.3V420ZM1145.6 420V242.3H1202.2V420ZM1208.5 420V288.4H1238.7V420ZM1244.8 420V283.4H1277.3V420ZM1284 420V177H1314.7V420ZM1319.7 420V295.5H1337.4V262.2H1340.4V295.5H1358V420ZM1361.2 420V274H1409.2V420ZM1414.2 420V285.4H1448.2V420Z" fill="url(#dxbWin)" opacity=".5"/>
+              <path d="M590 420C600 410 720 410 730 420Z" fill="#141a54"/>
+              <ellipse cx="588" cy="196" rx="13" ry="3.5" fill="#f2f0ff"/>
+              <path d="M600 420V156L610 150V420Z" fill="#d9dcf8"/>
+              <path d="M610 160C662 186 700 258 704 350V420H610Z" fill="url(#dxbSail)" opacity=".95"/>
+              <path d="M614 200L700 380M700 300L614 380" stroke="#fff" stroke-width="2" opacity=".35"/>
+              <path d="M718 420V178L746 152V420Z" fill="#222c7f"/>
+              <path d="M754 420V200L776 182V420Z" fill="#1e2878"/>
+              <path d="M718 420V178L746 152V420ZM754 420V200L776 182V420Z" fill="url(#dxbWin)" opacity=".7"/>
+              <path d="M718 178L746 152M754 200L776 182" stroke="#f8e7b5" stroke-width="1.4" opacity=".7"/>
+              <path d="M826 420V362H831V300H836V240H841V186H846V136H850V96H854V62H857V30H859V8H861V30H863V62H866V96H870V136H874V186H879V240H884V300H889V362H894V420Z" fill="url(#bkBody)"/>
+              <path d="M826 420V362H831V300H836V240H841V186H846V136H850V96H854V62H857V30H859V8H861V30H863V62H866V96H870V136H874V186H879V240H884V300H889V362H894V420Z" fill="url(#bkLights)"/>
+              <circle class="blink" cx="860" cy="7" r="2.8" fill="#ff5a5a"/>
+              <path d="M908 420V212H968V420H954V226H922V420Z" fill="url(#goldFoil)"/>
+              <path d="M1078 420C1070 360 1092 300 1080 240C1074 212 1088 192 1084 170H1112C1116 192 1102 212 1108 240C1120 300 1098 360 1106 420Z" fill="#1d267a"/>
+              <path d="M1078 420C1070 360 1092 300 1080 240C1074 212 1088 192 1084 170H1112C1116 192 1102 212 1108 240C1120 300 1098 360 1106 420Z" fill="url(#dxbWin)" opacity=".7"/>
+              <path d="M-10 420V301.5H30.9V420ZM39.8 420V356.9L58.7 346.9L77.6 356.9V420ZM82.2 420V357H143V420ZM147.5 420V326.8H189.9V420ZM197.2 420V352.4L212.5 342.4L227.8 352.4V420ZM236.9 420V289.4H300.9V420ZM309.1 420V290.6H351V304.6H379V420ZM387.9 420V294.5H438.4V420ZM444.4 420V327H471.5V341H489.7V420ZM493.5 420V290.2H557.9V420ZM565.7 420V305.2L592.4 295.2L619 305.2V420ZM738 420V340.4L765.7 330.4L793.4 340.4V420ZM799.8 420V356.4L819.8 346.4L839.7 356.4V420ZM845.3 420V304.9H878.4V420ZM992.4 420V354H1049.2V420ZM1058.3 420V289.7H1098.7V303.7H1125.5V420ZM1134.5 420V308.3L1157.4 298.3L1180.3 308.3V420ZM1190.1 420V297.7H1223.3V311.7H1245.4V420ZM1252.7 420V310.9H1307.1V420ZM1315.2 420V350.5L1337.4 340.5L1359.6 350.5V420ZM1367.3 420V347.4H1383.2V320.6H1386.2V347.4H1402.1V420ZM1409 420V366.1H1461.8V420Z" fill="#090d3a"/>
+              <path d="M-10 420V301.5H30.9V420ZM39.8 420V356.9L58.7 346.9L77.6 356.9V420ZM82.2 420V357H143V420ZM147.5 420V326.8H189.9V420ZM197.2 420V352.4L212.5 342.4L227.8 352.4V420ZM236.9 420V289.4H300.9V420ZM309.1 420V290.6H351V304.6H379V420ZM387.9 420V294.5H438.4V420ZM444.4 420V327H471.5V341H489.7V420ZM493.5 420V290.2H557.9V420ZM565.7 420V305.2L592.4 295.2L619 305.2V420ZM738 420V340.4L765.7 330.4L793.4 340.4V420ZM799.8 420V356.4L819.8 346.4L839.7 356.4V420ZM845.3 420V304.9H878.4V420ZM992.4 420V354H1049.2V420ZM1058.3 420V289.7H1098.7V303.7H1125.5V420ZM1134.5 420V308.3L1157.4 298.3L1180.3 308.3V420ZM1190.1 420V297.7H1223.3V311.7H1245.4V420ZM1252.7 420V310.9H1307.1V420ZM1315.2 420V350.5L1337.4 340.5L1359.6 350.5V420ZM1367.3 420V347.4H1383.2V320.6H1386.2V347.4H1402.1V420ZM1409 420V366.1H1461.8V420Z" fill="url(#dxbWin)"/>
+            </svg>
+          </div>
+          <!-- Meydan: a arquibancada em meia-lua da Dubai World Cup -->
+          <div class="jy-meydan" data-jy="meydan">
+            <svg viewBox="0 0 1000 200">
+              <defs>
+                <linearGradient id="mdRoof" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a9812f"/><stop offset=".5" stop-color="#fff4cf"/><stop offset="1" stop-color="#a9812f"/></linearGradient>
+                <linearGradient id="mdTurf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f8a5c"/><stop offset="1" stop-color="#0d3b2b"/></linearGradient>
+                <linearGradient id="mdBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe6" stop-opacity=".32"/><stop offset="1" stop-color="#fffbe6" stop-opacity="0"/></linearGradient>
+                <radialGradient id="mdLamp"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                <pattern id="mdSeats" width="8" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#fff6dc" opacity=".45"/></pattern>
+                <linearGradient id="mdGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c8" stop-opacity=".95"/><stop offset="1" stop-color="#e8c56f" stop-opacity=".55"/></linearGradient>
+                <pattern id="mdMullion" width="14" height="40" patternUnits="userSpaceOnUse"><rect width="1.4" height="40" fill="#0c1142" opacity=".5"/></pattern>
+              </defs>
+              <path d="M70 34L262 160H138ZM930 34L738 160H862Z" fill="url(#mdBeam)"/>
+              <path d="M69 160V40M931 160V40" stroke="#2a3170" stroke-width="4"/>
+              <rect x="54" y="26" width="30" height="12" rx="2" fill="#fffbe6"/>
+              <rect x="916" y="26" width="30" height="12" rx="2" fill="#fffbe6"/>
+              <circle cx="69" cy="32" r="24" fill="url(#mdLamp)"/>
+              <circle cx="931" cy="32" r="24" fill="url(#mdLamp)"/>
+              <path d="M110 160L126 110Q500 66 874 110L890 160Z" fill="#0c1142"/>
+              <path d="M128 116Q500 74 872 116L876 131Q500 90 124 131Z" fill="url(#mdGlass)"/>
+              <path d="M128 116Q500 74 872 116L876 131Q500 90 124 131Z" fill="url(#mdMullion)"/>
+              <path d="M136 141Q500 102 864 141M144 151Q500 113 856 151" fill="none" stroke="#fff" stroke-width="1.2" opacity=".18"/>
+              <path d="M140 160L148 136Q500 98 852 136L860 160Z" fill="url(#mdSeats)" opacity=".8"/>
+              <path d="M96 108Q500 24 904 108Q500 52 96 108Z" fill="url(#mdRoof)"/>
+              <path d="M96 108Q500 24 904 108" fill="none" stroke="#fff4cf" stroke-width="5" opacity=".25"/>
+              <rect y="160" width="1000" height="40" fill="url(#mdTurf)"/>
+              <path d="M0 168H1000M0 192H1000" stroke="#fff" stroke-width="1.6" opacity=".75"/>
+              <path d="M520 160V140" stroke="#fff" stroke-width="2"/>
+              <circle cx="520" cy="138" r="4" fill="#ff7eb3"/>
+            </svg>
+          </div>
+
+          <div class="jy-clouds jy-clouds-back" data-jy="back"><div class="jy-cloud-strip"><div class="jy-cloud-drift"><svg viewBox="0 0 4800 600" preserveAspectRatio="none"><g fill="url(#cloudFar)"><use href="#cloudBack" x="0" width="1200" height="600"/><use href="#cloudBack" x="1200" width="1200" height="600"/><use href="#cloudBack" x="2400" width="1200" height="600"/><use href="#cloudBack" x="3600" width="1200" height="600"/></g><g class="lit" fill="url(#cloudFarLit)"><use href="#cloudBack" x="0" width="1200" height="600"/><use href="#cloudBack" x="1200" width="1200" height="600"/><use href="#cloudBack" x="2400" width="1200" height="600"/><use href="#cloudBack" x="3600" width="1200" height="600"/></g></svg></div></div></div>
+
+          <!-- O jatinho da Vivlos: branco, azul royal e dourado, com o V na cauda -->
+          <div class="jy-plane" data-jy="plane">
+            <div class="jy-bob">
+              <svg class="jy-jet" viewBox="0 0 320 110">
+                <defs>
+                  <linearGradient id="jetBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#eceefa"/><stop offset="1" stop-color="#c3c8e8"/></linearGradient>
+                  <linearGradient id="jetBelly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4655b8"/><stop offset="1" stop-color="#1f2a7a"/></linearGradient>
+                  <linearGradient id="jetFin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#25318c"/><stop offset="1" stop-color="#4a5ac0"/></linearGradient>
+                  <linearGradient id="jetPod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cdd1ec"/></linearGradient>
+                  <linearGradient id="jetTrail" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".06" stop-color="#fff" stop-opacity=".85"/><stop offset=".5" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="jetBeam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fffbe6" stop-opacity=".5"/><stop offset="1" stop-color="#fffbe6" stop-opacity="0"/></linearGradient>
+                  <radialGradient id="glowWhite"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+                  <radialGradient id="glowRed"><stop offset="0" stop-color="#ff5a5a" stop-opacity=".95"/><stop offset="1" stop-color="#ff5a5a" stop-opacity="0"/></radialGradient>
+                  <radialGradient id="glowGreen"><stop offset="0" stop-color="#5dffb0" stop-opacity=".9"/><stop offset="1" stop-color="#5dffb0" stop-opacity="0"/></radialGradient>
+                  <path id="jetHullPath" d="M34 50C38 45 46 43 56 42.5L238 39C262 38.5 282 42 298 47C308 50 314 53 315 56C313 60 304 63 292 65L250 66.5H128C100 66.5 72 62 52 57C42 55 35 53 34 50Z"/>
+                  <clipPath id="jetHull"><use href="#jetHullPath"/></clipPath>
+                </defs>
+                <!-- rastro de condensação: começa um pouco atrás do motor -->
+                <g class="trail">
+                  <rect x="-700" y="36.4" width="768" height="7.2" rx="3.6" fill="url(#jetTrail)" opacity=".35"/>
+                  <rect x="-700" y="38.8" width="768" height="2.4" rx="1.2" fill="url(#jetTrail)"/>
+                </g>
+                <!-- farol de pouso -->
+                <g class="beam">
+                  <path d="M292 66L470 38V104Z" fill="url(#jetBeam)"/>
+                  <circle cx="292" cy="66" r="7" fill="url(#glowWhite)"/>
+                </g>
+                <!-- trem de pouso: recolhe depois da decolagem e desce na aproximação -->
+                <g class="gear">
+                  <path d="M182 64V83M288 64V83" stroke="#7b7fa3" stroke-width="2.6" stroke-linecap="round"/>
+                  <g fill="#1a1e3d"><circle cx="176.5" cy="86" r="5.5"/><circle cx="187.5" cy="86" r="5.5"/><circle cx="288" cy="87" r="4.5"/></g>
+                  <g fill="#9ca1c4"><circle cx="176.5" cy="86" r="2"/><circle cx="187.5" cy="86" r="2"/><circle cx="288" cy="87" r="1.7"/></g>
+                </g>
+                <!-- deriva em T, com o V dourado -->
+                <path d="M46 44L62 9H77L106 41Z" fill="url(#jetFin)"/>
+                <path d="M42 11.5L86 7.5L90 10.5L46 14.5Z" fill="#202b82"/>
+                <path d="M64 16H68.6L73.6 27.6L79 16H82L73.9 33Z" fill="url(#goldFoil)"/>
+                <!-- fuselagem com faixa dourada e rosa -->
+                <use href="#jetHullPath" fill="url(#jetBody)"/>
+                <g clip-path="url(#jetHull)">
+                  <path d="M320 59.5C262 60.5 200 60.5 140 60.5C100 60.5 70 57 30 51V90H320Z" fill="url(#jetBelly)"/>
+                  <path d="M318 57.6C262 58.6 200 58.6 140 58.6C100 58.6 70 55 30 49" fill="none" stroke="#e8c56f" stroke-width="1.8"/>
+                  <path d="M318 55.2C262 56.2 200 56.2 140 56.2C100 56.2 70 52.6 30 46.6" fill="none" stroke="#f6a6cb" stroke-width=".9"/>
+                </g>
+                <path d="M276 44.6L293.5 47.6C296.5 48.3 297.6 49.6 296.7 50.6L279.5 50.2Z" fill="#1b2147"/>
+                <path d="M279 45.7L289 47.4" stroke="#8fd3ff" stroke-width="1" opacity=".6"/>
+                <path d="M258 43.4V56.6H266V43.4" fill="none" stroke="#cfd3ec" stroke-width=".9"/>
+                <g class="win"><rect x="128" y="45.5" width="7" height="6" rx="2.6"/><rect x="143" y="45.5" width="7" height="6" rx="2.6"/><rect x="158" y="45.5" width="7" height="6" rx="2.6"/><rect x="173" y="45.5" width="7" height="6" rx="2.6"/><rect x="188" y="45.5" width="7" height="6" rx="2.6"/><rect x="203" y="45.5" width="7" height="6" rx="2.6"/><rect x="218" y="45.5" width="7" height="6" rx="2.6"/><rect x="233" y="45.5" width="7" height="6" rx="2.6"/><rect x="248" y="45.5" width="7" height="6" rx="2.6"/></g>
+                <!-- motor traseiro -->
+                <path d="M69 37.5L77 36V44L69 42.5Z" fill="#6b6f8f"/>
+                <path d="M84 33.5H124C131 33.5 135 36.5 135 40S131 46.5 124 46.5H84C79 46.5 76 43.5 76 40S79 33.5 84 33.5Z" fill="url(#jetPod)"/>
+                <ellipse cx="134.2" cy="40" rx="2.2" ry="5.8" fill="#1b2147"/>
+                <path d="M86 40.4H124" stroke="#e8c56f" stroke-width="1.2"/>
+                <!-- asa e winglet -->
+                <path d="M212 61L162 62.5L113 75.5H127Z" fill="#d7dbf1"/>
+                <path d="M162 62.5L113 75.5" stroke="#9ea4cc" stroke-width="1.2"/>
+                <path d="M113 75.5H127L117 63H110Z" fill="#2a3796"/>
+                <!-- luzes: verde fixa na asa, estrobo branco e farol vermelho piscando -->
+                <circle cx="121" cy="75.5" r="7" fill="url(#glowGreen)"/>
+                <circle cx="121" cy="75.5" r="1.8" fill="#c8ffe6"/>
+                <g class="strobe"><circle cx="111" cy="63" r="10" fill="url(#glowWhite)"/><circle cx="111" cy="63" r="1.8" fill="#fff"/></g>
+                <g class="beacon"><circle cx="186" cy="39.4" r="8" fill="url(#glowRed)"/><circle cx="186" cy="39.4" r="1.9" fill="#ff9a9a"/></g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="jy-clouds jy-clouds-front" data-jy="front"><div class="jy-cloud-strip"><div class="jy-cloud-drift"><svg viewBox="0 0 4800 600" preserveAspectRatio="none"><g fill="url(#cloudNear)"><use href="#cloudFront" x="0" width="1200" height="600"/><use href="#cloudFront" x="1200" width="1200" height="600"/><use href="#cloudFront" x="2400" width="1200" height="600"/><use href="#cloudFront" x="3600" width="1200" height="600"/></g><g class="lit" fill="url(#cloudNearLit)"><use href="#cloudFront" x="0" width="1200" height="600"/><use href="#cloudFront" x="1200" width="1200" height="600"/><use href="#cloudFront" x="2400" width="1200" height="600"/><use href="#cloudFront" x="3600" width="1200" height="600"/></g></svg></div></div></div>
+          <div class="jy-mist" data-jy="mist"></div>
+        </div>
 
         <div class="journey-copy">
           <span class="kicker">Rota TYO → DXB</span>
@@ -752,6 +1040,11 @@
             </li>
           </ol>
           <div class="journey-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <dl class="jy-readout" aria-hidden="true">
+            <div><dt>Altitude</dt><dd id="jyAlt">0 pés</dd></div>
+            <div><dt>Velocidade</dt><dd id="jySpeed">0 km/h</dd></div>
+            <div><dt>Até Dubai</dt><dd id="jyDist">7.935 km</dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -886,6 +1179,22 @@
         </div>
       </div>
     </section>
+
+    <section class="uma-next" aria-label="Próxima personagem">
+      <div class="uma-next-inner">
+        <a class="uma-next-card uma-theme-acute" href="acute.html">
+          <span class="uma-next-copy">
+            <span class="uma-next-kicker"><span class="uma-next-gate" style="--frame:#1F9A52;--frame-ink:#FFFFFF" aria-hidden="true">6</span>Próxima largada</span>
+            <strong class="uma-next-name">Wonder Acute</strong>
+            <span class="uma-next-jp" lang="ja">ワンダーアキュート</span>
+            <span class="uma-next-tagline">Calma como uma tarde de chá, firme como uma largada — e fiel ao seu celular de flip.</span>
+            <span class="uma-next-cta">Ir para a página <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="uma-next-art" aria-hidden="true"><img src="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8642ed3b208b4f3b8ce46c8f961ca77a/wonderacute_02.png?w=720&amp;fm=webp&amp;q=80" alt="" width="720" height="1268" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
+        </a>
+        <a class="uma-next-all" href="index.html"><i aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>Ver todas no Paddock</a>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -903,6 +1212,7 @@
       const CHARACTER_ID = 10013;
       const GAME_ID = 1091;
       const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
+      const VOICE_CLIP = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c2da394d1d24410ab27d8015c56a8f50/vivlos_voice.mp3";
       const $ = selector => document.querySelector(selector);
 
       // Traduções dos textos oficiais (em inglês na API) exibidos na página.
@@ -1078,6 +1388,177 @@
         });
       }
 
+      /* ------------------------------------------- jornada: o voo TYO → DXB */
+      // O voo inteiro é uma linha do tempo de 0 a 1 (o progresso da cena). Câmera,
+      // avião, nuvens e céu saem do mesmo número: rolar para trás desfaz a viagem.
+      const FLIGHT_KM = 7935; // Haneda → Dubai, em linha reta sobre o globo
+      const smooth = t => t * t * (3 - 2 * t);
+      const linear = t => t;
+
+      // Trilha [[p, valor], ...] com suavização em cada trecho.
+      function along(points, p, easing = smooth) {
+        if (p <= points[0][0]) return points[0][1];
+        for (let index = 1; index < points.length; index += 1) {
+          const [end, to] = points[index];
+          if (p <= end) {
+            const [start, from] = points[index - 1];
+            return from + (to - from) * easing((p - start) / (end - start));
+          }
+        }
+        return points[points.length - 1][1];
+      }
+
+      // Poses do avião [p, x, y, inclinação, escala] ligadas por Catmull-Rom:
+      // a curva passa por todas sem frear em cada uma.
+      function poseAt(frames, p) {
+        const last = frames.length - 1;
+        if (p <= frames[0][0]) return frames[0].slice(1);
+        if (p >= frames[last][0]) return frames[last].slice(1);
+        let index = 1;
+        while (frames[index][0] < p) index += 1;
+        const [a, b, c, d] = [frames[Math.max(0, index - 2)], frames[index - 1], frames[index], frames[Math.min(last, index + 1)]];
+        const t = (p - b[0]) / (c[0] - b[0]);
+        return b.slice(1).map((_, k) => {
+          const [p0, p1, p2, p3] = [a[k + 1], b[k + 1], c[k + 1], d[k + 1]];
+          return 0.5 * (2 * p1 + (p2 - p0) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (3 * p1 - p0 - 3 * p2 + p3) * t * t * t);
+        });
+      }
+
+      // Em frações do palco; G é a linha da pista (medida no CSS).
+      const WIDE_FLIGHT = G => [
+        [0, .62, G, 0, 1], [.05, .62, G, 0, 1], [.13, .73, G, 0, 1], [.165, .78, G, -9, 1],
+        [.2, .82, G - .07, -12, 1], [.27, .78, .62, -13, 1], [.36, .7, .46, -6, 1], [.42, .67, .42, -1, 1],
+        [.52, .66, .41, 0, 1], [.62, .67, .42, 0, 1], [.68, .66, .45, 5, 1], [.78, .64, .52, 7, 1],
+        [.88, .72, .58, 5, .92], [1, .8, .64, 3, .82]
+      ];
+      const NARROW_FLIGHT = G => [
+        [0, .36, G, 0, 1], [.05, .36, G, 0, 1], [.13, .54, G, 0, 1], [.165, .62, G, -9, 1],
+        [.2, .68, G - .05, -12, 1], [.27, .64, .8, -13, 1], [.36, .56, .7, -6, 1], [.42, .54, .68, -1, 1],
+        [.62, .55, .68, 0, 1], [.68, .55, .7, 5, 1], [.78, .5, .76, 7, 1], [.88, .58, .78, 5, .9], [1, .7, .8, 3, .82]
+      ];
+
+      function initJourney() {
+        const section = $("#jornada");
+        const stage = $("#journeyStage");
+        const part = name => stage.querySelector(`[data-jy="${name}"]`);
+        const sky = { sunset: part("sunset"), night: part("night"), stars: part("stars"), meteor: part("meteor"), sun: part("sun"), moon: part("moon"), mist: part("mist") };
+        const land = { fuji: part("fuji"), tokyo: part("tokyo"), runway: part("runway"), lights: part("lights"), dubai: part("dubai"), meydan: part("meydan") };
+        const clouds = ["back", "front"].map((name, index) => {
+          const element = part(name);
+          return { element, strip: element.querySelector(".jy-cloud-strip"), speed: index ? 1 : 0.55, top: 0, height: 0, tile: 1, lift: 0 };
+        });
+        const plane = part("plane");
+        const cities = [...stage.querySelectorAll(".jy-city svg")];
+        const readout = { alt: $("#jyAlt"), speed: $("#jySpeed"), dist: $("#jyDist") };
+        const shown = {};
+        const motion = document.documentElement.classList.contains("motion");
+        let width = 1;
+        let height = 1;
+        let horizon = 0;
+        let groundLine = 1;
+        let frames = [];
+        let lastP = -1;
+
+        const move = (element, x, y, extra = "") => { element.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)${extra}`; };
+        const fade = (element, value) => { element.style.opacity = value.toFixed(3); };
+        const hide = (elements, hidden) => elements.forEach(element => { element.style.visibility = hidden ? "hidden" : ""; });
+        const write = (key, value) => {
+          if (shown[key] === value) return;
+          shown[key] = value;
+          readout[key].textContent = value;
+        };
+        const number = value => value.toLocaleString("pt-BR");
+
+        function measure() {
+          width = stage.clientWidth || 1;
+          height = stage.clientHeight || 1;
+          groundLine = 1 - (land.runway.offsetHeight * 0.55) / height;
+          frames = (width <= 900 ? NARROW_FLIGHT : WIDE_FLIGHT)(groundLine);
+          // Em telas largas o texto fica à esquerda: as cidades alinham pela esquerda para
+          // os marcos (Tokyo Tower, Burj Khalifa…) caírem à direita do cartão.
+          cities.forEach(svg => svg.setAttribute("preserveAspectRatio", width <= 900 ? "xMidYMax slice" : "xMinYMax slice"));
+          clouds.forEach(cloud => {
+            cloud.top = cloud.element.offsetTop;
+            cloud.height = cloud.element.offsetHeight;
+            cloud.tile = cloud.height * 2; // cada bloco de nuvem tem proporção 2:1
+            cloud.strip.style.width = `${cloud.tile * 4}px`;
+            cloud.strip.style.setProperty("--tile", `${cloud.tile}px`);
+          });
+          horizon = clouds[0].top + clouds[0].height * 0.2; // topo do mar de nuvens no cruzeiro
+          lastP = -1;
+          render(motion ? Uma.progress(section) : 0.5);
+        }
+
+        function render(p) {
+          if (p === lastP) return;
+          lastP = p;
+          // A câmera só sobe depois que as rodas saem do chão.
+          const climb = along([[0.17, 0], [0.38, 1]], p);
+          const arrive = along([[0.66, 0], [0.92, 1]], p);
+          const altitude = p < 0.5 ? climb : 1 - arrive;
+
+          // Céu: anoitecer em Tóquio, pôr do sol acima das nuvens, noite em Dubai.
+          fade(sky.sunset, along([[0.2, 0], [0.33, 1], [0.58, 1], [0.7, 0]], p));
+          fade(sky.night, along([[0.56, 0], [0.72, 1]], p));
+          fade(sky.stars, along([[0, 0.45], [0.2, 0.3], [0.3, 0], [0.6, 0], [0.74, 1]], p));
+          fade(sky.moon, along([[0.66, 0], [0.8, 1]], p));
+          fade(sky.meteor, along([[0.72, 0], [0.82, 1]], p));
+          // Subindo, o horizonte baixa e o sol que já tinha se posto reaparece; depois se põe de novo.
+          move(sky.sun, width * (width <= 900 ? 0.8 : 0.84), horizon + along([[0.2, 0.3], [0.36, -0.1], [0.46, -0.1], [0.66, 0.15]], p) * height);
+          fade(sky.sun, along([[0.2, 0], [0.3, 1], [0.62, 1], [0.69, 0]], p));
+          stage.style.setProperty("--sunlit", along([[0.2, 0], [0.33, 1], [0.56, 1], [0.68, 0]], p).toFixed(3));
+
+          // Chão: Tóquio desce enquanto o avião sobe; Dubai sobe na chegada.
+          const roll = along([[0.05, 0], [0.165, 1]], p, t => t * t);
+          move(land.fuji, 0, climb * height * 0.4);
+          fade(land.fuji, 1 - climb);
+          move(land.tokyo, 0, climb * height * 1.05);
+          move(land.runway, 0, climb * height * 1.3);
+          move(land.lights, -((roll * 2400) % 160), 0);
+          hide([land.fuji, land.tokyo, land.runway], climb >= 1);
+          move(land.dubai, 0, (1 - arrive) * height * 1.05);
+          move(land.meydan, 0, (1 - along([[0.82, 0], [0.97, 1]], p)) * height * 0.45);
+          hide([land.dubai, land.meydan], arrive <= 0);
+
+          // Nuvens: descem pela tela na subida, viram um mar no cruzeiro e sobem na descida.
+          clouds.forEach(cloud => {
+            cloud.lift = -(1 - altitude) * (cloud.top + cloud.height + height * 0.05);
+            move(cloud.element, 0, cloud.lift);
+            move(cloud.strip, -((p * 7000 * cloud.speed) % cloud.tile), 0);
+          });
+
+          // Avião: no chão ele só levanta o nariz (gira sobre o trem principal).
+          const [x, v, tilt, scale] = poseAt(frames, p);
+          const onGround = v >= groundLine - 0.001;
+          const y = Math.min(v, groundLine) * height;
+          move(plane, x * width, y, ` rotate(${(onGround ? Math.min(tilt, 0) : tilt).toFixed(2)}deg) scale(${scale.toFixed(3)})`);
+
+          // Névoa enquanto o avião atravessa as nuvens da frente.
+          const front = clouds[1];
+          const cloudTop = front.top + front.lift + front.height * 0.16;
+          const cloudBottom = front.top + front.lift + front.height * 0.9;
+          const depth = Math.min(y - cloudTop, cloudBottom - y) / (height * 0.14);
+          fade(sky.mist, depth > 0 ? smooth(Math.min(1, depth)) * 0.72 : 0);
+
+          stage.style.setProperty("--trail", along([[0.34, 0], [0.42, 0.9], [0.62, 0.9], [0.68, 0]], p).toFixed(3));
+          stage.classList.toggle("gear-up", p > 0.19 && p < 0.84);
+          stage.classList.toggle("lights-on", p < 0.21 || p > 0.8);
+          stage.classList.toggle("is-night", p < 0.24 || p > 0.6);
+          stage.classList.toggle("is-cruising", p > 0.36 && p < 0.66);
+          stage.classList.toggle("is-finale", p > 0.93);
+
+          // Painel de voo.
+          write("alt", `${number(Math.round(along([[0.17, 0], [0.38, 41000], [0.64, 41000], [0.9, 2500], [1, 900]], p) / 100) * 100)} pés`);
+          write("speed", `${number(Math.round(along([[0.05, 0], [0.16, 290], [0.36, 900], [0.64, 900], [0.9, 320], [1, 270]], p) / 10) * 10)} km/h`);
+          write("dist", `${number(Math.round(along([[0.12, FLIGHT_KM], [0.9, 30], [1, 8]], p, linear)))} km`);
+        }
+
+        measure();
+        if ("ResizeObserver" in window) new ResizeObserver(measure).observe(stage);
+        if (motion) Uma.onScroll(() => render(Uma.progress(section)));
+        Uma.pauseWhenHidden(stage);
+      }
+
       /* ------------------------------------------------------------ scroll */
       function initScrollEffects() {
         const topbar = $("#topbar");
@@ -1096,7 +1577,7 @@
 
       /* ------------------------------------------------------------- dados */
       function render({ character, groups: apiGroups, supports, voice }) {
-        if (character) Uma.fillCharacter(character, DICTIONARY);
+        if (character) voicePlayer.setSource(Uma.fillCharacter(character, DICTIONARY).voiceClip);
         if (voice) Uma.fillVoice(voice);
         if (apiGroups.length) {
           groups = apiGroups;
@@ -1114,6 +1595,8 @@
       Uma.initScrollSpy(".nav a");
       initScrollEffects();
       initCelebrations();
+      initJourney();
+      const voicePlayer = Uma.voice($("#voicePlay"), VOICE_CLIP, { idle: "Ouvir a Vivlos ♪" });
 
       showHero(groups);
       renderTabs();

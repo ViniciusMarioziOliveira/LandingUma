@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-uma="machan">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Landing page dedicada à Aston Machan, de Umamusume: Pretty Derby — fotografias, lembranças e um pedido: não se esqueça de mim. Dados da API Umapyoi.">
   <meta name="theme-color" content="#cf4436">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Paddock · Uma Musume fan pages">
+  <meta property="og:title" content="Aston Machan — Não se esqueça de mim">
+  <meta property="og:description" content="Landing page dedicada à Aston Machan, de Umamusume: Pretty Derby — fotografias, lembranças e um pedido: não se esqueça de mim. Dados da API Umapyoi.">
+  <meta property="og:image" content="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/77583677fc3d4593b617c0eb8092ce4b/astonmachan_header.png?w=1200&amp;fm=jpg&amp;q=85">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Aston Machan — Não se esqueça de mim</title>
+  <link rel="icon" type="image/png" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6cbe9384164943e195d74d79a788a495/astonmachan_icon.png?w=64&amp;h=64&amp;fm=png&amp;mask=ellipse">
+  <link rel="apple-touch-icon" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6cbe9384164943e195d74d79a788a495/astonmachan_icon.png?w=180&amp;h=180&amp;fm=png">
   <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +46,7 @@
       --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       --shadow: 0 25px 65px rgba(85, 32, 28, .15);
       --soft-shadow: 0 15px 38px rgba(85, 32, 28, .1);
+      --uma-display: "Gloock", serif;
 
       --sw-toggle-bg: rgba(255, 255, 255, .74);
       --sw-toggle-ink: var(--red-dark);
@@ -128,7 +138,8 @@
     .focus-ring::after { top: 50%; left: -10px; right: -10px; height: 1px; }
     .motion .brackets { transform: scale(calc(1 - var(--p, 0) * .08)); }
     .motion .focus-ring { transform: rotate(calc(var(--p, 0) * 180deg)) scale(calc(1 - var(--p, 0) * .3)); }
-    .hero-image { position: absolute; inset: 8px -8px 0; z-index: 2; width: calc(100% + 16px); height: calc(100% - 8px); object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .7s var(--ease-out); }
+    /* A arte oficial tem ~18% de vazio no topo: ela cresce e o visor corta o excesso. */
+    .hero-image { position: absolute; inset: auto -8px 0; z-index: 2; width: calc(100% + 16px); height: 113%; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .7s var(--ease-out); }
     .hero-image.is-loaded { opacity: 1; transform: none; }
     .camera-meta { position: absolute; z-index: 4; padding: 9px 12px; border-radius: 8px; color: #fff; background: rgba(51, 42, 40, .82); font: .72rem var(--mono); }
     .camera-meta.top { top: 55px; right: 32px; }
@@ -412,15 +423,7 @@
           <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
             <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
-            <p class="switcher-label">Trocar personagem</p>
-            <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
-            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
-            <a href="chiyo.html" style="--c:#f9879d">Sakura Chiyono O</a>
-            <a href="machan.html" style="--c:#CF4436" aria-current="page">Aston Machan <small>Atual</small></a>
-            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
-            <a href="acute.html" style="--c:#d85081">Wonder Acute</a>
-          </nav>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Personagens"></nav>
         </div>
       </div>
     </div>
@@ -531,13 +534,13 @@
         <div class="voice-copy" data-reveal>
           <span class="eyebrow">Mensagem arquivada</span>
           <h2 id="voiceTitle">Uma voz que pede para permanecer.</h2>
-          <p>O gravador homenageia o hábito de Machan de guardar mensagens. A interação é apenas visual e não usa áudio oficial.</p>
+          <p>O gravador homenageia o hábito de Machan de guardar mensagens — e toca a apresentação oficial dela, na voz da dubladora. É só apertar o play.</p>
           <p style="margin-top:14px">Voz de <strong data-field="voice">Honoka Inoue</strong> (<span data-field="voiceJp">井上ほの花</span>).</p>
         </div>
         <div class="recorder" id="recorder" data-reveal style="--d:.1s">
           <div class="rec-head">
             <div class="rec-title"><span class="rec-dot" aria-hidden="true"></span><strong>Ma-chan voice memo</strong></div>
-            <span class="rec-time" id="recTime">00:08</span>
+            <span class="rec-time" id="recTime">00:00</span>
           </div>
           <div class="rec-visual" aria-hidden="true">
             <div class="reel-disc"></div>
@@ -547,7 +550,7 @@
           </div>
           <div class="wave" id="wave" aria-hidden="true"></div>
           <div class="play-row">
-            <button class="play" id="playMemo" type="button" aria-pressed="false" aria-label="Reproduzir a animação do gravador">▶</button>
+            <button class="play" id="playMemo" type="button" aria-label="Ouvir a mensagem de voz da Machan">▶</button>
             <span class="memo-text" id="memoText" aria-live="polite">“Você vai se lembrar de mim, certo?”</span>
           </div>
         </div>
@@ -622,6 +625,22 @@
         </figure>
       </div>
     </section>
+
+    <section class="uma-next" aria-label="Próxima personagem">
+      <div class="uma-next-inner">
+        <a class="uma-next-card uma-theme-vivlos" href="vivlos.html">
+          <span class="uma-next-copy">
+            <span class="uma-next-kicker"><span class="uma-next-gate" style="--frame:#F2C414;--frame-ink:#1D1D1F" aria-hidden="true">5</span>Próxima largada</span>
+            <strong class="uma-next-name">Vivlos</strong>
+            <span class="uma-next-jp" lang="ja">ヴィブロス</span>
+            <span class="uma-next-tagline">Mimada, travessa e talentosa, sonha em brilhar na maior pista do mundo: Dubai.</span>
+            <span class="uma-next-cta">Ir para a página <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="uma-next-art" aria-hidden="true"><img src="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/244e561a280b486893eb658fc15150c2/vivlos_02.png?w=720&amp;fm=webp&amp;q=80" alt="" width="720" height="1178" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
+        </a>
+        <a class="uma-next-all" href="index.html"><i aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>Ver todas no Paddock</a>
+      </div>
+    </section>
   </main>
 
   <dialog class="lightbox" id="lightbox" aria-labelledby="lightboxCaption">
@@ -649,6 +668,7 @@
       const CHARACTER_ID = 7518;
       const GAME_ID = 1087;
       const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
+      const VOICE_CLIP = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/128b439b0daa4ecaa8288079e796e0be/astonmachan_voice.mp3";
       const $ = selector => document.querySelector(selector);
 
       const DICTIONARY = {
@@ -770,6 +790,7 @@
       }
 
       /* ---------------------------------------------------------- gravador */
+      // Toca a apresentação oficial (o .mp3 do site oficial); os medidores acompanham enquanto toca.
       function initRecorder() {
         const recorder = $("#recorder");
         const button = $("#playMemo");
@@ -785,29 +806,35 @@
         const leds = Array.from({ length: 14 }, () => Uma.el("span", "vu-led"));
         vu.replaceChildren(...leds);
         const tiers = leds.map((_, index) => (index < 8 ? "low" : index < 12 ? "mid" : "high"));
+        const clock = seconds => `00:${String(Math.floor(seconds || 0)).padStart(2, "0")}`;
         let timer = 0;
-        let seconds = 8;
 
         const reset = () => leds.forEach(led => led.classList.remove("low", "mid", "high"));
-        button.addEventListener("click", () => {
-          const playing = !recorder.classList.contains("is-playing");
-          recorder.classList.toggle("is-playing", playing);
-          button.textContent = playing ? "■" : "▶";
-          button.setAttribute("aria-pressed", String(playing));
-          text.textContent = playing ? "Mensagem sendo lembrada..." : "“Você vai se lembrar de mim, certo?”";
-          clearInterval(timer);
-          reset();
-          if (!playing) return;
-          let ticks = 0;
-          timer = setInterval(() => {
-            const active = 4 + Math.floor(Math.random() * 10);
-            leds.forEach((led, index) => {
-              led.classList.remove("low", "mid", "high");
-              if (index < active) led.classList.add(tiers[index]);
-            });
-            ticks += 1;
-            if (ticks % 7 === 0) time.textContent = `00:${String(++seconds % 60).padStart(2, "0")}`;
-          }, 140);
+        return Uma.voice(button, VOICE_CLIP, {
+          label: null,
+          onChange(state, audio) {
+            const playing = state === "playing";
+            recorder.classList.toggle("is-playing", playing);
+            button.textContent = playing ? "■" : "▶";
+            button.setAttribute("aria-label", playing ? "Pausar a mensagem" : "Ouvir a mensagem de voz da Machan");
+            text.textContent = state === "error"
+              ? "A fita enroscou… tente de novo mais tarde."
+              : playing ? "Mensagem sendo lembrada…" : "“Você vai se lembrar de mim, certo?”";
+            window.clearInterval(timer);
+            reset();
+            if (!playing) {
+              if (audio?.ended) time.textContent = clock(audio.duration);
+              return;
+            }
+            timer = window.setInterval(() => {
+              const active = 4 + Math.floor(Math.random() * 10);
+              leds.forEach((led, index) => {
+                led.classList.remove("low", "mid", "high");
+                if (index < active) led.classList.add(tiers[index]);
+              });
+              time.textContent = clock(audio.currentTime);
+            }, 140);
+          }
         });
       }
 
@@ -876,7 +903,7 @@
             lastFrame = frame;
             counter.textContent = frame;
           }
-          fab.classList.toggle("is-visible", y > heroEnd() && y < maxScroll - 220);
+          fab.classList.toggle("is-visible", y > heroEnd() && y < maxScroll - 1300);
 
           if (!frames.length || !document.documentElement.classList.contains("motion")) return;
           // Os negativos revelam ao passar pelo centro e continuam revelados depois.
@@ -914,7 +941,8 @@
       /* ------------------------------------------------------------ dados */
       function render({ character, groups: apiGroups, supports, voice }) {
         if (character) {
-          Uma.fillCharacter(character, DICTIONARY);
+          const fields = Uma.fillCharacter(character, DICTIONARY);
+          voicePlayer.setSource(fields.voiceClip);
           updateStamps(character);
         }
         if (voice) Uma.fillVoice(voice);
@@ -932,7 +960,7 @@
       Uma.initScrollSpy(".nav a");
       initScrollEffects();
       initInteractions();
-      initRecorder();
+      const voicePlayer = initRecorder();
       initMemory();
 
       showPhotos(groups);

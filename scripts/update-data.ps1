@@ -12,12 +12,13 @@ $OutDir = Join-Path $PSScriptRoot "..\data"
 
 # id da personagem na Umapyoi => game id (usado pelos support cards)
 $Characters = [ordered]@{
-  5474  = 1059  # Mejiro Dober   (index.html)
+  5474  = 1059  # Mejiro Dober   (dober.html)
   5191  = 1033  # Admire Vega    (ayabe.html)
   5509  = 1069  # Sakura Chiyono O (chiyo.html)
   7518  = 1087  # Aston Machan   (machan.html)
   10013 = 1091  # Vivlos         (vivlos.html)
   7879  = 1100  # Wonder Acute   (acute.html)
+  10408 = 1143  # Victoire Pisa  (victoire.html)
 }
 
 $Client = New-Object System.Net.WebClient

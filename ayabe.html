@@ -1,36 +1,57 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-uma="ayabe">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Por que Admire Vega deve ser a sua Umamusume favorita? Uma noite estrelada dedicada à Ayabe-san, com dados da API Umapyoi.">
-  <meta name="theme-color" content="#050914">
-  <title>Por que Admire Vega deve ser a sua Umamusume Favorita?</title>
+  <meta name="description" content="Admire Vega, de Umamusume: Pretty Derby — a estrela de primeira grandeza que prefere brilhar sozinha e esconde um coração derretido por coisas macias. Com dados da API Umapyoi.">
+  <meta name="theme-color" content="#060914">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Paddock · Uma Musume fan pages">
+  <meta property="og:title" content="Admire Vega nunca vai pedir para ser a sua favorita">
+  <meta property="og:description" content="A estrela de primeira grandeza que prefere brilhar sozinha — e esconde um coração derretido por coisas macias.">
+  <meta property="og:image" content="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c01c0382f8c64a80a0d40742051e05c1/admirevega_header.png?w=1200&amp;fm=jpg&amp;q=85">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Admire Vega — Uma estrela de primeira grandeza</title>
+  <link rel="icon" type="image/png" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d34bee3b36f0457f896e851359d0bd00/admirevega_icon.png?w=64&amp;h=64&amp;fm=png&amp;mask=ellipse">
+  <link rel="apple-touch-icon" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d34bee3b36f0457f896e851359d0bd00/admirevega_icon.png?w=180&amp;h=180&amp;fm=png">
   <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.microcms-assets.io">
   <link rel="preload" as="image" href="img/ayabe.png" fetchpriority="high">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Klee+One:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/uma-core.css">
 
   <style>
     :root {
-      --night: #050914;
-      --night-2: #0a1128;
-      --navy: #101c3d;
+      --night: #060914;
+      --night-2: #0a1029;
       --blue: #3865a1;
-      --blue-light: #6b95d6;
+      --blue-light: #6f9be0;
       --cyan: #78d5e1;
-      --star: #eaf4ff;
-      --vega: #f3cf7a;
-      --lavender: #aab5ff;
-      --text: #eef3fb;
-      --muted: #9aa9c4;
-      --line: rgba(120, 160, 220, .2);
-      --card: rgba(14, 24, 52, .62);
+      --star: #eef4ff;
+      --vega: #f5d98a;
+      --text: #e9eef8;
+      --muted: #9aa8c5;
+      --faint: #6f7da0;
+      --line: rgba(120, 160, 220, .18);
+      --line-strong: rgba(150, 185, 235, .34);
+      --panel: rgba(13, 21, 48, .74);
+      /* O lado que ela esconde: tons macios que só aparecem nos segredos */
+      --fluff: #fdf1f4;
+      --fluff-pink: #f5b9cd;
+      --fluff-rose: #e88aab;
+      --fluff-ink: #5a4566;
       --radius: 22px;
+      --uma-display: "Cinzel", serif;
+      --uv-line: var(--line-strong);
+      --uv-ink: var(--star);
+      --uv-bg: rgba(255, 255, 255, .04);
+      --uv-bg-hover: rgba(120, 213, 225, .1);
+      --uv-dot: var(--blue);
+      --uv-dot-ink: #fff;
 
       --sw-toggle-bg: rgba(255, 255, 255, .05);
       --sw-toggle-ink: var(--star);
@@ -72,44 +93,64 @@
       z-index: -3;
       pointer-events: none;
       background:
-        radial-gradient(640px 520px at 12% 8%, rgba(170, 181, 255, .1), transparent 62%),
-        radial-gradient(760px 620px at 88% 24%, rgba(56, 101, 161, .2), transparent 62%),
-        radial-gradient(560px 520px at 50% 96%, rgba(243, 207, 122, .06), transparent 66%),
-        linear-gradient(180deg, #050914, #070d1f 60%, #050914);
+        radial-gradient(640px 520px at 12% 8%, rgba(170, 181, 255, .09), transparent 62%),
+        radial-gradient(760px 620px at 88% 24%, rgba(56, 101, 161, .18), transparent 62%),
+        radial-gradient(560px 520px at 50% 96%, rgba(245, 185, 205, .05), transparent 66%),
+        linear-gradient(180deg, #060914, #070d1f 60%, #060914);
     }
 
     .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
-    .title { font-family: "Cinzel", serif; font-weight: 700; letter-spacing: .02em; line-height: 1.12; overflow-wrap: anywhere; }
-    .serif { font-family: "Cormorant Garamond", serif; font-style: italic; }
-    .kicker { display: inline-flex; align-items: center; gap: 9px; color: var(--cyan); font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
-    .kicker .icon { color: var(--vega); }
-    .kicker.greek { font-family: "Cinzel", serif; font-size: .9rem; letter-spacing: .3em; text-transform: none; }
+    .display { font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: -.005em; line-height: 1.02; overflow-wrap: anywhere; }
+    .display em { color: var(--vega); font-style: italic; }
+    .hand { font-family: "Klee One", cursive; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--cyan); font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .kicker::before { content: ""; flex: 0 0 auto; width: 10px; height: 10px; background: var(--vega); clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
 
-    .section-head { max-width: 680px; margin: 0 auto 50px; text-align: center; }
-    .section-head h2 { margin: 12px 0; font-size: clamp(2rem, 4.2vw, 3rem); color: #fff; }
+    .section-head { max-width: 720px; margin: 0 auto 54px; text-align: center; }
+    .section-head h2 { margin: 14px 0; color: #fff; font-size: clamp(2.3rem, 4.8vw, 3.7rem); }
     .section-head p { color: var(--muted); font-size: 1.04rem; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 24px; border: 1px solid transparent; border-radius: 999px; font-weight: 700; font-size: .94rem; cursor: pointer; transition: transform .3s var(--ease-out), box-shadow .3s ease, background .3s ease, border-color .3s ease; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 24px; border: 1px solid transparent; border-radius: 999px; font-size: .92rem; font-weight: 700; cursor: pointer; transition: transform .3s var(--ease-out), box-shadow .3s ease, background .3s ease, border-color .3s ease; }
     .btn:hover { transform: translateY(-2px); }
-    .btn-primary { color: #fff; border-color: rgba(255, 255, 255, .18); background: linear-gradient(135deg, var(--blue), #264a7d); box-shadow: 0 6px 24px rgba(56, 101, 161, .45); }
-    .btn-primary:hover { box-shadow: 0 10px 32px rgba(56, 101, 161, .7); background: linear-gradient(135deg, var(--blue-light), var(--blue)); }
-    .btn-ghost { border-color: var(--line); background: rgba(255, 255, 255, .04); }
-    .btn-ghost:hover { border-color: rgba(234, 244, 255, .6); background: rgba(255, 255, 255, .08); }
+    .btn-primary { color: #0a1430; background: linear-gradient(135deg, #fff, #d4e3ff); box-shadow: 0 8px 28px rgba(150, 185, 235, .3); }
+    .btn-primary:hover { box-shadow: 0 12px 36px rgba(150, 185, 235, .48), 0 0 0 4px rgba(234, 244, 255, .1); }
+    .btn-ghost { border-color: var(--line-strong); background: rgba(255, 255, 255, .03); }
+    .btn-ghost:hover { border-color: rgba(234, 244, 255, .6); background: rgba(255, 255, 255, .07); }
+    .btn-sm { min-height: 40px; padding: 0 16px; font-size: .8rem; }
+
+    /* Chapa de observatório: painel com marcas de registro nos quatro cantos */
+    .plate { position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(16, 26, 58, .82), rgba(8, 13, 32, .9)); box-shadow: 0 30px 70px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .05); }
+    .plate::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      pointer-events: none;
+      background:
+        linear-gradient(var(--line-strong), var(--line-strong)) 0 0 / 14px 1px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 0 0 / 1px 14px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 100% 0 / 14px 1px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 100% 0 / 1px 14px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 14px 1px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 1px 14px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 100% 100% / 14px 1px,
+        linear-gradient(var(--line-strong), var(--line-strong)) 100% 100% / 1px 14px;
+      background-repeat: no-repeat;
+    }
 
     /* ----------------------------------------------------------------- header */
-    .site-nav { position: fixed; inset: 0 0 auto; z-index: 60; border-bottom: 1px solid var(--line); background: rgba(5, 9, 20, .82); transition: background .35s ease, box-shadow .35s ease; }
-    .site-nav.is-scrolled { background: rgba(5, 9, 20, .94); box-shadow: 0 10px 34px rgba(0, 0, 0, .4); }
-    @media (min-width: 901px) and (hover: hover) { .site-nav { background: rgba(5, 9, 20, .7); backdrop-filter: blur(12px); } }
+    .site-nav { position: fixed; inset: 0 0 auto; z-index: 60; border-bottom: 1px solid var(--line); background: rgba(6, 9, 20, .84); transition: background .35s ease, box-shadow .35s ease; }
+    .site-nav.is-scrolled { background: rgba(6, 9, 20, .95); box-shadow: 0 10px 34px rgba(0, 0, 0, .4); }
+    @media (min-width: 901px) and (hover: hover) { .site-nav { background: rgba(6, 9, 20, .7); backdrop-filter: blur(12px); } }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 66px; }
-    .brand { display: flex; align-items: center; gap: 11px; font-family: "Cinzel", serif; font-weight: 700; font-size: 1.08rem; letter-spacing: .04em; }
-    .brand-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #fff; background: linear-gradient(135deg, var(--blue), #6b5bd6); box-shadow: 0 0 16px rgba(120, 160, 220, .45); font-size: .95rem; }
+    .brand { display: flex; align-items: center; gap: 11px; font-family: "Cinzel", serif; font-size: 1.06rem; font-weight: 700; letter-spacing: .04em; }
+    .brand-icon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--vega); background: radial-gradient(circle, rgba(245, 217, 138, .22), transparent 70%); font-size: .95rem; }
     .nav-links { display: flex; gap: 26px; list-style: none; }
-    .nav-links a { position: relative; padding-block: 6px; color: var(--muted); font-size: .9rem; font-weight: 500; transition: color .25s ease; }
+    .nav-links a { position: relative; padding-block: 6px; color: var(--muted); font-size: .88rem; font-weight: 500; transition: color .25s ease; }
     .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--star), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease-out); }
     .nav-links a:hover, .nav-links a.is-active { color: var(--star); }
     .nav-links a:hover::after, .nav-links a.is-active::after { transform: scaleX(1); }
     .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .nav-actions .btn { min-height: 44px; padding-inline: 18px; font-size: .86rem; }
+    .nav-actions .btn { min-height: 44px; padding-inline: 18px; font-size: .84rem; }
 
     /* Linha do tempo da noite: uma estrela cruza o céu conforme a leitura */
     .night-line { position: relative; height: 2px; background: rgba(120, 160, 220, .12); }
@@ -119,21 +160,26 @@
 
     /* ------------------------------------------------------------------- hero */
     .hero { position: relative; overflow: hidden; }
-    .hero-inner { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 48px; min-height: max(760px, 100svh); padding: 130px 0 90px; }
-    .badge { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 24px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--star); background: rgba(56, 101, 161, .22); font-size: .84rem; font-weight: 500; }
-    .badge .icon { color: var(--vega); }
-    .hero h1 { margin-bottom: 24px; }
-    .h1-pre { display: block; margin-bottom: 10px; color: var(--muted); font-family: "Cormorant Garamond", serif; font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-style: italic; font-weight: 500; letter-spacing: 0; line-height: 1.25; }
-    .h1-name { display: block; font-size: clamp(3.1rem, 7vw, 5.6rem); line-height: 1; color: transparent; background: linear-gradient(135deg, #fff 30%, var(--star) 60%, var(--blue-light) 100%); -webkit-background-clip: text; background-clip: text; }
-    .hero-copy > p { max-width: 530px; margin-bottom: 34px; color: var(--muted); font-size: 1.12rem; }
-    .hero-copy strong { color: var(--star); font-weight: 700; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-inner { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 40px; min-height: max(760px, 100svh); padding: 124px 0 84px; }
+    .dnd { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; padding: 7px 15px 7px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(10, 16, 41, .62); font-size: .78rem; font-weight: 500; }
+    .dnd-icon { position: relative; flex: 0 0 auto; width: 15px; height: 15px; border-radius: 50%; background: #e2657c; box-shadow: 0 0 0 4px rgba(226, 101, 124, .16); }
+    .dnd-icon::after { content: ""; position: absolute; left: 3.5px; right: 3.5px; top: 6.5px; height: 2px; border-radius: 2px; background: #fff; }
+    .hero-pre { color: var(--muted); font-family: "Cormorant Garamond", serif; font-size: clamp(1.3rem, 2.3vw, 1.8rem); font-style: italic; font-weight: 500; line-height: 1.25; }
+    .hero-name { margin: 12px 0 16px; font-family: "Cinzel", serif; font-size: clamp(3.4rem, 7vw, 6rem); font-weight: 700; line-height: .94; letter-spacing: .01em; }
+    .hero-name span { display: block; color: transparent; background: linear-gradient(120deg, #fff 18%, var(--star) 46%, #a9c6f4 76%, var(--cyan)); -webkit-background-clip: text; background-clip: text; }
+    .hero-name span + span { padding-left: .6em; }
+    .hero-jp { display: flex; align-items: center; gap: 14px; color: var(--cyan); font-size: .84rem; letter-spacing: .28em; }
+    .hero-jp::before { content: ""; width: 36px; height: 1px; background: var(--line-strong); }
+    .hero-jp span + span { color: var(--muted); letter-spacing: .14em; }
+    .hero-lede { max-width: 540px; margin: 26px 0 34px; color: var(--muted); font-size: 1.1rem; line-height: 1.78; }
+    .hero-lede strong { color: var(--star); font-weight: 700; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
     .api-line { display: flex; align-items: center; gap: 10px; margin-top: 24px; color: var(--muted); font-size: .8rem; }
-    .api-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--vega); box-shadow: 0 0 0 5px rgba(243, 207, 122, .14); }
+    .api-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--vega); box-shadow: 0 0 0 5px rgba(245, 217, 138, .14); }
     .api-dot.is-online { background: var(--cyan); box-shadow: 0 0 0 5px rgba(120, 213, 225, .14), 0 0 12px rgba(120, 213, 225, .6); }
 
-    .hero-visual { position: relative; display: grid; place-items: center; min-height: 600px; }
-    .halo { position: absolute; width: min(90%, 440px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(56, 101, 161, .55) 0%, rgba(170, 181, 255, .16) 45%, transparent 70%); }
+    .hero-visual { --win: 380px; position: relative; display: grid; place-items: center; min-height: 620px; }
+    .halo { position: absolute; width: min(90%, 440px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(56, 101, 161, .5) 0%, rgba(170, 181, 255, .14) 45%, transparent 70%); }
     .lyra { position: absolute; inset: -6% -8%; width: 116%; height: 112%; pointer-events: none; overflow: visible; }
     .lyra line { stroke: var(--blue-light); stroke-width: 1; opacity: .6; stroke-dasharray: 1; stroke-dashoffset: 1; }
     .lyra circle { fill: var(--star); }
@@ -153,16 +199,29 @@
     .vega-glow { transform-box: fill-box; transform-origin: center; animation: vegaPulse 2.8s ease-in-out infinite; }
     @keyframes vegaPulse { 50% { opacity: .45; transform: scale(1.5); } }
     .motion .lyra { transform: rotate(calc(var(--p, 0) * -14deg)); }
-    .motion .window { transform: translate3d(0, calc(var(--p, 0) * 60px), 0); }
+    .motion .window, .motion .peek-wrap { transform: translate3d(0, calc(var(--p, 0) * 60px), 0); }
 
-    .window { position: relative; z-index: 1; width: min(100%, 380px); padding: 16px; border: 1px solid var(--line); border-radius: 200px 200px 26px 26px; background: rgba(12, 21, 48, .7); box-shadow: 0 24px 60px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .06); }
-    .window-frame { position: relative; overflow: hidden; aspect-ratio: 640 / 905; border-radius: 184px 184px 16px 16px; background: linear-gradient(160deg, #0d1527, #16233f); }
+    .window { position: relative; z-index: 1; width: min(100%, var(--win)); padding: 14px; border: 1px solid var(--line-strong); border-radius: 200px 200px 24px 24px; background: #0b132e; box-shadow: 0 30px 70px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .06); }
+    .window-frame { position: relative; overflow: hidden; aspect-ratio: 640 / 905; border-radius: 186px 186px 14px 14px; background: linear-gradient(160deg, #0d1527, #16233f); }
     .window-frame::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 -60px 60px -30px rgba(5, 9, 20, .5); pointer-events: none; }
     .window-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .window-fallback { position: absolute; inset: 0; display: none; place-items: center; align-content: center; gap: 12px; color: var(--muted); font-family: "Cinzel", serif; }
     .window-fallback .icon { font-size: 2.4rem; color: var(--star); }
     .window.has-error .window-fallback { display: grid; }
-    .window figcaption { margin-top: 14px; padding-inline: 6px; color: var(--star); font-size: 1.12rem; text-align: center; }
+    .window figcaption { margin-top: 14px; padding-inline: 10px; color: var(--star); font-family: "Cormorant Garamond", serif; font-size: 1.14rem; font-style: italic; line-height: 1.4; text-align: center; }
+
+    /*
+     * O carneirinho de pelúcia espia por trás da janela — e se esconde quando é visto.
+     * O recorte termina exatamente na borda da janela: o que passa dali fica "atrás" dela.
+     */
+    .peek-wrap { position: absolute; z-index: 2; left: calc(50% - var(--win) / 2 - 68px); bottom: 24%; width: 68px; }
+    .peek-clip { margin: -14px 0 -14px -14px; padding: 14px 0 14px 14px; overflow: hidden; }
+    .peek { display: block; width: 124px; padding: 0; border: 0; border-radius: 40%; background: none; cursor: pointer; transform: rotate(-6deg); transform-origin: 60% 90%; transition: transform .5s var(--ease-out); }
+    .peek svg { display: block; width: 100%; height: auto; }
+    .peek.is-hiding { transform: translate(76px, 10px) rotate(8deg); transition-duration: .2s; }
+    .peek:focus-visible { outline-offset: -2px; }
+    .peek-note { position: absolute; left: -18px; bottom: calc(100% + 4px); padding: 7px 13px; border-radius: 14px 14px 14px 4px; color: var(--fluff-ink); background: var(--fluff); font: 600 .92rem/1.3 "Klee One", cursive; white-space: nowrap; box-shadow: 0 12px 26px rgba(0, 0, 0, .35); opacity: 0; transform: translateY(8px) rotate(-4deg); transition: opacity .3s ease, transform .4s var(--ease-out); pointer-events: none; }
+    .peek-note.is-on { opacity: 1; transform: rotate(-4deg); }
 
     /* ---------------------------------------------------- a promessa (cena) */
     .promise { --scene-h: 330vh; position: relative; }
@@ -191,16 +250,16 @@
     .horizon path { fill: #03060f; }
     .horizon .far { fill: #0a1230; }
 
-    .promise-copy { position: relative; align-self: center; width: min(480px, calc(100% - 40px)); margin-left: max(20px, calc((100% - 1180px) / 2)); padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: rgba(5, 9, 20, .78); box-shadow: 0 30px 60px rgba(0, 0, 0, .35); }
-    .promise-copy h2 { margin: 10px 0 20px; font-size: clamp(2rem, 4vw, 2.8rem); }
-    .clock { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; color: var(--vega); font-family: "Cinzel", serif; font-size: 1.1rem; letter-spacing: .08em; }
+    .promise-copy { position: relative; align-self: center; width: min(480px, calc(100% - 40px)); margin-left: max(20px, calc((100% - 1180px) / 2)); padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: rgba(6, 10, 24, .8); box-shadow: 0 30px 60px rgba(0, 0, 0, .35); }
+    .promise-copy h2 { margin: 12px 0 20px; color: #fff; font-size: clamp(2.2rem, 4.2vw, 3rem); }
+    .clock { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; color: var(--vega); font-family: "Cinzel", serif; font-size: 1.1rem; letter-spacing: .08em; }
     .clock-times { display: grid; }
     .clock-times span { grid-area: 1 / 1; }
     .beats { display: grid; list-style: none; }
     .beat { padding-block: 16px; border-top: 1px solid var(--line); }
-    .beat h3 { margin-bottom: 8px; color: #fff; font-family: "Cinzel", serif; font-size: 1.3rem; }
+    .beat h3 { margin-bottom: 8px; color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.55rem; font-weight: 600; line-height: 1.15; }
     .beat p { color: var(--muted); }
-    .beat .record { display: block; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--vega); border-radius: 0 10px 10px 0; color: var(--star); background: rgba(243, 207, 122, .07); font-family: "Cormorant Garamond", serif; font-size: 1.12rem; font-style: italic; }
+    .beat .record { display: block; margin-top: 12px; padding: 10px 14px; border-left: 2px solid var(--vega); border-radius: 0 10px 10px 0; color: var(--star); background: rgba(245, 217, 138, .07); font-family: "Cormorant Garamond", serif; font-size: 1.12rem; font-style: italic; }
     .beat .record small { display: block; color: var(--vega); font-family: "Plus Jakarta Sans", sans-serif; font-size: .64rem; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 
     html:not(.motion) .promise-stage { padding: 110px 0 200px; }
@@ -225,49 +284,61 @@
     .motion .promise[data-step="1"] .clock-times span:nth-child(2), .motion .promise[data-step="2"] .clock-times span:nth-child(3) { opacity: 1; transform: none; pointer-events: auto; }
     html:not(.motion) .clock-times span { display: none; }
 
+    /* ------------------------------------------------------- o jeito dela */
+    .manual { padding: 120px 0 100px; }
+    .manual-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 60px; align-items: start; }
+    .manual-intro { position: sticky; top: 120px; }
+    .manual-intro h2 { margin: 16px 0 22px; color: #fff; font-size: clamp(2.4rem, 4.6vw, 3.8rem); }
+    .manual-intro p { color: var(--muted); font-size: 1.04rem; line-height: 1.8; }
+    .manual-intro p + p { margin-top: 14px; }
+    .manual-intro strong { color: var(--star); }
+    .lightyear { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 2px 18px; margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+    .lightyear strong { grid-row: span 2; color: var(--vega); font-family: "Cormorant Garamond", serif; font-size: 4.6rem; font-weight: 600; line-height: .85; }
+    .lightyear span { color: var(--star); font-size: .95rem; font-weight: 700; line-height: 1.4; }
+    .lightyear small { color: var(--muted); font-family: "Cormorant Garamond", serif; font-size: 1.08rem; font-style: italic; }
+
+    .manual-card { padding: 34px 36px 26px; }
+    .manual-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .manual-head h3 { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.75rem; font-weight: 600; line-height: 1.1; }
+    .manual-head small { color: var(--faint); font-family: "Cinzel", serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; }
+    .rules { position: relative; list-style: none; }
+    /* As regras ficam presas numa corrente de estrelas que termina em rosa */
+    .rules::before { content: ""; position: absolute; left: 15.5px; top: 34px; bottom: 40px; width: 1px; background: linear-gradient(var(--line-strong) 70%, rgba(245, 185, 205, .7)); }
+    .rule { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 18px; padding: 18px 0; }
+    .rule + .rule { border-top: 1px dashed rgba(120, 160, 220, .12); }
+    .rule-mag { position: relative; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #0b1230; }
+    .rule-mag i { width: calc(var(--m, 1) * 3px + 4px); aspect-ratio: 1; border-radius: 50%; background: var(--star); box-shadow: 0 0 calc(var(--m, 1) * 4px + 2px) rgba(234, 244, 255, .75); }
+    .rule h4 { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.42rem; font-weight: 600; line-height: 1.2; }
+    .rule p { margin-top: 4px; color: var(--muted); font-size: .95rem; line-height: 1.65; }
+    .rule .archive { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin-top: 10px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--star); background: rgba(56, 101, 161, .12); font-size: .84rem; }
+    .archive small { color: var(--cyan); font-size: .6rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .rule.is-secret .rule-mag { color: var(--fluff-pink); font-size: 1.1rem; }
+    .rule.is-secret h4, .rule.is-secret p { color: var(--fluff-pink); font-family: "Klee One", cursive; }
+    .rule.is-secret h4 { font-size: 1.22rem; }
+
     /* ------------------------------------------------------------------ ficha */
-    .ficha { padding: 110px 0 90px; background: linear-gradient(180deg, transparent, rgba(56, 101, 161, .08), transparent); }
-    .ficha-grid { display: grid; grid-template-columns: .9fr 2fr; gap: 20px; }
-    .slogan-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 22px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(160deg, rgba(56, 101, 161, .35), rgba(8, 14, 34, .85)); }
-    .slogan-card::after { content: "α"; position: absolute; right: -6px; bottom: -48px; color: rgba(234, 244, 255, .05); font-family: "Cinzel", serif; font-size: 12rem; line-height: 1; }
-    .slogan-card blockquote { color: #fff; font-size: 1.6rem; line-height: 1.3; }
-    .slogan-card .profile-line { color: var(--muted); font-size: .96rem; }
-    .swatches { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; }
-    .swatch { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(5, 9, 20, .5); font-size: .8rem; }
+    .ficha { padding: 100px 0; }
+    .ficha-plate { display: grid; grid-template-columns: .92fr 1.6fr; overflow: hidden; }
+    .ficha-side { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; overflow: hidden; padding: 36px 34px; border-right: 1px solid var(--line); background: radial-gradient(circle at 20% 0%, rgba(56, 101, 161, .32), transparent 62%); }
+    .ficha-side::after { content: "α"; position: absolute; right: 14px; bottom: -44px; color: rgba(234, 244, 255, .05); font: 700 11rem/1 "Cinzel", serif; pointer-events: none; }
+    .plate-code { color: var(--faint); font-family: "Cinzel", serif; font-size: .7rem; letter-spacing: .18em; }
+    .ficha-side blockquote { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.7rem; font-style: italic; font-weight: 600; line-height: 1.25; }
+    .profile-line { color: var(--muted); font-size: .95rem; }
+    .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+    .swatch { display: flex; align-items: center; gap: 10px; padding: 7px 12px 7px 7px; border: 1px solid var(--line); border-radius: 999px; background: rgba(5, 9, 20, .5); font-size: .78rem; }
     .swatch i { width: 22px; height: 22px; border: 2px solid rgba(255, 255, 255, .7); border-radius: 50%; background: var(--c); }
-    .stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-    .stat { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease, background .35s ease; }
-    .stat:hover { transform: translateY(-4px); border-color: rgba(107, 149, 214, .7); background: rgba(22, 38, 78, .75); box-shadow: 0 12px 30px rgba(56, 101, 161, .25); }
-    .stat-code { margin-bottom: 14px; color: rgba(154, 169, 196, .7); font-family: "Cinzel", serif; font-size: .66rem; letter-spacing: .12em; }
-    .stat-label { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    .stat-label .icon { color: var(--blue-light); }
-    .stat strong { color: #fff; font-size: 1.12rem; line-height: 1.35; overflow-wrap: anywhere; }
-    .stat small { margin-top: 4px; color: var(--muted); font-size: .82rem; }
-    .stat-grid [data-reveal]:nth-child(4n+2) { --d: .06s; }
-    .stat-grid [data-reveal]:nth-child(4n+3) { --d: .12s; }
-    .stat-grid [data-reveal]:nth-child(4n+4) { --d: .18s; }
+    .ficha-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: -1px 0 0 -1px; }
+    .cell { display: flex; flex-direction: column; min-width: 0; min-height: 168px; padding: 24px 22px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); transition: background .3s ease; }
+    .cell:hover { background: rgba(56, 101, 161, .14); }
+    .cell dt { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .cell dt b { color: var(--faint); font-family: "Cinzel", serif; font-weight: 500; letter-spacing: .08em; }
+    .cell dd { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 18px; color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 600; line-height: 1.15; overflow-wrap: anywhere; }
+    .cell dd small { color: var(--muted); font-family: "Plus Jakarta Sans", sans-serif; font-size: .78rem; font-weight: 500; line-height: 1.4; }
 
-    /* ----------------------------------------------------------------- razões */
-    .reasons { padding: 100px 0; }
-    .pillars { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-    .pillar { position: relative; overflow: hidden; padding: 34px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); transition: transform .4s var(--ease-out), box-shadow .4s ease, border-color .4s ease; }
-    .pillar:hover { transform: translateY(-6px); border-color: rgba(107, 149, 214, .6); box-shadow: 0 16px 40px rgba(56, 101, 161, .3); }
-    .pillar-letter { position: absolute; right: 22px; top: 12px; color: rgba(234, 244, 255, .07); font-family: "Cinzel", serif; font-size: 5.4rem; line-height: 1; transition: color 1.2s ease .5s, text-shadow 1.2s ease .5s; }
-    .pillar.is-in .pillar-letter, html:not(.js) .pillar-letter { color: rgba(243, 207, 122, .3); text-shadow: 0 0 24px rgba(243, 207, 122, .45); }
-    .pillar-icon { display: grid; place-items: center; width: 58px; height: 58px; margin-bottom: 22px; border: 1px solid var(--line); border-radius: 16px; color: var(--star); background: rgba(56, 101, 161, .3); font-size: 1.5rem; transition: transform .4s var(--ease-out), box-shadow .4s ease; }
-    .pillar:hover .pillar-icon { transform: rotate(-8deg) scale(1.08); box-shadow: 0 0 22px rgba(107, 149, 214, .55); }
-    .pillar h3 { margin-bottom: 12px; color: #fff; font-size: 1.3rem; }
-    .pillar p { color: var(--muted); font-size: .98rem; line-height: 1.75; }
-    .pillar code { padding: 2px 6px; border-radius: 4px; color: var(--star); background: rgba(56, 101, 161, .28); font-size: .9em; }
-    .pillar strong, .pillar em { color: var(--star); }
-    .pillars [data-reveal]:nth-child(2) { --d: .1s; }
-    .pillars [data-reveal]:nth-child(3) { --d: .15s; }
-    .pillars [data-reveal]:nth-child(4) { --d: .25s; }
-
-    /* --------------------------------------------------------------- galeria */
+    /* ------------------------------------------------------------ observatório */
     .observatory { padding: 100px 0; }
     .scope { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 40px; }
-    .scope-copy h3 { margin: 10px 0 6px; color: #fff; font-size: clamp(2rem, 4vw, 3rem); }
+    .scope-copy h3 { margin: 12px 0 6px; color: #fff; font-family: "Cormorant Garamond", serif; font-size: clamp(2.4rem, 4.4vw, 3.4rem); font-weight: 600; line-height: 1.05; }
     .scope-jp { color: var(--cyan); letter-spacing: .14em; }
     .scope-copy p { margin-top: 16px; color: var(--muted); }
     .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
@@ -284,45 +355,111 @@
     .lens-view img.is-loaded { opacity: 1; transform: none; }
     .lens-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); text-align: center; }
 
-    /* --------------------------------------------------------------- pantufas */
-    .fluff-section { position: relative; overflow: hidden; padding: 90px 0; border-block: 1px solid var(--line); background: rgba(14, 24, 52, .35); }
-    .fluff-box { max-width: 760px; margin: 0 auto; padding: 48px 40px; border: 1px solid var(--line); border-radius: var(--radius); text-align: center; background: linear-gradient(135deg, rgba(30, 48, 80, .78), rgba(10, 16, 36, .92)); box-shadow: 0 25px 60px rgba(0, 0, 0, .5); }
-    .fluff-box h2 { margin: 16px 0 10px; color: #fff; font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
-    .fluff-box > p { margin-bottom: 30px; color: var(--muted); }
-    .fluff-stage { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
-    .fluff-ring { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(var(--ring-color, var(--vega)) calc(var(--v, 50) * 1%), rgba(255, 255, 255, .08) 0); }
-    .fluff-ring::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; background: radial-gradient(circle at 40% 30%, rgba(56, 101, 161, .5), #0d1527 75%); }
-    .fluff-icon { position: relative; z-index: 1; width: 64px; height: 64px; color: var(--ring-color, var(--star)); transform: scale(calc(.85 + var(--v, 50) * .0055)); transition: transform .15s ease, color .2s ease; }
-    .fluff-slider-wrap { position: relative; height: 34px; margin: 34px 0 18px; }
-    .fluff-track { position: absolute; left: 0; right: 0; top: 50%; height: 10px; overflow: hidden; border-radius: 6px; background: rgba(255, 255, 255, .08); transform: translateY(-50%); }
-    .fluff-fill { position: absolute; inset: 0; border-radius: 6px; background: linear-gradient(90deg, var(--blue), var(--blue-light), var(--vega)); transform: scaleX(calc(var(--v, 50) / 100)); transform-origin: left; }
-    .fluff-slider { position: absolute; inset: 0; width: 100%; height: 34px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
-    .fluff-slider::-webkit-slider-runnable-track { height: 34px; background: transparent; }
-    .fluff-slider::-moz-range-track { height: 34px; background: transparent; }
-    .fluff-slider::-webkit-slider-thumb { width: 26px; height: 26px; margin-top: 4px; border: 2px solid rgba(255, 255, 255, .6); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, var(--star) 45%, var(--blue-light)); box-shadow: 0 0 16px rgba(234, 244, 255, .8); cursor: grab; -webkit-appearance: none; }
-    .fluff-slider::-moz-range-thumb { width: 22px; height: 22px; border: 2px solid rgba(255, 255, 255, .6); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, var(--star) 45%, var(--blue-light)); box-shadow: 0 0 16px rgba(234, 244, 255, .8); cursor: grab; }
-    .fluff-spark { position: absolute; top: 4px; color: var(--vega); font-size: .9rem; pointer-events: none; }
-    .fluff-value { min-height: 56px; margin: 10px 0; color: var(--star); font-family: "Cinzel", serif; font-size: 2.3rem; font-weight: 700; }
-    .fluff-quote { min-height: 50px; color: var(--muted); font-family: "Cormorant Garamond", serif; font-size: 1.15rem; font-style: italic; }
-    .fluff-reaction { display: block; margin-top: 6px; color: var(--star); font-family: "Plus Jakarta Sans", sans-serif; font-size: .88rem; font-style: normal; font-weight: 700; }
+    /* ------------------------------------------------- constelações secretas */
+    .secret { padding: 110px 0; }
+    .secret-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 54px; align-items: center; }
+    .secret-copy h2 { margin: 14px 0 18px; color: #fff; font-size: clamp(2.3rem, 4.4vw, 3.6rem); }
+    .secret-copy > p { color: var(--muted); font-size: 1.04rem; line-height: 1.8; }
+    .cs-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .cs-tabs button { min-height: 44px; padding: 0 17px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); background: rgba(255, 255, 255, .03); font-size: .84rem; font-weight: 700; cursor: pointer; transition: color .25s ease, background .25s ease, border-color .25s ease; }
+    .cs-tabs button:hover { color: var(--star); border-color: rgba(234, 244, 255, .5); }
+    .cs-tabs button[aria-pressed="true"] { color: #0a1430; border-color: transparent; background: var(--star); }
+    .cs-tabs button.is-done::after { content: " ♡"; color: var(--fluff-rose); }
 
-    /* ---------------------------------------------------------- curiosidades */
-    .quotes { padding: 100px 0; }
-    .quote-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-    .quote { position: relative; padding: 28px 32px; border-left: 3px solid var(--blue-light); border-radius: 0 16px 16px 0; background: var(--card); transition: border-color .3s ease, transform .35s var(--ease-out), background .3s ease; }
-    .quote:hover { transform: translateX(6px); border-left-color: var(--vega); background: rgba(22, 38, 78, .75); }
-    .quote.is-official { border-left-color: var(--cyan); }
-    .quote p { margin-bottom: 12px; color: #f1f5f9; font-size: 1.32rem; line-height: 1.4; }
-    .quote-author { color: var(--star); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .quote-list [data-reveal]:nth-child(even) { --d: .1s; }
+    /* O caderno de capa azul: folha quadriculada com espiral na lateral */
+    .chart { position: relative; aspect-ratio: 600 / 440; overflow: hidden; border: 1px solid var(--line-strong); border-radius: 18px 22px 22px 18px; background: radial-gradient(circle at 50% 42%, rgba(56, 101, 161, .32), transparent 70%), linear-gradient(180deg, #0b1330, #070b1d); box-shadow: 0 30px 70px rgba(0, 0, 0, .4), inset 14px 0 0 rgba(6, 9, 20, .55); }
+    .chart::before { content: ""; position: absolute; inset: 14px auto 14px 4px; z-index: 3; width: 10px; background: radial-gradient(circle at 50% 50%, #0a1029 0 3px, var(--line-strong) 3.5px 4.5px, transparent 5px) 0 0 / 10px 26px repeat-y; pointer-events: none; }
+    .chart-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cs-grid path { fill: none; stroke: rgba(150, 185, 235, .09); stroke-width: 1; }
+    .cs-label { fill: rgba(154, 169, 196, .55); font: 500 11px "Cinzel", serif; letter-spacing: 1.5px; }
+    .cs-dust circle { fill: #dfe9ff; }
+    .cs-art { opacity: 0; transform: scale(.94); transform-origin: 300px 230px; transition: opacity .9s ease, transform 1.2s var(--ease-out); filter: drop-shadow(0 0 22px rgba(245, 185, 205, .28)); }
+    .chart.is-complete .cs-art.is-current { opacity: .95; transform: none; }
+    html:not(.js) .cs-art[data-art="ursinho"] { opacity: .95; transform: none; }
+    .cs-line { stroke: var(--cyan); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: drawLine .45s var(--ease-out) forwards; filter: drop-shadow(0 0 4px rgba(120, 213, 225, .9)); }
+    .cs-line.is-drawn { animation: none; stroke-dashoffset: 0; }
+    .chart.is-complete .cs-line { stroke: #fff; stroke-width: 1.6; opacity: .8; }
+    .cs-features circle { fill: #dfe9ff; opacity: .7; transition: opacity .6s ease; }
+    .chart.is-complete .cs-features circle { opacity: 0; }
+    .chart-stars { position: absolute; inset: 0; z-index: 2; }
+    .cs-star { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
+    .cs-star::before { content: ""; position: absolute; inset: 12px; border-radius: 50%; background: var(--star); box-shadow: 0 0 8px rgba(234, 244, 255, .9), 0 0 18px rgba(120, 213, 225, .45); transition: transform .3s var(--ease-out), background .3s ease; }
+    .cs-star:hover::before, .cs-star:focus-visible::before { transform: scale(1.45); }
+    .cs-star.is-linked::before { background: var(--cyan); }
+    .cs-star.is-next::after { content: ""; position: absolute; inset: 3px; border: 1.5px solid var(--cyan); border-radius: 50%; animation: ping 1.6s ease-out infinite; }
+    .cs-star.is-wrong { animation: shake .4s ease; }
+    .cs-num { position: absolute; left: 25px; top: -3px; color: rgba(234, 244, 255, .55); font: 600 .64rem "Cinzel", serif; pointer-events: none; transition: opacity .4s ease; }
+    .chart.is-complete .cs-num { opacity: 0; }
+    .chart.is-complete .cs-star { cursor: default; }
+    .chart.is-complete .cs-star::before { transform: scale(.8); }
+    @keyframes ping { from { opacity: .9; transform: scale(.6); } to { opacity: 0; transform: scale(1.6); } }
+    @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    .chart-tag { position: absolute; top: 14px; right: 18px; z-index: 3; color: var(--fluff-pink); font: 600 .9rem "Klee One", cursive; transform: rotate(4deg); pointer-events: none; }
+    .cs-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 18px; margin-top: 16px; }
+    .cs-status { color: var(--muted); font-size: .86rem; }
+    .cs-actions { display: flex; gap: 8px; }
+    .cs-note { min-height: 6.6em; margin-top: 16px; color: var(--faint); font-size: .9rem; }
+    .cs-note.is-complete { padding: 18px 22px; border-radius: 18px 18px 18px 6px; color: var(--fluff-ink); background: var(--fluff); font: 600 1.02rem/1.6 "Klee One", cursive; box-shadow: 0 18px 40px rgba(0, 0, 0, .3); animation: noteIn .6s var(--ease-out); }
+    .cs-code { display: block; margin-bottom: 6px; color: var(--fluff-rose); font: 700 .66rem "Plus Jakarta Sans", sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+    .cs-all { display: block; margin-top: 8px; color: var(--fluff-rose); font-size: .9rem; }
+    @keyframes noteIn { from { opacity: 0; transform: translateY(10px) rotate(-1deg); } }
+
+    /* ------------------------------------------------- quarto de luz apagada */
+    .night-room { padding: 110px 0; }
+    .room-layout { display: grid; gap: 18px; }
+    /*
+     * O desenho tem 1000 × 560. No celular o quarto fica mais alto e mostra só o miolo
+     * (x 150 → 850): --vx e --vw dizem aos botões qual faixa do desenho está visível.
+     */
+    .room { --vx: 0; --vw: 1000; position: relative; aspect-ratio: 1000 / 560; overflow: hidden; border: 1px solid var(--line-strong); border-radius: var(--radius); background: #0e1431; box-shadow: 0 30px 70px rgba(0, 0, 0, .45); cursor: crosshair; touch-action: pan-y; -webkit-tap-highlight-color: transparent; }
+    .room-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .room-dark { transition: opacity 1.6s ease; }
+    .room.is-complete .room-dark { opacity: .42; }
+    html:not(.js) .room-dark, html:not(.js) #flashTint { display: none; }
+    .lamp-light { opacity: 0; transition: opacity 1s ease; }
+    .room [data-art="luminaria"].is-found .lamp-light { opacity: 1; }
+    .bed-sheep { opacity: 0; transform: translate(26px, 10px); transition: opacity .7s ease .4s, transform 1s var(--ease-out) .4s; }
+    .room.is-complete .bed-sheep { opacity: 1; transform: none; }
+    .room-item { position: absolute; z-index: 2; left: calc((var(--x) - var(--vx)) / var(--vw) * 100%); top: calc(var(--y) / 560 * 100%); width: calc(var(--r) * 2 / var(--vw) * 100%); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; transform: translate(-50%, -50%); }
+    .room-item::after { content: ""; position: absolute; inset: 6%; border: 1.5px dashed transparent; border-radius: 50%; transition: border-color .3s ease; }
+    .room-item.is-lit:not(.is-found)::after { border-color: rgba(255, 236, 200, .6); animation: spin 9s linear infinite; }
+    .room-item:focus-visible { outline: 2px solid var(--fluff-pink); outline-offset: 2px; }
+    .room-check { position: absolute; top: 2%; right: 2%; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: var(--fluff-ink); background: var(--fluff-pink); font-size: .7rem; font-weight: 800; opacity: 0; transform: scale(.4); transition: opacity .3s ease, transform .4s var(--ease-out); }
+    .room-item.is-found .room-check { opacity: 1; transform: none; }
+    @keyframes spin { to { transform: rotate(1turn); } }
+    .room-hint { position: absolute; left: 14px; bottom: 12px; z-index: 3; padding: 6px 12px; border-radius: 999px; color: var(--muted); background: rgba(6, 9, 20, .72); font-size: .74rem; pointer-events: none; transition: opacity .4s ease; }
+    .room.is-complete .room-hint, html:not(.js) .room-hint { opacity: 0; }
+
+    .found { padding: 24px 26px 26px; }
+    .found-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .found-head h3 { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.55rem; font-weight: 600; }
+    .found-tip { flex: 1 1 260px; color: var(--muted); font-size: .86rem; }
+    .found-count { color: var(--fluff-pink); font: 600 1.5rem "Klee One", cursive; }
+    .found-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; list-style: none; }
+    .found-item { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(6, 10, 26, .5); transition: background .5s ease, border-color .5s ease; }
+    .found-no { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--fluff-pink); border-radius: 50%; color: var(--fluff-pink); font: 600 .78rem "Klee One", cursive; }
+    .found-item h4 { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.16rem; font-weight: 600; line-height: 1.25; }
+    .found-item p { margin-top: 3px; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+    .found-item p b { color: var(--fluff-pink); font-weight: 700; }
+    .found-dark { display: none; }
+    .found-item.is-locked h4, .found-item.is-locked p:not(.found-dark) { display: none; }
+    .found-item.is-locked .found-dark { display: block; align-self: center; margin: 0; color: var(--faint); font-style: italic; }
+    .found-item.is-locked { padding-block: 9px; }
+    .found-item.is-locked .found-no { border-style: dashed; border-color: var(--line-strong); color: var(--faint); }
+    .found-item.is-new { border-color: rgba(245, 185, 205, .55); background: rgba(245, 185, 205, .08); animation: foundIn .7s var(--ease-out); }
+    @keyframes foundIn { from { opacity: .3; transform: translateX(10px); } }
+    .room-final { display: grid; grid-template-columns: 70px minmax(0, 1fr); align-items: center; gap: 14px; width: min(100%, 560px); margin: 16px auto 0; padding: 14px 20px 14px 16px; border-radius: 18px 18px 18px 6px; color: var(--fluff-ink); background: var(--fluff); animation: noteIn .7s var(--ease-out); }
+    .room-final[hidden] { display: none; }
+    .room-final svg { width: 70px; height: auto; }
+    .room-final p { font: 600 .98rem/1.5 "Klee One", cursive; }
 
     /* ----------------------------------------------------------------- cards */
     .supports { padding: 90px 0 100px; }
     .support-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
-    .support-card { position: relative; flex: 0 1 240px; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: radial-gradient(circle at 50% 0%, rgba(56, 101, 161, .35), transparent 60%), rgba(10, 17, 40, .9); transition: transform .4s var(--ease-out), border-color .4s ease, box-shadow .4s ease; }
-    .support-card.rarity-ssr { border-color: rgba(243, 207, 122, .55); }
+    .support-card { position: relative; flex: 0 1 250px; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: radial-gradient(circle at 50% 0%, rgba(56, 101, 161, .35), transparent 60%), rgba(10, 17, 40, .9); transition: transform .4s var(--ease-out), border-color .4s ease, box-shadow .4s ease; }
+    .support-card.rarity-ssr { border-color: rgba(245, 217, 138, .55); }
     .support-card.rarity-sr { border-color: rgba(214, 224, 240, .45); }
-    .support-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 0 30px rgba(107, 149, 214, .2); }
+    .support-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 0 30px rgba(111, 155, 224, .2); }
     .support-image { position: relative; aspect-ratio: 1 / 1.1; padding: 16px 16px 0; background: linear-gradient(rgba(154, 169, 196, .06) 1px, transparent 1px) 0 0 / 100% 20%, linear-gradient(90deg, rgba(154, 169, 196, .06) 1px, transparent 1px) 0 0 / 20% 100%; }
     .support-image img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
     .support-fallback { display: grid; place-items: center; height: 100%; color: var(--star); font-family: "Cinzel", serif; font-size: 2.4rem; }
@@ -332,27 +469,43 @@
     .rarity-sr .rarity { background: #d6e0f0; }
     .rarity-r .rarity { color: #fff; background: var(--blue); }
     .support-type { color: var(--cyan); font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    .support-body h3 { color: #fff; font-size: .96rem; line-height: 1.4; }
+    .support-body h3 { color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.22rem; font-weight: 600; line-height: 1.25; }
     .support-body small { color: var(--muted); font-size: .76rem; }
     .js .support-grid .support-card { opacity: 0; transform: translateY(28px); transition: opacity .7s ease var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s), border-color .4s ease, box-shadow .4s ease; }
     .js .support-grid.is-in .support-card { opacity: 1; transform: none; }
     .js .support-grid.is-in .support-card:hover { transform: translateY(-8px); }
     .js .support-grid[data-reveal] { opacity: 1; transform: none; }
 
-    /* ------------------------------------------------------------------- cta */
-    .cta { padding: 90px 0 110px; text-align: center; }
-    .cta-box { position: relative; overflow: hidden; padding: 64px 40px; border: 1px solid var(--blue-light); border-radius: var(--radius); background: linear-gradient(135deg, rgba(56, 101, 161, .38), rgba(8, 13, 26, .94)); box-shadow: 0 0 60px rgba(56, 101, 161, .3); }
-    .cta-box h2 { margin-bottom: 16px; color: #fff; font-size: clamp(1.9rem, 4vw, 2.6rem); }
-    .cta-box p { max-width: 650px; margin: 0 auto 32px; color: var(--muted); font-size: 1.08rem; }
+    /* ----------------------------------------------------------------- final */
+    .final { padding: 90px 0 110px; }
+    .final-box { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; overflow: hidden; padding: clamp(30px, 5vw, 60px); background: radial-gradient(circle at 78% 30%, rgba(56, 101, 161, .3), transparent 60%), linear-gradient(180deg, rgba(16, 26, 58, .86), rgba(8, 13, 32, .92)); }
+    .final-copy h2 { margin: 14px 0 18px; color: #fff; font-size: clamp(2.5rem, 5vw, 4.2rem); }
+    .final-copy p { color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+    .tri-note { min-height: 3.4em; margin-top: 18px; color: var(--star) !important; font-family: "Cormorant Garamond", serif; font-size: 1.24rem !important; font-style: italic; line-height: 1.45 !important; }
+    .triangle { position: relative; width: min(100%, 460px); aspect-ratio: 400 / 330; justify-self: center; }
+    .triangle svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .milkyway { fill: url(#milkyGlow); opacity: .55; }
+    .tri-line { fill: none; stroke: rgba(234, 244, 255, .4); stroke-width: 1.2; stroke-dasharray: 3 7; opacity: 0; transition: opacity 1s ease; }
+    .triangle.is-found .tri-line { opacity: 1; }
+    .tri-star { position: absolute; left: calc(var(--x) / 400 * 100%); top: calc(var(--y) / 330 * 100%); width: 60px; height: 60px; margin: -30px 0 0 -30px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
+    .tri-star::before { content: ""; position: absolute; left: 50%; top: 50%; width: var(--s); height: var(--s); border-radius: 50%; background: #fff; box-shadow: 0 0 calc(var(--s) * 1.3) calc(var(--s) * .25) rgba(234, 244, 255, .6), 0 0 calc(var(--s) * 3.2) rgba(120, 213, 225, .35); transform: translate(-50%, -50%); animation: starBreath 3.6s ease-in-out infinite; }
+    .tri-star:nth-of-type(2)::before { animation-delay: -1.2s; }
+    .tri-star:nth-of-type(3)::before { animation-delay: -2.4s; }
+    .tri-star:hover::before, .tri-star:focus-visible::before { box-shadow: 0 0 calc(var(--s) * 1.6) calc(var(--s) * .4) rgba(234, 244, 255, .8), 0 0 calc(var(--s) * 4) rgba(120, 213, 225, .5); }
+    @keyframes starBreath { 50% { opacity: .78; transform: translate(-50%, -50%) scale(.86); } }
+    .tri-name { position: absolute; left: 50%; top: calc(100% - 4px); color: var(--muted); font: 600 .72rem "Cinzel", serif; letter-spacing: .16em; white-space: nowrap; opacity: 0; transform: translateX(-50%); transition: opacity .5s ease; }
+    .tri-name small { display: block; color: var(--faint); font: 500 .62rem "Plus Jakarta Sans", sans-serif; letter-spacing: .1em; text-align: center; }
+    .tri-star.is-tried .tri-name, .triangle.is-found .tri-name { opacity: 1; }
+    .triangle.is-found .tri-star[data-star="vega"] .tri-name { color: var(--vega); }
 
     .praise { width: min(460px, calc(100% - 32px)); margin: auto; padding: 0; border: 1px solid var(--line); border-radius: 24px; color: var(--text); background: linear-gradient(160deg, #13224a, #070c1d); box-shadow: 0 40px 80px rgba(0, 0, 0, .6); }
     .praise::backdrop { background: rgba(2, 4, 12, .72); }
     .praise[open] { animation: praiseIn .5s var(--ease-out); }
     @keyframes praiseIn { from { opacity: 0; transform: translateY(18px) scale(.97); } }
     .praise-inner { padding: 34px 30px 28px; text-align: center; }
-    .praise-star { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 18px; border-radius: 50%; color: var(--vega); background: radial-gradient(circle, rgba(243, 207, 122, .3), transparent 70%); font-size: 2rem; }
+    .praise-star { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 18px; border-radius: 50%; color: var(--vega); background: radial-gradient(circle, rgba(245, 217, 138, .3), transparent 70%); font-size: 2rem; }
     .praise p { color: var(--muted); }
-    .praise blockquote { margin: 14px 0 24px; color: #fff; font-size: 1.45rem; line-height: 1.35; }
+    .praise blockquote { margin: 14px 0 24px; color: #fff; font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-style: italic; font-weight: 600; line-height: 1.32; }
 
     .site-footer { padding: 40px 0; border-top: 1px solid var(--line); color: var(--muted); background: #04070f; font-size: .88rem; text-align: center; }
     .site-footer a { color: var(--blue-light); }
@@ -360,26 +513,38 @@
     .site-footer p + p { margin-top: 8px; font-size: .8rem; }
 
     /* ------------------------------------------------------------- responsivo */
-    .hero-inner > *, .ficha-grid > *, .scope > * { min-width: 0; }
+    .hero-inner > *, .scope > *, .manual-grid > *, .secret-grid > *, .room-layout > *, .final-box > * { min-width: 0; }
 
     @media (max-width: 1080px) {
-      .ficha-grid { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .ficha-plate { grid-template-columns: 1fr; }
+      .ficha-side { border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+
+    @media (max-width: 860px) {
+      .found-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .room { --vx: 150; --vw: 700; aspect-ratio: 700 / 560; }
     }
 
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .hero-inner { grid-template-columns: 1fr; gap: 34px; padding-top: 112px; text-align: center; }
-      .hero-copy > p { margin-inline: auto; }
-      .hero-cta { justify-content: center; }
-      .api-line { justify-content: center; }
-      .hero-visual { min-height: 0; }
-      .window { width: min(100%, 340px); }
+      .hero-inner { grid-template-columns: 1fr; gap: 26px; padding-top: 108px; text-align: center; }
+      .hero-copy { display: flex; flex-direction: column; align-items: center; }
+      .hero-name span + span { padding-left: 0; }
+      .hero-jp::before { display: none; }
+      .hero-lede { margin-inline: auto; }
+      .hero-cta, .api-line { justify-content: center; }
+      .hero-visual { --win: 340px; min-height: 0; padding-bottom: 10px; }
+      .manual-grid, .secret-grid, .final-box { grid-template-columns: 1fr; }
+      .manual-grid { gap: 40px; }
+      .manual-intro { position: static; }
+      .secret-grid { gap: 34px; }
       .scope { grid-template-columns: 1fr; text-align: center; }
       .tabs { justify-content: center; }
-      .quote-list { grid-template-columns: 1fr; }
       .promise-copy { align-self: end; margin: 0 auto 16px; padding: 22px; }
-      .promise-copy h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 7vw, 2.2rem); }
+      .promise-copy h2 { margin-bottom: 12px; font-size: clamp(1.8rem, 7vw, 2.4rem); }
       .beat .record { font-size: 1rem; }
       .star-pair svg { top: 92px; right: 50%; width: min(80vw, 400px); transform: translateX(50%); }
       html:not(.motion) .promise-copy { align-self: start; }
@@ -390,26 +555,43 @@
     @media (max-width: 680px) {
       .container { width: min(100% - 28px, 1180px); }
       .nav-actions .btn { display: none; }
-      .pillars { grid-template-columns: 1fr; }
-      .pillar { padding: 28px 24px; }
-      .stat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .stat { padding: 16px; }
-      .fluff-box { padding: 36px 20px; }
-      .cta-box { padding: 48px 22px; }
-      .quote { padding: 22px 22px; }
-      .quote p { font-size: 1.18rem; }
+      .hero-visual { --win: min(70vw, 300px); }
+      .peek-wrap { left: calc(50% - var(--win) / 2 - 52px); width: 52px; }
+      .peek { width: 96px; }
+      .peek-note { left: -4px; font-size: .84rem; }
+      .ficha-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cell { min-height: 124px; padding: 18px 16px; }
+      .cell dd { font-size: 1.28rem; }
+      .ficha-side { padding: 28px 24px; }
+      .ficha-side blockquote { font-size: 1.45rem; }
+      .manual-card { padding: 26px 20px 20px; }
+      .rule { gap: 14px; }
+      .found { padding: 22px 18px 18px; }
+      .cs-star { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+      .cs-star::before { inset: 10px; }
+      .cs-num { left: 21px; }
       .support-card { flex-basis: 100%; max-width: 320px; }
-      .ficha, .reasons, .observatory, .quotes { padding-block: 76px; }
+      .ficha, .manual, .observatory, .secret, .night-room { padding-block: 76px; }
       .beat p { font-size: .92rem; }
+      .room-hint { left: 10px; bottom: 8px; font-size: .68rem; }
+    }
+
+    @media (max-width: 560px) {
+      .found-list { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 400px) {
-      .stat-grid { grid-template-columns: 1fr; }
       .hero-cta > * { flex: 1 1 100%; }
+      .cs-actions { width: 100%; }
+      .cs-actions .btn { flex: 1; }
+    }
+
+    @media (max-width: 340px) {
+      .ficha-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .lyra .twinkle, .vega-glow { animation: none; }
+      .lyra .twinkle, .vega-glow, .tri-star::before, .cs-star.is-next::after { animation: none; }
     }
   </style>
 </head>
@@ -421,24 +603,28 @@
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
-      <radialGradient id="vegaAura"><stop offset="0%" stop-color="#fff3cf" stop-opacity=".95"/><stop offset="35%" stop-color="#f3cf7a" stop-opacity=".45"/><stop offset="100%" stop-color="#f3cf7a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="vegaAura"><stop offset="0%" stop-color="#fff3cf" stop-opacity=".95"/><stop offset="35%" stop-color="#f5d98a" stop-opacity=".45"/><stop offset="100%" stop-color="#f5d98a" stop-opacity="0"/></radialGradient>
       <radialGradient id="twinAura"><stop offset="0%" stop-color="#ffffff" stop-opacity=".9"/><stop offset="35%" stop-color="#78d5e1" stop-opacity=".4"/><stop offset="100%" stop-color="#78d5e1" stop-opacity="0"/></radialGradient>
+      <radialGradient id="milkyGlow"><stop offset="0%" stop-color="#c9d6ff" stop-opacity=".3"/><stop offset="55%" stop-color="#8fa6e6" stop-opacity=".12"/><stop offset="100%" stop-color="#8fa6e6" stop-opacity="0"/></radialGradient>
       <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
       <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></symbol>
-      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5l-1.3-1.2C6 15 3 12.3 3 8.9 3 6.2 5.1 4 7.8 4c1.6 0 3.1.8 4.2 2 1.1-1.2 2.6-2 4.2-2C18.9 4 21 6.2 21 8.9c0 3.4-3 6.1-7.7 10.4z"/></symbol>
       <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8zM19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></symbol>
-      <symbol id="i-meteor" viewBox="0 0 24 24"><path d="M21 3l-8.5 4.2 1.4 1.4L3.6 14.9l1.4 1.4 10.3-6.3 1.4 1.4zM9.5 13a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z"/></symbol>
-      <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 19a5 5 0 0 1-.6-10A6 6 0 0 1 18 8.5a4.5 4.5 0 0 1-.5 10.5z"/></symbol>
-      <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v2h3v3a4 4 0 0 1-4.1 4A5 5 0 0 1 13 14.9V18h3v3H8v-3h3v-3.1A5 5 0 0 1 8.1 12 4 4 0 0 1 4 8V5h3zm-1 4v1a2 2 0 0 0 1.2 1.8A6 6 0 0 1 7 8V7zm12 0h-1v1a6 6 0 0 1-.2 1.8A2 2 0 0 0 18 8z"/></symbol>
-      <symbol id="i-hands" viewBox="0 0 24 24"><path d="M12 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM3 13.5l4.5-1.8c1-.4 2.1-.2 2.9.5l1.6 1.4 1.6-1.4c.8-.7 1.9-.9 2.9-.5l4.5 1.8V16l-4.8-1.6L12 18l-4.2-3.6L3 16z"/></symbol>
-      <symbol id="i-slipper" viewBox="0 0 64 64"><path d="M5 45c0-4 3-7 8-7h37c5 0 9 3 9 7.5S55 52 50 52H12c-4 0-7-3-7-7z"/><path d="M26 39c1-11 8-18 17-18 9 0 15 7 16 18z"/><circle cx="41" cy="18" r="6.5"/><circle cx="35.5" cy="15" r="3.6"/><circle cx="46.5" cy="15" r="3.6"/><path d="M8 45h50" fill="none" stroke="#0d1527" stroke-width="2" stroke-linecap="round" opacity=".3"/></symbol>
-      <symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 2c1 1.3 1.5 2.3 1.5 3a1.5 1.5 0 0 1-3 0c0-.7.5-1.7 1.5-3zM11 8h2v3h5a3 3 0 0 1 3 3v7H3v-7a3 3 0 0 1 3-3h5z"/></symbol>
-      <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M8 2h8v20H8zm2 3v1.5h3V5zm0 4v1.5h2V9zm0 4v1.5h3V13zm0 4v1.5h2V17z"/></symbol>
-      <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3zM5 10h2a5 5 0 0 0 10 0h2a7 7 0 0 1-6 6.9V20h3v2H8v-2h3v-3.1A7 7 0 0 1 5 10z"/></symbol>
-      <symbol id="i-lang" viewBox="0 0 24 24"><path d="M3 4h10v2H9.7c-.5 2.2-1.5 4.1-2.9 5.7 1 .9 2.2 1.6 3.4 2.2l-.8 1.9c-1.5-.7-2.9-1.6-4-2.7A12 12 0 0 1 2.6 15l-.8-1.9c1.2-.5 2.3-1.1 3.3-1.9A10 10 0 0 1 7.6 6H3zm12.4 5h2.2L22 20h-2.2l-1-2.6h-4.6l-1 2.6H11zm1.1 2.8L15 15.5h3.1z"/></symbol>
-      <symbol id="i-home" viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></symbol>
-      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 2 .8A3 3 0 0 1 14 4h6v15h-6a2 2 0 0 0-2 1 2 2 0 0 0-2-1H4z"/></symbol>
-      <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 17v-6l4-5 3 3c1 1 3 2 5 2h3a3 3 0 0 1 3 3v3z"/></symbol>
+      <!-- O carneirinho de pelúcia: aparece no hero e debaixo da cama -->
+      <symbol id="sheep" viewBox="0 0 120 100">
+        <rect x="58" y="74" width="9" height="18" rx="4.5" fill="#6b5c7e"/>
+        <rect x="86" y="74" width="9" height="18" rx="4.5" fill="#6b5c7e"/>
+        <g fill="#ddd2f2"><circle cx="56" cy="46" r="24"/><circle cx="79" cy="36" r="25"/><circle cx="100" cy="50" r="21.5"/><circle cx="66" cy="66" r="21.5"/><circle cx="91" cy="69" r="20.5"/></g>
+        <g fill="#fffaf3"><circle cx="56" cy="46" r="21"/><circle cx="79" cy="36" r="22"/><circle cx="100" cy="50" r="18.5"/><circle cx="66" cy="66" r="18.5"/><circle cx="91" cy="69" r="17.5"/><circle cx="78" cy="54" r="20"/></g>
+        <ellipse cx="45" cy="38" rx="9" ry="4.6" transform="rotate(-32 45 38)" fill="#5e5070"/>
+        <ellipse cx="33" cy="56" rx="17" ry="19" fill="#6b5c7e"/>
+        <g fill="#fffaf3" stroke="#ddd2f2" stroke-width="2"><circle cx="28" cy="38" r="7"/><circle cx="38.5" cy="37" r="7.5"/></g>
+        <ellipse cx="16" cy="50" rx="10.5" ry="5" transform="rotate(22 16 50)" fill="#6b5c7e"/>
+        <ellipse cx="16" cy="50" rx="6.4" ry="2.6" transform="rotate(22 16 50)" fill="#f2a9c2"/>
+        <path d="M24 55q3.2-3.4 6.4 0M36 55q3.2-3.4 6.4 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="23.5" cy="63" rx="3.8" ry="2.3" fill="#f49ab8" opacity=".9"/>
+        <ellipse cx="43" cy="63" rx="3.8" ry="2.3" fill="#f49ab8" opacity=".9"/>
+        <path d="M31 66.5q2.2 2.2 4.4 0" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+      </symbol>
     </defs>
   </svg>
 
@@ -451,27 +637,19 @@
       <nav aria-label="Seções">
         <ul class="nav-links">
           <li><a href="#promessa">A promessa</a></li>
+          <li><a href="#jeito">O jeito dela</a></li>
           <li><a href="#ficha">Ficha</a></li>
-          <li><a href="#razoes">Por que ela?</a></li>
           <li><a href="#observatorio">Visuais</a></li>
-          <li><a href="#pantufas">Medidor fofo</a></li>
+          <li><a href="#constelacoes">Segredos</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
-        <a href="#cta" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg> Virar treinador</a>
+        <a href="#ficar" class="btn btn-ghost"><svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg> Ficar com ela</a>
         <div class="switcher" data-switcher>
           <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
             <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
-            <p class="switcher-label">Trocar personagem</p>
-            <a href="ayabe.html" style="--c:#3865A1" aria-current="page">Admire Vega <small>Atual</small></a>
-            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
-            <a href="chiyo.html" style="--c:#f9879d">Sakura Chiyono O</a>
-            <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
-            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
-            <a href="acute.html" style="--c:#d85081">Wonder Acute</a>
-          </nav>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Personagens"></nav>
         </div>
       </div>
     </div>
@@ -485,15 +663,14 @@
     <section class="hero" id="inicio" data-scroll="exit">
       <div class="container hero-inner">
         <div class="hero-copy" data-reveal>
-          <p class="badge"><svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg> A estrela mais brilhante de Tracen</p>
-          <h1 class="title">
-            <span class="h1-pre">Por que a sua Umamusume favorita deve ser a</span>
-            <span class="h1-name">Admire Vega?</span>
-          </h1>
-          <p>Conhecida carinhosamente como <strong>Ayabe-san</strong>, ela combina um design estelar inesquecível, uma determinação emocionante e um lado secreto incrivelmente adorável.</p>
+          <p class="dnd"><span class="dnd-icon" aria-hidden="true"></span>Não perturbe · observando Vega</p>
+          <p class="hero-pre">Ela nunca vai pedir para ser a sua favorita.</p>
+          <h1 class="hero-name"><span>Admire</span> <span>Vega</span></h1>
+          <p class="hero-jp"><span lang="ja" data-field="nameJp">アドマイヤベガ</span><span>Ayabe-san</span></p>
+          <p class="hero-lede">Não puxa conversa, recusa convites e treina até tarde, sozinha, com os olhos na mesma estrela — por uma promessa que não divide com ninguém. Mas quem presta atenção percebe: a <strong>Ayabe-san</strong> esconde um coração derretido por coisas macias.</p>
           <div class="hero-cta">
-            <a href="#razoes" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg> Descobrir motivos</a>
-            <a href="#ficha" class="btn btn-ghost">Ver ficha técnica</a>
+            <a href="#promessa" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg> Prestar atenção</a>
+            <a href="#constelacoes" class="btn btn-ghost">Ver o que ela esconde</a>
           </div>
           <p class="api-line"><span class="api-dot" id="apiDot" aria-hidden="true"></span><span id="apiStatus" role="status">Consultando o céu da Umapyoi…</span></p>
         </div>
@@ -515,12 +692,20 @@
             <text x="216" y="14">VEGA</text>
             <text class="lyra-label" x="0" y="432">CONSTELAÇÃO DE LIRA</text>
           </svg>
+          <div class="peek-wrap">
+            <p class="peek-note" id="peekNote" role="status"></p>
+            <div class="peek-clip">
+              <button class="peek" id="peek" type="button" aria-label="Tem alguma coisa espiando atrás da janela">
+                <svg viewBox="0 0 120 100" aria-hidden="true"><use href="#sheep" width="120" height="100"/></svg>
+              </button>
+            </div>
+          </div>
           <figure class="window" id="heroWindow">
             <div class="window-frame">
-              <img id="heroImage" src="img/ayabe.png" width="640" height="905" alt="Admire Vega (Ayabe-san) segurando uma caneca sob o céu estrelado" fetchpriority="high" decoding="async">
+              <img id="heroImage" src="img/ayabe.png" width="640" height="905" alt="Admire Vega (Ayabe-san) de moletom, segurando uma caneca sob o céu estrelado" fetchpriority="high" decoding="async">
               <div class="window-fallback"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><span>Admire Vega</span></div>
             </div>
-            <figcaption class="serif">“Jurei sob aquela estrela radiante... Eu correrei e vencerei.”</figcaption>
+            <figcaption>“Fiz uma promessa àquela estrela brilhante: vou vencer, nem que seja sozinha.”</figcaption>
           </figure>
         </div>
       </div>
@@ -559,8 +744,8 @@
             <svg class="icon"><use href="#i-moon"/></svg>
             <span class="clock-times"><span>21:00</span><span>00:00</span><span>04:30</span></span>
           </p>
-          <span class="kicker">Uma noite com Ayabe-san</span>
-          <h2 class="title" id="promiseTitle">A promessa sob Vega</h2>
+          <span class="kicker">Uma noite com a Ayabe-san</span>
+          <h2 class="display" id="promiseTitle">A promessa sob Vega</h2>
           <ol class="beats">
             <li class="beat">
               <h3>Sozinha na pista</h3>
@@ -582,72 +767,113 @@
       </div>
     </section>
 
+    <section class="manual" id="jeito" aria-labelledby="manualTitle">
+      <div class="container manual-grid">
+        <div class="manual-intro" data-reveal>
+          <span class="kicker">Introvertida, não fria</span>
+          <h2 class="display" id="manualTitle">Ela não é distante.<br><em>Só está longe.</em></h2>
+          <p>A Ayabe-san prefere a própria companhia. Recusa convites com uma desculpa educada, foge de lugares cheios e passa as noites com os olhos no céu. Não é arrogância: é o jeito dela de carregar uma promessa sem pesar em ninguém.</p>
+          <p>Quem chega perto de verdade — como a colega de quarto <strong>Curren Chan</strong> ou a insistente <strong>Narita Top Road</strong> — aprende a respeitar esse silêncio. E descobre que, por trás dele, mora alguém muito mais doce.</p>
+          <div class="lightyear">
+            <strong>25</strong>
+            <span>anos-luz separam a Terra da estrela Vega.</span>
+            <small>A Ayabe-san, às vezes, parece estar ainda mais longe.</small>
+          </div>
+        </div>
+
+        <article class="plate manual-card" data-reveal style="--d:.1s">
+          <header class="manual-head">
+            <h3>Manual de convivência</h3>
+            <small>Anotado por um treinador paciente</small>
+          </header>
+          <ol class="rules">
+            <li class="rule" style="--m:3">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>Nada de multidões.</h4>
+                <p>Se o plano tem fila, barulho ou plateia, conte com um “hoje não”.</p>
+                <p class="archive"><small>Ponto fraco oficial</small><span data-field="weaknesses">Lugares movimentados</span></p>
+              </div>
+            </li>
+            <li class="rule" style="--m:2">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>Convites recebem desculpas.</h4>
+                <p>Ela costuma recusar convites com uma desculpa qualquer. Não é pessoal: o céu já estava marcado.</p>
+              </div>
+            </li>
+            <li class="rule" style="--m:2">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>O frio é companhia.</h4>
+                <p>Noites geladas não a incomodam nem um pouco — e ler em voz alta é outro talento dela.</p>
+                <p class="archive"><small>Pontos fortes oficiais</small><span data-field="strengths">Ler em voz alta e clima frio</span></p>
+              </div>
+            </li>
+            <li class="rule" style="--m:1">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>Luminária acesa: não interrompa.</h4>
+                <p>Quando vai ler a sério, ela sempre acende a luminária. É a regra pessoal dela.</p>
+              </div>
+            </li>
+            <li class="rule" style="--m:2">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>Cuidado com a palavra “irmã”.</h4>
+                <p>As orelhas dela respondem sozinhas.</p>
+                <p class="archive"><small>Arquivo oficial · orelhas</small><span data-field="ears">Elas se contraem ao ouvir vozes que lembram uma irmã mais velha.</span></p>
+              </div>
+            </li>
+            <li class="rule" style="--m:1">
+              <span class="rule-mag" aria-hidden="true"><i></i></span>
+              <div>
+                <h4>No telhado, ela não está sozinha.</h4>
+                <p>Em algumas noites, observa as estrelas no telhado da escola com a Silence Suzuka. Em silêncio, claro.</p>
+              </div>
+            </li>
+            <li class="rule is-secret">
+              <span class="rule-mag" aria-hidden="true">♡</span>
+              <div>
+                <h4>E se você trouxer algo macio…</h4>
+                <p>…talvez ela fique mais cinco minutos.</p>
+              </div>
+            </li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
     <section class="ficha" id="ficha" aria-labelledby="fichaTitle">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="kicker"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg> Catálogo estelar · Umapyoi</span>
-          <h2 class="title" id="fichaTitle">Dados precisos da Tracen Academy</h2>
-          <p>Ficha técnica consumida em tempo real, com os campos oficiais da Ayabe-san.</p>
+          <span class="kicker">Catálogo estelar · Umapyoi</span>
+          <h2 class="display" id="fichaTitle">Ficha de uma estrela de <em>primeira grandeza</em></h2>
+          <p>Os campos oficiais da Ayabe-san, direto do arquivo da Umapyoi.</p>
         </div>
 
-        <div class="ficha-grid">
-          <article class="slogan-card" data-reveal>
-            <span class="kicker">α Lyrae · Slogan</span>
-            <blockquote class="serif" data-field="slogan">Carrega uma determinação pesada. Uma estrela de primeira grandeza que permanece sozinha.</blockquote>
+        <div class="plate ficha-plate" data-reveal>
+          <div class="ficha-side">
+            <span class="plate-code">α Lyrae · ID 5191</span>
+            <blockquote data-field="slogan">Carrega uma determinação pesada. Uma estrela de primeira grandeza que permanece sozinha.</blockquote>
             <p class="profile-line" data-field="profile">Admire Vega. ...Já posso ir? Preciso treinar mais, vencer mais corridas e me tornar uma estrela de primeira grandeza.</p>
+            <button class="uma-voice" type="button" id="voicePlay"><span class="uma-voice-icon" aria-hidden="true"></span><span data-voice-label>Ouvir a apresentação</span></button>
             <div class="swatches" aria-label="Cores oficiais">
               <span class="swatch" id="swatchMain" style="--c:#3865A1"><i aria-hidden="true"></i><span data-field="colorMain">#3865A1</span></span>
               <span class="swatch" id="swatchSub" style="--c:#78D5E1"><i aria-hidden="true"></i><span data-field="colorSub">#78D5E1</span></span>
             </div>
-          </article>
-
-          <div class="stat-grid">
-            <div class="stat" data-reveal><span class="stat-code">LYR · 01</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-lang"/></svg>Nome japonês</span><strong data-field="nameJp">アドマイヤベガ</strong><small>Ayabe-san (アヤベさん)</small></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 02</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-cake"/></svg>Aniversário</span><strong data-field="birthday">12 de março</strong></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 03</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-ruler"/></svg>Altura</span><strong data-field="height">157 cm</strong></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 04</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Três medidas</span><strong data-field="sizes">B85 · W57 · H82</strong></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 05</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>Dubladora</span><strong data-field="voice">Hitomi Sasaki</strong><small data-field="voiceJp">咲々木瞳</small></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 06</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Série</span><strong data-field="grade">Ensino Médio</strong></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 07</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>Dormitório</span><strong data-field="residence">Dormitório Ritto</strong></div>
-            <div class="stat" data-reveal><span class="stat-code">LYR · 08</span><span class="stat-label"><svg class="icon" aria-hidden="true"><use href="#i-shoe"/></svg>Calçado · Peso</span><strong data-field="shoe">23,0 cm</strong><small data-field="weight">Sem alterações</small></div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="reasons" id="razoes" aria-labelledby="reasonsTitle">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="kicker greek">α · β · γ · δ</span>
-          <h2 class="title" id="reasonsTitle">4 razões para se apaixonar</h2>
-          <p>O que torna a Admire Vega única no universo de Uma Musume Pretty Derby.</p>
-        </div>
-
-        <div class="pillars">
-          <article class="pillar" data-reveal>
-            <span class="pillar-letter" aria-hidden="true">α</span>
-            <div class="pillar-icon" aria-hidden="true"><svg class="icon"><use href="#i-meteor"/></svg></div>
-            <h3 class="title">1. Estética celestial única</h3>
-            <p>Inspirada na estrela Vega (Constelação de Lira) e na cor azul noturno (<code>#3865A1</code>). Seus acessórios estelares, olhar profundo e presença graciosa a destacam imediatamente de qualquer outra garota-pônei.</p>
-          </article>
-          <article class="pillar" data-reveal>
-            <span class="pillar-letter" aria-hidden="true">β</span>
-            <div class="pillar-icon" aria-hidden="true"><svg class="icon"><use href="#i-cloud"/></svg></div>
-            <h3 class="title">2. O “gap moe” mais adorável</h3>
-            <p>Por fora ela é fria, calma e distante. Mas em segredo? Ela é <strong>obsessiva por coisas fofas e macias</strong>! Ela tem um secador de futon no quarto, avalia pantufas pela fofura e adora pães fresquinhos.</p>
-          </article>
-          <article class="pillar" data-reveal>
-            <span class="pillar-letter" aria-hidden="true">γ</span>
-            <div class="pillar-icon" aria-hidden="true"><svg class="icon"><use href="#i-trophy"/></svg></div>
-            <h3 class="title">3. Uma lenda das pistas (Derby '99)</h3>
-            <p>Protagonista do aclamado anime <em>Road to the Top</em>, ela é a grande vencedora do Tokyo Yushun (Japanese Derby 1999) com uma arrancada épica e emocionante vinda por fora na reta final.</p>
-          </article>
-          <article class="pillar" data-reveal>
-            <span class="pillar-letter" aria-hidden="true">δ</span>
-            <div class="pillar-icon" aria-hidden="true"><svg class="icon"><use href="#i-hands"/></svg></div>
-            <h3 class="title">4. Uma história profunda</h3>
-            <p>Ela carrega o peso de uma promessa emocionante à sua falecida irmã gêmea. Ao se tornar o treinador dela, você a ensina a não correr mais na solidão, mas sim a brilhar com a própria luz.</p>
-          </article>
+          <dl class="ficha-grid">
+            <div class="cell"><dt><b>01</b>Nome japonês</dt><dd><span data-field="nameJp">アドマイヤベガ</span><small>Ayabe-san · アヤベさん</small></dd></div>
+            <div class="cell"><dt><b>02</b>Aniversário</dt><dd><span data-field="birthday">12 de março</span></dd></div>
+            <div class="cell"><dt><b>03</b>Altura</dt><dd><span data-field="height">157 cm</span></dd></div>
+            <div class="cell"><dt><b>04</b>Três medidas</dt><dd><span data-field="sizes">B85 · W57 · H82</span></dd></div>
+            <div class="cell"><dt><b>05</b>Dubladora</dt><dd><span data-field="voice">Hitomi Sasaki</span><small data-field="voiceJp">咲々木瞳</small></dd></div>
+            <div class="cell"><dt><b>06</b>Série</dt><dd><span data-field="grade">Ensino Médio</span></dd></div>
+            <div class="cell"><dt><b>07</b>Dormitório</dt><dd><span data-field="residence">Dormitório Ritto</span><small>Divide o quarto com a Curren Chan</small></dd></div>
+            <div class="cell"><dt><b>08</b>Calçado · peso</dt><dd><span data-field="shoe">23,0 cm</span><small data-field="weight">Sem alterações</small></dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -655,8 +881,8 @@
     <section class="observatory" id="observatorio" aria-labelledby="scopeTitle">
       <div class="container scope">
         <div class="scope-copy" data-reveal>
-          <span class="kicker"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg> Observatório</span>
-          <h3 class="title" id="scopeTitle">Uniforme</h3>
+          <span class="kicker">Observatório</span>
+          <h3 id="scopeTitle">Uniforme</h3>
           <p class="scope-jp" id="scopeJp">制服</p>
           <p>Aponte o telescópio para cada visual oficial. As imagens vêm direto do arquivo da Umapyoi.</p>
           <div class="tabs" id="scopeTabs" role="group" aria-label="Escolher visual"></div>
@@ -675,60 +901,321 @@
       </div>
     </section>
 
-    <section class="fluff-section" id="pantufas" aria-labelledby="fluffTitle">
-      <div class="container">
-        <div class="fluff-box" data-reveal>
-          <span class="kicker"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg> Mini-game de interação</span>
-          <h2 class="title" id="fluffTitle">Testador de pantufas da Ayabe-san</h2>
-          <p>Arraste a barra para oferecer uma pantufa para a Admire Vega e veja o nível de aprovação dela!</p>
+    <section class="secret" id="constelacoes" aria-labelledby="secretTitle">
+      <div class="container secret-grid">
+        <div class="secret-copy" data-reveal>
+          <span class="kicker">Caderno de capa azul</span>
+          <h2 class="display" id="secretTitle">As constelações que ela <em>nunca mostrou</em> a ninguém</h2>
+          <p>Entre mapas celestes muito sérios, a Ayabe-san desenhou algumas constelações só dela. Ligue as estrelas na ordem e descubra o que ela enxerga no céu quando acha que ninguém está olhando.</p>
+          <div class="cs-tabs" id="csTabs" role="group" aria-label="Escolher constelação"></div>
+        </div>
 
-          <div class="fluff-stage" id="fluffStage">
-            <div class="fluff-ring"><svg class="fluff-icon" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-slipper" fill="currentColor"/></svg></div>
+        <div class="chart-wrap" data-reveal style="--d:.1s">
+          <div class="chart" id="chart">
+            <svg class="chart-svg" viewBox="0 0 600 440" aria-hidden="true">
+              <g class="cs-grid">
+                <path d="M0 110H600M0 220H600M0 330H600M150 0V440M300 0V440M450 0V440"/>
+                <path d="M-20 404Q300 330 620 404M-20 52Q300-8 620 52"/>
+              </g>
+              <text class="cs-label" x="24" y="426">AR 18h 36m 56s</text>
+              <text class="cs-label" x="582" y="430" text-anchor="end">Dec +38° 47′ 01″</text>
+              <g class="cs-dust"></g>
+              <g class="cs-arts">
+                <g class="cs-art" data-art="ursinho">
+                  <g fill="#f3dccb"><circle cx="205" cy="138" r="50"/><circle cx="395" cy="138" r="50"/><circle cx="300" cy="250" r="126"/></g>
+                  <g fill="#e2b896"><circle cx="205" cy="138" r="46"/><circle cx="395" cy="138" r="46"/><circle cx="300" cy="250" r="122"/></g>
+                  <circle cx="205" cy="140" r="25" fill="#f2a9c0"/>
+                  <circle cx="395" cy="140" r="25" fill="#f2a9c0"/>
+                  <ellipse cx="300" cy="296" rx="64" ry="48" fill="#fbeee2"/>
+                  <ellipse cx="300" cy="273" rx="18" ry="12.5" fill="#4a3a5c"/>
+                  <path d="M300 285v11m0 0c-6 9-17 9-23 2m23-2c6 9 17 9 23 2" fill="none" stroke="#4a3a5c" stroke-width="3.5" stroke-linecap="round"/>
+                  <circle cx="252" cy="226" r="10.5" fill="#3b2f4e"/><circle cx="256" cy="222" r="3.4" fill="#fff"/>
+                  <circle cx="348" cy="226" r="10.5" fill="#3b2f4e"/><circle cx="352" cy="222" r="3.4" fill="#fff"/>
+                  <ellipse cx="228" cy="268" rx="17" ry="10" fill="#f294b5" opacity=".7"/>
+                  <ellipse cx="372" cy="268" rx="17" ry="10" fill="#f294b5" opacity=".7"/>
+                  <path d="M300 132c-5 12-5 24 0 36" fill="none" stroke="#c99a78" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round"/>
+                </g>
+                <g class="cs-art" data-art="carneirinho">
+                  <g fill="#6b5c7e"><rect x="254" y="296" width="17" height="62" rx="8.5"/><rect x="292" y="300" width="17" height="60" rx="8.5"/><rect x="352" y="300" width="17" height="60" rx="8.5"/><rect x="390" y="294" width="17" height="60" rx="8.5"/></g>
+                  <g fill="#ddd2f2"><circle cx="240" cy="205" r="53"/><circle cx="290" cy="165" r="55"/><circle cx="350" cy="160" r="55"/><circle cx="405" cy="190" r="51"/><circle cx="415" cy="245" r="47"/><circle cx="360" cy="272" r="49"/><circle cx="295" cy="272" r="51"/><circle cx="245" cy="255" r="47"/><circle cx="462" cy="226" r="19"/></g>
+                  <g fill="#fffaf3"><circle cx="240" cy="205" r="48"/><circle cx="290" cy="165" r="50"/><circle cx="350" cy="160" r="50"/><circle cx="405" cy="190" r="46"/><circle cx="415" cy="245" r="42"/><circle cx="360" cy="272" r="44"/><circle cx="295" cy="272" r="46"/><circle cx="245" cy="255" r="42"/><circle cx="330" cy="220" r="70"/><circle cx="462" cy="226" r="14"/></g>
+                  <g transform="rotate(-14 172 214)">
+                    <ellipse cx="134" cy="190" rx="22" ry="9.5" transform="rotate(-24 134 190)" fill="#6b5c7e"/>
+                    <ellipse cx="172" cy="214" rx="38" ry="46" fill="#6b5c7e"/>
+                    <ellipse cx="134" cy="190" rx="13" ry="4.6" transform="rotate(-24 134 190)" fill="#f2a9c0"/>
+                  </g>
+                  <g fill="#fffaf3" stroke="#ddd2f2" stroke-width="4"><circle cx="182" cy="170" r="17"/><circle cx="204" cy="180" r="14"/></g>
+                  <path d="M150 210q8-8 16 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+                  <ellipse cx="160" cy="234" rx="9" ry="5" fill="#f294b5" opacity=".85"/>
+                  <path d="M141 242q4 4 8 0" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                </g>
+                <g class="cs-art" data-art="pantufa">
+                  <g transform="rotate(-8 296 170)"><ellipse cx="296" cy="170" rx="27" ry="78" fill="#fff3f7" stroke="#f4c3d4" stroke-width="5"/><ellipse cx="296" cy="178" rx="13" ry="56" fill="#f6b0c7"/></g>
+                  <g transform="rotate(9 396 166)"><ellipse cx="396" cy="166" rx="27" ry="80" fill="#fff3f7" stroke="#f4c3d4" stroke-width="5"/><ellipse cx="396" cy="174" rx="13" ry="58" fill="#f6b0c7"/></g>
+                  <path d="M120 322c0-22 16-38 40-38h270c34 0 54 20 54 44v6c0 10-8 18-18 18H136c-9 0-16-7-16-16z" fill="#e48fb0"/>
+                  <path d="M128 312c0-16 12-26 30-26h96v26z" fill="#f7c6d6"/>
+                  <path d="M240 312c0-52 48-86 116-86 70 0 120 40 120 88v4H240z" fill="#fff3f7" stroke="#f4c3d4" stroke-width="5"/>
+                  <g fill="#fff3f7"><circle cx="264" cy="262" r="16"/><circle cx="298" cy="240" r="18"/><circle cx="342" cy="230" r="18"/><circle cx="388" cy="234" r="18"/><circle cx="430" cy="250" r="17"/><circle cx="458" cy="276" r="15"/></g>
+                  <circle cx="432" cy="266" r="8.5" fill="#3b2f4e"/><circle cx="435" cy="263" r="2.6" fill="#fff"/>
+                  <ellipse cx="466" cy="290" rx="7.5" ry="5.5" fill="#ef86aa"/>
+                  <ellipse cx="410" cy="292" rx="12" ry="7" fill="#f294b5" opacity=".6"/>
+                  <path d="M478 286l22-6m-22 12l22 2" stroke="#d98fae" stroke-width="2" stroke-linecap="round"/>
+                </g>
+              </g>
+              <g class="cs-lines"></g>
+              <g class="cs-features"></g>
+            </svg>
+            <span class="chart-tag" aria-hidden="true">não oficial ✦</span>
+            <div class="chart-stars" id="chartStars"></div>
           </div>
-
-          <div class="fluff-slider-wrap" id="fluffWrap">
-            <div class="fluff-track"><div class="fluff-fill"></div></div>
-            <input type="range" min="0" max="100" value="50" step="1" class="fluff-slider" id="fluffRange" aria-label="Nível de fofura da pantufa" aria-describedby="fluffQuote">
+          <div class="cs-bar">
+            <p class="cs-status" id="csStatus" aria-live="polite">Comece pela estrela 1.</p>
+            <div class="cs-actions">
+              <button class="btn btn-ghost btn-sm" type="button" id="csAuto">Ligar tudo</button>
+              <button class="btn btn-ghost btn-sm" type="button" id="csReset">Apagar</button>
+            </div>
           </div>
-
-          <div class="fluff-value" id="fluffValue">50% de fofura</div>
-          <p class="fluff-quote" id="fluffQuote" aria-live="polite"></p>
+          <p class="cs-note" id="csNote" aria-live="polite">Cada figura completa entra no catálogo secreto dela.</p>
         </div>
       </div>
     </section>
 
-    <section class="quotes" id="curiosidades" aria-labelledby="quotesTitle">
+    <section class="night-room" id="quarto" aria-labelledby="roomTitle">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="kicker">Arquivo secreto</span>
-          <h2 class="title" id="quotesTitle">Curiosidades &amp; falas secretas</h2>
+          <span class="kicker">Dormitório Ritto · depois do toque de recolher</span>
+          <h2 class="display" id="roomTitle">De luz apagada, ninguém vê <em>o que ela guarda.</em></h2>
+          <p>Passe a lanterna pelo quarto e examine o que encontrar. Algumas coisas aqui não combinam com a fama de estrela solitária — e todas são verdade.</p>
         </div>
-        <div class="quote-list">
-          <blockquote class="quote" data-reveal>
-            <p class="serif">“Eu me recuso a descansar até atingir a perfeição... Mas se Curren-chan trouxer aquele cobertor felpudo de novo... talvez só 5 minutos.”</p>
-            <footer class="quote-author">— Admire Vega (segredo do dormitório)</footer>
-          </blockquote>
-          <blockquote class="quote is-official" data-reveal>
-            <p class="serif" data-field="ears">Elas se contraem ao ouvir vozes que lembram uma irmã mais velha.</p>
-            <footer class="quote-author">— Arquivo oficial da Tracen · orelhas</footer>
-          </blockquote>
-          <blockquote class="quote" data-reveal>
-            <p class="serif">“Ela compra pães de padarias diferentes dependendo do tipo exato que quer comer no dia.”</p>
-            <footer class="quote-author">— Curren Chan (sua colega de quarto)</footer>
-          </blockquote>
-          <blockquote class="quote is-official" data-reveal>
-            <p class="serif" data-field="tail">Tem o hábito de abraçá-la sem perceber enquanto dorme.</p>
-            <footer class="quote-author">— Arquivo oficial da Tracen · cauda</footer>
-          </blockquote>
-          <blockquote class="quote is-official" data-reveal>
-            <p class="serif" data-field="strengths">Ler em voz alta e clima frio</p>
-            <footer class="quote-author">— Arquivo oficial da Tracen · pontos fortes</footer>
-          </blockquote>
-          <blockquote class="quote is-official" data-reveal>
-            <p class="serif" data-field="family">Todo ano, a família prepara dois bolos de aniversário.</p>
-            <footer class="quote-author">— Arquivo oficial da Tracen · família</footer>
-          </blockquote>
+
+        <div class="room-layout">
+          <div class="room" id="room" data-reveal>
+            <svg class="room-svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="roomSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1745"/><stop offset="1" stop-color="#2a3f86"/></linearGradient>
+                <linearGradient id="beamFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8a8a8"/><stop offset="1" stop-color="#e2e2e2"/></linearGradient>
+                <radialGradient id="flashFade"><stop offset="0" stop-color="#000"/><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient>
+                <radialGradient id="foundFade"><stop offset="0" stop-color="#262626"/><stop offset=".5" stop-color="#4a4a4a"/><stop offset="1" stop-color="#fff"/></radialGradient>
+                <radialGradient id="warmTint"><stop offset="0" stop-color="#ffe2a8" stop-opacity=".2"/><stop offset="1" stop-color="#ffe2a8" stop-opacity="0"/></radialGradient>
+                <radialGradient id="lampLight"><stop offset="0" stop-color="#ffe7ae" stop-opacity=".7"/><stop offset="1" stop-color="#ffe7ae" stop-opacity="0"/></radialGradient>
+                <linearGradient id="phoneSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1b52"/><stop offset="1" stop-color="#4a5fb5"/></linearGradient>
+                <pattern id="wallDots" width="44" height="44" patternUnits="userSpaceOnUse"><circle cx="22" cy="22" r="1.3" fill="#26336a"/></pattern>
+                <pattern id="blanketStars" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M17 11l1.6 4.4 4.4 1.6-4.4 1.6-1.6 4.4-1.6-4.4-4.4-1.6 4.4-1.6z" fill="#7d8ad0"/></pattern>
+                <mask id="roomMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="560">
+                  <rect width="1000" height="560" fill="#fff"/>
+                  <rect x="604" y="48" width="192" height="236" fill="#000"/>
+                  <polygon points="604,296 796,296 720,560 430,560" fill="url(#beamFade)"/>
+                  <!-- o que está na frente da janela vira silhueta até ser encontrado -->
+                  <g fill="#fff" stroke="#fff" stroke-linecap="round">
+                    <path d="M636 218l26-4 13 30-30 6z"/>
+                    <path d="M624 298L612 254L646 226" fill="none" stroke-width="7"/>
+                    <path d="M762 272l16-46" fill="none" stroke-width="13"/>
+                    <path d="M748 302v-32l4-6h28l4 6v32z"/>
+                  </g>
+                  <g id="foundHoles"></g>
+                  <circle id="flash" cx="330" cy="330" r="140" fill="url(#flashFade)"/>
+                </mask>
+              </defs>
+
+              <!-- parede, rodapé e chão -->
+              <rect width="1000" height="404" fill="#141d40"/>
+              <rect width="1000" height="404" fill="url(#wallDots)"/>
+              <rect y="392" width="1000" height="12" fill="#0f1636"/>
+              <rect y="404" width="1000" height="156" fill="#0e1431"/>
+              <path d="M0 444H1000M0 492H1000M0 540H1000" stroke="#0a1027" stroke-width="2"/>
+
+              <!-- carta celeste da Lira -->
+              <g transform="translate(118 84)">
+                <rect width="172" height="128" rx="5" fill="#0d1636" stroke="#34437c" stroke-width="5"/>
+                <path d="M86 24L70 46M86 24L104 46M70 46L62 100L110 104L104 46Z" fill="none" stroke="#5f77bb" stroke-width="1.5"/>
+                <g fill="#e6eeff"><circle cx="86" cy="24" r="4"/><circle cx="70" cy="46" r="2"/><circle cx="104" cy="46" r="2"/><circle cx="62" cy="100" r="2.2"/><circle cx="110" cy="104" r="2.2"/></g>
+                <text x="86" y="120" fill="#6c7fbf" font-size="9.5" font-family="Cinzel, serif" text-anchor="middle" letter-spacing="2">LYRA</text>
+              </g>
+
+              <!-- relógio: 23h40, bem depois do toque de recolher -->
+              <g transform="translate(366 112)">
+                <circle r="27" fill="#1b2550" stroke="#34437c" stroke-width="4"/>
+                <path d="M0-20v4M20 0h-4M0 20v-4M-20 0h4" stroke="#5f77bb" stroke-width="2" stroke-linecap="round"/>
+                <path d="M0 0L-15.6 9M0 0L-2.1-12" stroke="#c9d6ff" stroke-width="2.6" stroke-linecap="round"/>
+                <circle r="2.6" fill="#c9d6ff"/>
+              </g>
+
+              <!-- estante de livros ilustrados -->
+              <rect x="400" y="214" width="160" height="8" rx="2" fill="#2b356a"/>
+              <rect x="412" y="170" width="14" height="44" rx="2" fill="#3f4f92"/>
+              <rect x="428" y="162" width="12" height="52" rx="2" fill="#5a4a8a"/>
+              <rect x="442" y="176" width="16" height="38" rx="2" fill="#2f6f8f"/>
+              <rect x="460" y="166" width="12" height="48" rx="2" fill="#7a5a8f"/>
+              <rect x="482" y="184" width="44" height="30" rx="3" fill="#3a4680" transform="rotate(-8 504 199)"/>
+              <path d="M494 190l18-2" stroke="#6c7fbf" stroke-width="2" stroke-linecap="round" transform="rotate(-8 504 199)"/>
+
+              <!-- janela: o céu de verdade, sempre aceso -->
+              <rect x="556" y="26" width="288" height="7" rx="3.5" fill="#3a4680"/>
+              <rect x="596" y="40" width="208" height="252" rx="6" fill="#2a3866"/>
+              <rect x="604" y="48" width="192" height="236" fill="url(#roomSky)"/>
+              <g fill="#fff"><circle cx="626" cy="72" r="1.4"/><circle cx="662" cy="150" r="1"/><circle cx="640" cy="198" r="1.2"/><circle cx="684" cy="76" r="1"/><circle cx="730" cy="206" r="1.1"/><circle cx="772" cy="150" r="1.3"/><circle cx="760" cy="244" r="1"/><circle cx="622" cy="250" r="1.2"/><circle cx="668" cy="268" r="1"/><circle cx="716" cy="270" r="1.1"/><circle cx="742" cy="228" r=".9"/></g>
+              <g transform="translate(648 116)"><circle r="8" fill="#cfe0ff" opacity=".3"/><path d="M0-10V10M-10 0H10" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/><circle r="2.8" fill="#fff"/></g>
+              <path d="M752 68a22 22 0 1 0 17 38 18 18 0 1 1-17-38z" fill="#fff2cc"/>
+              <path d="M700 48V284M604 166H796" stroke="#2a3866" stroke-width="7"/>
+              <rect x="584" y="284" width="232" height="12" rx="3" fill="#2f3e70"/>
+              <path d="M566 30c14 70 2 180 18 270h-32c-10-90 4-200-10-270z" fill="#283070"/>
+              <path d="M834 30c-14 70-2 180-18 270h32c10-90-4-200 10-270z" fill="#283070"/>
+
+              <!-- telescópio apontado para a janela -->
+              <path d="M930 372L888 540M930 372L972 540M930 372L932 548" stroke="#3a4779" stroke-width="7" stroke-linecap="round" fill="none"/>
+              <g transform="translate(930 352) rotate(-148)">
+                <rect x="-46" y="-15" width="160" height="30" rx="13" fill="#3c4c88"/>
+                <rect x="104" y="-20" width="32" height="40" rx="7" fill="#4c5ea2"/>
+                <rect x="-6" y="-17" width="9" height="34" fill="#d9b45a"/>
+                <rect x="-64" y="-8" width="22" height="16" rx="4" fill="#2b3767"/>
+              </g>
+              <circle cx="930" cy="366" r="12" fill="#4a5992"/>
+
+              <!-- tapete -->
+              <ellipse cx="700" cy="516" rx="236" ry="30" fill="#1b2452"/>
+              <ellipse cx="700" cy="516" rx="208" ry="22" fill="none" stroke="#2b3770" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+
+              <!-- o carneirinho, debaixo da cama: só sai quando tudo é encontrado -->
+              <use class="bed-sheep" href="#sheep" x="232" y="440" width="104" height="87"/>
+
+              <!-- cama -->
+              <rect x="36" y="270" width="26" height="232" rx="8" fill="#262f60"/>
+              <rect x="31" y="262" width="36" height="15" rx="7.5" fill="#2f3a72"/>
+              <rect x="52" y="420" width="370" height="40" rx="7" fill="#20285a"/>
+              <rect x="68" y="458" width="13" height="44" rx="3" fill="#1a2150"/>
+              <rect x="396" y="458" width="13" height="44" rx="3" fill="#1a2150"/>
+              <rect x="56" y="386" width="364" height="42" rx="16" fill="#d9def5"/>
+              <g data-art="cama">
+                <path d="M150 378c60-12 150-12 222-2 24 3 44 12 48 26v32H150z" fill="#4655a6"/>
+                <path d="M150 378c60-12 150-12 222-2 24 3 44 12 48 26v32H150z" fill="url(#blanketStars)"/>
+                <path d="M150 380v54" stroke="#3a4790" stroke-width="3"/>
+                <path d="M70 372c0-20 18-32 44-32h40c26 0 40 14 40 32s-14 28-40 28h-40c-26 0-44-10-44-28z" fill="#f5f2fc"/>
+                <path d="M86 360q7-7 14 0M126 356q7-7 14 0M106 382q7-6 14 0" stroke="#d9d3ee" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              </g>
+
+              <!-- criado-mudo e celular -->
+              <rect x="434" y="392" width="78" height="110" rx="6" fill="#1e2652"/>
+              <rect x="434" y="392" width="78" height="9" rx="3" fill="#29336a"/>
+              <rect x="446" y="430" width="54" height="3" rx="1.5" fill="#2b356c"/>
+              <circle cx="473" cy="452" r="3.4" fill="#3c4884"/>
+              <g data-art="celular">
+                <path d="M450 392h46l-7-8h-32z" fill="#2c3668"/>
+                <rect x="458" y="330" width="30" height="54" rx="6" fill="#161b36" stroke="#4b5890" stroke-width="2"/>
+                <rect x="461.5" y="336" width="23" height="42" rx="2" fill="url(#phoneSky)"/>
+                <rect x="461.5" y="363" width="23" height="7" fill="#2a5b9c"/>
+                <path d="M461.5 370h23v5.5a2.5 2.5 0 0 1-2.5 2.5h-18a2.5 2.5 0 0 1-2.5-2.5z" fill="#d6be93"/>
+                <g fill="#fff"><circle cx="466" cy="342" r="1"/><circle cx="476" cy="346" r=".9"/><circle cx="481" cy="340" r="1.1"/><circle cx="471" cy="353" r=".9"/></g>
+              </g>
+
+              <!-- escrivaninha embaixo da janela -->
+              <rect x="588" y="302" width="224" height="12" rx="3" fill="#2b356a"/>
+              <rect x="598" y="314" width="11" height="190" fill="#20295a"/>
+              <rect x="791" y="314" width="11" height="190" fill="#20295a"/>
+              <rect x="612" y="314" width="176" height="32" rx="3" fill="#242e60"/>
+              <rect x="688" y="327" width="24" height="4" rx="2" fill="#35407a"/>
+
+              <!-- luminária de leitura e livro ilustrado -->
+              <g data-art="luminaria">
+                <ellipse class="lamp-light" cx="676" cy="290" rx="78" ry="34" fill="url(#lampLight)"/>
+                <ellipse cx="624" cy="300" rx="18" ry="4.5" fill="#3b4782"/>
+                <path d="M624 298L612 254L646 226" fill="none" stroke="#56649f" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="612" cy="254" r="4.5" fill="#6b79b8"/>
+                <path d="M636 218l26-4 13 30-30 6z" fill="#7d8acb"/>
+                <path d="M647 249l28-6" stroke="#ffe7ae" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+                <path d="M652 302l30-8 30 8v-17l-30-8-30 8z" fill="#efe5d2"/>
+                <path d="M682 277v25" stroke="#cbbd9f" stroke-width="1.6"/>
+                <path d="M659 290l15-4m-15 8l15-4m15-4l15 4m-15 4l15 4" stroke="#b9ab8c" stroke-width="1.3"/>
+              </g>
+
+              <!-- pães de padarias diferentes -->
+              <g data-art="paes">
+                <path d="M762 270l16-44" stroke="#d29a55" stroke-width="11" stroke-linecap="round"/>
+                <path d="M766 258l7-3m-3-9l7-3m-3-9l7-3" stroke="#f0c98a" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M748 302v-32l4-6h28l4 6v32z" fill="#c69d63"/>
+                <path d="M748 270l4-6h28l4 6-5 4-4-4-5 4-4-4-5 4-4-4-5 4-4-4z" fill="#d9b47c"/>
+                <path d="M756 286h20" stroke="#a87f48" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="732" cy="293" r="9" fill="#e2b468"/>
+                <path d="M726 289l12 8m-12 0l12-8" stroke="#c99545" stroke-width="1.3"/>
+              </g>
+
+              <!-- cadeira e a toalha preferida -->
+              <rect x="668" y="410" width="9" height="102" rx="2" fill="#232c5c"/>
+              <rect x="734" y="410" width="9" height="102" rx="2" fill="#232c5c"/>
+              <rect x="660" y="334" width="90" height="80" rx="12" fill="#2d3870"/>
+              <rect x="674" y="348" width="62" height="52" rx="8" fill="#252f62"/>
+              <g data-art="toalha">
+                <rect x="652" y="326" width="106" height="56" rx="10" fill="#f3b8cd"/>
+                <rect x="652" y="358" width="106" height="7" fill="#fde3ec"/>
+                <path d="M660 382v7M670 382v7M680 382v7M690 382v7M700 382v7M710 382v7M720 382v7M730 382v7M740 382v7M750 382v7" stroke="#f3b8cd" stroke-width="3.2" stroke-linecap="round"/>
+                <path d="M662 338q7-5 14 0t14 0 14 0 14 0 14 0 14 0 14 0" fill="none" stroke="#fbd3e1" stroke-width="2.2"/>
+              </g>
+
+              <!-- pantufas felpudas -->
+              <g data-art="pantufas">
+                <g transform="translate(560 478) scale(1.15)">
+                  <ellipse cx="36" cy="34" rx="38" ry="12" fill="#8f7bc0"/>
+                  <path d="M6 32c0-16 14-26 30-26s32 10 32 26z" fill="#fde7ef"/>
+                  <g fill="#fde7ef"><circle cx="10" cy="26" r="7"/><circle cx="21" cy="15" r="8"/><circle cx="36" cy="11" r="8"/><circle cx="51" cy="15" r="8"/><circle cx="62" cy="26" r="7"/></g>
+                </g>
+                <g transform="translate(508 490) scale(1.15)">
+                  <ellipse cx="36" cy="34" rx="38" ry="12" fill="#a28ad0"/>
+                  <path d="M6 32c0-16 14-26 30-26s32 10 32 26z" fill="#fff4f8"/>
+                  <g fill="#fff4f8"><circle cx="10" cy="26" r="7"/><circle cx="21" cy="15" r="8"/><circle cx="36" cy="11" r="8"/><circle cx="51" cy="15" r="8"/><circle cx="62" cy="26" r="7"/></g>
+                </g>
+              </g>
+
+              <circle id="flashTint" cx="330" cy="330" r="140" fill="url(#warmTint)"/>
+              <rect class="room-dark" width="1000" height="560" fill="#02040c" fill-opacity=".94" mask="url(#roomMask)"/>
+            </svg>
+
+            <button class="room-item" type="button" data-item="pantufas" style="--x:575;--y:510;--r:58" aria-label="Examinar o tapete"><span class="room-check" aria-hidden="true">✓</span></button>
+            <button class="room-item" type="button" data-item="toalha" style="--x:705;--y:354;--r:46" aria-label="Examinar a cadeira"><span class="room-check" aria-hidden="true">✓</span></button>
+            <button class="room-item" type="button" data-item="luminaria" style="--x:648;--y:262;--r:50" aria-label="Examinar a escrivaninha"><span class="room-check" aria-hidden="true">✓</span></button>
+            <button class="room-item" type="button" data-item="paes" style="--x:764;--y:268;--r:38" aria-label="Examinar o canto da mesa"><span class="room-check" aria-hidden="true">✓</span></button>
+            <button class="room-item" type="button" data-item="cama" style="--x:200;--y:388;--r:86" aria-label="Examinar a cama"><span class="room-check" aria-hidden="true">✓</span></button>
+            <button class="room-item" type="button" data-item="celular" style="--x:473;--y:360;--r:36" aria-label="Examinar o criado-mudo"><span class="room-check" aria-hidden="true">✓</span></button>
+            <p class="room-hint" aria-hidden="true">Mova a lanterna · clique no que encontrar</p>
+          </div>
+
+          <div class="plate found" data-reveal role="group" aria-labelledby="foundTitle">
+            <header class="found-head">
+              <h3 id="foundTitle">Achados no escuro</h3>
+              <p class="found-tip">Seis coisas que a estrela solitária preferia que ninguém visse.</p>
+              <span class="found-count" id="foundCount" aria-label="Segredos encontrados">0/6</span>
+            </header>
+            <ol class="found-list">
+              <li class="found-item" data-item="pantufas">
+                <span class="found-no" aria-hidden="true">1</span>
+                <div><h4>Pantufas felpudas</h4><p><b>Segredo oficial.</b> Ela dá nota para a fofura de cada pantufa que experimenta. Estas passaram no teste.</p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+              <li class="found-item" data-item="toalha">
+                <span class="found-no" aria-hidden="true">2</span>
+                <div><h4>A toalha preferida</h4><p><b>Coisas fofas.</b> No dia em que esqueceu o amaciante da toalha favorita, o drama foi real.</p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+              <li class="found-item" data-item="luminaria">
+                <span class="found-no" aria-hidden="true">3</span>
+                <div><h4>Luminária e livro ilustrado</h4><p><b>Regra pessoal.</b> Para ler a sério, sempre com a luminária acesa — e ler em voz alta é um dos pontos fortes dela.</p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+              <li class="found-item" data-item="paes">
+                <span class="found-no" aria-hidden="true">4</span>
+                <div><h4>Pães de padarias diferentes</h4><p><b>Segredo oficial.</b> Ela escolhe a padaria conforme o tipo de pão que quer comer.</p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+              <li class="found-item" data-item="cama">
+                <span class="found-no" aria-hidden="true">5</span>
+                <div><h4>O cobertor de estrelas</h4><p><b>Arquivo oficial · cauda.</b> <span data-field="tail">Tem o hábito de abraçá-la sem perceber enquanto dorme.</span></p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+              <li class="found-item" data-item="celular">
+                <span class="found-no" aria-hidden="true">6</span>
+                <div><h4>O celular</h4><p><b>Papel de parede.</b> Uma foto pronta de céu estrelado sobre a praia. Claro que é.</p><p class="found-dark">Ainda no escuro…</p></div>
+              </li>
+            </ol>
+            <div class="room-final" id="roomFinal" hidden>
+              <svg viewBox="0 0 120 100" aria-hidden="true"><use href="#sheep" width="120" height="100"/></svg>
+              <p>“…Pronto, agora você sabe. Se contar para a Curren, eu nego tudo.”</p>
+            </div>
+          </div>
         </div>
+        <p class="sr-only" id="roomLive" aria-live="polite"></p>
       </div>
     </section>
 
@@ -736,20 +1223,48 @@
       <div class="container">
         <div class="section-head" data-reveal>
           <span class="kicker">Mapa estelar</span>
-          <h2 class="title" id="supportsTitle">Support cards da Ayabe-san</h2>
+          <h2 class="display" id="supportsTitle">Support cards da <em>Ayabe-san</em></h2>
           <p>Cada card é uma estrela no mapa. Clique para ver os detalhes completos no GameTora.</p>
         </div>
         <div class="support-grid" id="supportGrid" data-reveal></div>
       </div>
     </section>
 
-    <section class="cta" id="cta" aria-labelledby="ctaTitle">
+    <section class="final" id="ficar" aria-labelledby="finalTitle">
       <div class="container">
-        <div class="cta-box" data-reveal>
-          <h2 class="title" id="ctaTitle">Pronto para treinar a estrela mais brilhante?</h2>
-          <p>Seja no jogo principal ou assistindo a <em>Road to the Top</em>, Admire Vega é uma personagem com profundidade, elegância e um coração de ouro esperando por alguém que acredite nela.</p>
-          <button class="btn btn-primary" type="button" id="praiseButton"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg> Dar apoio para a Ayabe-san!</button>
+        <div class="plate final-box" data-reveal>
+          <div class="final-copy">
+            <span class="kicker">Antes de ir embora</span>
+            <h2 class="display" id="finalTitle">Fique mais <em>um pouco.</em></h2>
+            <p>Ela não vai pedir. Mas, se você ficar, ela aponta para o céu e mostra onde fica a estrela dela. Ali está o Triângulo de Verão: encontre a Vega — a mais brilhante das três.</p>
+            <p class="tri-note" id="triNote" aria-live="polite"></p>
+          </div>
+          <div class="triangle" id="triangle">
+            <svg viewBox="0 0 400 330" aria-hidden="true">
+              <ellipse class="milkyway" cx="230" cy="176" rx="74" ry="250" transform="rotate(-42 230 176)"/>
+              <path class="tri-line" d="M120 40L300 72L200 300Z"/>
+            </svg>
+            <button class="tri-star" type="button" data-star="deneb" style="--x:120;--y:40;--s:7px" aria-label="Estrela no alto, à esquerda, de brilho fraco"><span class="tri-name">Deneb<small>Cisne</small></span></button>
+            <button class="tri-star" type="button" data-star="vega" style="--x:300;--y:72;--s:13px" aria-label="Estrela no alto, à direita, a mais brilhante"><span class="tri-name">Vega<small>Orihime</small></span></button>
+            <button class="tri-star" type="button" data-star="altair" style="--x:200;--y:300;--s:10px" aria-label="Estrela embaixo, de brilho médio"><span class="tri-name">Altair<small>Hikoboshi</small></span></button>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="uma-next" aria-label="Próxima personagem">
+      <div class="uma-next-inner">
+        <a class="uma-next-card uma-theme-chiyo" href="chiyo.html">
+          <span class="uma-next-copy">
+            <span class="uma-next-kicker"><span class="uma-next-gate" style="--frame:#D9342B;--frame-ink:#FFFFFF" aria-hidden="true">3</span>Próxima largada</span>
+            <strong class="uma-next-name">Sakura Chiyono O</strong>
+            <span class="uma-next-jp" lang="ja">サクラチヨノオー</span>
+            <span class="uma-next-tagline">Honesta e esforçada, transforma provérbios em impulso para dividir o palco com quem mais admira.</span>
+            <span class="uma-next-cta">Ir para a página <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="uma-next-art" aria-hidden="true"><img src="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c8d5b9b11ce46b7930f2bcba26ac6c4/sakurachiyonoo_02_2.png?w=720&amp;fm=webp&amp;q=80" alt="" width="720" height="1268" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
+        </a>
+        <a class="uma-next-all" href="index.html"><i aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>Ver todas no Paddock</a>
       </div>
     </section>
   </main>
@@ -757,9 +1272,9 @@
   <dialog class="praise" id="praiseDialog" aria-labelledby="praiseTitle">
     <form method="dialog" class="praise-inner">
       <div class="praise-star" aria-hidden="true"><svg class="icon"><use href="#i-star"/></svg></div>
-      <p id="praiseTitle">Ayabe-san olhou para você com um leve sorriso no rosto:</p>
-      <blockquote class="serif">“Obrigada por estar ao meu lado, treinador. Vamos olhar as estrelas juntos hoje à noite.”</blockquote>
-      <button class="btn btn-primary" value="close">Olhar as estrelas juntos</button>
+      <p id="praiseTitle">Ayabe-san desvia o olhar, mas não vai embora:</p>
+      <blockquote>“…É ela. A Orihime do Tanabata — e a minha estrela. Obrigada por olhar comigo, treinador. Mais cinco minutos… depois eu volto a treinar.”</blockquote>
+      <button class="btn btn-primary" value="close">Mais cinco minutos</button>
     </form>
   </dialog>
 
@@ -778,6 +1293,8 @@
       const CHARACTER_ID = 5191;
       const GAME_ID = 1033;
       const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
+      const VOICE_CLIP = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fb933924cc3e47238b00d306204df46e/admirevega_voice.mp3";
+      const SVG_NS = "http://www.w3.org/2000/svg";
       const $ = selector => document.querySelector(selector);
 
       const DICTIONARY = {
@@ -934,18 +1451,344 @@
         return {
           celebrate() {
             if (reduce) return;
-            for (let index = 0; index < 4; index += 1) setTimeout(spawnShooting, index * 180);
+            for (let index = 0; index < 5; index += 1) setTimeout(spawnShooting, index * 180);
           },
           stop() { cancelAnimationFrame(frame); }
         };
       }
 
+      /* ------------------------------------- o carneirinho que se esconde */
+      // Basta olhar (passar o mouse, tocar ou apertar Enter) para ele sumir atrás da janela.
+      function initPeek() {
+        const button = $("#peek");
+        const note = $("#peekNote");
+        const lines = ["…você não viu nada.", "Não tem carneirinho nenhum aqui.", "…É da Curren. Acho."];
+        let count = 0;
+        let timer = 0;
+
+        function hide() {
+          if (button.classList.contains("is-hiding")) return;
+          button.classList.add("is-hiding");
+          note.textContent = lines[count % lines.length];
+          count += 1;
+          note.classList.add("is-on");
+          window.clearTimeout(timer);
+          timer = window.setTimeout(() => {
+            button.classList.remove("is-hiding");
+            note.classList.remove("is-on");
+          }, 2600);
+        }
+
+        button.addEventListener("pointerenter", event => {
+          if (event.pointerType === "mouse") hide();
+        });
+        button.addEventListener("click", hide);
+      }
+
+      /* ------------------------------------------ constelações secretas */
+      // As estrelas de cada figura estão sobre o contorno do desenho; as de "features"
+      // parecem estrelas soltas, mas viram olhos, nariz e patinhas quando a figura fecha.
+      const CONSTELLATIONS = [
+        {
+          key: "ursinho",
+          name: "Ursinho Maior",
+          code: "AV-01",
+          stars: [[190, 300], [168, 168], [186, 100], [240, 108], [300, 128], [360, 108], [414, 100], [432, 168], [410, 300], [300, 372]],
+          features: [[252, 226], [348, 226], [300, 273]],
+          line: "…É a Ursa Maior. Eu só desenhei de um jeito diferente. Não tire conclusões."
+        },
+        {
+          key: "carneirinho",
+          name: "Carneirinho",
+          code: "AV-02",
+          stars: [[205, 175], [262, 122], [350, 110], [420, 148], [456, 236], [392, 306], [300, 318], [220, 288]],
+          features: [[158, 208], [262, 356], [300, 360], [360, 360], [398, 354]],
+          line: "Áries, o Carneiro. É um signo, é astronomia, é coisa séria. …A lã dele parece macia, mas isso é irrelevante."
+        },
+        {
+          key: "pantufa",
+          name: "Pantufa Austral",
+          code: "AV-03",
+          stars: [[128, 336], [132, 288], [248, 278], [290, 232], [286, 96], [344, 226], [404, 90], [400, 232], [476, 282], [470, 342]],
+          features: [[432, 266], [466, 290]],
+          line: "Essa não existe em catálogo nenhum. Avaliei a fofura dela: nota nove. …Esquece o que eu disse."
+        }
+      ];
+
+      function initConstellations() {
+        const chart = $("#chart");
+        const lineLayer = chart.querySelector(".cs-lines");
+        const featureLayer = chart.querySelector(".cs-features");
+        const starLayer = $("#chartStars");
+        const status = $("#csStatus");
+        const note = $("#csNote");
+        const done = new Set();
+        let current = 0;
+        let next = 0;
+        let started = false;
+        let autoTimer = 0;
+        let starButtons = [];
+
+        // Poeira de estrelas de fundo, sempre nas mesmas posições.
+        let seed = 11;
+        const random = () => {
+          seed = (seed * 16807) % 2147483647;
+          return seed / 2147483647;
+        };
+        const dust = chart.querySelector(".cs-dust");
+        for (let index = 0; index < 90; index += 1) {
+          const dot = document.createElementNS(SVG_NS, "circle");
+          dot.setAttribute("cx", (random() * 600).toFixed(1));
+          dot.setAttribute("cy", (random() * 440).toFixed(1));
+          dot.setAttribute("r", (0.5 + random() * 0.9).toFixed(2));
+          dot.setAttribute("opacity", (0.2 + random() * 0.45).toFixed(2));
+          dust.append(dot);
+        }
+
+        const tabButtons = CONSTELLATIONS.map((item, index) => {
+          const button = Uma.el("button", "", item.name);
+          button.type = "button";
+          button.addEventListener("click", () => select(index));
+          return button;
+        });
+        $("#csTabs").replaceChildren(...tabButtons);
+
+        function drawLine(from, to, instant) {
+          const line = document.createElementNS(SVG_NS, "line");
+          line.setAttribute("class", instant ? "cs-line is-drawn" : "cs-line");
+          line.setAttribute("pathLength", "1");
+          line.setAttribute("x1", from[0]);
+          line.setAttribute("y1", from[1]);
+          line.setAttribute("x2", to[0]);
+          line.setAttribute("y2", to[1]);
+          lineLayer.append(line);
+        }
+
+        function updateStatus() {
+          const item = CONSTELLATIONS[current];
+          const total = item.stars.length;
+          const complete = done.has(item.key);
+          if (complete) status.textContent = `${item.code} · ${item.name} · catalogada em segredo.`;
+          else if (!started) status.textContent = `Comece pela estrela 1 de ${total}.`;
+          else if (next === 0) status.textContent = "Agora feche a figura na estrela 1.";
+          else status.textContent = `Próxima: estrela ${next + 1} de ${total}.`;
+          starButtons.forEach((button, index) => button.classList.toggle("is-next", !complete && index === next));
+        }
+
+        function select(index) {
+          window.clearTimeout(autoTimer);
+          current = index;
+          next = 0;
+          started = false;
+          const item = CONSTELLATIONS[current];
+          lineLayer.replaceChildren();
+          chart.classList.remove("is-complete");
+          chart.querySelectorAll(".cs-art").forEach(art => art.classList.toggle("is-current", art.dataset.art === item.key));
+          tabButtons.forEach((button, buttonIndex) => button.setAttribute("aria-pressed", String(buttonIndex === index)));
+
+          featureLayer.replaceChildren(...item.features.map(([x, y]) => {
+            const dot = document.createElementNS(SVG_NS, "circle");
+            dot.setAttribute("cx", x);
+            dot.setAttribute("cy", y);
+            dot.setAttribute("r", "2.3");
+            return dot;
+          }));
+
+          starButtons = item.stars.map(([x, y], starIndex) => {
+            const button = Uma.el("button", "cs-star");
+            button.type = "button";
+            button.style.left = `${(x / 600) * 100}%`;
+            button.style.top = `${(y / 440) * 100}%`;
+            button.setAttribute("aria-label", `Estrela ${starIndex + 1} de ${item.stars.length}`);
+            button.append(Uma.el("span", "cs-num", String(starIndex + 1)));
+            button.addEventListener("click", () => press(starIndex));
+            return button;
+          });
+          starLayer.replaceChildren(...starButtons);
+
+          note.classList.remove("is-complete");
+          note.textContent = "Cada figura completa entra no catálogo secreto dela.";
+          if (done.has(item.key)) {
+            item.stars.forEach((star, starIndex) => drawLine(star, item.stars[(starIndex + 1) % item.stars.length], true));
+            starButtons.forEach(button => button.classList.add("is-linked"));
+            finish(false);
+          }
+          updateStatus();
+        }
+
+        function press(index) {
+          const item = CONSTELLATIONS[current];
+          if (done.has(item.key)) return;
+          const button = starButtons[index];
+          if (index !== next) {
+            button.classList.remove("is-wrong");
+            void button.offsetWidth; // reinicia o tremor
+            button.classList.add("is-wrong");
+            status.textContent = `Essa não… procure a estrela ${next + 1}.`;
+            return;
+          }
+          button.classList.add("is-linked");
+          if (!started) {
+            started = true;
+            next = 1;
+          } else {
+            const previous = index === 0 ? item.stars.length - 1 : index - 1;
+            drawLine(item.stars[previous], item.stars[index], Uma.reduceMotion);
+            if (index === 0) {
+              finish(true);
+              return;
+            }
+            next = (index + 1) % item.stars.length;
+          }
+          updateStatus();
+        }
+
+        function finish(fresh) {
+          const item = CONSTELLATIONS[current];
+          done.add(item.key);
+          chart.classList.add("is-complete");
+          tabButtons[current].classList.add("is-done");
+          note.classList.add("is-complete");
+          note.replaceChildren(Uma.el("span", "cs-code", `${item.code} · ${item.name}`), document.createTextNode(`“${item.line}”`));
+          if (fresh && done.size === CONSTELLATIONS.length) {
+            note.append(Uma.el("span", "cs-all", "Três constelações catalogadas em segredo. Ela vai negar todas."));
+          }
+          updateStatus();
+        }
+
+        $("#csAuto").addEventListener("click", () => {
+          const item = CONSTELLATIONS[current];
+          if (done.has(item.key)) return;
+          window.clearTimeout(autoTimer);
+          const step = () => {
+            press(next);
+            if (!done.has(item.key)) autoTimer = window.setTimeout(step, Uma.reduceMotion ? 0 : 170);
+          };
+          step();
+        });
+
+        $("#csReset").addEventListener("click", () => {
+          done.delete(CONSTELLATIONS[current].key);
+          tabButtons[current].classList.remove("is-done");
+          select(current);
+        });
+
+        select(0);
+      }
+
+      /* -------------------------------------------- quarto de luz apagada */
+      // Coordenadas no viewBox 1000 × 560 do quarto (iguais às dos botões no HTML). A lanterna
+      // é um furo na máscara da escuridão; cada achado deixa um furo menor e fica iluminado de vez.
+      const ROOM_ITEMS = {
+        pantufas: { x: 575, y: 510, r: 58 },
+        toalha: { x: 705, y: 354, r: 46 },
+        luminaria: { x: 648, y: 262, r: 50 },
+        paes: { x: 764, y: 268, r: 38 },
+        cama: { x: 200, y: 388, r: 86 },
+        celular: { x: 473, y: 360, r: 36 }
+      };
+
+      function initRoom() {
+        const room = $("#room");
+        const svg = room.querySelector("svg");
+        const flash = $("#flash");
+        const tint = $("#flashTint");
+        const holes = $("#foundHoles");
+        const live = $("#roomLive");
+        const count = $("#foundCount");
+        const buttons = [...room.querySelectorAll(".room-item")];
+        const entries = new Map([...document.querySelectorAll(".found-item")].map(entry => [entry.dataset.item, entry]));
+        const found = new Set();
+        let light = { x: 330, y: 330 };
+        let frame = 0;
+
+        // Sem JS tudo fica visível; com JS, as anotações só aparecem quando o objeto é achado.
+        entries.forEach(entry => entry.classList.add("is-locked"));
+
+        function toRoom(event) {
+          const matrix = svg.getScreenCTM();
+          if (!matrix) return null;
+          const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+          return { x: point.x, y: point.y };
+        }
+
+        function paint() {
+          frame = 0;
+          for (const element of [flash, tint]) {
+            element.setAttribute("cx", light.x.toFixed(1));
+            element.setAttribute("cy", light.y.toFixed(1));
+          }
+          buttons.forEach(button => {
+            const item = ROOM_ITEMS[button.dataset.item];
+            button.classList.toggle("is-lit", Math.hypot(item.x - light.x, item.y - light.y) < item.r + 64);
+          });
+        }
+
+        function aim(point) {
+          if (!point) return;
+          light = point;
+          if (!frame) frame = requestAnimationFrame(paint);
+        }
+
+        room.addEventListener("pointermove", event => aim(toRoom(event)));
+        room.addEventListener("pointerdown", event => aim(toRoom(event)));
+
+        buttons.forEach(button => {
+          const item = ROOM_ITEMS[button.dataset.item];
+          button.addEventListener("focus", () => aim({ x: item.x, y: item.y }));
+          button.addEventListener("click", () => discover(button));
+        });
+
+        function discover(button) {
+          const key = button.dataset.item;
+          const entry = entries.get(key);
+          if (found.has(key)) {
+            entry.classList.remove("is-new");
+            void entry.offsetWidth; // destaca a anotação de novo
+            entry.classList.add("is-new");
+            return;
+          }
+          found.add(key);
+          const item = ROOM_ITEMS[key];
+          // A luminária, quando achada, fica acesa e ilumina a escrivaninha inteira.
+          addHole(item.x, item.y, item.r * (key === "luminaria" ? 1.9 : 1.3));
+          room.querySelector(`[data-art="${key}"]`)?.classList.add("is-found");
+
+          const title = entry.querySelector("h4").textContent;
+          button.classList.add("is-found");
+          button.setAttribute("aria-label", `${title} (encontrado)`);
+          entry.classList.remove("is-locked");
+          entry.classList.add("is-new");
+          count.textContent = `${found.size}/${buttons.length}`;
+          live.textContent = `Encontrado: ${title}. ${entry.querySelector("p").textContent}`;
+          if (found.size === buttons.length) complete();
+        }
+
+        function addHole(x, y, radius) {
+          const hole = document.createElementNS(SVG_NS, "circle");
+          hole.setAttribute("cx", x);
+          hole.setAttribute("cy", y);
+          hole.setAttribute("r", Math.round(radius));
+          hole.setAttribute("fill", "url(#foundFade)");
+          holes.append(hole);
+        }
+
+        function complete() {
+          const final = $("#roomFinal");
+          addHole(284, 488, 80); // o carneirinho sai de debaixo da cama
+          room.classList.add("is-complete");
+          final.hidden = false;
+          live.textContent += ` ${final.textContent.trim()}`;
+        }
+
+        paint();
+      }
+
       /* -------------------------------------------------- observatório */
       function buildDial() {
         const ticks = $("#lensTicks");
-        const namespace = "http://www.w3.org/2000/svg";
         for (let index = 0; index < 72; index += 1) {
-          const line = document.createElementNS(namespace, "line");
+          const line = document.createElementNS(SVG_NS, "line");
           const long = index % 6 === 0;
           line.setAttribute("x1", "100");
           line.setAttribute("x2", "100");
@@ -1017,55 +1860,29 @@
         }));
       }
 
-      /* --------------------------------------------------- pantufas */
-      function initFluff() {
-        const range = $("#fluffRange");
-        const stage = $("#fluffStage");
-        const wrap = $("#fluffWrap");
-        const value = $("#fluffValue");
-        const quote = $("#fluffQuote");
-        const reactions = [
-          { max: 20, text: "“Isso é muito rígido... Não posso aceitar algo tão desconfortável.”", reaction: "Desaprovação silenciosa", color: "#94a3b8" },
-          { max: 50, text: "“Hum... É aceitável. O tecido poderia ser um pouco mais felpudo, mas cumpre o papel.”", reaction: "Observação neutra", color: "#6b95d6" },
-          { max: 80, text: "“Oh... É incrivelmente macio. Onde você comprou isso, treinador?”", reaction: "Olhar interessado", color: "#eaf4ff" },
-          { max: 100, text: "“Incrível... É tão macio quanto uma nuvem... Vou testar no meu secador de futon imediatamente!”", reaction: "Felicidade extrema (rara!)", color: "#f3cf7a" }
-        ];
-        let lastSpark = 0;
-
-        function update(level, spark) {
-          const item = reactions.find(entry => level <= entry.max) ?? reactions[reactions.length - 1];
-          value.textContent = `${level}% de fofura`;
-          quote.replaceChildren(document.createTextNode(item.text), Uma.el("span", "fluff-reaction", `[${item.reaction}]`));
-          for (const element of [stage, wrap]) {
-            element.style.setProperty("--v", level);
-            element.style.setProperty("--ring-color", item.color);
-          }
-          range.setAttribute("aria-valuetext", `${level}% de fofura — ${item.reaction}`);
-
-          const now = performance.now();
-          if (!spark || Uma.reduceMotion || now - lastSpark < 70) return;
-          lastSpark = now;
-          const sparkle = Uma.el("span", "fluff-spark", ["★", "♥", "✦"][Math.floor(Math.random() * 3)]);
-          sparkle.style.left = `${level}%`;
-          wrap.append(sparkle);
-          sparkle.animate([
-            { transform: "translate(-50%, 0) scale(.6) rotate(0deg)", opacity: 1 },
-            { transform: "translate(-50%, -38px) scale(1.1) rotate(60deg)", opacity: 0 }
-          ], { duration: 750, easing: "ease-out" }).onfinish = () => sparkle.remove();
-        }
-
-        range.addEventListener("input", event => update(Number(event.target.value), true));
-        update(Number(range.value), false);
-      }
-
-      /* -------------------------------------------------------- CTA */
-      function initPraise() {
+      /* ------------------------------------- final: o Triângulo de Verão */
+      function initTriangle() {
+        const triangle = $("#triangle");
+        const note = $("#triNote");
         const dialog = $("#praiseDialog");
-        $("#praiseButton").addEventListener("click", () => {
+        const lines = {
+          deneb: "Deneb, do Cisne. Parece a mais fraca das três só porque está muito mais longe — a mais de mil anos-luz. Não é ela.",
+          altair: "Altair — o Hikoboshi do Tanabata. Fica mais perto da Terra do que a Vega… mas não é ela."
+        };
+
+        triangle.querySelectorAll(".tri-star").forEach(star => star.addEventListener("click", () => {
+          const key = star.dataset.star;
+          star.classList.add("is-tried");
+          if (key !== "vega") {
+            note.textContent = lines[key];
+            return;
+          }
+          triangle.classList.add("is-found");
+          note.textContent = "…Isso. É ela.";
           sky?.celebrate();
-          if (typeof dialog.showModal === "function") dialog.showModal();
-          else window.alert("Ayabe-san olhou para você com um leve sorriso no rosto:\n\n“Obrigada por estar ao meu lado, treinador. Vamos olhar as estrelas juntos hoje à noite.”");
-        });
+          if (typeof dialog.showModal === "function") window.setTimeout(() => dialog.showModal(), Uma.reduceMotion ? 0 : 700);
+        }));
+
         dialog.addEventListener("click", event => {
           if (event.target === dialog) dialog.close();
         });
@@ -1075,6 +1892,7 @@
       function render({ character, groups: apiGroups, supports, voice }) {
         if (character) {
           const fields = Uma.fillCharacter(character, DICTIONARY);
+          voicePlayer.setSource(fields.voiceClip);
           if (fields.colorMain) $("#swatchMain").style.setProperty("--c", fields.colorMain);
           if (fields.colorSub) $("#swatchSub").style.setProperty("--c", fields.colorSub);
         }
@@ -1095,17 +1913,20 @@
       Uma.initScrollSpy(".nav-links a");
       Uma.onScroll(({ y }) => $("#navbar").classList.toggle("is-scrolled", y > 40));
       sky = initSky();
+      initPeek();
       buildDial();
       renderTabs();
       showLook(0);
+      initConstellations();
+      initRoom();
       renderSupports(FALLBACK_SUPPORTS);
-      initFluff();
-      initPraise();
+      initTriangle();
+      const voicePlayer = Uma.voice($("#voicePlay"), VOICE_CLIP, { idle: "Ouvir a apresentação" });
 
       Uma.loadCharacter({ id: CHARACTER_ID, gameId: GAME_ID }).then(result => {
         render(result);
         Uma.status($("#apiDot"), $("#apiStatus"), result, {
-          full: "Dados ao vivo da Umapyoi API · ID 5191",
+          full: "Dados da Umapyoi API · ID 5191",
           partial: "Dados parciais · complementados pelo arquivo local",
           offline: "API indisponível · usando o arquivo da reserva"
         });

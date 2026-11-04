@@ -1,7 +1,7 @@
 /*
- * Uma Core — utilitários compartilhados pelas landing pages.
+ * Uma Core — utilitários compartilhados pelas landing pages e pelo Paddock (index.html).
  * Dados da Umapyoi (snapshot local em data/, com a API ao vivo como reserva), imagens otimizadas,
- * preenchimento de campos, seletor de personagens, reveal e motor de scroll.
+ * preenchimento de campos, seletor de personagens, visitas, voz oficial, reveal e motor de scroll.
  */
 (function () {
   "use strict";
@@ -11,6 +11,29 @@
   const CACHE_PREFIX = "uma:v2:";
   const CACHE_TTL = 30 * 60 * 1000;
   const MICROCMS_HOST = "images.microcms-assets.io";
+  const ASSETS = "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938";
+  const VISITED_KEY = "uma:visited";
+  const LAST_KEY = "uma:last";
+
+  /*
+   * Elenco do Paddock, na ordem das baias. O seletor de cada página é montado a partir
+   * desta lista; uma personagem nova entra aqui, no index.html e em scripts/update-data.ps1.
+   */
+  const ROSTER = [
+    { slug: "dober", page: "dober.html", name: "Mejiro Dober", gate: 1, color: "#19B49E", icon: `${ASSETS}/a17237adfafe4643a73ce174e551c4ec/mejirodober_icon.png` },
+    { slug: "ayabe", page: "ayabe.html", name: "Admire Vega", gate: 2, color: "#3865A1", icon: `${ASSETS}/d34bee3b36f0457f896e851359d0bd00/admirevega_icon.png` },
+    { slug: "chiyo", page: "chiyo.html", name: "Sakura Chiyono O", gate: 3, color: "#F9879D", icon: `${ASSETS}/54ca5b65f05945d49d8780de4b3e75b7/sakurachiyonoo_icon.png` },
+    { slug: "machan", page: "machan.html", name: "Aston Machan", gate: 4, color: "#CF4436", icon: `${ASSETS}/6cbe9384164943e195d74d79a788a495/astonmachan_icon.png` },
+    { slug: "vivlos", page: "vivlos.html", name: "Vivlos", gate: 5, color: "#404FB1", icon: `${ASSETS}/a72fd0cded7040da8c4873657fb624a3/vivlos_icon.png` },
+    { slug: "acute", page: "acute.html", name: "Wonder Acute", gate: 6, color: "#D85081", icon: `${ASSETS}/5b4b3d2d5a864f809e1dfc89fa5678fb/wonderacute_icon.png` },
+    { slug: "victoire", page: "victoire.html", name: "Victoire Pisa", gate: 7, color: "#666AC5", icon: `${ASSETS}/bfbe62c6b00d49dbab70299dc1632455/victoirepisa_icon.png` }
+  ];
+
+  // Cores dos portões (枠) do turfe japonês, do 1 ao 8: [fundo, texto].
+  const GATE_COLORS = [
+    ["#F4F3EF", "#1D1D1F"], ["#1D1D1F", "#FFFFFF"], ["#D9342B", "#FFFFFF"], ["#2D5FC4", "#FFFFFF"],
+    ["#F2C414", "#1D1D1F"], ["#1F9A52", "#FFFFFF"], ["#F08A24", "#1D1D1F"], ["#F2A7C3", "#1D1D1F"]
+  ];
 
   const root = document.documentElement;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -146,6 +169,8 @@
         groups: normalizeGroups(snapshot.images),
         supports: normalizeSupports(snapshot.supports),
         voice: unwrapObject(snapshot.voice),
+        source: "snapshot",
+        updated: snapshot.updated || "",
         loaded: 4,
         total: 4
       };
@@ -179,6 +204,8 @@
       groups: normalizeGroups(valueOf(images)),
       supports: normalizeSupports(valueOf(supports)),
       voice: unwrapObject(valueOf(voice)),
+      source: "live",
+      updated: "",
       loaded: [character, images, supports, voice].filter(result => result.status === "fulfilled").length,
       total: requests.length
     };
@@ -254,6 +281,12 @@
       .format(date).replace(" de ", " ").replace(".", "");
   }
 
+  /** "2026-09-28" → "28/09/2026" (data local, sem deslocamento de fuso). */
+  function formatDay(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value || ""));
+    return match ? `${match[3]}/${match[2]}/${match[1]}` : "";
+  }
+
   function formatShoe(value) {
     if (typeof value !== "string" || !value.trim()) return "";
     const decimal = size => size.replace(".", ",");
@@ -299,6 +332,7 @@
       category: text("category_label_en"),
       colorMain: data.color_main,
       colorSub: data.color_sub,
+      voiceClip: normalizeUrl(data.voice),
       id: data.id
     };
     setFields(fields, scope);
@@ -390,12 +424,110 @@
     next();
   }
 
+  /* -------------------------------------------------------------- visitas */
+
+  // O Paddock mostra quais páginas já foram visitadas neste navegador.
+  function visited() {
+    try {
+      const list = JSON.parse(localStorage.getItem(VISITED_KEY) || "[]");
+      return Array.isArray(list) ? list.filter(slug => ROSTER.some(character => character.slug === slug)) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function lastVisited() {
+    try {
+      return localStorage.getItem(LAST_KEY) || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function markVisited(slug) {
+    if (!ROSTER.some(character => character.slug === slug)) return;
+    try {
+      const list = visited();
+      if (!list.includes(slug)) list.push(slug);
+      localStorage.setItem(VISITED_KEY, JSON.stringify(list));
+      localStorage.setItem(LAST_KEY, slug);
+    } catch {
+      /* sem armazenamento: a visita só não fica registrada */
+    }
+  }
+
   /* ----------------------------------------------------- seletor de páginas */
+
+  function el(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined && text !== null) element.textContent = text;
+    return element;
+  }
+
+  /** Monta o painel: atalho para o Paddock + as personagens, com a atual e as visitadas marcadas. */
+  function buildSwitcherPanel(panel) {
+    const current = root.dataset.uma || "";
+    const done = new Set(visited());
+
+    const home = el("a", "switcher-home");
+    home.href = "index.html";
+    const grid = el("span", "switcher-home-icon");
+    grid.setAttribute("aria-hidden", "true");
+    ROSTER.forEach(character => {
+      const tile = el("i");
+      tile.style.background = character.color;
+      grid.append(tile);
+    });
+    const homeText = el("span", "switcher-home-text");
+    homeText.append(el("strong", "", "Paddock"), el("small", "", "Todas as personagens"));
+    home.append(grid, homeText);
+
+    const items = ROSTER.map(character => {
+      const link = el("a", "switcher-item");
+      link.href = character.page;
+      link.style.setProperty("--c", character.color);
+
+      const avatar = el("span", "switcher-avatar");
+      avatar.setAttribute("aria-hidden", "true");
+      const image = document.createElement("img");
+      image.alt = "";
+      image.width = 34;
+      image.height = 34;
+      image.decoding = "async";
+      image.referrerPolicy = "no-referrer";
+      image.addEventListener("error", () => image.remove(), { once: true });
+      image.src = sizedUrl(character.icon, 72);
+      avatar.append(image);
+      link.append(avatar, el("span", "switcher-name", character.name));
+
+      if (character.slug === current) {
+        link.setAttribute("aria-current", "page");
+        link.append(el("small", "switcher-tag", "Atual"));
+      } else if (done.has(character.slug)) {
+        const check = el("small", "switcher-tag is-visited", "✓");
+        check.setAttribute("aria-hidden", "true");
+        link.append(check, el("span", "sr-only", " (visitada)"));
+      }
+
+      const [frame, frameInk] = GATE_COLORS[character.gate - 1] || GATE_COLORS[0];
+      const gate = el("span", "switcher-gate", String(character.gate));
+      gate.setAttribute("aria-hidden", "true");
+      gate.style.setProperty("--frame", frame);
+      gate.style.setProperty("--frame-ink", frameInk);
+      link.append(gate);
+      return link;
+    });
+
+    panel.replaceChildren(home, el("p", "switcher-label", "Trocar personagem"), ...items);
+  }
 
   function initSwitcher() {
     document.querySelectorAll("[data-switcher]").forEach(switcher => {
       const button = switcher.querySelector("[data-switcher-toggle]");
-      if (!button) return;
+      const panel = switcher.querySelector(".switcher-panel");
+      if (!button || !panel) return;
+      buildSwitcherPanel(panel);
       const setOpen = open => {
         switcher.classList.toggle("is-open", open);
         button.setAttribute("aria-expanded", String(open));
@@ -413,6 +545,63 @@
         if (event.relatedTarget && !switcher.contains(event.relatedTarget)) setOpen(false);
       });
     });
+  }
+
+  /* ------------------------------------------------------------ voz oficial */
+
+  let playingVoice = null;
+
+  /**
+   * Liga um botão à fala oficial da personagem (o .mp3 do site oficial, vindo da Umapyoi).
+   * O áudio só é baixado no primeiro clique; tocar uma voz pausa qualquer outra.
+   * Retorna { setSource } para trocar o arquivo quando os dados chegarem.
+   */
+  function voice(button, source, { label, idle = "Ouvir a voz", playing = "Pausar", unavailable = "Áudio indisponível", onChange } = {}) {
+    if (!button) return { setSource() {} };
+    const labelElement = label === undefined ? button.querySelector("[data-voice-label]") : label;
+    let url = normalizeUrl(source);
+    let audio = null;
+
+    const render = state => {
+      button.setAttribute("aria-pressed", String(state === "playing"));
+      button.classList.toggle("is-playing", state === "playing");
+      if (labelElement) labelElement.textContent = state === "error" ? unavailable : state === "playing" ? playing : idle;
+      onChange?.(state, audio);
+    };
+
+    button.disabled = !url;
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => {
+      if (!url) return;
+      if (!audio) {
+        audio = new Audio();
+        audio.preload = "auto";
+        audio.addEventListener("playing", () => render("playing"));
+        audio.addEventListener("pause", () => render("idle"));
+        audio.addEventListener("error", () => {
+          render("error");
+          button.disabled = true;
+        });
+        audio.src = url;
+      }
+      if (audio.paused) {
+        if (playingVoice && playingVoice !== audio) playingVoice.pause();
+        playingVoice = audio;
+        audio.play().catch(() => render("idle"));
+      } else {
+        audio.pause();
+      }
+    });
+
+    return {
+      setSource(next) {
+        const normalized = normalizeUrl(next);
+        if (!normalized || normalized === url) return;
+        url = normalized;
+        button.disabled = false;
+        if (audio && audio.paused) audio.src = url;
+      }
+    };
   }
 
   /* ---------------------------------------------------------------- reveal */
@@ -578,24 +767,31 @@
 
   function status(dot, label, result, messages = {}) {
     if (!label) return;
-    const { loaded = 0, total = 1 } = result || {};
+    const { loaded = 0, total = 1, source = "", updated = "" } = result || {};
     const online = loaded > 0;
     dot?.classList.toggle("is-online", online);
-    label.textContent = loaded === total
-      ? messages.full || "Dados ao vivo · Umapyoi API"
+    let text = loaded === total
+      ? messages.full || "Dados da Umapyoi API"
       : online
         ? messages.partial || "Dados parciais · complementados localmente"
         : messages.offline || "Modo offline · arquivo local";
+    // O snapshot local é uma cópia da Umapyoi: a data mostra de quando são os dados.
+    const day = formatDay(updated);
+    if (source === "snapshot" && day) {
+      text += ` · arquivo de ${day}`;
+      label.title = "Cópia local da Umapyoi API, gerada por scripts/update-data.ps1";
+    } else if (source === "live" && loaded === total) {
+      text += " · ao vivo";
+    }
+    label.textContent = text;
   }
 
-  function el(tag, className, text) {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text !== undefined && text !== null) element.textContent = text;
-    return element;
-  }
+  // Cada página declara a personagem em <html data-uma="...">; a visita fica registrada.
+  if (root.dataset.uma) markVisited(root.dataset.uma);
 
   window.Uma = {
+    roster: ROSTER,
+    gateColors: GATE_COLORS,
     api,
     loadCharacter,
     normalizeGroups,
@@ -610,7 +806,11 @@
     formatShoe,
     sizedUrl,
     setImage,
+    visited,
+    lastVisited,
+    markVisited,
     initSwitcher,
+    voice,
     initReveal,
     initScrollSpy,
     initScroll,

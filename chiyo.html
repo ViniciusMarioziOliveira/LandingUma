@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-uma="chiyo">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Um retrato interativo de Sakura Chiyono O, de Umamusume: Pretty Derby — florescer é continuar. Perfil, visuais e support cards conectados à Umapyoi API.">
   <meta name="theme-color" content="#f9879d">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Paddock · Uma Musume fan pages">
+  <meta property="og:title" content="Sakura Chiyono O — Florescer é continuar">
+  <meta property="og:description" content="Um retrato interativo de Sakura Chiyono O, de Umamusume: Pretty Derby — florescer é continuar. Perfil, visuais e support cards conectados à Umapyoi API.">
+  <meta property="og:image" content="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d353b0ea40714bcd9f259edbcc55ad67/sakurachiyonoo_header.png?w=1200&amp;fm=jpg&amp;q=85">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Sakura Chiyono O — Florescer é continuar</title>
+  <link rel="icon" type="image/png" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54ca5b65f05945d49d8780de4b3e75b7/sakurachiyonoo_icon.png?w=64&amp;h=64&amp;fm=png&amp;mask=ellipse">
+  <link rel="apple-touch-icon" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54ca5b65f05945d49d8780de4b3e75b7/sakurachiyonoo_icon.png?w=180&amp;h=180&amp;fm=png">
   <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +47,13 @@
       --line: rgba(126, 67, 84, .14);
       --shadow: 0 30px 80px rgba(141, 70, 91, .15);
       --soft-shadow: 0 18px 48px rgba(141, 70, 91, .09);
+      --uma-display: "Gloock", serif;
+      --uv-line: rgba(217, 87, 118, .28);
+      --uv-ink: var(--sakura-dark);
+      --uv-bg: var(--rose-soft);
+      --uv-bg-hover: var(--rose);
+      --uv-dot: var(--sakura);
+      --uv-dot-ink: #fff;
 
       --sw-toggle-bg: rgba(255, 255, 255, .78);
       --sw-toggle-ink: var(--sakura-dark);
@@ -174,7 +190,25 @@
     .note-photo img.is-loaded { opacity: 1; }
     .note-card { position: absolute; right: 0; bottom: 8px; z-index: 3; width: min(310px, 68%); padding: 28px 28px 26px; border: 1px solid rgba(201, 163, 95, .3); border-radius: 18px; background: repeating-linear-gradient(transparent 0 30px, rgba(151, 100, 114, .09) 31px), var(--paper); box-shadow: 0 18px 44px rgba(107, 60, 73, .15); transform: rotate(2deg); }
     .motion .note-card { transform: translate3d(0, calc((1 - var(--p, 1)) * 70px), 0) rotate(calc(2deg + (1 - var(--p, 1)) * 10deg)); }
-    .note-card::before { content: "Chiyo Note / 019"; display: block; margin-bottom: 22px; color: var(--gold); font-size: .61rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .note-page { margin-bottom: 18px; color: var(--gold); font-size: .61rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .note-entry > * { animation: noteIn .55s var(--ease-out) both; }
+    @keyframes noteIn { from { opacity: 0; transform: translateY(8px); } }
+    .note-jp { color: var(--sakura-dark); font-family: "Noto Serif JP", serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .06em; line-height: 1.5; }
+    .note-romaji { margin: 2px 0 10px; color: var(--muted); font-size: .74rem; font-style: italic; letter-spacing: .04em; }
+    .note-card blockquote.note-meaning { font-size: .98rem; line-height: 1.75; }
+    .note-turn { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 16px; padding: 0 14px; border: 1px solid rgba(217, 87, 118, .3); border-radius: 999px; color: var(--sakura-dark); background: #fff; font-size: .72rem; font-weight: 700; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+    .note-turn:hover { background: var(--rose-soft); transform: translateY(-2px); }
+    /* Orelhas espiando atrás do caderno: formigam a cada provérbio (dado oficial) */
+    .note-ears { position: absolute; top: -27px; left: 24px; width: 40px; color: #8c4a3d; }
+    .note-ears svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .note-ears .ear { fill: currentColor; transform-box: fill-box; transform-origin: 50% 100%; }
+    .note-card.is-tingling .ear:first-child { animation: earL .18s ease-in-out 6 alternate; }
+    .note-card.is-tingling .ear:last-child { animation: earR .18s ease-in-out 6 alternate; }
+    @keyframes earL { from { transform: rotate(-12deg); } to { transform: rotate(9deg); } }
+    @keyframes earR { from { transform: rotate(12deg); } to { transform: rotate(-9deg); } }
+    .note-tingle { position: absolute; top: -26px; left: 74px; padding: 4px 9px; border-radius: 999px; color: #fff; background: var(--sakura); font-size: .6rem; font-weight: 700; letter-spacing: .06em; white-space: nowrap; opacity: 0; pointer-events: none; }
+    .note-card.is-tingling .note-tingle { animation: tingle 1.7s var(--ease-out) both; }
+    @keyframes tingle { 0% { opacity: 0; transform: translateY(6px); } 15%, 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
     .note-card blockquote { font-family: "Noto Serif JP", serif; font-size: 1.1rem; line-height: 2; }
     .note-stamp { position: absolute; top: -28px; right: 24px; display: grid; place-items: center; width: 60px; height: 60px; border: 2px solid rgba(217, 87, 118, .62); border-radius: 50%; color: var(--sakura-deep); font-family: "Noto Serif JP", serif; font-size: .75rem; transform: rotate(10deg); }
     .profile-line { margin-top: 26px; padding: 18px 20px; border-radius: 16px; color: var(--sakura-dark); background: var(--rose-soft); font-family: "Gloock", serif; font-size: 1.12rem; line-height: 1.55; }
@@ -270,6 +304,7 @@
     .voice-copy small { color: var(--sakura-deep); font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .voice-copy h3 { margin: 9px 0 4px; font-family: "Gloock", serif; font-size: 1.55rem; font-weight: 400; }
     .voice-copy p { color: var(--muted); font-size: .8rem; }
+    .voice-copy .uma-voice { align-self: flex-start; margin-top: 14px; }
     .detail-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .detail-item { min-width: 0; padding: 18px; border: 1px solid rgba(217, 87, 118, .1); border-radius: 17px; background: rgba(255, 255, 255, .72); }
     .detail-item small { display: block; margin-bottom: 6px; color: var(--sakura-deep); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
@@ -499,15 +534,7 @@
           <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
             <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
-            <p class="switcher-label">Trocar personagem</p>
-            <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
-            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
-            <a href="chiyo.html" style="--c:#f9879d" aria-current="page">Sakura Chiyono O <small>Atual</small></a>
-            <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
-            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
-            <a href="acute.html" style="--c:#d85081">Wonder Acute</a>
-          </nav>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Personagens"></nav>
         </div>
       </div>
     </div>
@@ -600,9 +627,15 @@
             <div class="image-fallback">Um novo visual florescerá aqui.</div>
             <img id="storyImage" alt="Sakura Chiyono O de uniforme" loading="lazy" decoding="async" referrerpolicy="no-referrer">
           </figure>
-          <aside class="note-card" aria-label="Página do Chiyo Note">
+          <aside class="note-card" id="noteCard" aria-label="Chiyo Note">
+            <span class="note-ears" aria-hidden="true"><svg viewBox="0 0 46 40"><path class="ear" d="M6 38C2 26 4 12 10 2c6 9 9 22 8 36z"/><path class="ear" d="M28 38c-1-14 2-27 8-36 6 10 8 24 4 36z"/></svg></span>
+            <span class="note-tingle" aria-hidden="true">✦ orelhas formigando</span>
             <span class="note-stamp" aria-hidden="true">努力</span>
-            <blockquote>“Um sonho não floresce de uma vez. Primeiro vem a coragem de cuidar dele todos os dias.”</blockquote>
+            <p class="note-page">Chiyo Note / <span id="notePage">019</span></p>
+            <div class="note-entry" id="noteEntry" aria-live="polite">
+              <blockquote>“Um sonho não floresce de uma vez. Primeiro vem a coragem de cuidar dele todos os dias.”</blockquote>
+            </div>
+            <button class="note-turn" type="button" id="noteTurn">Virar a página <span aria-hidden="true">↻</span></button>
           </aside>
         </div>
 
@@ -718,6 +751,7 @@
                 <small>Character voice</small>
                 <h3 data-field="voice">Ruriko Noguchi</h3>
                 <p class="jp" data-field="voiceJp">野口瑠璃子</p>
+                <button class="uma-voice" type="button" id="voicePlay"><span class="uma-voice-icon" aria-hidden="true"></span><span data-voice-label>Ouvir a voz</span></button>
               </div>
             </article>
 
@@ -800,6 +834,22 @@
         </div>
       </div>
     </section>
+
+    <section class="uma-next" aria-label="Próxima personagem">
+      <div class="uma-next-inner">
+        <a class="uma-next-card uma-theme-machan" href="machan.html">
+          <span class="uma-next-copy">
+            <span class="uma-next-kicker"><span class="uma-next-gate" style="--frame:#2D5FC4;--frame-ink:#FFFFFF" aria-hidden="true">4</span>Próxima largada</span>
+            <strong class="uma-next-name">Aston Machan</strong>
+            <span class="uma-next-jp" lang="ja">アストンマーチャン</span>
+            <span class="uma-next-tagline">Quer virar a mascote do mundo inteiro — e guardar cada momento numa fotografia.</span>
+            <span class="uma-next-cta">Ir para a página <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="uma-next-art" aria-hidden="true"><img src="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2931373df1074e79848a126d2b5688f4/astonmachan_02.png?w=720&amp;fm=webp&amp;q=80" alt="" width="720" height="1268" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
+        </a>
+        <a class="uma-next-all" href="index.html"><i aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>Ver todas no Paddock</a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -844,6 +894,7 @@
       ]);
 
       const FALLBACK_VOICE_IMAGE = "https://img2.animatetimes.com/2021/12/61b22f037ab24_c8cdf8e922273005e33dac6311182b08.jpg";
+      const VOICE_CLIP = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0427a2a9266848089bbfc9aad7ced6b8/sakurachiyonoo_voice.mp3";
 
       let groups = FALLBACK_GROUPS;
       let activeGroup = 0;
@@ -899,6 +950,43 @@
           widths: [480, 720, 960],
           sizes: "(max-width: 860px) 92vw, 56vw",
           onFail: () => figure.classList.add("has-image-error")
+        });
+      }
+
+      /* ------------------------------------------------------- Chiyo Note */
+      // Provérbios japoneses de verdade. Que as orelhas formigam com um bom provérbio é dado oficial.
+      const PROVERBS = [
+        { jp: "千里の道も一歩から", romaji: "senri no michi mo ippo kara", pt: "Até um caminho de mil léguas começa com um único passo." },
+        { jp: "七転び八起き", romaji: "nana korobi ya oki", pt: "Caia sete vezes, levante-se oito." },
+        { jp: "塵も積もれば山となる", romaji: "chiri mo tsumoreba yama to naru", pt: "Até a poeira, quando se acumula, vira montanha." },
+        { jp: "好きこそ物の上手なれ", romaji: "suki koso mono no jōzu nare", pt: "Quem ama o que faz acaba ficando bom nisso." },
+        { jp: "雨降って地固まる", romaji: "ame futte ji katamaru", pt: "Depois da chuva, a terra fica mais firme." },
+        { jp: "初心忘るべからず", romaji: "shoshin wasuru bekarazu", pt: "Nunca esqueça o coração de quem está começando." },
+        { jp: "急がば回れ", romaji: "isogaba maware", pt: "Se está com pressa, vá pelo caminho mais seguro." },
+        { jp: "花より団子", romaji: "hana yori dango", pt: "Dango antes das flores: às vezes o prático vence o bonito." },
+        { jp: "桜切る馬鹿、梅切らぬ馬鹿", romaji: "sakura kiru baka, ume kiranu baka", pt: "Tolo quem poda a cerejeira, tolo quem não poda a ameixeira: cada flor pede um cuidado." }
+      ];
+
+      function initNote() {
+        const card = $("#noteCard");
+        const entry = $("#noteEntry");
+        const page = $("#notePage");
+        let index = -1;
+        let pageNumber = 19;
+        let timer = 0;
+        $("#noteTurn").addEventListener("click", () => {
+          index = (index + 1) % PROVERBS.length;
+          pageNumber += 1;
+          const proverb = PROVERBS[index];
+          page.textContent = String(pageNumber).padStart(3, "0");
+          const jp = Uma.el("p", "note-jp", proverb.jp);
+          jp.lang = "ja";
+          entry.replaceChildren(jp, Uma.el("p", "note-romaji", proverb.romaji), Uma.el("blockquote", "note-meaning", `“${proverb.pt}”`));
+          card.classList.remove("is-tingling");
+          void card.offsetWidth; // reinicia as orelhas
+          card.classList.add("is-tingling");
+          window.clearTimeout(timer);
+          timer = window.setTimeout(() => card.classList.remove("is-tingling"), 1800);
         });
       }
 
@@ -1147,7 +1235,7 @@
 
       /* ------------------------------------------------------------ dados */
       function render({ character, groups: apiGroups, supports, voice }) {
-        if (character) Uma.fillCharacter(character, DICTIONARY);
+        if (character) voicePlayer.setSource(Uma.fillCharacter(character, DICTIONARY).voiceClip);
         if (voice) Uma.fillVoice(voice);
         Uma.setImage($("#voiceImage"), [voice?.image, FALLBACK_VOICE_IMAGE], { onFail: () => { $("#voiceImage").hidden = true; } });
         if (apiGroups.length) {
@@ -1165,7 +1253,8 @@
       buildTree();
       initPetals();
       Uma.pauseWhenHidden($("#inicio"));
-                                                                                                                                                                                                                                  
+      initNote();
+      const voicePlayer = Uma.voice($("#voicePlay"), VOICE_CLIP);
       showPortraits(groups);
       renderGallery(0);
       renderSupports(FALLBACK_SUPPORTS);
@@ -1173,7 +1262,7 @@
       Uma.loadCharacter({ id: CHARACTER_ID, gameId: GAME_ID }).then(result => {
         render(result);
         Uma.status($("#apiDot"), $("#apiStatus"), result, {
-          full: "Arquivo ao vivo · Umapyoi API",
+          full: "Arquivo Umapyoi API",
           partial: "Arquivo parcial · complementado localmente",
           offline: "Modo offline · arquivo local ativo"
         });

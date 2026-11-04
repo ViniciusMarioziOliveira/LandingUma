@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-uma="acute">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Um retrato interativo de Wonder Acute, de Umamusume: Pretty Derby — calma como uma tarde de chá, firme como uma largada. Perfil, visuais e support cards conectados à Umapyoi API.">
   <meta name="theme-color" content="#d85081">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Paddock · Uma Musume fan pages">
+  <meta property="og:title" content="Wonder Acute — Devagar, e sempre em frente">
+  <meta property="og:description" content="Um retrato interativo de Wonder Acute, de Umamusume: Pretty Derby — calma como uma tarde de chá, firme como uma largada. Perfil, visuais e support cards conectados à Umapyoi API.">
+  <meta property="og:image" content="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/29a0b365c0cd4d3f9555fe356484f2f3/wonderacute_header.png?w=1200&amp;fm=jpg&amp;q=85">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Wonder Acute — Devagar, e sempre em frente</title>
+  <link rel="icon" type="image/png" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5b4b3d2d5a864f809e1dfc89fa5678fb/wonderacute_icon.png?w=64&amp;h=64&amp;fm=png&amp;mask=ellipse">
+  <link rel="apple-touch-icon" href="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5b4b3d2d5a864f809e1dfc89fa5678fb/wonderacute_icon.png?w=180&amp;h=180&amp;fm=png">
   <script>document.documentElement.className += " js" + (matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : " motion");</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,6 +55,7 @@
       --line: rgba(122, 60, 88, .14);
       --shadow: 0 30px 80px rgba(126, 33, 73, .14);
       --soft-shadow: 0 18px 48px rgba(126, 33, 73, .09);
+      --uma-display: "Fraunces", serif;
 
       --sw-toggle-bg: rgba(255, 255, 255, .8);
       --sw-toggle-ink: var(--acute-dark);
@@ -158,9 +168,21 @@
     .portrait-seal { position: absolute; right: 0; top: 70px; z-index: 5; display: grid; place-items: center; width: 92px; height: 92px; border: 2px dashed rgba(255, 255, 255, .7); border-radius: 50%; color: #fff; background: var(--acute); box-shadow: 0 0 0 5px var(--acute), 0 14px 30px rgba(184, 55, 104, .28); font: 700 .78rem/1.3 "Zen Maru Gothic", sans-serif; text-align: center; transform: rotate(10deg); }
     .portrait-seal small { display: block; font: 700 .5rem "Figtree", sans-serif; letter-spacing: .12em; opacity: .85; }
 
-    /* Chá com vapor: o convite para sentar e conversar */
-    .tea { position: absolute; left: 2%; bottom: 36px; z-index: 4; width: 132px; }
-    .tea svg { width: 100%; height: auto; overflow: visible; }
+    /*
+     * O matcha da tarde: chawan com esmalte escorrido, espuma fina, chasen no suporte e um docinho.
+     * Clicar faz o chasen sair do suporte e bater o chá (shaka-shaka).
+     */
+    .matcha { position: absolute; left: -2%; bottom: 10px; z-index: 4; width: 256px; padding: 0; border: 0; border-radius: 40px; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .matcha svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .matcha:focus-visible { outline-offset: 2px; }
+    .foam { opacity: .5; transform-box: fill-box; transform-origin: center; transition: opacity .8s ease, transform .8s var(--ease-out); }
+    .matcha.is-whisking .foam, .matcha.is-whisked .foam { opacity: 1; transform: scale(1.08); }
+    .matcha-sfx { fill: var(--acute-deep); font: 700 15px "Zen Maru Gothic", sans-serif; letter-spacing: 1px; opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .matcha.is-whisking .matcha-sfx { animation: sfxPop 2.4s ease forwards; }
+    @keyframes sfxPop { 0% { opacity: 0; transform: translateY(6px) scale(.6); } 18% { opacity: 1; transform: scale(1.08); } 75% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
+    .matcha-hint { position: absolute; left: 50%; bottom: calc(100% - 12px); padding: 5px 11px; border-radius: 999px; color: #fff; background: var(--acute-deep); font-size: .64rem; font-weight: 700; letter-spacing: .08em; white-space: nowrap; opacity: 0; transform: translate(-50%, 6px); transition: opacity .25s ease, transform .25s ease; pointer-events: none; }
+    .matcha:hover .matcha-hint, .matcha:focus-visible .matcha-hint { opacity: 1; transform: translate(-50%, 0); }
+    .matcha.is-whisking .matcha-hint { opacity: 0; }
     .steam path { fill: none; stroke: rgba(154, 128, 138, .5); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 60; animation: steam 3.6s ease-in-out infinite; }
     .steam path:nth-child(2) { animation-delay: -1.2s; }
     .steam path:nth-child(3) { animation-delay: -2.4s; }
@@ -391,7 +413,7 @@
     .detail-item { min-width: 0; padding: 18px; border: 1px solid rgba(216, 80, 129, .1); border-radius: 17px; background: rgba(255, 255, 255, .74); }
     .detail-item small { display: block; margin-bottom: 6px; color: var(--acute-deep); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .detail-item strong { display: block; font-size: .88rem; font-weight: 500; line-height: 1.55; overflow-wrap: anywhere; }
-    .lore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+    .lore-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 22px; }
     .lore-card { position: relative; overflow: hidden; min-height: 215px; padding: 28px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 22px; background: rgba(255, 255, 255, .76); transition: transform .35s var(--ease-out), box-shadow .35s ease; }
     .lore-card:hover { transform: translateY(-6px); box-shadow: var(--soft-shadow); }
     .lore-card::after { content: attr(data-mark); position: absolute; right: -3px; bottom: -22px; color: rgba(216, 80, 129, .08); font: 700 6.6rem "Zen Maru Gothic", sans-serif; }
@@ -400,17 +422,70 @@
     .lore-card p { position: relative; z-index: 1; color: var(--muted); font-size: .9rem; line-height: 1.68; }
     .lore-grid [data-reveal]:nth-child(2) { --d: .1s; }
     .lore-grid [data-reveal]:nth-child(3) { --d: .2s; }
-    .ears { position: absolute; top: 24px; right: 24px; width: 46px; color: var(--hair); }
-    .ears svg { width: 100%; height: auto; overflow: visible; }
-    .ears .ear { transform-box: fill-box; transform-origin: 50% 100%; }
-    .gong-button { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 16px; padding: 0 14px; border: 1px solid rgba(201, 161, 94, .45); border-radius: 999px; color: var(--tea-dark); background: #fff8ec; font-size: .74rem; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
-    .gong-button:hover { background: var(--gold-soft); transform: translateY(-2px); }
-    .gong-button svg { width: 20px; height: 20px; }
-    .lore-card.is-ringing .ear:nth-child(1) { animation: earL .28s ease-in-out 5 alternate; }
-    .lore-card.is-ringing .ear:nth-child(2) { animation: earR .28s ease-in-out 5 alternate; }
-    .lore-card.is-ringing::before { content: ""; position: absolute; top: 20px; right: 20px; width: 56px; height: 56px; border: 2px solid var(--acute); border-radius: 50%; animation: ripple 1.2s ease-out 2; }
-    @keyframes earL { from { transform: rotate(-14deg); } to { transform: rotate(8deg); } }
-    @keyframes earR { from { transform: rotate(14deg); } to { transform: rotate(-8deg); } }
+
+    /*
+     * Detalhe 01: ficha das orelhas. Só informação, sem desenhar a Acute: o fato oficial,
+     * a frase original em japonês, o enfeite e um guia de leitura baseado em cavalos de verdade.
+     */
+    .ear-sheet { grid-column: 1 / -1; padding: 34px 36px 26px; background: linear-gradient(rgba(216, 80, 129, .045) 1px, transparent 1px) 0 0 / 100% 28px, linear-gradient(90deg, rgba(216, 80, 129, .045) 1px, transparent 1px) 0 0 / 28px 100%, rgba(255, 252, 247, .95); }
+    .ear-sheet:hover { transform: none; }
+    .ear-sheet::after { top: -30px; right: 16px; bottom: auto; font-size: 10rem; }
+    .ear-head { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 18px 72px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+    .ear-sheet h3 { margin: 10px 0 0; font-size: clamp(2.3rem, 3.6vw, 3.1rem); line-height: 1; }
+    .ear-fact { position: relative; max-width: 640px; margin: 0; padding: 2px 0 2px 24px; }
+    .ear-fact::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 5px; border-radius: 5px; background: linear-gradient(var(--ribbon-red) 0 33%, #fff 33% 66%, var(--ribbon-blue) 66%); box-shadow: 0 0 0 1px rgba(122, 60, 88, .14); }
+    .ear-sheet .ear-fact-label { margin-bottom: 6px; color: var(--acute-deep); font-size: .62rem; font-weight: 700; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; }
+    .ear-sheet .ear-fact-text { color: var(--ink); font-family: "Fraunces", serif; font-size: clamp(1.4rem, 2.3vw, 2rem); font-style: italic; line-height: 1.2; }
+    .ear-notes { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .ear-note { min-width: 0; padding: 28px 30px 30px; }
+    .ear-note:first-child { padding-left: 0; }
+    .ear-note:last-child { padding-right: 0; }
+    .ear-note + .ear-note { border-left: 1px dashed rgba(122, 60, 88, .22); }
+    .ear-sheet .ear-label { display: flex; align-items: baseline; gap: 10px; color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; }
+    .ear-label [lang="ja"] { color: var(--acute); font: 700 .84rem "Zen Maru Gothic", sans-serif; letter-spacing: .06em; }
+    .ear-sheet h4 { margin: 8px 0 14px; color: var(--ink); font-family: "Fraunces", serif; font-size: 1.32rem; font-weight: 400; line-height: 1.2; }
+    .ear-sheet .ear-note > p:not(.ear-label) { font-size: .86rem; line-height: 1.65; }
+    .ear-note em { color: var(--ink); }
+    /* A frase original, palavra por palavra; o しまう (involuntário) fica destacado */
+    .ear-gloss { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 16px; padding: 0; list-style: none; }
+    .ear-gloss li { display: grid; justify-items: center; gap: 3px; padding: 8px 9px 7px; border: 1px solid rgba(216, 80, 129, .18); border-radius: 12px; background: #fff; }
+    .ear-gloss b { color: var(--ink); font: 700 1rem/1.2 "Zen Maru Gothic", sans-serif; }
+    .ear-gloss span { color: var(--muted); font-size: .64rem; font-weight: 700; white-space: nowrap; }
+    .ear-gloss li:last-child { border-color: rgba(216, 80, 129, .45); background: var(--blush-soft); }
+    .ear-gloss li:last-child b, .ear-gloss li:last-child span { color: var(--acute-deep); }
+    /* いぶし銀 numa plaquinha de prata */
+    .ear-term { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; margin-top: 18px; padding: 14px 18px 14px 14px; border: 1px solid rgba(159, 149, 162, .32); border-radius: 16px; background: linear-gradient(135deg, #faf8fa, #ebe6ec); }
+    .ear-term b { padding: 9px 6px; border-radius: 9px; color: #fff; background: linear-gradient(160deg, #bdb5bf, #7b7180); font: 700 1rem/1 "Zen Maru Gothic", sans-serif; letter-spacing: .14em; text-shadow: 0 1px 0 rgba(0, 0, 0, .18); writing-mode: vertical-rl; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45); }
+    .ear-sheet .ear-term p { font-size: .8rem; line-height: 1.55; }
+    /* O enfeite, desenhado sozinho, com legenda numerada */
+    .ear-cover { display: grid; grid-template-columns: 104px minmax(0, 1fr); align-items: center; gap: 18px; margin: 4px 0 16px; }
+    .ear-cover svg { display: block; width: 104px; height: auto; overflow: visible; filter: drop-shadow(0 10px 12px rgba(94, 30, 60, .12)); }
+    .cover-marks { font: 700 10px "Figtree", sans-serif; }
+    .ear-legend { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .ear-legend li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 9px; color: var(--muted); font-size: .76rem; line-height: 1.35; }
+    .ear-legend i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; color: #fff; background: var(--acute); font-size: .62rem; font-style: normal; font-weight: 700; }
+    .ear-legend b { display: block; color: var(--ink); font-size: .8rem; }
+    /* Guia de leitura: números de cavalos reais e seis posições */
+    .ear-guide { position: relative; z-index: 1; padding-top: 28px; border-top: 1px solid var(--line); }
+    .ear-guide-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 22px 48px; margin-bottom: 22px; }
+    .ear-guide-head h4 { margin-bottom: 8px; }
+    .ear-sheet .ear-guide-head p:not(.ear-label) { max-width: 52ch; font-size: .86rem; line-height: 1.6; }
+    .ear-stats { display: flex; margin: 0; }
+    .ear-stats div { min-width: 0; padding: 2px 24px; border-left: 1px solid var(--line); }
+    .ear-stats div:first-child { padding-left: 0; border-left: 0; }
+    .ear-stats dt { color: var(--acute-deep); font-family: "Fraunces", serif; font-size: 2.1rem; line-height: 1; white-space: nowrap; }
+    .ear-stats dd { max-width: 17ch; margin: 7px 0 0; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+    .ear-poses { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .ear-poses li { display: grid; justify-items: center; align-content: start; gap: 6px; min-width: 0; padding: 14px 12px 16px; border: 1px solid rgba(216, 80, 129, .14); border-radius: 18px; background: #fff; text-align: center; }
+    .ear-poses svg { width: 100px; height: auto; }
+    .ear-poses div { display: grid; gap: 5px; }
+    .ear-poses b { color: var(--ink); font-size: .8rem; line-height: 1.3; }
+    .ear-poses span { color: var(--muted); font-size: .74rem; line-height: 1.42; }
+    .ear-poses .is-warning { border-color: rgba(216, 67, 79, .28); background: #fff7f7; }
+    .ear-poses .is-warning b { color: var(--ribbon-red); }
+    .ear-swivel { transform: rotate(26deg); animation: earSwivel 3s ease-in-out infinite; }
+    @keyframes earSwivel { 0%, 100% { transform: rotate(8deg); } 30% { transform: rotate(34deg); } 55% { transform: rotate(2deg); } 78% { transform: rotate(26deg); } }
+    .ear-sheet .ear-sources { margin-top: 16px; font-size: .68rem; line-height: 1.5; }
 
     /* -------------------------------------------------------------- galeria */
     .gallery { padding: 120px 0; background: var(--paper); }
@@ -493,6 +568,14 @@
     @media (max-width: 1100px) {
       .main-nav { gap: 16px; }
       .header-cta { display: none; }
+      .ear-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .ear-note:nth-child(2) { padding-right: 0; }
+      .ear-note:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; column-gap: 30px; padding: 26px 0 28px; border-top: 1px dashed rgba(122, 60, 88, .22); border-left: 0; }
+      .ear-note:last-child > .ear-label, .ear-note:last-child > h4 { grid-column: 1 / -1; }
+      .ear-guide-head { grid-template-columns: 1fr; align-items: start; }
+      .ear-poses { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ear-poses li { grid-template-columns: 88px minmax(0, 1fr); align-items: center; justify-items: start; column-gap: 14px; padding: 12px 16px 12px 10px; text-align: left; }
+      .ear-poses svg { width: 88px; }
     }
 
     @media (max-width: 1050px) {
@@ -520,6 +603,11 @@
       .letter-sign { grid-column: 2; }
       .profile-side { grid-template-columns: 1fr; }
       .lore-grid { grid-template-columns: 1fr; }
+      .ear-head { grid-template-columns: 1fr; gap: 16px; }
+      .ear-notes { grid-template-columns: 1fr; }
+      .ear-note, .ear-note:first-child, .ear-note:last-child { display: block; padding: 24px 0 26px; }
+      .ear-note + .ear-note { border-top: 1px dashed rgba(122, 60, 88, .22); border-left: 0; }
+      .ear-poses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .phone-stage { order: 2; }
       .curio-list { grid-template-columns: 1fr 1fr; }
       .gallery-head, .support-head { flex-direction: column; align-items: flex-start; }
@@ -560,7 +648,16 @@
       .marumado { top: 30px; width: 92%; border-width: 10px; }
       .portrait-index { top: 10px; font-size: 2.6rem; }
       .portrait-seal { top: 36px; width: 72px; height: 72px; font-size: .66rem; }
-      .tea { width: 92px; bottom: 20px; }
+      .matcha { left: -3%; bottom: 4px; width: 172px; }
+      .ear-sheet { padding: 24px 18px 20px; }
+      .ear-sheet::after { top: -20px; font-size: 7rem; }
+      .ear-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ear-stats div { padding: 0 10px; }
+      .ear-stats dt { font-size: 1.45rem; }
+      .ear-stats dd { font-size: .66rem; }
+      .ear-poses { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .ear-poses li { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 12px 10px 14px; text-align: center; }
+      .ear-poses svg { width: 92px; }
       .hero-footnote { right: 8px; }
       .ribbon-track { justify-content: flex-start; padding-inline: 18px; }
       .essence, .profile, .gallery, .supports, .phone-section { padding: 80px 0; }
@@ -599,7 +696,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .strap, .steam path, .omamori .sway, .caret { animation: none !important; }
+      .strap, .steam path, .omamori .sway, .caret, .ear-swivel { animation: none !important; }
     }
   </style>
 </head>
@@ -625,12 +722,16 @@
         <path fill="none" stroke="currentColor" stroke-width="2.6" d="M15 7c0 10 8 12 8 17s-8 7-8 17M33 7c0 10-8 12-8 17s8 7 8 17"/>
         <path fill="#d85081" d="M18 12h12c-1 4-6 6-6 9c0-3-5-5-6-9zM24 32c3 2 7 4 8 8H16c1-4 5-6 8-8z" opacity=".8"/>
       </symbol>
-      <symbol id="gongIcon" viewBox="0 0 48 48">
-        <path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M6 44V8h36v36M4 8h40"/>
-        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M18 8v8M30 8v8"/>
-        <circle cx="24" cy="27" r="11" fill="#c9a15e"/>
-        <circle cx="24" cy="27" r="4" fill="#8a5a3c"/>
-      </symbol>
+      <!-- pictogramas do guia de orelhas: frente (com o interior rosa) e costas -->
+      <g id="earFront">
+        <path d="M-8.5 6C-9.5-6-6-21 0-33 6-21 9.5-6 8.5 6Z" fill="#a69a9c"/>
+        <path d="M-4.6 3C-5.2-6-3.4-17 0-26 3.4-17 5.2-6 4.6 3Z" fill="#f4c9d7"/>
+      </g>
+      <g id="earBack">
+        <path d="M-8.5 6C-9.5-6-6-21 0-33 6-21 9.5-6 8.5 6Z" fill="#908589"/>
+        <path d="M-2.6-24C-4.6-14-4.6-5-3.6 3" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".3"/>
+      </g>
+      <path id="earHead" d="M14 62C14 47 29 38 48 38S82 47 82 62Z" fill="#e6dfe5"/>
     </defs>
   </svg>
 
@@ -654,15 +755,7 @@
           <button class="switcher-toggle" type="button" data-switcher-toggle aria-expanded="false" aria-controls="switcherPanel" aria-label="Trocar personagem">
             <span class="switcher-bars" aria-hidden="true"><span></span><span></span><span></span></span>
           </button>
-          <nav class="switcher-panel" id="switcherPanel" aria-label="Outras personagens">
-            <p class="switcher-label">Trocar personagem</p>
-            <a href="ayabe.html" style="--c:#3865A1">Admire Vega</a>
-            <a href="index.html" style="--c:#19B49E">Mejiro Dober</a>
-            <a href="chiyo.html" style="--c:#f9879d">Sakura Chiyono O</a>
-            <a href="machan.html" style="--c:#CF4436">Aston Machan</a>
-            <a href="vivlos.html" style="--c:#404fb1">Vivlos</a>
-            <a href="acute.html" style="--c:#d85081" aria-current="page">Wonder Acute <small>Atual</small></a>
-          </nav>
+          <nav class="switcher-panel" id="switcherPanel" aria-label="Personagens"></nav>
         </div>
       </div>
     </div>
@@ -709,17 +802,59 @@
           <img class="hero-image" id="heroImage" alt="Wonder Acute em seu traje de corrida rosa" fetchpriority="high" decoding="async" referrerpolicy="no-referrer">
           <div class="portrait-index">03·14<small>Aniversário</small></div>
           <div class="portrait-seal" aria-hidden="true"><span>ガラケー<br>派<small>FLIP CLUB</small></span></div>
-          <div class="tea" aria-hidden="true">
-            <svg viewBox="0 0 120 130">
-              <g class="steam"><path d="M44 50c-8-10 8-16 0-28"/><path d="M60 46c-8-10 8-16 0-30"/><path d="M76 50c-8-10 8-16 0-28"/></g>
-              <ellipse cx="60" cy="122" rx="52" ry="6" fill="#7e2149" opacity=".12"/>
-              <path d="M22 62h76l-7 46a14 14 0 0 1-14 12H43a14 14 0 0 1-14-12z" fill="#d85081"/>
-              <path d="M23.6 74h72.8l-1.2 8H24.8z" fill="#fff" opacity=".85"/>
-              <path d="M40 90c4 6 10 8 14 4M62 96c4-6 12-6 14 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/>
-              <ellipse cx="60" cy="62" rx="38" ry="7" fill="#b83768"/>
-              <ellipse cx="60" cy="63" rx="32" ry="4.6" fill="#9aaa6c"/>
+          <button class="matcha" id="matcha" type="button" aria-label="Bater o matcha com o chasen">
+            <span class="matcha-hint" aria-hidden="true">Bater o matcha</span>
+            <svg viewBox="0 0 280 200" aria-hidden="true">
+              <defs>
+                <radialGradient id="matchaSurface" cx=".46" cy=".42" r=".62"><stop offset="0" stop-color="#c5de78"/><stop offset=".55" stop-color="#9fc045"/><stop offset="1" stop-color="#76972f"/></radialGradient>
+                <linearGradient id="chawanGlaze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ee95b6"/><stop offset=".55" stop-color="#d85081"/><stop offset="1" stop-color="#a52f5d"/></linearGradient>
+                <linearGradient id="trayWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c99a69"/><stop offset="1" stop-color="#9c6c43"/></linearGradient>
+              </defs>
+              <!-- bandeja -->
+              <ellipse cx="142" cy="186" rx="128" ry="12" fill="#7e2149" opacity=".12"/>
+              <ellipse cx="140" cy="173" rx="132" ry="22" fill="url(#trayWood)"/>
+              <ellipse cx="140" cy="169" rx="121" ry="17" fill="#d9b286"/>
+              <path d="M34 170c44 7 168 7 212 0M48 162c40 6 144 6 184 0" fill="none" stroke="#c99f70" stroke-width="1.3" opacity=".7"/>
+              <!-- papel kaishi e um nerikiri de flor de cerejeira -->
+              <path d="M16 161l34-14 42 8-34 16z" fill="#fffaf2"/>
+              <path d="M16 161l34-14 42 8" fill="none" stroke="#ecdccb" stroke-width="1"/>
+              <g transform="translate(52 152)">
+                <ellipse cy="5" rx="17" ry="5" fill="#7e2149" opacity=".12"/>
+                <g fill="#f5b3cb"><circle cy="-7" r="6.2"/><circle cx="6.7" cy="-2.2" r="6.2"/><circle cx="4.1" cy="5.7" r="6.2"/><circle cx="-4.1" cy="5.7" r="6.2"/><circle cx="-6.7" cy="-2.2" r="6.2"/></g>
+                <circle r="4.4" fill="#fbd6e3"/>
+                <circle r="2" fill="#f2cf63"/>
+              </g>
+              <!-- chashaku: a colher de bambu -->
+              <path d="M118 188c36-4 72-11 106-19" fill="none" stroke="#c9a46a" stroke-width="4.5" stroke-linecap="round"/>
+              <ellipse cx="229" cy="167" rx="7.5" ry="3.8" transform="rotate(-14 229 167)" fill="#c9a46a"/>
+              <path d="M168 181l1.6 5" stroke="#a8844d" stroke-width="2"/>
+              <!-- chawan: tigela rosa com esmalte creme escorrido -->
+              <path d="M111 162h34l-3 11h-28z" fill="#b98a66"/>
+              <path d="M70 104c2 42 28 62 58 62s56-20 58-62z" fill="url(#chawanGlaze)"/>
+              <path d="M71 104h114c-1 9-4 15-8 18-4 4-7 3-9-2s-6-6-9 0c-3 8-8 9-11 2-2-5-7-6-10 0-4 7-9 8-12 0-2-5-6-6-9-1-3 6-8 7-11 1-2-4-6-5-9 0-3 5-7 4-9-1-3-6-5-11-5-18z" fill="#f6e9df"/>
+              <g fill="#7e2149" opacity=".28"><circle cx="92" cy="140" r="1.2"/><circle cx="116" cy="152" r="1"/><circle cx="148" cy="148" r="1.3"/><circle cx="166" cy="134" r="1"/><circle cx="104" cy="133" r=".9"/><circle cx="138" cy="158" r="1.1"/><circle cx="158" cy="154" r=".8"/></g>
+              <path d="M80 120c2 17 10 30 22 38" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+              <ellipse cx="128" cy="104" rx="58" ry="12" fill="none" stroke="#f6e9df" stroke-width="3"/>
+              <!-- o matcha, com a espuma fina -->
+              <ellipse cx="128" cy="105" rx="54" ry="10" fill="url(#matchaSurface)"/>
+              <g class="foam">
+                <ellipse cx="124" cy="104" rx="41" ry="6.6" fill="#d7ea9e" opacity=".8"/>
+                <g fill="#f3f9da"><circle cx="104" cy="103" r="1.3"/><circle cx="112" cy="106" r=".9"/><circle cx="120" cy="101" r="1.1"/><circle cx="128" cy="105" r="1.4"/><circle cx="136" cy="102" r=".9"/><circle cx="143" cy="106" r="1.2"/><circle cx="150" cy="103" r=".8"/><circle cx="116" cy="109" r=".8"/><circle cx="133" cy="109" r="1"/><circle cx="98" cy="106" r=".8"/><circle cx="156" cy="106" r="1"/></g>
+              </g>
+              <g class="steam"><path d="M108 88c-8-10 8-16 0-28"/><path d="M128 84c-8-10 8-16 0-30"/><path d="M148 88c-8-10 8-16 0-28"/></g>
+              <!-- kusenaoshi (suporte) e o chasen descansando -->
+              <path d="M206 172c-2-14 4-22 8-28s4-12 2-18h20c-2 6-2 12 2 18s10 14 8 28z" fill="#fbf7f1"/>
+              <path d="M211 168c0-10 4-18 8-22" fill="none" stroke="#e6ddd2" stroke-width="2"/>
+              <g class="chasen">
+                <rect x="219" y="40" width="14" height="56" rx="3" fill="#dcc08a"/>
+                <path d="M219 62h14M219 80h14" stroke="#b8975a" stroke-width="1.5"/>
+                <path d="M219 94c-19 6-21 32-13 40h40c8-8 6-34-13-40z" fill="#ecd9a8"/>
+                <path d="M222 96c-12 10-14 26-10 37M226 96c-6 12-6 26-4 37M230 96c6 12 6 26 4 37M234 96c12 10 14 26 10 37" fill="none" stroke="#c9a96a" stroke-width="1.2"/>
+                <path d="M216 112c4-6 8-8 10-8M236 112c-4-6-8-8-10-8" fill="none" stroke="#c9a96a" stroke-width="1.2"/>
+              </g>
+              <text class="matcha-sfx" x="128" y="46" text-anchor="middle">シャカシャカ</text>
             </svg>
-          </div>
+          </button>
           <p class="hero-footnote">Official visual · Umapyoi archive</p>
         </div>
       </div>
@@ -985,13 +1120,142 @@
         </div>
 
         <div class="lore-grid">
-          <article class="lore-card" id="earCard" data-reveal data-mark="耳">
-            <span class="ears" aria-hidden="true">
-              <svg viewBox="0 0 46 40"><path class="ear" d="M6 38C2 26 4 12 10 2c6 9 9 22 8 36z" fill="currentColor"/><path class="ear" d="M28 38c-1-14 2-27 8-36 6 10 8 24 4 36z" fill="currentColor"/></svg>
-            </span>
-            <small>Detalhe 01</small><h3>Orelhas</h3>
-            <p data-field="ears">Sempre reagem ao som de um gongo.</p>
-            <button class="gong-button" type="button" id="gongButton"><svg aria-hidden="true"><use href="#gongIcon"/></svg>Tocar o gongo</button>
+          <article class="lore-card ear-sheet" id="earCard" data-reveal data-mark="耳">
+            <header class="ear-head">
+              <div>
+                <small>Detalhe 01 · 耳のこと</small>
+                <h3>Orelhas</h3>
+              </div>
+              <blockquote class="ear-fact">
+                <p class="ear-fact-label">Perfil oficial</p>
+                <p class="ear-fact-text" data-field="ears">Sempre reagem ao som de um gongo.</p>
+              </blockquote>
+            </header>
+
+            <div class="ear-notes">
+              <section class="ear-note" aria-labelledby="earNoteOriginal">
+                <p class="ear-label"><span lang="ja">原文</span>No original</p>
+                <h4 id="earNoteOriginal">Uma reação que ela não controla</h4>
+                <ol class="ear-gloss" aria-label="A frase original, palavra por palavra">
+                  <li><b lang="ja">ゴングの</b><span>do gongo</span></li>
+                  <li><b lang="ja">音に</b><span>ao som</span></li>
+                  <li><b lang="ja">反応して</b><span>reagem</span></li>
+                  <li><b lang="ja">しまう</b><span>sem querer</span></li>
+                </ol>
+                <p>Na ordem do português: <em>reagem ao som do gongo, sem conseguir evitar</em>. Quem dá o tom é o <span lang="ja">しまう</span> do fim, que marca uma ação involuntária.</p>
+              </section>
+
+              <section class="ear-note" aria-labelledby="earNoteGong">
+                <p class="ear-label"><span lang="ja">ゴング</span>Por que um gongo?</p>
+                <h4 id="earNoteGong">O som que abre a luta</h4>
+                <p>Em japonês, <span lang="ja">ゴング</span> também é o sino que abre as lutas de boxe e de luta livre. Tanto que <span lang="ja">試合開始のゴング</span>, “o gongo do início da luta”, virou expressão para qualquer começo decisivo.</p>
+                <div class="ear-term">
+                  <b lang="ja">いぶし銀</b>
+                  <p>“Prata envelhecida”: é como a descrição oficial chama o espírito de luta que ela esconde e que aparece quando a corrida se aproxima. Discreto, experiente e firme.</p>
+                </div>
+              </section>
+
+              <section class="ear-note" aria-labelledby="earNoteCover">
+                <p class="ear-label"><span lang="ja">耳飾り</span>O enfeite</p>
+                <h4 id="earNoteCover">Capa tricolor na orelha direita</h4>
+                <figure class="ear-cover">
+                  <svg viewBox="0 0 120 222" aria-hidden="true">
+                    <defs>
+                      <clipPath id="coverClip"><path d="M22 128C20 88 32 44 52 8c18 34 36 76 36 114L56 146Z"/></clipPath>
+                      <clipPath id="tailClipL"><polygon points="53,171 59,173 47,214 44,208.5 41,212"/></clipPath>
+                      <clipPath id="tailClipR"><polygon points="57,173 63,171 75,213 71.5,208.5 69,215"/></clipPath>
+                      <linearGradient id="coverShade" x1="0" x2="1"><stop offset=".4" stop-color="#75607d" stop-opacity="0"/><stop offset="1" stop-color="#75607d" stop-opacity=".22"/></linearGradient>
+                      <radialGradient id="pomRed" cx=".42" cy=".3" r=".75"><stop offset="0" stop-color="#f9b5a8"/><stop offset=".6" stop-color="#ee7f6f"/><stop offset="1" stop-color="#d95c4e"/></radialGradient>
+                      <radialGradient id="pomBlue" cx=".42" cy=".3" r=".75"><stop offset="0" stop-color="#a9b5f4"/><stop offset=".6" stop-color="#6276da"/><stop offset="1" stop-color="#4356b8"/></radialGradient>
+                    </defs>
+                    <!-- 1 · capa: branca, com listras pastel que se encontram na ponta -->
+                    <path d="M22 128C20 88 32 44 52 8c18 34 36 76 36 114L56 146Z" fill="#fffdfb"/>
+                    <g clip-path="url(#coverClip)">
+                      <g opacity=".85">
+                        <polygon points="52,8 11,150 17,150" fill="#f2a19c"/>
+                        <polygon points="52,8 27,150 33,150" fill="#a7b2ee"/>
+                        <polygon points="52,8 43,150 49,150" fill="#f2a19c"/>
+                        <polygon points="52,8 59,150 65,150" fill="#a7b2ee"/>
+                        <polygon points="52,8 75,150 81,150" fill="#f2a19c"/>
+                        <polygon points="52,8 91,150 97,150" fill="#a7b2ee"/>
+                      </g>
+                      <!-- 2 · faixa em V -->
+                      <path d="M10 108.7L56 133L100 100" fill="none" stroke="#df4851" stroke-width="7"/>
+                      <path d="M10 117.7L56 142L100 109" fill="none" stroke="#4b61c4" stroke-width="7"/>
+                      <rect x="22" width="66" height="160" fill="url(#coverShade)"/>
+                    </g>
+                    <path d="M31 112C30 80 38 50 49 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".75"/>
+                    <path d="M22 128C20 88 32 44 52 8c18 34 36 76 36 114L56 146Z" fill="none" stroke="#d3c7cf" stroke-width="1.3" stroke-linejoin="round"/>
+                    <!-- 4 · laço com fitas listradas -->
+                    <g clip-path="url(#tailClipL)">
+                      <polygon points="53,171 55,171.7 43,212.7 41,212" fill="#4b61c4"/>
+                      <polygon points="55,171.7 57,172.3 45,213.3 43,212.7" fill="#fff"/>
+                      <polygon points="57,172.3 59,173 47,214 45,213.3" fill="#df4851"/>
+                    </g>
+                    <g clip-path="url(#tailClipR)">
+                      <polygon points="57,173 59,172.3 71,214.3 69,215" fill="#df4851"/>
+                      <polygon points="59,172.3 61,171.7 73,213.7 71,214.3" fill="#fff"/>
+                      <polygon points="61,171.7 63,171 75,213 73,213.7" fill="#4b61c4"/>
+                    </g>
+                    <path d="M53 171l6 2-12 41-3-5.5-3 3.5zM57 173l6-2 12 42-3.5-4.5-2.5 6.5z" fill="none" stroke="#cdbfc8" stroke-width=".8" stroke-linejoin="round"/>
+                    <path d="M58 172c-6-7-16-8-17-2-1 5 9 6 17 2z" fill="#4b61c4"/>
+                    <path d="M58 172c6-7 16-8 17-2 1 5-9 6-17 2z" fill="#df4851"/>
+                    <circle cx="58" cy="172" r="3.6" fill="#fff" stroke="#4b61c4" stroke-width="1.2"/>
+                    <!-- 3 · pompons -->
+                    <g transform="translate(44 157)">
+                      <circle r="12.5" fill="url(#pomRed)"/>
+                      <circle r="12.5" fill="none" stroke="url(#pomRed)" stroke-width="5" stroke-dasharray=".1 3.4 .1 4.8 .1 3.9" stroke-linecap="round"/>
+                      <path d="M-11 5.5c3 3.2 6.4 5 10 4.8M-4 11c2.8.5 6-.5 8.6-2.8M8.5 2.5c1.6-1.2 3-3 3.4-5.2M-9-3.5c1.4-2 3.2-3.2 5.4-3.6" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" opacity=".9"/>
+                    </g>
+                    <g transform="translate(71 153)">
+                      <circle r="13.5" fill="url(#pomBlue)"/>
+                      <circle r="13.5" fill="none" stroke="url(#pomBlue)" stroke-width="5" stroke-dasharray=".1 3.6 .1 4.6 .1 4.1" stroke-linecap="round"/>
+                      <path d="M-12 6c3.2 3.4 6.8 5.4 10.6 5.2M-4.4 11.8c3 .5 6.4-.5 9.2-3M9.2 2.6c1.7-1.3 3.2-3.2 3.6-5.6M-9.6-4c1.5-2.1 3.4-3.4 5.8-3.8" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" opacity=".9"/>
+                    </g>
+                    <!-- marcadores da legenda -->
+                    <g class="cover-marks" text-anchor="middle">
+                      <path d="M72 64h26M84 116h14M87 152h11M70 196h28" fill="none" stroke="#c9a15e" stroke-width="1"/>
+                      <g fill="#7e2149"><circle cx="72" cy="64" r="1.8"/><circle cx="84" cy="116" r="1.8"/><circle cx="87" cy="152" r="1.8"/><circle cx="70" cy="196" r="1.8"/></g>
+                      <g fill="#d85081"><circle cx="106" cy="64" r="8"/><circle cx="106" cy="116" r="8"/><circle cx="106" cy="152" r="8"/><circle cx="106" cy="196" r="8"/></g>
+                      <g fill="#fff"><text x="106" y="67.5">1</text><text x="106" y="119.5">2</text><text x="106" y="155.5">3</text><text x="106" y="199.5">4</text></g>
+                    </g>
+                  </svg>
+                  <figcaption>
+                    <ol class="ear-legend">
+                      <li><i>1</i><span><b>Capa listrada</b>Branca, com listras vermelhas e azuis em tom pastel.</span></li>
+                      <li><i>2</i><span><b>Faixa em V</b>Vermelha e azul, na borda.</span></li>
+                      <li><i>3</i><span><b>Pompons</b>Um vermelho e um azul, mesclados de branco.</span></li>
+                      <li><i>4</i><span><b>Laço</b>Fitas listradas de azul, branco e vermelho.</span></li>
+                    </ol>
+                  </figcaption>
+                </figure>
+                <p>Na série, o lado do enfeite acompanha o cavalo real: direita para machos, esquerda para fêmeas. O Wonder Acute de verdade foi um garanhão, nascido em 14 de março de 2006, o mesmo dia do aniversário dela.</p>
+              </section>
+            </div>
+
+            <section class="ear-guide" aria-labelledby="earGuideTitle">
+              <div class="ear-guide-head">
+                <div>
+                  <p class="ear-label"><span lang="ja">耳の読み方</span>Guia rápido</p>
+                  <h4 id="earGuideTitle">Como ler orelhas de cavalo</h4>
+                  <p>As Umamusume herdaram as orelhas dos cavalos. E, nos cavalos, a posição delas diz muito sobre o que estão sentindo.</p>
+                </div>
+                <dl class="ear-stats">
+                  <div><dt>180°</dt><dd>de giro em cada orelha</dd></div>
+                  <div><dt>10</dt><dd>músculos movem cada uma (as nossas têm 3)</dd></div>
+                  <div><dt>33,5 kHz</dt><dd>é o som mais agudo que ouvem (nós: cerca de 20 kHz)</dd></div>
+                </dl>
+              </div>
+              <ul class="ear-poses">
+                <li><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earFront" transform="translate(36 44) rotate(-8)"/><use href="#earFront" transform="translate(60 44) rotate(8)"/><use href="#earHead"/></svg><div><b>Para a frente</b><span>Atenção e interesse no que está adiante.</span></div></li>
+                <li><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earFront" transform="translate(35 46) rotate(-62)"/><use href="#earFront" transform="translate(61 46) rotate(62)"/><use href="#earHead"/></svg><div><b>Soltas, de lado</b><span>Relaxamento. Às vezes, um cochilo.</span></div></li>
+                <li><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earFront" transform="translate(36 44) rotate(-8)"/><use href="#earBack" transform="translate(60 44) rotate(22)"/><use href="#earHead"/></svg><div><b>Uma de cada jeito</b><span>Atenção dividida entre a frente e o que vem atrás.</span></div></li>
+                <li><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earBack" transform="translate(36 44) rotate(-20)"/><use href="#earBack" transform="translate(60 44) rotate(20)"/><use href="#earHead"/></svg><div><b>Viradas para trás</b><span>Ouvindo algo atrás. Não é irritação.</span></div></li>
+                <li class="is-warning"><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earHead"/><use href="#earBack" transform="translate(39 44) rotate(-72) scale(1 .6)"/><use href="#earBack" transform="translate(57 44) rotate(72) scale(1 .6)"/></svg><div><b>Coladas para trás</b><span>Aviso claro: irritação, medo ou dor.</span></div></li>
+                <li><svg viewBox="0 0 96 62" aria-hidden="true"><use href="#earFront" transform="translate(36 44) rotate(-8)"/><use href="#earFront" transform="translate(60 44) rotate(8)" opacity=".28"/><g transform="translate(60 44)"><g class="ear-swivel"><use href="#earBack"/></g></g><path d="M67 3.6A41 41 0 0 1 86.4 12.6M69.8 1.6 67 3.6l2.4 2.6M86.6 9 86.4 12.6l-3.4-.9" fill="none" stroke="#d85081" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><use href="#earHead"/></svg><div><b>Girando sem parar</b><span>Ansiedade ou estímulo demais em volta.</span></div></li>
+              </ul>
+              <p class="ear-sources">Números de cavalos reais: University of Kentucky e Heffner &amp; Heffner (1983).</p>
+            </section>
           </article>
           <article class="lore-card" data-reveal data-mark="尾"><small>Detalhe 02</small><h3>Cauda</h3><p data-field="tail">Escapa com elegância de qualquer tentativa de toque.</p></article>
           <article class="lore-card" data-reveal data-mark="家"><small>Detalhe 03</small><h3>Família</h3><p data-field="family">A mãe é a pessoa mais tranquila da família.</p></article>
@@ -1075,6 +1339,22 @@
         </div>
       </div>
     </section>
+
+    <section class="uma-next" aria-label="Próxima personagem">
+      <div class="uma-next-inner">
+        <a class="uma-next-card uma-theme-victoire" href="victoire.html">
+          <span class="uma-next-copy">
+            <span class="uma-next-kicker"><span class="uma-next-gate" style="--frame:#F08A24;--frame-ink:#1D1D1F" aria-hidden="true">7</span>Próxima largada</span>
+            <strong class="uma-next-name">Victoire Pisa</strong>
+            <span class="uma-next-jp" lang="ja">ヴィクトワールピサ</span>
+            <span class="uma-next-tagline">Gentil por inteiro e firme por dentro, ela não deixa ninguém sozinho — e sonha com um círculo de esperança.</span>
+            <span class="uma-next-cta">Ir para a página <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="uma-next-art" aria-hidden="true"><img src="https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/419bbb05ec1d43429cfffecd7daf12a6/victoirepisa_02.png?w=720&amp;fm=webp&amp;q=80" alt="" width="720" height="1268" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span>
+        </a>
+        <a class="uma-next-all" href="index.html"><i aria-hidden="true"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>Ver todas no Paddock</a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -1119,11 +1399,10 @@
       ]);
 
       const FALLBACK_VOICE_IMAGE = "https://www.toho-ent.co.jp/wp-content/uploads/2019/02/%E9%A0%88%E8%97%A4%E5%8F%B6%E5%B8%8C2020.jpg";
-      const FALLBACK_VOICE_SAMPLE = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e3b6df0feb84cd892e1fb8df52d92ae/wonderacute_voice.mp3";
+      const VOICE_CLIP = "https://files.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e3b6df0feb84cd892e1fb8df52d92ae/wonderacute_voice.mp3";
 
       let groups = FALLBACK_GROUPS;
       let activeGroup = 0;
-      let voiceSample = FALLBACK_VOICE_SAMPLE;
 
       const findGroup = (list, labelEn) => list.find(group => group.labelEn === labelEn) ?? list[0];
 
@@ -1232,64 +1511,66 @@
         oscillator.stop(now + 0.08);
       }
 
-      // Gongo: parciais inarmônicas com decaimento longo e leve queda de afinação.
-      function gong() {
+      // Chasen batendo o matcha: rajadas curtas de ruído filtrado, no ritmo do pulso.
+      function whisk(delay) {
         const context = audio();
         if (!context) return;
         const now = context.currentTime;
-        const master = context.createGain();
-        master.gain.setValueAtTime(0.0001, now);
-        master.gain.exponentialRampToValueAtTime(0.16, now + 0.02);
-        master.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
-        master.connect(context.destination);
-        [[1, 1], [1.47, 0.55], [2.09, 0.4], [2.76, 0.28], [3.9, 0.16], [5.1, 0.08]].forEach(([ratio, level]) => {
-          const oscillator = context.createOscillator();
-          const gain = context.createGain();
-          oscillator.frequency.setValueAtTime(98 * ratio, now);
-          oscillator.frequency.exponentialRampToValueAtTime(96 * ratio, now + 4);
-          gain.gain.setValueAtTime(level, now);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2 / Math.sqrt(ratio));
-          oscillator.connect(gain).connect(master);
-          oscillator.start(now);
-          oscillator.stop(now + 4.3);
-        });
+        const length = Math.floor(context.sampleRate * 2.4);
+        const buffer = context.createBuffer(1, length, context.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let index = 0; index < length; index += 1) data[index] = Math.random() * 2 - 1;
+        const source = context.createBufferSource();
+        const filter = context.createBiquadFilter();
+        const gain = context.createGain();
+        source.buffer = buffer;
+        filter.type = "bandpass";
+        filter.frequency.value = 3400;
+        filter.Q.value = 0.9;
+        gain.gain.setValueAtTime(0.0001, now);
+        for (let stroke = 0; stroke < 11; stroke += 1) {
+          const time = now + delay + stroke * 0.11;
+          gain.gain.setValueAtTime(0.0001, time);
+          gain.gain.linearRampToValueAtTime(0.06, time + 0.025);
+          gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.095);
+        }
+        source.connect(filter).connect(gain).connect(context.destination);
+        source.start(now);
+        source.stop(now + 2.4);
       }
 
-      function initGong() {
-        const card = $("#earCard");
-        let timer = 0;
-        $("#gongButton").addEventListener("click", () => {
-          gong();
-          card.classList.remove("is-ringing");
-          void card.offsetWidth; // reinicia a animação das orelhas
-          card.classList.add("is-ringing");
-          window.clearTimeout(timer);
-          timer = window.setTimeout(() => card.classList.remove("is-ringing"), 2600);
-        });
-      }
+      /* ------------------------------------------------ matcha do hero */
+      // O chasen sai do suporte, bate o chá em zigue-zague e volta; a espuma fica mais cheia.
+      function initMatcha() {
+        const button = $("#matcha");
+        const chasen = button.querySelector(".chasen");
+        let busy = false;
 
-      /* ------------------------------------------------------ voz oficial */
-      function initVoice() {
-        const button = $("#voicePlay");
-        const label = $("#voicePlayLabel");
-        let player;
-        const setPlaying = playing => {
-          button.setAttribute("aria-pressed", String(playing));
-          label.textContent = playing ? "Pausar" : "Ouvir a voz";
-        };
-        button.addEventListener("click", () => {
-          if (!player) {
-            player = new Audio(voiceSample);
-            player.addEventListener("ended", () => setPlaying(false));
-            player.addEventListener("pause", () => setPlaying(false));
-            player.addEventListener("playing", () => setPlaying(true));
-            player.addEventListener("error", () => {
-              label.textContent = "Áudio indisponível";
-              button.disabled = true;
-            });
+        button.addEventListener("click", async () => {
+          if (busy) return;
+          busy = true;
+          button.classList.add("is-whisking");
+          if (Uma.reduceMotion) {
+            whisk(0);
+            await new Promise(resolve => window.setTimeout(resolve, 1400));
+          } else {
+            const duration = 2600;
+            const frames = [
+              { transform: "translate(0, 0)" },
+              { transform: "translate(-22px, -42px)", offset: 0.12 },
+              { transform: "translate(-98px, -44px)", offset: 0.26 },
+              { transform: "translate(-98px, -34px)", offset: 0.32 }
+            ];
+            for (let stroke = 0; stroke < 10; stroke += 1) {
+              frames.push({ transform: `translate(${stroke % 2 ? -86 : -110}px, -34px)`, offset: 0.35 + stroke * 0.045 });
+            }
+            frames.push({ transform: "translate(-98px, -48px)", offset: 0.84 }, { transform: "translate(0, 0)" });
+            whisk(duration * 0.35 / 1000);
+            await chasen.animate(frames, { duration, easing: "ease-in-out" }).finished.catch(() => {});
           }
-          if (player.paused) player.play().catch(() => setPlaying(false));
-          else player.pause();
+          button.classList.remove("is-whisking");
+          button.classList.add("is-whisked");
+          busy = false;
         });
       }
 
@@ -1546,10 +1827,7 @@
 
       /* ------------------------------------------------------------ dados */
       function render({ character, groups: apiGroups, supports, voice }) {
-        if (character) {
-          Uma.fillCharacter(character, DICTIONARY);
-          if (character.voice) voiceSample = Uma.normalizeUrl(character.voice) || voiceSample;
-        }
+        if (character) voicePlayer.setSource(Uma.fillCharacter(character, DICTIONARY).voiceClip);
         if (voice) Uma.fillVoice(voice);
         Uma.setImage($("#voiceImage"), [voice?.image, FALLBACK_VOICE_IMAGE], { onFail: () => { $("#voiceImage").hidden = true; } });
         if (apiGroups.length) {
@@ -1571,8 +1849,8 @@
       showPortraits(groups);
       renderGallery(0);
       renderSupports(FALLBACK_SUPPORTS);
-      initGong();
-      initVoice();
+      initMatcha();
+      const voicePlayer = Uma.voice($("#voicePlay"), VOICE_CLIP, { label: $("#voicePlayLabel") });
       initPhone();
 
       Uma.loadCharacter({ id: CHARACTER_ID, gameId: GAME_ID }).then(result => {

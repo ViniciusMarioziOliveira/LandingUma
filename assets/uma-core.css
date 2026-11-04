@@ -1,6 +1,6 @@
 /*
  * Uma Core — estrutura compartilhada. Cada página define as cores via variáveis:
- * --sw-* (seletor de personagens) e --ease-out.
+ * --sw-* (seletor de personagens), --uv-* (botão de voz), --uma-display e --ease-out.
  */
 :root {
   --ease-out: cubic-bezier(.16, 1, .3, 1);
@@ -52,6 +52,21 @@
 
 .skip-link:focus { transform: none; }
 
+/* ------------------------------------------------- transição entre páginas */
+/* Navegadores com View Transitions fazem um crossfade entre o Paddock e as páginas. */
+
+@view-transition { navigation: auto; }
+
+::view-transition-old(root) { animation: uma-page-out .32s ease both; }
+::view-transition-new(root) { animation: uma-page-in .55s var(--ease-out) both; }
+
+@keyframes uma-page-out { to { opacity: 0; } }
+@keyframes uma-page-in { from { opacity: 0; transform: scale(1.015); } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
 /* ------------------------------------------------------------ switcher */
 
 .switcher { position: relative; flex: 0 0 auto; }
@@ -91,13 +106,13 @@
   top: calc(100% + 12px);
   right: 0;
   z-index: 120;
-  width: min(250px, calc(100vw - 24px));
+  width: min(292px, calc(100vw - 24px));
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 8px;
   border: 1px solid var(--sw-panel-line);
-  border-radius: 16px;
+  border-radius: 18px;
   color: var(--sw-panel-ink);
   background: var(--sw-panel-bg);
   box-shadow: var(--sw-shadow);
@@ -114,9 +129,53 @@
   transform: none;
 }
 
+.switcher-home {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 9px 10px;
+  border: 1px solid var(--sw-panel-line);
+  border-radius: 13px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.switcher-home:hover,
+.switcher-home:focus-visible {
+  border-color: transparent;
+  background: var(--sw-hover-bg);
+}
+
+.switcher-home-icon {
+  display: grid;
+  grid-template-columns: repeat(4, 7px);
+  gap: 3px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #15121b;
+}
+
+.switcher-home-icon i { width: 7px; height: 9px; border-radius: 2px; }
+
+.switcher-home-text strong {
+  display: block;
+  font-size: .9rem;
+  line-height: 1.2;
+}
+
+.switcher-home-text small {
+  display: block;
+  margin-top: 2px;
+  color: var(--sw-panel-muted);
+  font-size: .72rem;
+  font-weight: 500;
+}
+
 .switcher-label {
   margin: 0;
-  padding: 8px 10px 6px;
+  padding: 12px 10px 6px;
   color: var(--sw-panel-muted);
   font-size: .64rem;
   font-weight: 800;
@@ -124,13 +183,13 @@
   text-transform: uppercase;
 }
 
-.switcher-panel a {
+.switcher-item {
   display: flex;
   align-items: center;
   gap: 11px;
-  min-height: 44px;
-  padding: 9px 10px;
-  border-radius: 10px;
+  min-height: 48px;
+  padding: 6px 10px 6px 7px;
+  border-radius: 12px;
   color: inherit;
   font-size: .88rem;
   font-weight: 700;
@@ -139,18 +198,22 @@
   transition: background .18s ease, color .18s ease;
 }
 
-.switcher-panel a::before {
-  content: "";
+.switcher-avatar {
+  position: relative;
   flex: 0 0 auto;
-  width: 10px;
-  height: 10px;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
   border-radius: 50%;
   background: var(--c, currentColor);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c, currentColor) 22%, transparent);
+  box-shadow: 0 0 0 2px var(--sw-panel-bg), 0 0 0 4px color-mix(in srgb, var(--c, currentColor) 60%, transparent);
 }
 
-.switcher-panel a small {
-  margin-left: auto;
+.switcher-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.switcher-name { flex: 1; min-width: 0; }
+
+.switcher-tag {
   font-size: .6rem;
   font-weight: 800;
   letter-spacing: .1em;
@@ -158,11 +221,343 @@
   opacity: .62;
 }
 
-.switcher-panel a:hover,
-.switcher-panel a:focus-visible,
-.switcher-panel a[aria-current="page"] {
+.switcher-tag.is-visited { font-size: .8rem; letter-spacing: 0; opacity: .7; }
+
+.switcher-gate {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 22px;
+  border-radius: 4px;
+  color: var(--frame-ink);
+  background: var(--frame);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .14);
+  font-size: .66rem;
+  font-weight: 800;
+}
+
+.switcher-item:hover,
+.switcher-item:focus-visible,
+.switcher-item[aria-current="page"] {
   color: var(--sw-hover-ink);
   background: var(--sw-hover-bg);
+}
+
+/* ---------------------------------------------------------- botão de voz */
+
+.uma-voice {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 15px 0 6px;
+  border: 1px solid var(--uv-line, currentColor);
+  border-radius: 999px;
+  color: var(--uv-ink, inherit);
+  background: var(--uv-bg, transparent);
+  font: inherit;
+  font-size: .76rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, border-color .2s ease;
+}
+
+.uma-voice:hover { transform: translateY(-2px); background: var(--uv-bg-hover, var(--uv-bg, transparent)); }
+.uma-voice:disabled { cursor: not-allowed; opacity: .55; transform: none; }
+
+.uma-voice-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--uv-dot, currentColor);
+}
+
+.uma-voice-icon::before {
+  content: "";
+  margin-left: 3px;
+  border-block: 6px solid transparent;
+  border-left: 9px solid var(--uv-dot-ink, #fff);
+}
+
+.uma-voice[aria-pressed="true"] .uma-voice-icon::before {
+  width: 9px;
+  height: 10px;
+  margin: 0;
+  border: 0;
+  background: linear-gradient(90deg, var(--uv-dot-ink, #fff) 0 3px, transparent 3px 6px, var(--uv-dot-ink, #fff) 6px);
+}
+
+.uma-voice[aria-pressed="true"] .uma-voice-icon { animation: uma-voice-pulse 1.2s ease-in-out infinite; }
+
+@keyframes uma-voice-pulse {
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--uv-dot, currentColor) 22%, transparent); }
+}
+
+/* ------------------------------------------------------ temas das baias */
+/*
+ * Uma paleta por personagem: usada nas baias do Paddock, na cortina de entrada
+ * e no convite "Próxima largada" no fim de cada página.
+ */
+.uma-theme-dober {
+  --t-ink: #fbf7ec;
+  --t-soft: rgba(251, 247, 236, .74);
+  --t-accent: #f1dfae;
+  --t-deep: #0b3f3c;
+  --t-bg: radial-gradient(circle at 76% 16%, rgba(241, 223, 174, .3), transparent 44%), linear-gradient(155deg, #168078 0%, #0d4b47 46%, #042220 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23f1dfae' stroke-opacity='.16'%3E%3Ccircle cx='60' cy='60' r='16'/%3E%3Cpath d='M60 18c7 12 7 24 0 36-7-12-7-24 0-36Zm0 48c7 12 7 24 0 36-7-12-7-24 0-36ZM18 60c12-7 24-7 36 0-12 7-24 7-36 0Zm48 0c12-7 24-7 36 0-12 7-24 7-36 0Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 120px 120px;
+}
+
+.uma-theme-ayabe {
+  --t-ink: #eef3fb;
+  --t-soft: rgba(238, 243, 251, .72);
+  --t-accent: #f3cf7a;
+  --t-deep: #0a1128;
+  --t-bg: radial-gradient(circle at 72% 14%, rgba(120, 213, 225, .26), transparent 42%), linear-gradient(172deg, #22397a 0%, #101c3d 46%, #040812 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23eaf4ff'%3E%3Ccircle cx='14' cy='20' r='1' opacity='.7'/%3E%3Ccircle cx='74' cy='42' r='1.5' opacity='.9'/%3E%3Ccircle cx='118' cy='12' r='.9' opacity='.6'/%3E%3Ccircle cx='40' cy='100' r='1.2' opacity='.75'/%3E%3Ccircle cx='102' cy='126' r='1.4' opacity='.85'/%3E%3Ccircle cx='136' cy='78' r='.9' opacity='.6'/%3E%3Ccircle cx='60' cy='140' r='.8' opacity='.5'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 150px 150px;
+}
+
+.uma-theme-chiyo {
+  --t-ink: #fffafb;
+  --t-soft: rgba(255, 250, 251, .8);
+  --t-accent: #ffe1b0;
+  --t-deep: #8f2d4b;
+  --t-bg: radial-gradient(circle at 74% 16%, rgba(255, 255, 255, .34), transparent 44%), linear-gradient(162deg, #f6a0b3 0%, #dc5f7f 46%, #862a48 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130' viewBox='0 0 130 130'%3E%3Cg fill='%23ffffff' fill-opacity='.18'%3E%3Cpath d='M0 -9C6 -7 7 1 0 8C-7 1 -6 -7 0 -9Z' transform='translate(26 30) rotate(24)'/%3E%3Cpath d='M0 -7C5 -5 5 1 0 6C-5 1 -5 -5 0 -7Z' transform='translate(96 22) rotate(-40)'/%3E%3Cpath d='M0 -9C6 -7 7 1 0 8C-7 1 -6 -7 0 -9Z' transform='translate(78 92) rotate(70)'/%3E%3Cpath d='M0 -6C4 -5 5 1 0 5C-5 1 -4 -5 0 -6Z' transform='translate(18 104) rotate(-12)'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 130px 130px;
+}
+
+.uma-theme-machan {
+  --t-ink: #fff8ef;
+  --t-soft: rgba(255, 248, 239, .76);
+  --t-accent: #ffd9a8;
+  --t-deep: #6e241d;
+  --t-bg: radial-gradient(circle at 74% 16%, rgba(241, 179, 158, .42), transparent 42%), linear-gradient(162deg, #dc5442 0%, #a3352a 46%, #3f1714 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1.3' fill='%23fff8ef' fill-opacity='.14'/%3E%3C/svg%3E") 0 0 / 26px 26px;
+}
+
+.uma-theme-vivlos {
+  --t-ink: #ffffff;
+  --t-soft: rgba(255, 255, 255, .74);
+  --t-accent: #e8c56f;
+  --t-deep: #121a5c;
+  --t-bg: radial-gradient(circle at 70% 14%, rgba(246, 166, 203, .32), transparent 44%), linear-gradient(168deg, #3a368f 0%, #151e66 46%, #050822 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23f8e7b5'%3E%3Cpath d='M30 20l2 7 7 2-7 2-2 7-2-7-7-2 7-2z' opacity='.35'/%3E%3Cpath d='M104 70l1.4 4.6 4.6 1.4-4.6 1.4-1.4 4.6-1.4-4.6-4.6-1.4 4.6-1.4z' opacity='.3'/%3E%3Ccircle cx='64' cy='118' r='1.3' opacity='.5'/%3E%3Ccircle cx='122' cy='18' r='1' opacity='.45'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 140px 140px;
+}
+
+.uma-theme-acute {
+  --t-ink: #fffafc;
+  --t-soft: rgba(255, 250, 252, .78);
+  --t-accent: #ecd9ae;
+  --t-deep: #6d1f42;
+  --t-bg: radial-gradient(circle at 74% 16%, rgba(255, 255, 255, .26), transparent 42%), linear-gradient(162deg, #e2789f 0%, #b23a68 44%, #34182a 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='28' viewBox='0 0 56 28'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.11'%3E%3Cpath d='M0 28a28 28 0 0 1 56 0M9 28a19 19 0 0 1 38 0M18 28a10 10 0 0 1 20 0M-28 14a28 28 0 0 1 56 0M28 14a28 28 0 0 1 56 0'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 56px 28px;
+}
+
+/* Victoire Pisa: crepúsculo lilás, creme de amanhecer e pequenos anéis de luz (輪). */
+.uma-theme-victoire {
+  --t-ink: #fffef6;
+  --t-soft: rgba(255, 254, 246, .8);
+  --t-accent: #f3eead;
+  --t-deep: #2e3288;
+  --t-bg: radial-gradient(circle at 74% 14%, rgba(250, 247, 222, .42), transparent 44%), linear-gradient(164deg, #a3a6e4 0%, #666ac5 42%, #282c78 100%);
+  --t-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%23fcfaec' stroke-opacity='.17'%3E%3Ccircle cx='30' cy='34' r='10'/%3E%3Ccircle cx='92' cy='88' r='6'/%3E%3C/g%3E%3Cg fill='%23fcfaec'%3E%3Ccircle cx='30' cy='24' r='1.7' opacity='.5'/%3E%3Ccircle cx='92' cy='82' r='1.2' opacity='.42'/%3E%3Ccircle cx='78' cy='26' r='1' opacity='.32'/%3E%3Ccircle cx='14' cy='96' r='1' opacity='.28'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 120px 120px;
+}
+
+/* ----------------------------------------------------- próxima largada */
+/* Convite no fim de cada página: a próxima personagem, nas cores dela. */
+
+.uma-next { padding: 72px 0 84px; }
+
+.uma-next-inner { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+.uma-next-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+  align-items: end;
+  min-height: 400px;
+  overflow: hidden;
+  border-radius: 34px;
+  color: var(--t-ink);
+  background: var(--t-pattern), var(--t-bg);
+  box-shadow: 0 34px 80px rgba(10, 8, 16, .28), inset 0 0 0 1px rgba(255, 255, 255, .14);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.uma-next-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(8, 6, 12, .42), rgba(8, 6, 12, .1) 55%, transparent);
+}
+
+.uma-next-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;
+  padding: 56px 0 56px clamp(28px, 5vw, 64px);
+}
+
+.uma-next-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--t-soft);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.uma-next-gate {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 36px;
+  border-radius: 6px;
+  color: var(--frame-ink);
+  background: var(--frame);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .28), inset 0 0 0 1px rgba(0, 0, 0, .14);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.uma-next-name {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--uma-display, Georgia, serif);
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  font-weight: 400;
+  line-height: .92;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+}
+
+.uma-next-jp {
+  margin-top: 12px;
+  color: var(--t-accent);
+  font-size: .86rem;
+  letter-spacing: .3em;
+}
+
+.uma-next-tagline {
+  max-width: 460px;
+  margin-top: 16px;
+  color: var(--t-soft);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.uma-next-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  margin-top: 28px;
+  padding: 0 24px;
+  border-radius: 999px;
+  color: var(--t-deep);
+  background: var(--t-ink);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .22);
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.uma-next-cta span { transition: transform .3s var(--ease-out); }
+
+.uma-next-art {
+  position: relative;
+  align-self: stretch;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+/* As artes oficiais têm ~18% de vazio no topo: a imagem cresce e o card corta o excesso. */
+.uma-next-art img {
+  position: absolute;
+  bottom: -2%;
+  left: 50%;
+  width: auto;
+  max-width: none;
+  height: 114%;
+  filter: drop-shadow(0 26px 34px rgba(0, 0, 0, .35));
+  transform: translateX(-50%);
+  transition: transform .7s var(--ease-out);
+}
+
+.uma-next-card:hover .uma-next-art img,
+.uma-next-card:focus-visible .uma-next-art img { transform: translateX(-50%) translateY(-10px) scale(1.03); }
+
+.uma-next-card:hover .uma-next-cta span,
+.uma-next-card:focus-visible .uma-next-cta span { transform: translateX(5px); }
+
+.uma-next-card:focus-visible { outline: 3px solid var(--t-accent); outline-offset: 5px; }
+
+.uma-next-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 44px;
+  margin: 22px auto 0;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: inherit;
+  font-size: .86rem;
+  font-weight: 700;
+  text-decoration: none;
+  opacity: .75;
+  transition: opacity .2s ease, background .2s ease;
+}
+
+.uma-next-all:hover,
+.uma-next-all:focus-visible { opacity: 1; background: rgba(127, 127, 127, .12); }
+
+/* Ícone de "todas": as sete baias em miniatura. */
+.uma-next-all i {
+  display: grid;
+  grid-template-columns: repeat(4, 5px);
+  gap: 2px;
+}
+
+.uma-next-all b { display: block; width: 5px; height: 6px; border-radius: 1px; background: currentColor; opacity: .7; }
+
+/* No celular a arte vira fundo, à direita, e o texto passa por cima com um degradê de leitura. */
+@media (max-width: 760px) {
+  .uma-next { padding: 56px 0 64px; }
+  .uma-next-inner { width: min(100% - 24px, 1180px); }
+  .uma-next-card { display: block; min-height: 330px; border-radius: 26px; }
+  .uma-next-copy { position: relative; z-index: 1; max-width: 62%; padding: 34px 0 34px 22px; }
+  .uma-next-name { font-size: clamp(2rem, 9vw, 3rem); }
+  .uma-next-tagline { font-size: .92rem; }
+  .uma-next-cta { min-height: 46px; margin-top: 20px; padding: 0 18px; font-size: .8rem; }
+  .uma-next-art { position: absolute; inset: 0 0 0 auto; width: 58%; min-height: 0; }
+  .uma-next-art img { left: 64%; height: 118%; }
+  /* Depois da arte no DOM: fica por cima dela e por baixo do texto (z-index 1). */
+  .uma-next-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(8, 6, 12, .55), rgba(8, 6, 12, .26) 50%, transparent 76%);
+    pointer-events: none;
+  }
+  .uma-next-card:hover .uma-next-art img { transform: translateX(-50%); }
+}
+
+@media (max-width: 420px) {
+  .uma-next-jp { display: none; }
+  .uma-next-copy { max-width: 66%; }
 }
 
 /* -------------------------------------------------------------- reveal */
